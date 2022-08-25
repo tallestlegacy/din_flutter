@@ -26,8 +26,28 @@ flutter run
 - [ ] Hadith and Sunnah
 - [ ] Multiple translations
 
+## Customisation
+
+- [ ] Arabic / English / Transliteration toggles
+- [ ] Scroll Direction
+- [ ] App colors and theme
+
 ## UI
 
 | light                    | dark                          |
 | ------------------------ | ----------------------------- |
 | ![](./_assets/surah.jpg) | ![](./_assets/surah-dark.jpg) |
+
+## Building
+
+For minimal app bundle size :
+
+```sh
+ flutter build appbundle --target-platform android-arm,android-arm64
+```
+
+For minimal apk size :
+
+```sh
+flutter build apk --split-per-abi
+```

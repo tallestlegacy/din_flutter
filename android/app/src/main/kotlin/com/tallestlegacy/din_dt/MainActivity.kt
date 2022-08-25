@@ -1,4 +1,4 @@
-package com.example.din_dt
+package com.tallestlegacy.din_dt
 
 import android.os.Build
 import android.os.Bundle

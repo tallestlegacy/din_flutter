@@ -15,15 +15,15 @@ class Verse extends StatelessWidget {
             textAlign: TextAlign.right,
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Theme.of(context).primaryColorLight,
+            color: Theme.of(context).primaryTextTheme.bodyText2?.color,
           ),
           PaddedText(
             text: "${verse['transliteration']}",
-            color: Theme.of(context).primaryColorLight,
+            color: Theme.of(context).primaryTextTheme.bodyText2?.color,
           ),
           PaddedText(
             text: "${verse['id']}. ${verse['translation']}",
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).primaryTextTheme.bodyText1?.color,
           )
         ]);
   }
@@ -32,7 +32,7 @@ class Verse extends StatelessWidget {
 class PaddedText extends StatelessWidget {
   final String text;
   final TextAlign textAlign;
-  final Color color;
+  final Color? color;
   final double fontSize;
   final FontWeight fontWeight;
 

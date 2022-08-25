@@ -15,8 +15,8 @@ class _SurahState extends State<Surah> {
   List<dynamic> _verses = [];
 
   Future<void> getVerses() async {
-    final data =
-        await LoadJson().load("assets/json/en/${widget.chapter['id']}.json");
+    final data = await LoadJson()
+        .load("assets/json/quran/en/${widget.chapter['id']}.json");
     if (mounted) {
       setState(() {
         _verses = data["verses"];
