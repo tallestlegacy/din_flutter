@@ -2,6 +2,7 @@ import 'package:din/components/scroll_to_hide.dart';
 import 'package:din/screens/hadith.dart';
 import 'package:din/screens/quran.dart';
 import 'package:din/screens/settings.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -46,9 +47,6 @@ class _AppState extends State<App> {
       bottomNavigationBar: ScrollToHide(
         controller: scrollController,
         child: BottomNavigationBar(
-          backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white54,
           showUnselectedLabels: false,
           currentIndex: _selectedIndex,
           onTap: handleNavigationTap,
@@ -63,7 +61,7 @@ class _AppState extends State<App> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.menu_open_rounded),
-              label: 'Settings',
+              label: 'More',
             ),
           ],
         ),

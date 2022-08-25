@@ -29,8 +29,8 @@ class _SurahState extends State<Surah> {
     getVerses();
     return ListView.separated(
       itemCount: _verses.length,
-      itemBuilder: (context, index) => Container(
-        margin: const EdgeInsets.all(8),
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.all(8),
         child: Verse(verse: _verses[index]),
       ),
       separatorBuilder: (BuildContext context, int index) => const Divider(),

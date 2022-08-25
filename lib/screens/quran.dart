@@ -66,7 +66,21 @@ class _QuranPageState extends State<QuranPage> {
           controller: pageController,
           onPageChanged: onPageChanged,
           children: <Widget>[
-            for (var chapter in _chapters) Surah(chapter: chapter)
+            for (var chapter in _chapters)
+              Column(children: [
+                Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text(
+                    "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+                    textScaleFactor: 2,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Theme.of(context).accentColor),
+                  ),
+                ),
+                Expanded(
+                  child: Surah(chapter: chapter),
+                ),
+              ])
           ],
         ),
       ),
@@ -75,7 +89,9 @@ class _QuranPageState extends State<QuranPage> {
           itemCount: _chapters.length,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
-              pageController.jumpToPage(index);
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 200),
+                  curve: const ElasticInCurve());
               Scaffold.of(context).closeDrawer();
             },
             child: Container(

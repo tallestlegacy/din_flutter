@@ -31,10 +31,15 @@ class _HadithState extends State<Hadith> {
             ],
           ),
         ),
-        body: const TabBarView(children: [
-          Bukhari(),
-          Hisnul(),
-        ]),
+        body: Container(
+          color: Theme.of(context).backgroundColor,
+          child: const TabBarView(
+            children: [
+              Bukhari(),
+              Hisnul(),
+            ],
+          ),
+        ),
       ),
     );
   }
