@@ -8,7 +8,7 @@ class Hadith extends StatefulWidget {
   const Hadith({Key? key, required this.scrollController}) : super(key: key);
 
   @override
-  _HadithState createState() => _HadithState();
+  State<Hadith> createState() => _HadithState();
 }
 
 class _HadithState extends State<Hadith> {
@@ -21,9 +21,10 @@ class _HadithState extends State<Hadith> {
         appBar: AppBar(
           flexibleSpace: Column(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: const [
+            children: [
               TabBar(
-                tabs: <Widget>[
+                indicatorColor: Theme.of(context).colorScheme.primary,
+                tabs: const <Widget>[
                   Tab(child: Text("Bukhari")),
                   Tab(child: Text("HisnulMuslim")),
                 ],
@@ -31,14 +32,11 @@ class _HadithState extends State<Hadith> {
             ],
           ),
         ),
-        body: Container(
-          color: Theme.of(context).backgroundColor,
-          child: const TabBarView(
-            children: [
-              Bukhari(),
-              Hisnul(),
-            ],
-          ),
+        body: const TabBarView(
+          children: [
+            Bukhari(),
+            Hisnul(),
+          ],
         ),
       ),
     );

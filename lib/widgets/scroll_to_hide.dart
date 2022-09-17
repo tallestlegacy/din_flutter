@@ -14,7 +14,7 @@ class ScrollToHide extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScrollToHideState createState() => _ScrollToHideState();
+  State<ScrollToHide> createState() => _ScrollToHideState();
 }
 
 class _ScrollToHideState extends State<ScrollToHide> {

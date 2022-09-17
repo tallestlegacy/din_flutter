@@ -1,15 +1,16 @@
-import 'package:din/components/scroll_to_hide.dart';
+import 'package:din/screens/salaah.dart';
+import 'package:din/widgets/scroll_to_hide.dart';
+import 'package:din/screens/debug.dart';
 import 'package:din/screens/hadith.dart';
 import 'package:din/screens/quran.dart';
 import 'package:din/screens/settings.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
 
   @override
-  _AppState createState() => _AppState();
+  State<App> createState() => _AppState();
 }
 
 class _AppState extends State<App> {
@@ -40,28 +41,36 @@ class _AppState extends State<App> {
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
       Hadith(scrollController: scrollController),
-      const SettingsScreen()
+      const SettingsScreen(),
+      const Debug()
     ];
     return Scaffold(
       body: screens[_selectedIndex],
       bottomNavigationBar: ScrollToHide(
         controller: scrollController,
         child: BottomNavigationBar(
-          showUnselectedLabels: false,
           currentIndex: _selectedIndex,
           onTap: handleNavigationTap,
-          items: const <BottomNavigationBarItem>[
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.menu_book_rounded),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              icon: const Icon(Icons.menu_book_rounded),
               label: 'Quran',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.book),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              icon: const Icon(Icons.book),
               label: 'Hadith',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.menu_open_rounded),
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              icon: const Icon(Icons.menu_open_rounded),
               label: 'More',
+            ),
+            BottomNavigationBarItem(
+              backgroundColor: Theme.of(context).colorScheme.secondary,
+              icon: const Icon(Icons.bug_report_rounded),
+              label: 'Debug',
             ),
           ],
         ),

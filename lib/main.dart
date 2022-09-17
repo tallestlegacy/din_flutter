@@ -2,13 +2,15 @@ import 'package:din/screens/app.dart';
 import 'package:din/util/theme.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
-void main() {
+void main() async {
+  await GetStorage.init();
   runApp(const DinFlutterApp());
 
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.black,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(systemNavigationBarColor: Colors.black));
 }
 
 class DinFlutterApp extends StatelessWidget {
@@ -16,7 +18,7 @@ class DinFlutterApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: "Din",
       debugShowCheckedModeBanner: false,
       home: const App(),

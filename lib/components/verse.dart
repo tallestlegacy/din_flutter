@@ -7,31 +7,39 @@ class Verse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          PaddedText(
-            text: "${verse['text']}",
-            textAlign: TextAlign.right,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-          ),
-          PaddedText(
-            text: "${verse['transliteration']}",
-            color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-          ),
-          PaddedText(
-            text: "${verse['id']}. ${verse['translation']}",
-            color: Theme.of(context).primaryTextTheme.bodyText1?.color,
-          )
-        ]);
+    return ListTile(
+      leading: Text(
+        verse['id'].toString(),
+        style: const TextStyle(color: Colors.grey),
+      ),
+      contentPadding: const EdgeInsets.all(0),
+      minVerticalPadding: 0,
+      title: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            PaddedText(
+              text: verse['text'],
+              textAlign: TextAlign.right,
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+            ),
+            PaddedText(
+              text: verse['transliteration'],
+              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+            ),
+            PaddedText(
+              text: verse['translation'],
+              color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+            )
+          ]),
+    );
   }
 }
 
 class PaddedText extends StatelessWidget {
   final String text;
-  final TextAlign textAlign;
+  final TextAlign? textAlign;
   final Color? color;
   final double fontSize;
   final FontWeight fontWeight;

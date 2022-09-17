@@ -6,10 +6,10 @@ import 'package:din/components/surah.dart';
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
 
-  QuranPage({Key? key, required this.scrollController}) : super(key: key);
+  const QuranPage({Key? key, required this.scrollController}) : super(key: key);
 
   @override
-  _QuranPageState createState() => _QuranPageState();
+  State<QuranPage> createState() => _QuranPageState();
 }
 
 class _QuranPageState extends State<QuranPage> {
@@ -39,9 +39,13 @@ class _QuranPageState extends State<QuranPage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     getChapters();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final PageController pageController = PageController();
 
     return Scaffold(
@@ -67,20 +71,25 @@ class _QuranPageState extends State<QuranPage> {
           onPageChanged: onPageChanged,
           children: <Widget>[
             for (var chapter in _chapters)
-              Column(children: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Text(
-                    "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-                    textScaleFactor: 2,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Theme.of(context).accentColor),
+              CustomScrollView(
+                slivers: [
+                  SliverList(
+                    delegate: SliverChildListDelegate([
+                      Text(
+                        "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColor,
+                          fontSize: 32,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ]),
                   ),
-                ),
-                Expanded(
-                  child: Surah(chapter: chapter),
-                ),
-              ])
+                  Surah(
+                    chapter: chapter,
+                  )
+                ],
+              )
           ],
         ),
       ),
@@ -89,15 +98,20 @@ class _QuranPageState extends State<QuranPage> {
           itemCount: _chapters.length,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
-              pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 200),
-                  curve: const ElasticInCurve());
+              pageController.jumpToPage(index);
               Scaffold.of(context).closeDrawer();
             },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: Text(
-                  "${_chapters[index]['id']}.  ${_chapters[index]['translation']}"),
+            child: ListTile(
+              subtitle: Text("${_chapters[index]['translation']}"),
+              leading: Text("${_chapters[index]['id']}"),
+              title: Text(
+                "${_chapters[index]['name']}",
+                style: Theme.of(context).primaryTextTheme.bodyText2,
+              ),
+              trailing: Text(
+                "${_chapters[index]['total_verses']}",
+                style: Theme.of(context).primaryTextTheme.bodyText2,
+              ),
             ),
           ),
           separatorBuilder: (BuildContext context, int index) =>

@@ -6,9 +6,9 @@ import '../util/json.dart';
 class Surah extends StatefulWidget {
   final chapter;
 
-  Surah({Key? key, this.chapter}) : super(key: key);
+  const Surah({Key? key, this.chapter}) : super(key: key);
   @override
-  _SurahState createState() => _SurahState();
+  State<Surah> createState() => _SurahState();
 }
 
 class _SurahState extends State<Surah> {
@@ -25,15 +25,25 @@ class _SurahState extends State<Surah> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     getVerses();
-    return ListView.separated(
-      itemCount: _verses.length,
-      itemBuilder: (context, index) => Padding(
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+      (context, index) => Padding(
         padding: const EdgeInsets.all(8),
-        child: Verse(verse: _verses[index]),
+        child: Column(
+          children: [
+            Verse(verse: _verses[index]),
+            if (index != _verses.length - 1) const Divider()
+          ],
+        ),
       ),
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    );
+      childCount: _verses.length,
+    ));
   }
 }

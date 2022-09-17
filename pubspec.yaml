@@ -14,6 +14,9 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  shared_preferences: ^2.0.15
+  get: ^4.6.5
+  get_storage: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +47,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
+  fonts:
+    - family: Naskh
+      fonts:
+        - asset: assets/fonts/DroidNaskh-Regular.ttf
+        - asset: assets/fonts/DroidNaskh-Bold.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

@@ -1,12 +1,11 @@
 import 'package:din/util/json.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Hisnul extends StatefulWidget {
   const Hisnul({Key? key}) : super(key: key);
 
   @override
-  _HisnulState createState() => _HisnulState();
+  State<Hisnul> createState() => _HisnulState();
 }
 
 class _HisnulState extends State<Hisnul> {
@@ -23,25 +22,31 @@ class _HisnulState extends State<Hisnul> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     getRefs();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     return ListView.builder(
+      padding: const EdgeInsets.all(8),
       itemBuilder: (context, index) {
         return Card(
-            elevation: 0.5,
-            child: ListTile(
-              dense: true,
-              leading: Text("${_refs[index]['hadiths'].length}"),
-              trailing: const Icon(CupertinoIcons.right_chevron, size: 16),
-              title: Text("${_refs[index]['title']}"),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => HisnulReference(ref: _refs[index]),
-                ),
+          child: ListTile(
+            trailing: Text(
+              "${_refs[index]['hadiths'].length}",
+              style: const TextStyle(color: Colors.grey),
+            ),
+            title: Text("${_refs[index]['title']}"),
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HisnulReference(ref: _refs[index]),
               ),
-            ));
+            ),
+          ),
+        );
       },
       itemCount: _refs.length,
     );
@@ -49,8 +54,8 @@ class _HisnulState extends State<Hisnul> {
 }
 
 class HisnulReference extends StatelessWidget {
-  var ref;
-  HisnulReference({Key? key, required this.ref}) : super(key: key);
+  final ref;
+  const HisnulReference({Key? key, required this.ref}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -62,22 +67,27 @@ class HisnulReference extends StatelessWidget {
         ),
         title: Text("${ref['title']}"),
       ),
-      body: Container(
-        color: Theme.of(context).backgroundColor,
-        child: ListView.builder(
-          itemCount: ref['hadiths'].length,
-          itemBuilder: (context, index) => Card(
-            child: ListTile(
-              title: Text(ref['hadiths'][index]['text']
-                  .toString()
-                  .replaceAll("\n", " ")),
-              subtitle: Text(ref['hadiths'][index]['translation']
-                  .toString()
-                  .replaceAll("\n", " ")),
-              leading: Text("${ref['hadiths'][index]['id']}"),
-              minLeadingWidth: 4,
-              minVerticalPadding: 16,
-              dense: true,
+      body: ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: ref['hadiths'].length,
+        itemBuilder: (context, index) => Card(
+          child: ListTile(
+            title: Text(
+                ref['hadiths'][index]['text'].toString().replaceAll("\n", " ")),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(ref['hadiths'][index]['transliteration']
+                    .toString()
+                    .replaceAll("\n", " ")),
+                Text(ref['hadiths'][index]['translation']
+                    .toString()
+                    .replaceAll("\n", " ")),
+              ],
+            ),
+            leading: Text(
+              "${ref['hadiths'][index]['id']}",
+              style: const TextStyle(color: Colors.grey),
             ),
           ),
         ),
