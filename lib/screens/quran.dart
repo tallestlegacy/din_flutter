@@ -45,8 +45,8 @@ class _QuranPageState extends State<QuranPage> {
   Widget build(BuildContext context) {
     final GlobalStoreController globalStoreController =
         Get.put(GlobalStoreController());
-    final PageController pageController = PageController(
-        initialPage: globalStoreController.lastSurahIndex.value + 1);
+    final PageController pageController =
+        PageController(initialPage: globalStoreController.lastSurahIndex.value);
 
     void onPageChanged(int page) {
       setState(() {
@@ -54,6 +54,10 @@ class _QuranPageState extends State<QuranPage> {
       });
       globalStoreController.setLastSurahIndex(page);
     }
+
+    setState(() {
+      _currentPage = globalStoreController.lastSurahIndex.value;
+    });
 
     return Scaffold(
       body: NestedScrollView(
