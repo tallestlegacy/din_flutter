@@ -4,6 +4,7 @@ import 'package:din/screens/debug.dart';
 import 'package:din/screens/hadith.dart';
 import 'package:din/screens/quran.dart';
 import 'package:din/screens/settings.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -44,35 +45,43 @@ class _AppState extends State<App> {
       const SettingsScreen(),
       const Debug()
     ];
-    return Scaffold(
-      body: screens[_selectedIndex],
-      bottomNavigationBar: ScrollToHide(
-        controller: scrollController,
-        child: BottomNavigationBar(
-          currentIndex: _selectedIndex,
-          onTap: handleNavigationTap,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.menu_book_rounded),
-              label: 'Quran',
+    return SafeArea(
+      bottom: true,
+      top: false,
+      child: Scaffold(
+        body: screens[_selectedIndex],
+        bottomNavigationBar: ScrollToHide(
+          controller: scrollController,
+          child: SizedBox(
+            height: 64,
+            child: BottomNavigationBar(
+              currentIndex: _selectedIndex,
+              onTap: handleNavigationTap,
+              items: <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  icon: const Icon(Icons.menu_book_rounded),
+                  label: 'Quran',
+                ),
+                BottomNavigationBarItem(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  icon: const Icon(Icons.book),
+                  label: 'Hadith',
+                ),
+                BottomNavigationBarItem(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  icon: const Icon(Icons.menu_open_rounded),
+                  label: 'More',
+                ),
+                if (kDebugMode)
+                  BottomNavigationBarItem(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    icon: const Icon(Icons.bug_report_rounded),
+                    label: 'Debug',
+                  ),
+              ],
             ),
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.book),
-              label: 'Hadith',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.menu_open_rounded),
-              label: 'More',
-            ),
-            BottomNavigationBarItem(
-              backgroundColor: Theme.of(context).colorScheme.secondary,
-              icon: const Icon(Icons.bug_report_rounded),
-              label: 'Debug',
-            ),
-          ],
+          ),
         ),
       ),
     );

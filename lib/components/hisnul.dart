@@ -1,5 +1,8 @@
+import 'package:din/components/text_toggles.dart';
 import 'package:din/util/json.dart';
+import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Hisnul extends StatefulWidget {
   const Hisnul({Key? key}) : super(key: key);
@@ -59,6 +62,9 @@ class HisnulReference extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SettingsStoreController settingsStoreController =
+        Get.put(SettingsStoreController());
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -66,28 +72,40 @@ class HisnulReference extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text("${ref['title']}"),
+        actions: const [TextToggles()],
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: ref['hadiths'].length,
         itemBuilder: (context, index) => Card(
-          child: ListTile(
-            title: Text(
-                ref['hadiths'][index]['text'].toString().replaceAll("\n", " ")),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(ref['hadiths'][index]['transliteration']
-                    .toString()
-                    .replaceAll("\n", " ")),
-                Text(ref['hadiths'][index]['translation']
-                    .toString()
-                    .replaceAll("\n", " ")),
-              ],
-            ),
-            leading: Text(
-              "${ref['hadiths'][index]['id']}",
-              style: const TextStyle(color: Colors.grey),
+          child: Obx(
+            () => ListTile(
+              title: settingsStoreController.showArabicText.value
+                  ? Text(ref['hadiths'][index]['text']
+                      .toString()
+                      .replaceAll("\n", " "))
+                  : null,
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Visibility(
+                    visible: settingsStoreController.showTransliteration.value,
+                    child: Text(ref['hadiths'][index]['transliteration']
+                        .toString()
+                        .replaceAll("\n", " ")),
+                  ),
+                  Visibility(
+                    visible: settingsStoreController.showTranslation.value,
+                    child: Text(ref['hadiths'][index]['translation']
+                        .toString()
+                        .replaceAll("\n", " ")),
+                  ),
+                ],
+              ),
+              leading: Text(
+                "${ref['hadiths'][index]['id']}",
+                style: const TextStyle(color: Colors.grey),
+              ),
             ),
           ),
         ),

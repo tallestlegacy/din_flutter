@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 class SettingsStoreController extends GetxController {
   var showTranslation = true.obs;
   var showTransliteration = true.obs;
+  var showArabicText = true.obs;
 
   final box = GetStorage();
 
@@ -14,12 +15,41 @@ class SettingsStoreController extends GetxController {
 
   void setTranslation(bool value) {
     showTranslation(value);
-    box.write("showTransliteration", value);
+    box.write("showTranslation", value);
+
+    if (value == false) showArabicText(true);
+    box.write("showArabicText", true);
+  }
+
+  void setShowArabicText(bool value) {
+    showArabicText(value);
+    box.write("showArabicText", value);
+
+    if (value == false) showTranslation(true);
+    box.write("showTranslation", true);
   }
 
   SettingsStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
+    showArabicText(box.read("showArabicText") ?? true);
+  }
+}
+
+// TODO : Add accent colors
+class AppearanceStoreController extends GetxController {}
+
+class GlobalStoreController extends GetxController {
+  final box = GetStorage();
+  var lastSurahIndex = 0.obs;
+
+  void setLastSurahIndex(int pageIndex) {
+    lastSurahIndex(pageIndex);
+    box.write("lastSurahIndex", pageIndex);
+  }
+
+  GlobalStoreController() {
+    lastSurahIndex(box.read("lastSurahIndex") ?? 0);
   }
 }
 
@@ -34,6 +64,6 @@ class DebugController extends GetxController {
   }
 
   DebugController() {
-    countObs += box.read("count");
+    countObs(box.read("count") ?? 0);
   }
 }

@@ -47,6 +47,7 @@ class Styles {
         unselectedItemColor: colorScheme.onSecondary,
         showSelectedLabels: true,
         showUnselectedLabels: false,
+        enableFeedback: true,
       ),
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onSecondary,

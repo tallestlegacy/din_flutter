@@ -1,4 +1,6 @@
+import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Verse extends StatelessWidget {
   final verse;
@@ -7,6 +9,8 @@ class Verse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final SettingsStoreController settingsStoreController =
+        Get.put(SettingsStoreController());
     return ListTile(
       leading: Text(
         verse['id'].toString(),
@@ -14,25 +18,36 @@ class Verse extends StatelessWidget {
       ),
       contentPadding: const EdgeInsets.all(0),
       minVerticalPadding: 0,
-      title: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            PaddedText(
-              text: verse['text'],
-              textAlign: TextAlign.right,
-              fontSize: 20,
-              fontWeight: FontWeight.w400,
-              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-            ),
-            PaddedText(
-              text: verse['transliteration'],
-              color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-            ),
-            PaddedText(
-              text: verse['translation'],
-              color: Theme.of(context).primaryTextTheme.bodyText1?.color,
-            )
-          ]),
+      title: Obx(
+        () => Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Visibility(
+                visible: settingsStoreController.showArabicText.value,
+                child: PaddedText(
+                  text: verse['text'],
+                  textAlign: TextAlign.right,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                ),
+              ),
+              Visibility(
+                visible: settingsStoreController.showTransliteration.value,
+                child: PaddedText(
+                  text: verse['transliteration'],
+                  color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                ),
+              ),
+              Visibility(
+                visible: settingsStoreController.showTranslation.value,
+                child: PaddedText(
+                  text: verse['translation'],
+                  color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                ),
+              )
+            ]),
+      ),
     );
   }
 }

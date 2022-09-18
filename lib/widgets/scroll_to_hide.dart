@@ -48,7 +48,7 @@ class _ScrollToHideState extends State<ScrollToHide> {
   @override
   Widget build(BuildContext context) => AnimatedContainer(
         duration: widget.duration,
-        height: isVisible ? 80 : 0,
+        height: isVisible ? 64 : 0,
         child: Wrap(
           children: [widget.child],
         ),

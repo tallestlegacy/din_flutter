@@ -1,7 +1,9 @@
 import 'package:din/util/json.dart';
+import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
 
 import 'package:din/components/surah.dart';
+import 'package:get/get.dart';
 
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
@@ -14,24 +16,19 @@ class QuranPage extends StatefulWidget {
 
 class _QuranPageState extends State<QuranPage> {
   List _chapters = [];
-  int currentPage = -1;
+  int _currentPage = -1;
 
   Future<void> getChapters() async {
     final data = await LoadJson().load("assets/json/quran/chapters.json");
     setState(() {
       _chapters = data;
-      currentPage = currentPage < 0 ? 0 : currentPage;
-    });
-  }
-
-  void onPageChanged(int page) {
-    setState(() {
-      currentPage = page;
+      _currentPage = _currentPage < 0 ? 0 : _currentPage;
     });
   }
 
   String getChapterText(int page) {
-    if (page >= 0) {
+    print("This page here >> $page");
+    if (page >= 0 && page <= 114) {
       var chapter = _chapters[page];
       return "${chapter['id']}  -  ${chapter['name']}  -  ${chapter['translation']}";
     }
@@ -46,7 +43,17 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
-    final PageController pageController = PageController();
+    final GlobalStoreController globalStoreController =
+        Get.put(GlobalStoreController());
+    final PageController pageController = PageController(
+        initialPage: globalStoreController.lastSurahIndex.value + 1);
+
+    void onPageChanged(int page) {
+      setState(() {
+        _currentPage = page;
+      });
+      globalStoreController.setLastSurahIndex(page);
+    }
 
     return Scaffold(
       body: NestedScrollView(
@@ -55,7 +62,7 @@ class _QuranPageState extends State<QuranPage> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              title: Text(getChapterText(currentPage)),
+              title: Text(getChapterText(_currentPage)),
               leading: IconButton(
                 icon: const Icon(Icons.menu_rounded),
                 onPressed: () => Scaffold.of(context).openDrawer(),

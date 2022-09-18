@@ -29,9 +29,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "Quran Preferences".toUpperCase(),
-                    style: Theme.of(context).textTheme.headline6,
+                  ListTile(
+                    leading: const Icon(Icons.text_format_outlined),
+                    title: Text(
+                      "Text Preferences".toUpperCase(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.all(8),
@@ -51,20 +54,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                   ),
                   Obx(() => CheckboxListTile(
-                      title: Text(
-                          "Show Translation >> ${settingsStoreController.showTranslation}"),
+                      title: const Text("Arabic text"),
+                      value: settingsStoreController.showArabicText.value,
+                      onChanged: (value) {
+                        settingsStoreController.setShowArabicText(value!);
+                      })),
+                  Obx(() => CheckboxListTile(
+                      title: const Text("Transliteration"),
+                      value: settingsStoreController.showTransliteration.value,
+                      onChanged: (value) {
+                        settingsStoreController.setTransliteration(value!);
+                      })),
+                  Obx(() => CheckboxListTile(
+                      title: const Text("Translation"),
                       value: settingsStoreController.showTranslation.value,
                       onChanged: (value) {
                         settingsStoreController.setTranslation(value!);
                       })),
-                  Obx(
-                    () => CheckboxListTile(
-                        title: const Text("Show Transliteration"),
-                        value:
-                            settingsStoreController.showTransliteration.value,
-                        onChanged: (value) {
-                          settingsStoreController.setTransliteration(value!);
-                        }),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(Icons.color_lens_sharp),
+                    title: Text(
+                      "Appearance".toUpperCase(),
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
                   )
                 ],
               ),
