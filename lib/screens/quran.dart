@@ -1,3 +1,4 @@
+import 'package:din/components/text_toggles.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,6 @@ class _QuranPageState extends State<QuranPage> {
   }
 
   String getChapterText(int page) {
-    print("This page here >> $page");
     if (page >= 0 && page <= 114) {
       var chapter = _chapters[page];
       return "${chapter['id']}  -  ${chapter['name']}  -  ${chapter['translation']}";
@@ -43,21 +43,13 @@ class _QuranPageState extends State<QuranPage> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalStoreController globalStoreController =
-        Get.put(GlobalStoreController());
-    final PageController pageController =
-        PageController(initialPage: globalStoreController.lastSurahIndex.value);
+    final PageController pageController = PageController();
 
     void onPageChanged(int page) {
       setState(() {
         _currentPage = page;
       });
-      globalStoreController.setLastSurahIndex(page);
     }
-
-    setState(() {
-      _currentPage = globalStoreController.lastSurahIndex.value;
-    });
 
     return Scaffold(
       body: NestedScrollView(
@@ -73,6 +65,8 @@ class _QuranPageState extends State<QuranPage> {
               ),
               snap: true,
               floating: true,
+              actions: const [TextToggles()],
+              backgroundColor: Theme.of(context).backgroundColor,
             ),
           ];
         },

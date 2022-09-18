@@ -20,6 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: const Text("Preferences and More"),
         actions: const [ThemeToggleButton()],
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -40,7 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     padding: const EdgeInsets.all(8),
                     margin: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
+                        border: Border.all(color: Colors.grey, width: 1),
                         borderRadius:
                             const BorderRadius.all(Radius.circular(8))),
                     child: const Verse(
@@ -71,14 +72,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onChanged: (value) {
                         settingsStoreController.setTranslation(value!);
                       })),
-                  const Divider(),
-                  ListTile(
-                    leading: const Icon(Icons.color_lens_sharp),
-                    title: Text(
-                      "Appearance".toUpperCase(),
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  )
                 ],
               ),
             )

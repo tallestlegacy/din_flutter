@@ -14,31 +14,10 @@ class Hadith extends StatefulWidget {
 class _HadithState extends State<Hadith> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      initialIndex: 0,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          flexibleSpace: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TabBar(
-                indicatorColor: Theme.of(context).colorScheme.primary,
-                tabs: const <Widget>[
-                  Tab(child: Text("Bukhari")),
-                  Tab(child: Text("HisnulMuslim")),
-                ],
-              ),
-            ],
-          ),
+          title: const Text("Sahih Bukhari"),
         ),
-        body: const TabBarView(
-          children: [
-            Bukhari(),
-            Hisnul(),
-          ],
-        ),
-      ),
-    );
+        body: const Bukhari());
   }
 }

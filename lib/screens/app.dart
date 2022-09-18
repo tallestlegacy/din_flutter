@@ -1,3 +1,5 @@
+import 'package:din/components/hisnul.dart';
+import 'package:din/screens/dua.dart';
 import 'package:din/screens/salaah.dart';
 import 'package:din/widgets/scroll_to_hide.dart';
 import 'package:din/screens/debug.dart';
@@ -41,6 +43,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
+      const Dua(),
       Hadith(scrollController: scrollController),
       const SettingsScreen(),
       const Debug()
@@ -62,6 +65,11 @@ class _AppState extends State<App> {
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                   icon: const Icon(Icons.menu_book_rounded),
                   label: 'Quran',
+                ),
+                BottomNavigationBarItem(
+                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                  icon: const Icon(Icons.try_sms_star_rounded),
+                  label: 'Dua',
                 ),
                 BottomNavigationBarItem(
                   backgroundColor: Theme.of(context).colorScheme.secondary,

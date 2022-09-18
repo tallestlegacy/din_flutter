@@ -36,10 +36,11 @@ class Styles {
             fontFamily: "Naskh"),
       ),
       appBarTheme: AppBarTheme(
-        backgroundColor: colorScheme.secondary,
+        backgroundColor: backgroundColor,
         titleTextStyle: TextStyle(color: colorScheme.onSecondary, fontSize: 20),
         iconTheme: IconThemeData(color: colorScheme.onSecondary),
-        scrolledUnderElevation: 10,
+        scrolledUnderElevation: 1,
+        shadowColor: Colors.grey,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: colorScheme.secondary,
