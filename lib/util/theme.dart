@@ -37,7 +37,11 @@ class Styles {
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: backgroundColor,
-        titleTextStyle: TextStyle(color: colorScheme.onSecondary, fontSize: 20),
+        titleTextStyle: TextStyle(
+          color: colorScheme.onSecondary,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
         iconTheme: IconThemeData(color: colorScheme.onSecondary),
         scrolledUnderElevation: 1,
         shadowColor: Colors.grey,
@@ -62,10 +66,11 @@ class Styles {
       iconTheme: IconThemeData(
         color: accentColor,
       ),
-      listTileTheme: const ListTileThemeData(
+      listTileTheme: ListTileThemeData(
         dense: true,
         minLeadingWidth: 4,
         minVerticalPadding: 16,
+        iconColor: accentColor,
       ),
       scaffoldBackgroundColor: backgroundColor,
       textTheme: TextTheme(

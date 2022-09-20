@@ -1,11 +1,9 @@
-import 'package:din/components/hisnul.dart';
-import 'package:din/screens/dua.dart';
-import 'package:din/screens/salaah.dart';
+import 'package:din/screens/dua/dua.dart';
 import 'package:din/widgets/scroll_to_hide.dart';
 import 'package:din/screens/debug.dart';
-import 'package:din/screens/hadith.dart';
+import 'package:din/screens/hadith/hadith.dart';
 import 'package:din/screens/quran.dart';
-import 'package:din/screens/settings.dart';
+import 'package:din/screens/more/more.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -43,9 +41,9 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
-      const Dua(),
+      Dua(scrollController: scrollController),
       Hadith(scrollController: scrollController),
-      const SettingsScreen(),
+      MoreScreen(scrollController: scrollController),
       const Debug()
     ];
     return SafeArea(

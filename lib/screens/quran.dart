@@ -1,10 +1,8 @@
-import 'package:din/components/text_toggles.dart';
+import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
-import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
 
 import 'package:din/components/surah.dart';
-import 'package:get/get.dart';
 
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
@@ -58,14 +56,18 @@ class _QuranPageState extends State<QuranPage> {
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
             SliverAppBar(
-              title: Text(getChapterText(_currentPage)),
+              title: Text(
+                getChapterText(_currentPage),
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
               leading: IconButton(
                 icon: const Icon(Icons.menu_rounded),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
               snap: true,
               floating: true,
-              actions: const [TextToggles()],
+              actions: const [TextSettings()],
               backgroundColor: Theme.of(context).backgroundColor,
             ),
           ];

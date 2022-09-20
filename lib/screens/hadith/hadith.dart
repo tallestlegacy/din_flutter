@@ -1,5 +1,4 @@
-import 'package:din/components/bukhari.dart';
-import 'package:din/components/hisnul.dart';
+import 'package:din/screens/hadith/bukhari.dart';
 import 'package:flutter/material.dart';
 
 class Hadith extends StatefulWidget {
@@ -14,10 +13,8 @@ class Hadith extends StatefulWidget {
 class _HadithState extends State<Hadith> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Sahih Bukhari"),
-        ),
-        body: const Bukhari());
+    return Bukhari(
+      scrollController: widget.scrollController,
+    );
   }
 }

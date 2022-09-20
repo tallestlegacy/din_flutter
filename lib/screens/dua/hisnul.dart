@@ -1,11 +1,13 @@
-import 'package:din/components/text_toggles.dart';
+import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Hisnul extends StatefulWidget {
-  const Hisnul({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+
+  const Hisnul({Key? key, required this.scrollController}) : super(key: key);
 
   @override
   State<Hisnul> createState() => _HisnulState();
@@ -33,6 +35,7 @@ class _HisnulState extends State<Hisnul> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      controller: widget.scrollController,
       padding: const EdgeInsets.all(8),
       itemBuilder: (context, index) {
         return Card(
@@ -72,7 +75,7 @@ class HisnulReference extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text("${ref['title']}"),
-        actions: const [TextToggles()],
+        actions: const [TextSettings()],
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(8),

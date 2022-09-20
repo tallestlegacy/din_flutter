@@ -12,7 +12,8 @@ class Debug extends StatelessWidget {
       appBar: AppBar(
           title: Obx(() => Text("Get Storage >> ${storeController.countObs}"))),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => storeController.increment(storeController.count)),
+        onPressed: () => storeController.increment(storeController.count),
+      ),
     );
   }
 }

@@ -2,7 +2,8 @@ import 'package:din/util/json.dart';
 import 'package:flutter/material.dart';
 
 class Bukhari extends StatefulWidget {
-  const Bukhari({Key? key}) : super(key: key);
+  final ScrollController scrollController;
+  const Bukhari({Key? key, required this.scrollController}) : super(key: key);
 
   @override
   State<Bukhari> createState() => _BukhariState();
@@ -29,45 +30,51 @@ class _BukhariState extends State<Bukhari> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.all(8),
-      itemCount: _volumes.length,
-      itemBuilder: (context, index) => Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              "${_volumes[index]['name']}",
-              style: TextStyle(
-                fontSize: 24,
-                color: Theme.of(context).colorScheme.secondary,
-                fontWeight: FontWeight.w300,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Sahih Bukhari"),
+      ),
+      body: ListView.builder(
+        controller: widget.scrollController,
+        padding: const EdgeInsets.all(8),
+        itemCount: _volumes.length,
+        itemBuilder: (context, index) => Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                "${_volumes[index]['name']}",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Theme.of(context).colorScheme.secondary,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
-          ),
-          for (var book in _volumes[index]['books'])
-            Card(
-              child: ListTile(
-                title: Text(
-                  "${book['name']}",
-                ),
-                trailing: Text(
-                  "${book['length']}",
-                  style: const TextStyle(color: Colors.grey),
-                ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BukhariHadiths(
-                        book: book,
+            for (var book in _volumes[index]['books'])
+              Card(
+                child: ListTile(
+                  title: Text(
+                    "${book['name']}",
+                  ),
+                  trailing: Text(
+                    "${book['length']}",
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BukhariHadiths(
+                          book: book,
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            )
-        ],
+                    );
+                  },
+                ),
+              )
+          ],
+        ),
       ),
     );
   }
@@ -104,6 +111,10 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
     return Scaffold(
       appBar: AppBar(
         title: Text("${widget.book['name']}"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_rounded),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.all(8),
