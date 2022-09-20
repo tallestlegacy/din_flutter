@@ -1,5 +1,6 @@
 import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
+import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:din/components/surah.dart';
@@ -67,7 +68,7 @@ class _QuranPageState extends State<QuranPage> {
               ),
               snap: true,
               floating: true,
-              actions: const [TextSettings()],
+              actions: const [TextSettings(), ThemeToggleButton()],
               backgroundColor: Theme.of(context).backgroundColor,
             ),
           ];

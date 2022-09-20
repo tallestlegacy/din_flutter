@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 
 class Styles {
-  static ThemeData themeData(bool isDarkMode, BuildContext context) {
-    MaterialColor primarySwatch = isDarkMode ? Colors.blueGrey : Colors.indigo;
+  MaterialColor swatch;
+  bool isDarkMode;
+
+  Styles({
+    this.isDarkMode = false,
+    this.swatch = Colors.blue,
+  });
+
+  ThemeData get themeData {
+    MaterialColor primarySwatch = swatch;
 
     Color? accentColor = primarySwatch[200];
     Color? backgroundColor = isDarkMode ? Colors.grey[900] : primarySwatch[50];
@@ -80,6 +88,18 @@ class Styles {
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStatePropertyAll(primarySwatch),
         checkColor: const MaterialStatePropertyAll(Colors.white),
+      ),
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStatePropertyAll(primarySwatch),
+        trackColor: MaterialStatePropertyAll(primarySwatch.shade100),
+      ),
+      sliderTheme: SliderThemeData(
+        thumbColor: isDarkMode ? Colors.white : primarySwatch,
+        activeTrackColor: primarySwatch.shade300,
+        inactiveTrackColor: isDarkMode
+            ? primarySwatch.shade100.withAlpha(50)
+            : primarySwatch.shade100,
+        valueIndicatorColor: accentColor,
       ),
     );
   }

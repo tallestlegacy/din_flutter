@@ -1,4 +1,5 @@
 import 'package:din/util/json.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Bukhari extends StatefulWidget {
@@ -64,7 +65,7 @@ class _BukhariState extends State<Bukhari> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
+                      CupertinoPageRoute(
                         builder: (context) => BukhariHadiths(
                           book: book,
                         ),
@@ -108,25 +109,29 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("${widget.book['name']}"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => Navigator.pop(context),
+    return SafeArea(
+      bottom: true,
+      top: false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("${widget.book['name']}"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_rounded),
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
-      ),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: _hadiths.length,
-        itemBuilder: (context, index) => Card(
-          child: ListTile(
-            leading: Text(
-              _hadiths[index]['id'].toString(),
-              style: const TextStyle(color: Colors.grey),
+        body: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: _hadiths.length,
+          itemBuilder: (context, index) => Card(
+            child: ListTile(
+              leading: Text(
+                _hadiths[index]['id'].toString(),
+                style: const TextStyle(color: Colors.grey),
+              ),
+              title: Text(_hadiths[index]['by']),
+              subtitle: Text(_hadiths[index]['text']),
             ),
-            title: Text(_hadiths[index]['by']),
-            subtitle: Text(_hadiths[index]['text']),
           ),
         ),
       ),

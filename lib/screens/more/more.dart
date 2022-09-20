@@ -5,7 +5,6 @@ import 'package:din/screens/more/reader_preferences.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import "package:get/get.dart";
 
 class MoreScreen extends StatelessWidget {
   final ScrollController scrollController;
@@ -15,6 +14,10 @@ class MoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void Push(Widget page) {
+      Navigator.push(context, CupertinoPageRoute(builder: (context) => page));
+    }
+
     return Scaffold(
         appBar: AppBar(
           title: const Text("More"),
@@ -22,8 +25,6 @@ class MoreScreen extends StatelessWidget {
           // backgroundColor: Theme.of(context).backgroundColor,
         ),
         body: ListView(
-          controller: scrollController,
-          padding: const EdgeInsets.all(8),
           children: [
             ListTile(
               leading: const Icon(Icons.stars_rounded),
@@ -40,8 +41,9 @@ class MoreScreen extends StatelessWidget {
               enabled: false,
             ),
             ListTile(
-              leading: const Icon(Icons.history_edu_rounded),
-              title: const Text("Madrasa"),
+              leading: const Icon(Icons.bookmark),
+              title: const Text("Online References"),
+              subtitle: const Text("Books, websites, videos"),
               onTap: () {},
               enabled: false,
             ),
@@ -56,15 +58,13 @@ class MoreScreen extends StatelessWidget {
               leading: const Icon(Icons.text_format_rounded),
               title: const Text("Reader preferences"),
               subtitle: const Text("Size, fonts, display format"),
-              onTap: () => Get.to(const ReaderPreferences(),
-                  transition: Transition.rightToLeft),
+              onTap: () => Push(const ReaderPreferences()),
             ),
             ListTile(
               leading: const Icon(Icons.palette_outlined),
               title: const Text("Appearance"),
               subtitle: const Text("Theme modes, accent colors"),
-              onTap: () => Get.to(const Appearance(),
-                  transition: Transition.rightToLeft),
+              onTap: () => Push(const Appearance()),
             ),
             const Divider(),
             const ListTile(
@@ -87,15 +87,13 @@ class MoreScreen extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.info_outline_rounded),
               title: const Text("About the app"),
-              onTap: () =>
-                  Get.to(const AboutApp(), transition: Transition.rightToLeft),
+              onTap: () => Push(const AboutApp()),
             ),
             ListTile(
               leading: const Icon(Icons.badge_outlined),
               title:
                   const Text("About the developers"), // TODO find a better icon
-              onTap: () => Get.to(const AboutDeveloper(),
-                  transition: Transition.rightToLeft),
+              onTap: () => Push(const AboutDeveloper()),
             ),
             ListTile(
               leading: const Icon(Icons.code_sharp),

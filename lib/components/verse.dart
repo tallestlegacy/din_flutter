@@ -27,7 +27,7 @@ class Verse extends StatelessWidget {
                 child: PaddedText(
                   text: verse['text'],
                   textAlign: TextAlign.right,
-                  fontSize: 20,
+                  fontSize: settingsStoreController.fontSize.value * 1.5,
                   fontWeight: FontWeight.w400,
                   color: Theme.of(context).primaryTextTheme.bodyText2?.color,
                 ),
@@ -37,6 +37,7 @@ class Verse extends StatelessWidget {
                 child: PaddedText(
                   text: verse['transliteration'],
                   color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                  fontSize: settingsStoreController.fontSize.value,
                 ),
               ),
               Visibility(
@@ -44,6 +45,7 @@ class Verse extends StatelessWidget {
                 child: PaddedText(
                   text: verse['translation'],
                   color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  fontSize: settingsStoreController.fontSize.value,
                 ),
               )
             ]),

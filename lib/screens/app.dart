@@ -6,6 +6,7 @@ import 'package:din/screens/quran.dart';
 import 'package:din/screens/more/more.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);

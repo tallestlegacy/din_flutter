@@ -1,3 +1,5 @@
+import 'package:din/util/theme.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -5,6 +7,7 @@ class SettingsStoreController extends GetxController {
   var showTranslation = true.obs;
   var showTransliteration = true.obs;
   var showArabicText = true.obs;
+  var fontSize = 12.0.obs;
 
   final box = GetStorage();
 
@@ -29,15 +32,63 @@ class SettingsStoreController extends GetxController {
     box.write("showTranslation", true);
   }
 
+  void setFontSize(double value) {
+    fontSize(value);
+    box.write("fontSize", value);
+  }
+
   SettingsStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
     showArabicText(box.read("showArabicText") ?? true);
+    fontSize(box.read("fontSize") ?? 12);
   }
 }
 
-// TODO : Add accent colors
-class AppearanceStoreController extends GetxController {}
+class AppearanceStoreController extends GetxController {
+  var swatch = Colors.blue.obs;
+  var darkSwatch = Colors.blue.obs;
+
+  List<MaterialColor> get colors => <MaterialColor>[
+        Colors.blue,
+        Colors.cyan,
+        Colors.indigo,
+        Colors.purple,
+        Colors.pink,
+        Colors.red,
+        Colors.deepOrange,
+        Colors.orange,
+        Colors.yellow,
+        Colors.lime,
+        Colors.lightGreen,
+        Colors.green,
+        Colors.teal,
+        Colors.brown,
+        Colors.grey,
+        Colors.blueGrey,
+      ];
+
+  MaterialColor resolver() {
+    return Colors.blue;
+  }
+
+  final box = GetStorage();
+
+  void setSwatch(MaterialColor color) {
+    swatch(color);
+    box.write("swatch", colors.indexOf(color));
+  }
+
+  void setDarkSwatch(MaterialColor color) {
+    darkSwatch(color);
+    box.write("darkSwatch", colors.indexOf(color));
+  }
+
+  AppearanceStoreController() {
+    swatch(colors[box.read("swatch") ?? 0]);
+    darkSwatch(colors[box.read("darkSwatch") ?? 0]);
+  }
+}
 
 class GlobalStoreController extends GetxController {
   final box = GetStorage();
