@@ -13,7 +13,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.3
   shared_preferences: ^2.0.15
   get: ^4.6.5
   get_storage: ^2.0.3
