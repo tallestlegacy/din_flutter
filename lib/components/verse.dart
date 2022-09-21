@@ -12,9 +12,13 @@ class Verse extends StatelessWidget {
     final SettingsStoreController settingsStoreController =
         Get.put(SettingsStoreController());
     return ListTile(
-      leading: Text(
-        verse['id'].toString(),
-        style: const TextStyle(color: Colors.grey),
+      leading: Obx(
+        () => Text(
+          verse['id'].toString(),
+          style: TextStyle(
+              color: Colors.grey,
+              fontSize: settingsStoreController.fontSize.value),
+        ),
       ),
       contentPadding: const EdgeInsets.all(0),
       minVerticalPadding: 0,

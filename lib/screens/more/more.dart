@@ -1,6 +1,8 @@
 import 'package:din/screens/more/about_app.dart';
 import 'package:din/screens/more/about_developer.dart';
 import 'package:din/screens/more/appearance.dart';
+import 'package:din/screens/more/learning_resources.dart';
+import 'package:din/screens/more/names.dart';
 import 'package:din/screens/more/reader_preferences.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,9 +32,8 @@ class MoreScreen extends StatelessWidget {
               leading: const Icon(Icons.stars_rounded),
               title: const Text("99 Names"),
               subtitle:
-                  const Text("Names of Allah and the prophet Muhammad (ﷺ.)"),
-              onTap: () {},
-              enabled: false,
+                  const Text("99 Names of Allah and the prophet Muhammad (ﷺ.)"),
+              onTap: () => Push(const Names()),
             ),
             ListTile(
               leading: const Icon(Icons.stars_rounded),
@@ -42,10 +43,9 @@ class MoreScreen extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.bookmark),
-              title: const Text("Online References"),
-              subtitle: const Text("Books, websites, videos"),
-              onTap: () {},
-              enabled: false,
+              title: const Text("Learning resources"),
+              subtitle: const Text("Books, websites, videos, alphabet"),
+              onTap: () => Push(const LearningResources()),
             ),
             ListTile(
               leading: const Icon(CupertinoIcons.heart_fill),
@@ -65,6 +65,13 @@ class MoreScreen extends StatelessWidget {
               title: const Text("Appearance"),
               subtitle: const Text("Theme modes, accent colors"),
               onTap: () => Push(const Appearance()),
+            ),
+            ListTile(
+              leading: const Icon(Icons.translate_rounded),
+              title: const Text("Translations"),
+              subtitle: const Text("Multiple translations, language selection"),
+              onTap: () => {},
+              enabled: false,
             ),
             const Divider(),
             const ListTile(

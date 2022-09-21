@@ -68,7 +68,7 @@ class _QuranPageState extends State<QuranPage> {
               ),
               snap: true,
               floating: true,
-              actions: const [TextSettings(), ThemeToggleButton()],
+              actions: const [TextSettingsAction(), ThemeToggleButton()],
               backgroundColor: Theme.of(context).backgroundColor,
             ),
           ];

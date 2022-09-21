@@ -79,7 +79,7 @@ class HisnulReference extends StatelessWidget {
             onPressed: () => Navigator.pop(context),
           ),
           title: Text("${ref['title']}"),
-          actions: const [TextSettings()],
+          actions: const [TextSettingsAction()],
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
