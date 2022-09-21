@@ -28,9 +28,9 @@ flutter run
 
 ## Customisation
 
-- [ ] Arabic / English / Transliteration toggles
-- [ ] Scroll Direction
-- [ ] App colors and theme
+- [x] Arabic / English / Transliteration toggles
+- [x] Scroll Direction
+- [x] App colors and theme
 
 ## UI
 
