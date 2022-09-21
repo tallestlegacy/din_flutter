@@ -1,3 +1,4 @@
+import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
@@ -40,52 +41,87 @@ class _NamesState extends State<Names> {
     final SettingsStoreController settingsStoreController =
         Get.put(SettingsStoreController());
 
-    Widget buildNamesListView(var names, double fontSize) {
-      return ListView.separated(
-        itemCount: names.length,
-        itemBuilder: (context, index) => ListTile(
-          leading: Text(
-            (index + 1).toString(),
-            style: TextStyle(fontSize: fontSize),
-          ),
-          title: Text(
-            "${names[index]["name"]} - ${names[index]["transliteration"]}",
-            style: TextStyle(fontSize: fontSize),
-          ),
-          subtitle: Text(
-            names[index]["translation"],
-            style: TextStyle(fontSize: fontSize),
-          ),
-        ),
-        separatorBuilder: (builder, context) => const Divider(),
-      );
-    }
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Theme.of(context).backgroundColor,
-          title: const Text("99 Names"),
-          bottom: TabBar(
-              indicatorColor: Theme.of(context).primaryColor,
-              labelPadding: const EdgeInsets.all(8),
-              tabs: const [
-                Text("Allah"),
-                Text("Muhammad"),
-              ]),
-          actions: const [TextSettingsAction(), ThemeToggleButton()],
+        body: NestedScrollView(
+          floatHeaderSlivers: true,
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) => [
+            SliverOverlapAbsorber(
+              sliver: SliverAppBar(
+                floating: true,
+                snap: true,
+                pinned: true,
+                forceElevated: innerBoxIsScrolled,
+                backgroundColor: Theme.of(context).backgroundColor,
+                title: const Text("99 Names"),
+                leading: const CustomBackButton(),
+                bottom: TabBar(
+                  labelPadding: const EdgeInsets.all(8),
+                  tabs: const [
+                    Text("Allah"),
+                    Text("Muhammad"),
+                  ],
+                  indicatorColor: Theme.of(context).primaryColor,
+                ),
+                actions: const [TextSettingsAction(), ThemeToggleButton()],
+              ),
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            ),
+          ],
+          body: TabBarView(
+            children: [_namesOfAllah, _namesOfMuhammad].map((var names) {
+              return SafeArea(
+                top: false,
+                bottom: true,
+                child: Builder(
+                  builder: (BuildContext context) {
+                    return CustomScrollView(
+                      slivers: <Widget>[
+                        SliverOverlapInjector(
+                          handle:
+                              NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                  context),
+                        ),
+                        SliverList(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) => Column(
+                              children: [
+                                Obx(
+                                  (() {
+                                    double fontSize =
+                                        settingsStoreController.fontSize.value;
+                                    return ListTile(
+                                      leading: Text(
+                                        (index + 1).toString(),
+                                        style: TextStyle(fontSize: fontSize),
+                                      ),
+                                      title: Text(
+                                        "${names[index]["name"]} - ${names[index]["transliteration"]}",
+                                        style: TextStyle(fontSize: fontSize),
+                                      ),
+                                      subtitle: Text(
+                                        names[index]["translation"],
+                                        style: TextStyle(fontSize: fontSize),
+                                      ),
+                                    );
+                                  }),
+                                ),
+                                if (index != names.length - 1) const Divider()
+                              ],
+                            ),
+                            childCount: names.length,
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
+              );
+            }).toList(),
+          ),
         ),
-        body: TabBarView(children: [
-          Obx(
-            () => buildNamesListView(
-                _namesOfAllah, settingsStoreController.fontSize.value),
-          ),
-          Obx(
-            () => buildNamesListView(
-                _namesOfMuhammad, settingsStoreController.fontSize.value),
-          ),
-        ]),
       ),
     );
   }

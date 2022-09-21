@@ -23,14 +23,25 @@ flutter run
 ## Features
 
 - [x] Quran
-- [ ] Hadith and Sunnah
+- [x] Hadith and Sunnah
+- [ ] Madrasa
 - [ ] Multiple translations
+- [ ] Learning resources
+- [ ] Favourites
+- [ ] Text sharing
+- [ ] Application reviews and Release notes
+- [ ] User manual
+- [ ] Search quran
+- [ ] Search every other list
+- [ ] Islamic calendar
+- [ ] Optional reminders (Prayer and Fasting)
 
 ## Customisation
 
 - [x] Arabic / English / Transliteration toggles
-- [x] Scroll Direction
+- [ ] Scroll Direction
 - [x] App colors and theme
+- [ ] Arabic and English fonts
 
 ## UI
 

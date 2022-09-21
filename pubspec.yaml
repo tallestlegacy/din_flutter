@@ -17,6 +17,8 @@ dependencies:
   shared_preferences: ^2.0.15
   get: ^4.6.5
   get_storage: ^2.0.3
+  font_awesome_flutter: ^10.2.1
+  url_launcher: ^6.1.5
 
 dev_dependencies:
   flutter_test:

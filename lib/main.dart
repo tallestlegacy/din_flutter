@@ -1,5 +1,4 @@
 import 'package:din/screens/app.dart';
-import 'package:din/screens/more/appearance.dart';
 import 'package:din/util/store.dart';
 import 'package:din/util/theme.dart';
 import "package:flutter/material.dart";
@@ -23,15 +22,22 @@ class DinFlutterApp extends StatelessWidget {
     final AppearanceStoreController appearanceStoreController =
         Get.put(AppearanceStoreController());
 
+    bool forceDarkMode = appearanceStoreController.forceDarkMode.value;
+
     return GetMaterialApp(
       title: "Din",
       debugShowCheckedModeBanner: false,
       home: const App(),
-      theme: Styles(swatch: appearanceStoreController.swatch.value).themeData,
+      theme: Styles(
+        isDarkMode: forceDarkMode,
+        swatch: forceDarkMode
+            ? appearanceStoreController.darkSwatch.value
+            : appearanceStoreController.swatch.value,
+      ).themeData,
       darkTheme: Styles(
-              isDarkMode: true,
-              swatch: appearanceStoreController.darkSwatch.value)
-          .themeData,
+        isDarkMode: true,
+        swatch: appearanceStoreController.darkSwatch.value,
+      ).themeData,
       themeMode: ThemeMode.system,
     );
   }

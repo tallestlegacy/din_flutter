@@ -52,7 +52,7 @@ class Styles {
         ),
         iconTheme: IconThemeData(color: colorScheme.onSecondary),
         scrolledUnderElevation: 1,
-        shadowColor: Colors.grey,
+        shadowColor: primarySwatch.shade100,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: colorScheme.secondary,
@@ -65,6 +65,7 @@ class Styles {
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onSecondary,
         labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+        indicatorSize: TabBarIndicatorSize.label,
       ),
       cardTheme: CardTheme(
           color: cardColor,

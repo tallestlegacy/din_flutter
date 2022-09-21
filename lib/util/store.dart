@@ -1,3 +1,4 @@
+import 'package:din/util/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -47,6 +48,7 @@ class SettingsStoreController extends GetxController {
 class AppearanceStoreController extends GetxController {
   var swatch = Colors.blue.obs;
   var darkSwatch = Colors.blue.obs;
+  var forceDarkMode = false.obs;
 
   List<MaterialColor> get colors => <MaterialColor>[
         Colors.blue,
@@ -83,9 +85,20 @@ class AppearanceStoreController extends GetxController {
     box.write("darkSwatch", colors.indexOf(color));
   }
 
+  void setForceDarkMode(bool value) {
+    forceDarkMode(value);
+    box.write("forceDarkMode", value);
+
+    Get.isDarkMode
+        ? Get.changeTheme(Styles(swatch: swatch.value).themeData)
+        : Get.changeTheme(
+            Styles(isDarkMode: true, swatch: darkSwatch.value).themeData);
+  }
+
   AppearanceStoreController() {
     swatch(colors[box.read("swatch") ?? 0]);
     darkSwatch(colors[box.read("darkSwatch") ?? 0]);
+    forceDarkMode(box.read("forceDarkMode") ?? false);
   }
 }
 

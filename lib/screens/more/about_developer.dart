@@ -1,3 +1,4 @@
+import 'package:din/components/back_button.dart';
 import 'package:flutter/material.dart';
 
 class AboutDeveloper extends StatelessWidget {
@@ -8,6 +9,7 @@ class AboutDeveloper extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("About the Developers"),
+        leading: const CustomBackButton(),
       ),
     );
   }

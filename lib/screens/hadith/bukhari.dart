@@ -1,6 +1,11 @@
+import 'package:din/components/back_button.dart';
+import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
+import 'package:din/util/store.dart';
+import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Bukhari extends StatefulWidget {
   final ScrollController scrollController;
@@ -34,6 +39,7 @@ class _BukhariState extends State<Bukhari> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sahih Bukhari"),
+        actions: const [ThemeToggleButton()],
       ),
       body: ListView.builder(
         controller: widget.scrollController,
@@ -109,28 +115,40 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
 
   @override
   Widget build(BuildContext context) {
+    final SettingsStoreController settingsStoreController =
+        Get.put(SettingsStoreController());
     return SafeArea(
       bottom: true,
       top: false,
       child: Scaffold(
         appBar: AppBar(
           title: Text("${widget.book['name']}"),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            onPressed: () => Navigator.pop(context),
-          ),
+          leading: const CustomBackButton(),
+          actions: const [TextSettingsAction(), ThemeToggleButton()],
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: _hadiths.length,
           itemBuilder: (context, index) => Card(
-            child: ListTile(
-              leading: Text(
-                _hadiths[index]['id'].toString(),
-                style: const TextStyle(color: Colors.grey),
+            child: Obx(
+              () => ListTile(
+                leading: Text(
+                  _hadiths[index]['id'].toString(),
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: settingsStoreController.fontSize.value),
+                ),
+                title: Text(
+                  _hadiths[index]['by'],
+                  style: TextStyle(
+                      fontSize: settingsStoreController.fontSize.value),
+                ),
+                subtitle: Text(
+                  _hadiths[index]['text'],
+                  style: TextStyle(
+                      fontSize: settingsStoreController.fontSize.value),
+                ),
               ),
-              title: Text(_hadiths[index]['by']),
-              subtitle: Text(_hadiths[index]['text']),
             ),
           ),
         ),

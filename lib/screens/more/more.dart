@@ -4,9 +4,11 @@ import 'package:din/screens/more/appearance.dart';
 import 'package:din/screens/more/learning_resources.dart';
 import 'package:din/screens/more/names.dart';
 import 'package:din/screens/more/reader_preferences.dart';
+import 'package:din/util/network.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/link.dart';
 
 class MoreScreen extends StatelessWidget {
   final ScrollController scrollController;
@@ -48,8 +50,9 @@ class MoreScreen extends StatelessWidget {
               onTap: () => Push(const LearningResources()),
             ),
             ListTile(
-              leading: const Icon(CupertinoIcons.heart_fill),
+              leading: const Icon(Icons.favorite),
               title: const Text("Favourites"),
+              subtitle: const Text("Aya, hadith, names of allah"),
               onTap: () {},
               enabled: false,
             ),
@@ -75,19 +78,26 @@ class MoreScreen extends StatelessWidget {
             ),
             const Divider(),
             const ListTile(
+              leading: Icon(Icons.school_rounded),
+              title: Text("How to use this app"),
+              subtitle: Text("User guide"),
+              enabled: false,
+            ),
+            const ListTile(
               leading: Icon(Icons.share_rounded),
               title: Text("Share"),
               enabled: false,
             ),
             const ListTile(
-              leading: Icon(Icons.star_rounded),
+              leading: Icon(Icons.thumbs_up_down_rounded),
               title: Text("Rate the app"),
               enabled: false,
             ),
-            const ListTile(
-              leading: Icon(Icons.question_answer_rounded),
-              title: Text("Help and Feedback"),
-              subtitle: Text("Privacy policy, contact us, recommendations"),
+            ListTile(
+              leading: const Icon(Icons.question_answer_rounded),
+              title: const Text("Help and Feedback"),
+              subtitle: const Text("Contact, recommendations"),
+              onTap: () => launchUri(context, Uri.parse("https://google.com")),
               enabled: false,
             ),
             const Divider(),
@@ -99,13 +109,12 @@ class MoreScreen extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.badge_outlined),
               title:
-                  const Text("About the developers"), // TODO find a better icon
+                  const Text("Meet the developers"), // TODO find a better icon
               onTap: () => Push(const AboutDeveloper()),
             ),
             ListTile(
-              leading: const Icon(Icons.code_sharp),
-              title: const Text(
-                  "Sources and Licencing"), // TODO find a better icon
+              leading: const Icon(Icons.code_rounded),
+              title: const Text("Sources and Licencing"),
               onTap: () => {},
               enabled: false,
             ),

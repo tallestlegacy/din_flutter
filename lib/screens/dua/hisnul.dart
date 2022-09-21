@@ -1,6 +1,8 @@
+import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
+import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,27 +37,33 @@ class _HisnulState extends State<Hisnul> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      controller: widget.scrollController,
-      padding: const EdgeInsets.all(8),
-      itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            trailing: Text(
-              "${_refs[index]['hadiths'].length}",
-              style: const TextStyle(color: Colors.grey),
-            ),
-            title: Text("${_refs[index]['title']}"),
-            onTap: () => Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) => HisnulReference(ref: _refs[index]),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Hisnul Muslim"),
+        actions: const [ThemeToggleButton()],
+      ),
+      body: ListView.builder(
+        controller: widget.scrollController,
+        padding: const EdgeInsets.all(8),
+        itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              trailing: Text(
+                "${_refs[index]['hadiths'].length}",
+                style: const TextStyle(color: Colors.grey),
+              ),
+              title: Text("${_refs[index]['title']}"),
+              onTap: () => Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => HisnulReference(ref: _refs[index]),
+                ),
               ),
             ),
-          ),
-        );
-      },
-      itemCount: _refs.length,
+          );
+        },
+        itemCount: _refs.length,
+      ),
     );
   }
 }
@@ -74,12 +82,9 @@ class HisnulReference extends StatelessWidget {
       top: false,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_rounded),
-            onPressed: () => Navigator.pop(context),
-          ),
+          leading: const CustomBackButton(),
           title: Text("${ref['title']}"),
-          actions: const [TextSettingsAction()],
+          actions: const [TextSettingsAction(), ThemeToggleButton()],
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),

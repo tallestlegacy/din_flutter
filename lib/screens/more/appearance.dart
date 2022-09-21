@@ -1,10 +1,10 @@
+import 'package:din/components/back_button.dart';
 import 'package:din/components/verse.dart';
 import 'package:din/util/store.dart';
 import 'package:din/util/theme.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class Appearance extends StatelessWidget {
   const Appearance({super.key});
@@ -14,7 +14,7 @@ class Appearance extends StatelessWidget {
     final AppearanceStoreController appearanceStoreController =
         Get.put(AppearanceStoreController());
 
-    Widget getColors(bool isDark) {
+    Widget getColors(bool isDarkMode) {
       return Wrap(
         spacing: 16,
         runSpacing: 16,
@@ -28,18 +28,17 @@ class Appearance extends StatelessWidget {
               child: Obx(
                 () => GestureDetector(
                   onTap: () {
-                    bool darkModeIsSet = Get.isDarkMode;
-
-                    if (isDark) {
+                    if (isDarkMode) {
                       appearanceStoreController.setDarkSwatch(color);
                     } else {
                       appearanceStoreController.setSwatch(color);
                     }
 
-                    if (isDark == darkModeIsSet) {
-                      Get.changeTheme(
-                          Styles(swatch: color, isDarkMode: isDark).themeData);
-                    }
+                    appearanceStoreController.setForceDarkMode(isDarkMode);
+
+                    Get.changeTheme(
+                        Styles(swatch: color, isDarkMode: isDarkMode)
+                            .themeData);
                   },
                   child: DecoratedBox(
                     decoration: BoxDecoration(
@@ -47,12 +46,12 @@ class Appearance extends StatelessWidget {
                       color: color,
                       border: Border.all(
                         color: color ==
-                                (isDark
+                                (isDarkMode
                                     ? appearanceStoreController.darkSwatch.value
                                     : appearanceStoreController.swatch.value)
-                            ? Theme.of(context).primaryColor
+                            ? color.shade200
                             : Colors.transparent,
-                        width: 3,
+                        width: 5,
                       ),
                     ),
                   ),
@@ -68,6 +67,7 @@ class Appearance extends StatelessWidget {
         title: const Text("Appearance"),
         actions: const [ThemeToggleButton()],
         backgroundColor: Theme.of(context).backgroundColor,
+        leading: const CustomBackButton(),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -82,22 +82,18 @@ class Appearance extends StatelessWidget {
                 ),
                 child: const Padding(
                   padding: EdgeInsets.all(16),
-                  child: Verse(
-                    verse: {
-                      "id": 1,
-                      "text": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-                      "translation":
-                          "In the name of Allah, the Entirely Merciful, the Especially Merciful",
-                      "transliteration": "Bismi Allahi alrrahmani alrraheemi"
-                    },
-                  ),
+                  child: VersePreview(),
                 ),
               ),
             ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.light_mode_outlined),
-              title: getColors(false),
+              title: const Padding(
+                padding: EdgeInsets.all(16),
+                child: Text("Light mode accent"),
+              ),
+              subtitle: getColors(false),
             ),
             const Divider(),
             ListTile(

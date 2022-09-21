@@ -1,3 +1,4 @@
+import 'package:din/components/back_button.dart';
 import 'package:flutter/material.dart';
 
 class LearningResources extends StatelessWidget {
@@ -9,6 +10,7 @@ class LearningResources extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Learning Resources"),
         backgroundColor: Theme.of(context).backgroundColor,
+        leading: const CustomBackButton(),
       ),
     );
   }
