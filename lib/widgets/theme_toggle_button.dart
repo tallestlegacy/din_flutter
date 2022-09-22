@@ -12,6 +12,7 @@ class ThemeToggleButton extends StatelessWidget {
 
     return IconButton(
       onPressed: () {
+        Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
         appearanceStoreController.setForceDarkMode(!Get.isDarkMode);
       },
       icon: Obx(

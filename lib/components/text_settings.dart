@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TextSettings extends StatelessWidget {
+  const TextSettings({super.key});
+
   @override
   Widget build(BuildContext context) {
     final SettingsStoreController settingsStoreController =
@@ -89,7 +91,7 @@ class TextSettingsAction extends StatelessWidget {
                 ),
                 color: Theme.of(context).canvasColor,
               ),
-              child: TextSettings(),
+              child: const TextSettings(),
             );
           }),
         );

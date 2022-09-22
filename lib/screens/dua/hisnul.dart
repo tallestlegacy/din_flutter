@@ -98,8 +98,13 @@ class HisnulReference extends StatelessWidget {
                             .toString()
                             .replaceAll("\n", " "),
                         style: TextStyle(
-                            fontSize:
-                                settingsStoreController.fontSize.value * 1.25),
+                          fontSize:
+                              settingsStoreController.fontSize.value * 1.25,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2
+                              ?.color,
+                        ),
                       )
                     : null,
                 subtitle: Column(
@@ -114,10 +119,13 @@ class HisnulReference extends StatelessWidget {
                             .replaceAll("\n", " "),
                         style: TextStyle(
                           fontSize: settingsStoreController.fontSize.value,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2
+                              ?.color,
                         ),
                       ),
                     ),
-                    Divider(),
                     Visibility(
                       visible: settingsStoreController.showTranslation.value,
                       child: Text(
@@ -125,7 +133,12 @@ class HisnulReference extends StatelessWidget {
                             .toString()
                             .replaceAll("\n", " "),
                         style: TextStyle(
-                            fontSize: settingsStoreController.fontSize.value),
+                          fontSize: settingsStoreController.fontSize.value,
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText1
+                              ?.color,
+                        ),
                       ),
                     ),
                   ],

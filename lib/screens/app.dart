@@ -1,5 +1,4 @@
 import 'package:din/screens/dua/dua.dart';
-import 'package:din/screens/more/search.dart';
 import 'package:din/widgets/scroll_to_hide.dart';
 import 'package:din/screens/debug.dart';
 import 'package:din/screens/hadith/hadith.dart';
@@ -7,7 +6,6 @@ import 'package:din/screens/quran.dart';
 import 'package:din/screens/more/more.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
@@ -45,7 +43,6 @@ class _AppState extends State<App> {
       QuranPage(scrollController: scrollController),
       Dua(scrollController: scrollController),
       Hadith(scrollController: scrollController),
-      Search(),
       MoreScreen(scrollController: scrollController),
       const Debug()
     ];
@@ -77,12 +74,6 @@ class _AppState extends State<App> {
                   icon: const Icon(Icons.book),
                   label: 'Hadith',
                 ),
-                if (kDebugMode)
-                  BottomNavigationBarItem(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    icon: const Icon(Icons.search_rounded),
-                    label: 'Search',
-                  ),
                 BottomNavigationBarItem(
                   backgroundColor: Theme.of(context).colorScheme.secondary,
                   icon: const Icon(Icons.menu_open_rounded),

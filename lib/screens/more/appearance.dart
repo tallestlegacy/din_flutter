@@ -36,6 +36,8 @@ class Appearance extends StatelessWidget {
 
                     appearanceStoreController.setForceDarkMode(isDarkMode);
 
+                    Get.changeThemeMode(ThemeMode
+                        .light); // FIXME PlatfrmIsDarkMode automatic change
                     Get.changeTheme(
                         Styles(swatch: color, isDarkMode: isDarkMode)
                             .themeData);
@@ -72,33 +74,36 @@ class Appearance extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(
-                      width: 2, color: Theme.of(context).backgroundColor),
-                ),
-                child: const Padding(
-                  padding: EdgeInsets.all(16),
-                  child: VersePreview(),
-                ),
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: VersePreview(),
               ),
             ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.light_mode_outlined),
-              title: const Padding(
-                padding: EdgeInsets.all(16),
-                child: Text("Light mode accent"),
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Text(
+                  "Light mode accent",
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                ),
               ),
               subtitle: getColors(false),
             ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.dark_mode_outlined),
-              title: getColors(true),
+              title: Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Text(
+                  "Dark mode accent",
+                  style: TextStyle(color: Theme.of(context).primaryColor),
+                ),
+              ),
+              subtitle: getColors(true),
             )
           ],
         ),

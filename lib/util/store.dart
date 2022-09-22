@@ -1,4 +1,5 @@
 import 'package:din/util/theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -86,8 +87,8 @@ class AppearanceStoreController extends GetxController {
   }
 
   void setForceDarkMode(bool value) {
-    forceDarkMode(value);
     box.write("forceDarkMode", value);
+    forceDarkMode(value);
 
     Get.isDarkMode
         ? Get.changeTheme(Styles(swatch: swatch.value).themeData)
@@ -121,7 +122,9 @@ class DebugController extends GetxController {
   var countObs = 0.obs;
   int get count => box.read("count") ?? 0;
   increment(int val) {
-    print("Incrementing >> ${val + 1}");
+    if (kDebugMode) {
+      print("Incrementing >> ${val + 1}");
+    }
     box.write("count", val + 1);
     countObs(val + 1);
   }

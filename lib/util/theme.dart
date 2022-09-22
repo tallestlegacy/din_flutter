@@ -40,7 +40,8 @@ class Styles {
       primaryTextTheme: TextTheme(
         bodyText1: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
         bodyText2: TextStyle(
-            color: isDarkMode ? primarySwatch[200] : Colors.grey,
+            color:
+                isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100),
             fontFamily: "Naskh"),
       ),
       appBarTheme: AppBarTheme(
@@ -84,7 +85,9 @@ class Styles {
       scaffoldBackgroundColor: backgroundColor,
       textTheme: TextTheme(
         headline6: TextStyle(
-            fontSize: 16, color: isDarkMode ? primarySwatch[200] : Colors.grey),
+          fontSize: 16,
+          color: primarySwatch[200],
+        ),
       ),
       checkboxTheme: CheckboxThemeData(
         fillColor: MaterialStatePropertyAll(primarySwatch),

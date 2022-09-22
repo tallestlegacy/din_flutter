@@ -1,6 +1,4 @@
-import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class Debug extends StatefulWidget {
   const Debug({super.key});

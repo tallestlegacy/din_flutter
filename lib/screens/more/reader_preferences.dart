@@ -1,5 +1,6 @@
 import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
+import 'package:din/components/verse.dart';
 import 'package:flutter/material.dart';
 
 class ReaderPreferences extends StatelessWidget {
@@ -12,7 +13,16 @@ class ReaderPreferences extends StatelessWidget {
         title: const Text("Reader preferences"),
         leading: const CustomBackButton(),
       ),
-      body: TextSettings(),
+      body: Column(
+        children: const [
+          Padding(
+            padding: EdgeInsets.all(16),
+            child: VersePreview(),
+          ),
+          Divider(),
+          TextSettings(),
+        ],
+      ),
     );
   }
 }
