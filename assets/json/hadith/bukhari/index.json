@@ -1,0 +1,512 @@
+[
+    {
+        "name": "Volume 1",
+        "books": [
+            {
+                "name": "1. Revelation",
+                "length": 6,
+                "id": 1
+            },
+            {
+                "name": "2. Belief",
+                "length": 49,
+                "id": 2
+            },
+            {
+                "name": "3. Knowledge",
+                "length": 82,
+                "id": 3
+            },
+            {
+                "name": "4. Ablution (Wudu')",
+                "length": 111,
+                "id": 4
+            },
+            {
+                "name": "5. Bathing (Ghusl)",
+                "length": 45,
+                "id": 5
+            },
+            {
+                "name": "6. Menstrual Periods",
+                "length": 37,
+                "id": 6
+            },
+            {
+                "name": "7. Ablution with dust",
+                "length": 0,
+                "id": 7
+            },
+            {
+                "name": "8. Prayer (Salat)",
+                "length": 129,
+                "id": 8
+            },
+            {
+                "name": "9. Prayer Hall (Sutra)",
+                "length": 28,
+                "id": 9
+            },
+            {
+                "name": "10. Times of the Prayer",
+                "length": 77,
+                "id": 10
+            },
+            {
+                "name": "11. Call to Prayer",
+                "length": 122,
+                "id": 11
+            },
+            {
+                "name": "12. Characteristics of Prayer",
+                "length": 134,
+                "id": 12
+            }
+        ]
+    },
+    {
+        "name": "Volume 2",
+        "books": [
+            {
+                "name": "13. Friday Prayer",
+                "length": 63,
+                "id": 13
+            },
+            {
+                "name": "14. Fear Prayer",
+                "length": 5,
+                "id": 14
+            },
+            {
+                "name": "15. The Two Festivals (Eids)",
+                "length": 36,
+                "id": 15
+            },
+            {
+                "name": "16. Witr Prayer",
+                "length": 14,
+                "id": 16
+            },
+            {
+                "name": "17. Dua' for Rain (Istisqaa)",
+                "length": 31,
+                "id": 17
+            },
+            {
+                "name": "18. Eclipses",
+                "length": 23,
+                "id": 18
+            },
+            {
+                "name": "19. Prostration",
+                "length": 13,
+                "id": 19
+            },
+            {
+                "name": "20. Shortening Prayers",
+                "length": 35,
+                "id": 20
+            },
+            {
+                "name": "21. Night Prayer (Tahajjud)",
+                "length": 70,
+                "id": 21
+            },
+            {
+                "name": "22. Actions while Praying",
+                "length": 41,
+                "id": 22
+            },
+            {
+                "name": "23. Funerals (Al-Janaa'iz)",
+                "length": 155,
+                "id": 23
+            },
+            {
+                "name": "24. Tax (Zakat)",
+                "length": 96,
+                "id": 24
+            },
+            {
+                "name": "25. Tax (Zakat ul Fitr)",
+                "length": 10,
+                "id": 25
+            },
+            {
+                "name": "26. Pilgrimmage (Hajj)",
+                "length": 235,
+                "id": 26
+            }
+        ]
+    },
+    {
+        "name": "Volume 3",
+        "books": [
+            {
+                "name": "27. Minor Pilgrimmage",
+                "length": 32,
+                "id": 27
+            },
+            {
+                "name": "28. Pilgrims Prevented",
+                "length": 14,
+                "id": 28
+            },
+            {
+                "name": "29. Prilgrims Hunting Penalty",
+                "length": 44,
+                "id": 29
+            },
+            {
+                "name": "30. Virtues of Madinah",
+                "length": 24,
+                "id": 30
+            },
+            {
+                "name": "31. Fasting",
+                "length": 111,
+                "id": 31
+            },
+            {
+                "name": "32. Ramadan Prayer",
+                "length": 16,
+                "id": 32
+            },
+            {
+                "name": "33. Stay in Mosque (I'tikaf)",
+                "length": 21,
+                "id": 33
+            },
+            {
+                "name": "34. Sales and Trade",
+                "length": 178,
+                "id": 34
+            },
+            {
+                "name": "35. Paid in Advance",
+                "length": 20,
+                "id": 35
+            },
+            {
+                "name": "36. Hiring",
+                "length": 25,
+                "id": 36
+            },
+            {
+                "name": "37. Debt Transfer",
+                "length": 11,
+                "id": 37
+            },
+            {
+                "name": "38. Business by Proxy",
+                "length": 18,
+                "id": 38
+            },
+            {
+                "name": "39. Agriculture",
+                "length": 28,
+                "id": 39
+            },
+            {
+                "name": "40. Distributing Water",
+                "length": 29,
+                "id": 40
+            },
+            {
+                "name": "41. Loans, Bankruptcy",
+                "length": 38,
+                "id": 41
+            },
+            {
+                "name": "42. Lost & Found",
+                "length": 12,
+                "id": 42
+            },
+            {
+                "name": "43. Oppressions",
+                "length": 43,
+                "id": 43
+            },
+            {
+                "name": "44. Partnership",
+                "length": 22,
+                "id": 44
+            },
+            {
+                "name": "45. Mortgaging",
+                "length": 8,
+                "id": 45
+            },
+            {
+                "name": "46. Freeing Slaves",
+                "length": 47,
+                "id": 46
+            },
+            {
+                "name": "47. Gifts",
+                "length": 65,
+                "id": 47
+            },
+            {
+                "name": "48. Witnesses",
+                "length": 50,
+                "id": 48
+            },
+            {
+                "name": "49. Peacemaking",
+                "length": 19,
+                "id": 49
+            },
+            {
+                "name": "50. Conditions",
+                "length": 22,
+                "id": 50
+            }
+        ]
+    },
+    {
+        "name": "Volume 4",
+        "books": [
+            {
+                "name": "51. Wills",
+                "length": 40,
+                "id": 51
+            },
+            {
+                "name": "52. Jihaad",
+                "length": 288,
+                "id": 52
+            },
+            {
+                "name": "53. One-fifth of Booty",
+                "length": 89,
+                "id": 53
+            },
+            {
+                "name": "54. Begining of Creation",
+                "length": 130,
+                "id": 54
+            },
+            {
+                "name": "55. Prophets",
+                "length": 116,
+                "id": 55
+            },
+            {
+                "name": "56. Merits of Sunnah",
+                "length": 183,
+                "id": 56
+            }
+        ]
+    },
+    {
+        "name": "Volume 5",
+        "books": [
+            {
+                "name": "57. The Companions",
+                "length": 119,
+                "id": 57
+            },
+            {
+                "name": "58. Merits of Al-Ansaar",
+                "length": 165,
+                "id": 58
+            },
+            {
+                "name": "59. Expeditions",
+                "length": 465,
+                "id": 59
+            }
+        ]
+    },
+    {
+        "name": "Volume 6",
+        "books": [
+            {
+                "name": "60. Prophetic Commentary",
+                "length": 501,
+                "id": 60
+            },
+            {
+                "name": "61. Virtues of the Qur'an",
+                "length": 82,
+                "id": 61
+            }
+        ]
+    },
+    {
+        "name": "Volume 7",
+        "books": [
+            {
+                "name": "62. Marriage",
+                "length": 177,
+                "id": 62
+            },
+            {
+                "name": "63. Divorce",
+                "length": 86,
+                "id": 63
+            },
+            {
+                "name": "64. Supporting Family",
+                "length": 23,
+                "id": 64
+            },
+            {
+                "name": "65. Food, Meals",
+                "length": 90,
+                "id": 65
+            },
+            {
+                "name": "66. Sacrifice on Birth",
+                "length": 9,
+                "id": 66
+            },
+            {
+                "name": "67. Hunting, Slaughter",
+                "length": 69,
+                "id": 67
+            },
+            {
+                "name": "68. Al-Adha Sacrifice",
+                "length": 28,
+                "id": 68
+            },
+            {
+                "name": "69. Drinks",
+                "length": 63,
+                "id": 69
+            },
+            {
+                "name": "70. Patients",
+                "length": 38,
+                "id": 70
+            },
+            {
+                "name": "71. Medicine",
+                "length": 92,
+                "id": 71
+            },
+            {
+                "name": "72. Dress",
+                "length": 180,
+                "id": 72
+            }
+        ]
+    },
+    {
+        "name": "Volume 8",
+        "books": [
+            {
+                "name": "73. Good Manners",
+                "length": 247,
+                "id": 73
+            },
+            {
+                "name": "74. Asking Permission",
+                "length": 72,
+                "id": 74
+            },
+            {
+                "name": "75. Invocations",
+                "length": 104,
+                "id": 75
+            },
+            {
+                "name": "76. Softening the Heart",
+                "length": 173,
+                "id": 76
+            },
+            {
+                "name": "77. Divine Will (Qadar)",
+                "length": 25,
+                "id": 77
+            },
+            {
+                "name": "78. Oaths and Vows",
+                "length": 81,
+                "id": 78
+            },
+            {
+                "name": "79. Unfulfilled Oaths",
+                "length": 17,
+                "id": 79
+            },
+            {
+                "name": "80. Inheritance Laws",
+                "length": 47,
+                "id": 80
+            },
+            {
+                "name": "81. Punishment Laws",
+                "length": 31,
+                "id": 81
+            },
+            {
+                "name": "82. Disbelievers (war)",
+                "length": 51,
+                "id": 82
+            }
+        ]
+    },
+    {
+        "name": "Volume 9",
+        "books": [
+            {
+                "name": "83. Blood Money",
+                "length": 53,
+                "id": 83
+            },
+            {
+                "name": "84. Dealing with Apostates",
+                "length": 20,
+                "id": 84
+            },
+            {
+                "name": "85. Under Duress",
+                "length": 12,
+                "id": 85
+            },
+            {
+                "name": "86. Tricks",
+                "length": 27,
+                "id": 86
+            },
+            {
+                "name": "87. Interpretations of Dreams",
+                "length": 59,
+                "id": 87
+            },
+            {
+                "name": "88. End of the World",
+                "length": 81,
+                "id": 88
+            },
+            {
+                "name": "89. Judgments",
+                "length": 81,
+                "id": 89
+            },
+            {
+                "name": "90. Wishes",
+                "length": 20,
+                "id": 90
+            },
+            {
+                "name": "91. Truthfull Word",
+                "length": 21,
+                "id": 91
+            },
+            {
+                "name": "92. Holding Steadfast",
+                "length": 97,
+                "id": 92
+            },
+            {
+                "name": "93. Oneness of Allah",
+                "length": 187,
+                "id": 93
+            }
+        ]
+    }
+]

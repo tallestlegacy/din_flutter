@@ -6,17 +6,17 @@ import '../util/json.dart';
 class Surah extends StatefulWidget {
   final chapter;
 
-  Surah({Key? key, this.chapter}) : super(key: key);
+  const Surah({Key? key, this.chapter}) : super(key: key);
   @override
-  _SurahState createState() => _SurahState();
+  State<Surah> createState() => _SurahState();
 }
 
 class _SurahState extends State<Surah> {
   List<dynamic> _verses = [];
 
   Future<void> getVerses() async {
-    final data =
-        await LoadJson().load("assets/json/en/${widget.chapter['id']}.json");
+    final data = await LoadJson()
+        .load("assets/json/quran/en/${widget.chapter['id']}.json");
     if (mounted) {
       setState(() {
         _verses = data["verses"];
@@ -25,15 +25,25 @@ class _SurahState extends State<Surah> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     getVerses();
-    return ListView.separated(
-      itemCount: _verses.length,
-      itemBuilder: (context, index) => Container(
-        margin: const EdgeInsets.all(8),
-        child: Verse(verse: _verses[index]),
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverList(
+        delegate: SliverChildBuilderDelegate(
+      (context, index) => Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          children: [
+            Verse(verse: _verses[index]),
+            if (index != _verses.length - 1) const Divider()
+          ],
+        ),
       ),
-      separatorBuilder: (BuildContext context, int index) => const Divider(),
-    );
+      childCount: _verses.length,
+    ));
   }
 }

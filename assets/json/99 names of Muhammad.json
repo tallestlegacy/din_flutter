@@ -1,0 +1,1214 @@
+[
+    {
+      "id": 1,
+      "name": "مُحَمَّدٌ",
+      "transliteration": "Muḥammad",
+      "translation": "Oft-Praised"
+    },
+    {
+      "id": 2,
+      "name": "أَحْمَدٌ",
+      "transliteration": "Aḥmad",
+      "translation": "Greatest of Praisers"
+    },
+    {
+      "id": 3,
+      "name": "حَامِدٌ",
+      "transliteration": "Ḥāmid",
+      "translation": "Praiser"
+    },
+    {
+      "id": 4,
+      "name": "مَحْمودٌ",
+      "transliteration": "Maḥmūd",
+      "translation": "Praised One"
+    },
+    {
+      "id": 5,
+      "name": "أَحِيدُ",
+      "transliteration": "Aḥīd",
+      "translation": "Repeller"
+    },
+    {
+      "id": 6,
+      "name": "وَحِيدٌ",
+      "transliteration": "Waḥīd",
+      "translation": "Unique"
+    },
+    {
+      "id": 7,
+      "name": "مَاحٍ",
+      "transliteration": "Māḥī",
+      "translation": "Effacer"
+    },
+    {
+      "id": 8,
+      "name": "حَاشِرٌ",
+      "transliteration": "Ḥāshir",
+      "translation": "Gatherer"
+    },
+    {
+      "id": 9,
+      "name": "عَاقِبٌ",
+      "transliteration": "ʿĀqib",
+      "translation": "Last in Succession"
+    },
+    {
+      "id": 10,
+      "name": "طَهَ",
+      "transliteration": "Ṭāhā",
+      "translation": "Taha"
+    },
+    {
+      "id": 11,
+      "name": "يَسٓ",
+      "transliteration": "Yāsīn",
+      "translation": "Yasin"
+    },
+    {
+      "id": 12,
+      "name": "طَاهِرٌ",
+      "transliteration": "Ṭāhir",
+      "translation": "Pure One"
+    },
+    {
+      "id": 13,
+      "name": "مُطَهَّرٌ",
+      "transliteration": "Muṭahhar",
+      "translation": "Purified"
+    },
+    {
+      "id": 14,
+      "name": "طَيِّبٌ",
+      "transliteration": "Ṭayyib",
+      "translation": "Fragrant"
+    },
+    {
+      "id": 15,
+      "name": "سَيِّدٌ",
+      "transliteration": "Sayyīd",
+      "translation": "Liegelord"
+    },
+    {
+      "id": 16,
+      "name": "رَسُولٌ",
+      "transliteration": "Rasūl",
+      "translation": "Emissary, or Messenger"
+    },
+    {
+      "id": 17,
+      "name": "نَبِيٌّ",
+      "transliteration": "Nabiyy",
+      "translation": "Prophet"
+    },
+    {
+      "id": 18,
+      "name": "رَسُولُ الرَّحْمَةِ",
+      "transliteration": "Rasūlu r-Raḥmah",
+      "translation": "Emissary of Mercy"
+    },
+    {
+      "id": 19,
+      "name": "قَيِّمٌ",
+      "transliteration": "Qayyim",
+      "translation": "Upright"
+    },
+    {
+      "id": 20,
+      "name": "جَامِعٌ",
+      "transliteration": "Jāmiʿ",
+      "translation": "Embodier of all Virtues"
+    },
+    {
+      "id": 21,
+      "name": "مُقْتَفٍ",
+      "transliteration": "Muqtafī",
+      "translation": "Successor to the Past Prophets"
+    },
+    {
+      "id": 22,
+      "name": "مُقَفِّى",
+      "transliteration": "Muqaffī",
+      "translation": "Surpasser"
+    },
+    {
+      "id": 23,
+      "name": "رَسُولُ الْمَلَاحِمِ",
+      "transliteration": "Rasūlu l-Malāḥim",
+      "translation": "Emissary who fought Battles"
+    },
+    {
+      "id": 24,
+      "name": "رَسُولُ الرَّاحَةِ",
+      "transliteration": "Rasūlu r-Rāḥah",
+      "translation": "Emissary of Comfort"
+    },
+    {
+      "id": 25,
+      "name": "كَامِلٌ",
+      "transliteration": "Kāmil",
+      "translation": "Complete"
+    },
+    {
+      "id": 26,
+      "name": "إِكْلِيلٌ",
+      "transliteration": "Iklīl",
+      "translation": "Crown"
+    },
+    {
+      "id": 27,
+      "name": "مُدَّثِّرٌ",
+      "transliteration": "Muddaththir",
+      "translation": "Enwrapped in His Robe"
+    },
+    {
+      "id": 28,
+      "name": "مُزَّمِّلٌ",
+      "transliteration": "Muzzammil",
+      "translation": "Enwrapped in His Cloak"
+    },
+    {
+      "id": 29,
+      "name": "عَبْدُ اللهِ",
+      "transliteration": "ʿAbdullāh",
+      "translation": "Slave of Allah"
+    },
+    {
+      "id": 30,
+      "name": "حَبِيبُ اللهِ",
+      "transliteration": "Ḥabībullāh",
+      "translation": "Beloved of Allah"
+    },
+    {
+      "id": 31,
+      "name": "صَفِيُّ اللهِ",
+      "transliteration": "Ṣafiyyullāh",
+      "translation": "One Solely Chosen by Allah"
+    },
+    {
+      "id": 32,
+      "name": "نَجِّيُّ اللهِ",
+      "transliteration": "Najiyyullāh",
+      "translation": "One who had Intimate Discourse with Allah"
+    },
+    {
+      "id": 33,
+      "name": "كَلِيمُ اللهِ",
+      "transliteration": "Kalīmullāh",
+      "translation": "One Addressed by Allah"
+    },
+    {
+      "id": 34,
+      "name": "خَاتِمُ الْأَنْبِيَاءِ",
+      "transliteration": "Khatimu l-Anbiyā’",
+      "translation": "Seal of the Prophets"
+    },
+    {
+      "id": 35,
+      "name": "خَاتِمُ الرُّسُلِ",
+      "transliteration": "Khātimu r-Rusul",
+      "translation": "Seal of the Emissaries"
+    },
+    {
+      "id": 36,
+      "name": "مُحْيٍ",
+      "transliteration": "Muḥyī",
+      "translation": "Reviver"
+    },
+    {
+      "id": 37,
+      "name": "مُنْجٍ",
+      "transliteration": "Munjī",
+      "translation": "Deliverer"
+    },
+    {
+      "id": 38,
+      "name": "مُذَكِّرٌ",
+      "transliteration": "Mudhakkir",
+      "translation": "One Who Reminds"
+    },
+    {
+      "id": 39,
+      "name": "نَاصِرٌ",
+      "transliteration": "Nāṣir",
+      "translation": "Bringer of Victory"
+    },
+    {
+      "id": 40,
+      "name": "مَنْصُورٌ",
+      "transliteration": "Manṣūr",
+      "translation": "One Granted Victory"
+    },
+    {
+      "id": 41,
+      "name": "نَبِيُّ الرَّحْمَةِ",
+      "transliteration": "Nabiyyu r-Raḥmah",
+      "translation": "Prophet of Mercy"
+    },
+    {
+      "id": 42,
+      "name": "نَبِيُّ التَّوْبَةِ",
+      "transliteration": "Nabiyyu t-Tawbah",
+      "translation": "Prophet of Repentance"
+    },
+    {
+      "id": 43,
+      "name": "حَرِيصٌ عَلَيْكُمْ",
+      "transliteration": "Harīṣun ʿAlaykum",
+      "translation": "Most Concerned for You"
+    },
+    {
+      "id": 44,
+      "name": "مَعْلُومٌ",
+      "transliteration": "Maʿlūm",
+      "translation": "Known One"
+    },
+    {
+      "id": 45,
+      "name": "شَهِيرٌ",
+      "transliteration": "Shahīr",
+      "translation": "Renowned"
+    },
+    {
+      "id": 46,
+      "name": "شَاهِدٌ",
+      "transliteration": "Shāhid",
+      "translation": "Testifier"
+    },
+    {
+      "id": 47,
+      "name": "شَهِيدٌ",
+      "transliteration": "Shahīd",
+      "translation": "Witness"
+    },
+    {
+      "id": 48,
+      "name": "مَشْهُودٌ",
+      "transliteration": "Mashhūd",
+      "translation": "One Witnessed to"
+    },
+    {
+      "id": 49,
+      "name": "بَشِيرٌ",
+      "transliteration": "Bashīr",
+      "translation": "Bearer of Good Tidings"
+    },
+    {
+      "id": 50,
+      "name": "مُبَشِّرٌ",
+      "transliteration": "Mubashshir",
+      "translation": "Bringer of Good News"
+    },
+    {
+      "id": 51,
+      "name": "نَذِيرٌ",
+      "transliteration": "Nadhīr",
+      "translation": "Warner"
+    },
+    {
+      "id": 52,
+      "name": "مُنْذِرٌ",
+      "transliteration": "Mundhir",
+      "translation": "Admonisher"
+    },
+    {
+      "id": 53,
+      "name": "نُورٌ",
+      "transliteration": "Nūr",
+      "translation": "Light"
+    },
+    {
+      "id": 54,
+      "name": "سِرَاجٌ",
+      "transliteration": "Sirāj",
+      "translation": "Lamp"
+    },
+    {
+      "id": 55,
+      "name": "مِصْبَاحٌ",
+      "transliteration": "Miṣbāh",
+      "translation": "Lantern"
+    },
+    {
+      "id": 56,
+      "name": "هُدَىً",
+      "transliteration": "Hudā",
+      "translation": "Guidance"
+    },
+    {
+      "id": 57,
+      "name": "مَهْدِيٌ",
+      "transliteration": "Mahdiyy",
+      "translation": "Guided"
+    },
+    {
+      "id": 58,
+      "name": "مُنِيرٌ",
+      "transliteration": "Munīr",
+      "translation": "Giver of Light"
+    },
+    {
+      "id": 59,
+      "name": "دَاعٍ",
+      "transliteration": "Dāʿī",
+      "translation": "Caller"
+    },
+    {
+      "id": 60,
+      "name": "مَدْعُوٌّ",
+      "transliteration": "Madʿuww",
+      "translation": "Called Upon"
+    },
+    {
+      "id": 61,
+      "name": "مُجِيبٌ",
+      "transliteration": "Mujīb",
+      "translation": "Answerer to the Call"
+    },
+    {
+      "id": 62,
+      "name": "مُجَابٌ",
+      "transliteration": "Mujāb",
+      "translation": "Answered"
+    },
+    {
+      "id": 63,
+      "name": "حَفِيٌّ",
+      "transliteration": "Ḥafiyy",
+      "translation": "Welcoming"
+    },
+    {
+      "id": 64,
+      "name": "عَفُوٌّ",
+      "transliteration": "ʿAfuww",
+      "translation": "Much-Pardoning"
+    },
+    {
+      "id": 65,
+      "name": "وَلِيٌّ",
+      "transliteration": "Waliyy",
+      "translation": "One Close to Allah"
+    },
+    {
+      "id": 66,
+      "name": "حَقٌ",
+      "transliteration": "Ḥaqq",
+      "translation": "Truth"
+    },
+    {
+      "id": 67,
+      "name": "قَوِيٌّ",
+      "transliteration": "Qawiyy",
+      "translation": "Mighty"
+    },
+    {
+      "id": 68,
+      "name": "أَمِينٌ",
+      "transliteration": "Amīn",
+      "translation": "Trustworthy"
+    },
+    {
+      "id": 69,
+      "name": "مَأْمُونٌ",
+      "transliteration": "Ma’mūn",
+      "translation": "Trusted"
+    },
+    {
+      "id": 70,
+      "name": "كَرِيمٌ",
+      "transliteration": "Karīm",
+      "translation": "Noble"
+    },
+    {
+      "id": 71,
+      "name": "مُكَرَّمٌ",
+      "transliteration": "Mukarram",
+      "translation": "Ennobled"
+    },
+    {
+      "id": 72,
+      "name": "مَكِينٌ",
+      "transliteration": "Makīn",
+      "translation": "Unshakeable"
+    },
+    {
+      "id": 73,
+      "name": "مَتِينٌ",
+      "transliteration": "Matīn",
+      "translation": "Firm"
+    },
+    {
+      "id": 74,
+      "name": "مُبِينٌ",
+      "transliteration": "Mubīn",
+      "translation": "Evident, Clarifier"
+    },
+    {
+      "id": 75,
+      "name": "مُؤَمِّلٌ",
+      "transliteration": "Mu’ammil",
+      "translation": "Hopeful"
+    },
+    {
+      "id": 76,
+      "name": "وَصُولٌ",
+      "transliteration": "Waṣūl",
+      "translation": "Maintainer of Ties"
+    },
+    {
+      "id": 77,
+      "name": "ذُو قُوَّةٍ",
+      "transliteration": "Dhū Quwwah",
+      "translation": "Possessor of Might"
+    },
+    {
+      "id": 78,
+      "name": "ذُو حُرْمَةٍ",
+      "transliteration": "Dhū Ḥurmah",
+      "translation": "Possessor of Sanctity"
+    },
+    {
+      "id": 79,
+      "name": "ذُو مَكَانَةٍ",
+      "transliteration": "Dhū Makānah",
+      "translation": "Possessor of a Mighty Station"
+    },
+    {
+      "id": 80,
+      "name": "ذُو عِزٍّ",
+      "transliteration": "Dhū ʿIzz",
+      "translation": "Possessor of Glory"
+    },
+    {
+      "id": 81,
+      "name": "ذُو فَضْلٍ",
+      "transliteration": "Dhū Faḍl",
+      "translation": "Possessor of Virtue"
+    },
+    {
+      "id": 82,
+      "name": "مُطَاعٌ",
+      "transliteration": "Muṭāʿ",
+      "translation": "Obeyed"
+    },
+    {
+      "id": 83,
+      "name": "مُطِيعٌ",
+      "transliteration": "Muṭīʿ",
+      "translation": "Obedient"
+    },
+    {
+      "id": 84,
+      "name": "قَدَمُ صِدْقٍ",
+      "transliteration": "Qadamu Ṣidq",
+      "translation": "Sure Forerunner"
+    },
+    {
+      "id": 85,
+      "name": "رَحْمَةٌ",
+      "transliteration": "Raḥmah",
+      "translation": "Mercy"
+    },
+    {
+      "id": 86,
+      "name": "بُشْرَى",
+      "transliteration": "Bushrā",
+      "translation": "Glad Tidings"
+    },
+    {
+      "id": 87,
+      "name": "غُوثٌ",
+      "transliteration": "Ghawth",
+      "translation": "Aid"
+    },
+    {
+      "id": 88,
+      "name": "غَيْثٌ",
+      "transliteration": "Ghayth",
+      "translation": "Relief"
+    },
+    {
+      "id": 89,
+      "name": "غِيَاثٌ",
+      "transliteration": "Ghiyāth",
+      "translation": "Succour"
+    },
+    {
+      "id": 90,
+      "name": "نِعْمَةُ اللهِ",
+      "transliteration": "Niʿmatullāh",
+      "translation": "Allah’s Blessing"
+    },
+    {
+      "id": 91,
+      "name": "هَدِيَّةُ اللهِ",
+      "transliteration": "Hadiyyatullāh",
+      "translation": "Allah’s Gift"
+    },
+    {
+      "id": 92,
+      "name": "عُرْوَةٌ وُثْقَى",
+      "transliteration": "ʿUrwatun Wuthqā",
+      "translation": "Most Trusty Hold"
+    },
+    {
+      "id": 93,
+      "name": "صِرَاطُ اللهِ",
+      "transliteration": "Ṣirāṭullāh",
+      "translation": "Path to Allah"
+    },
+    {
+      "id": 94,
+      "name": "صِرَاطٌ مُسْتَقِيمٌ",
+      "transliteration": "Ṣirāṭun Mustaqīm",
+      "translation": "Straight Path"
+    },
+    {
+      "id": 95,
+      "name": "ذِكْرُ اللهِ",
+      "transliteration": "Dhikrullāh",
+      "translation": "Remembrance of Allah"
+    },
+    {
+      "id": 96,
+      "name": "سَيْفُ اللهِ",
+      "transliteration": "Sayfullāh",
+      "translation": "Sword of Allah"
+    },
+    {
+      "id": 97,
+      "name": "حِزْبُ اللهِ",
+      "transliteration": "Ḥizbullāh",
+      "translation": "Party of Allah"
+    },
+    {
+      "id": 98,
+      "name": "النَّجْمُ الثَّاقِبُ",
+      "transliteration": "An-Najmu th-thāqib",
+      "translation": "Shining Star"
+    },
+    {
+      "id": 99,
+      "name": "مُصْطَفَى",
+      "transliteration": "Muṣṭafā",
+      "translation": "Chosen"
+    },
+    {
+      "id": 100,
+      "name": "مُجْتَبَى",
+      "transliteration": "Mujtabā",
+      "translation": "Selected"
+    },
+    {
+      "id": 101,
+      "name": "مُنْتَقَى",
+      "transliteration": "Muntaqā",
+      "translation": "Elect"
+    },
+    {
+      "id": 102,
+      "name": "أُمِّيٌ",
+      "transliteration": "Ummiyy",
+      "translation": "Unlettered"
+    },
+    {
+      "id": 103,
+      "name": "مُخْتَارٌ",
+      "transliteration": "Mukhtār",
+      "translation": "Preferred One"
+    },
+    {
+      "id": 104,
+      "name": "أَجِيرٌ",
+      "transliteration": "Ajīr",
+      "translation": "Protector"
+    },
+    {
+      "id": 105,
+      "name": "جَبَّارٌ",
+      "transliteration": "Jabbār",
+      "translation": "Rectifier"
+    },
+    {
+      "id": 106,
+      "name": "أَبُو الْقَاسِمِ",
+      "transliteration": "Abu l-Qāsim",
+      "translation": "Father of Qasim"
+    },
+    {
+      "id": 107,
+      "name": "أَبُو الطَّاهِرِ",
+      "transliteration": "Abu ṭ-Ṭāhir",
+      "translation": "Father of Tahir"
+    },
+    {
+      "id": 108,
+      "name": "أَبُو الطَّيِّبِ",
+      "transliteration": "Abu ṭ-Ṭayyib",
+      "translation": "Father of Tayyib"
+    },
+    {
+      "id": 109,
+      "name": "أَبُو إِبْرَاهِيمَ",
+      "transliteration": "Abū Ibrāhīm",
+      "translation": "Father of Ibrahim"
+    },
+    {
+      "id": 110,
+      "name": "مُشَفَّعٌ",
+      "transliteration": "Mushaffaʿ",
+      "translation": "One Permitted to Intercede"
+    },
+    {
+      "id": 111,
+      "name": "شَفِيعٌ",
+      "transliteration": "Shafīʿ",
+      "translation": "Intercessor"
+    },
+    {
+      "id": 112,
+      "name": "صَالِحٌ",
+      "transliteration": "Ṣāliḥ",
+      "translation": "Righteous"
+    },
+    {
+      "id": 113,
+      "name": "مُصْلِحٌ",
+      "transliteration": "Muṣliḥ",
+      "translation": "Rectifier"
+    },
+    {
+      "id": 114,
+      "name": "مُهَيْمِنٌ",
+      "transliteration": "Muhaymin",
+      "translation": "Guardian"
+    },
+    {
+      "id": 115,
+      "name": "صَادِقٌ",
+      "transliteration": "Ṣādiq",
+      "translation": "Truthful"
+    },
+    {
+      "id": 116,
+      "name": "مُصَدَّقٌ",
+      "transliteration": "Muṣaddaq",
+      "translation": "Confirmed"
+    },
+    {
+      "id": 117,
+      "name": "صِدْقٌ",
+      "transliteration": "Ṣidq",
+      "translation": "Truthfulness"
+    },
+    {
+      "id": 118,
+      "name": "سَيِّدُ الْمُرْسَلِينَ",
+      "transliteration": "Sayyidu l-Mursalīn",
+      "translation": "Master of the Emissaries"
+    },
+    {
+      "id": 119,
+      "name": "إِمَامُ الْمُتَّقِينَ",
+      "transliteration": "Imāmu l-Muttaqīn",
+      "translation": "Leader of the God-fearing"
+    },
+    {
+      "id": 120,
+      "name": "قَائِدُ الْغُرِّ الْمُحَجَّلِينَ",
+      "transliteration": "Qā’idu l-Ghurri l-Muḥajjalīn",
+      "translation": "Leader of the Brightly Shining Ones"
+    },
+    {
+      "id": 121,
+      "name": "خَلِيلُ الرَّحْمٰنِ",
+      "transliteration": "Khalīlu r-Raḥmān",
+      "translation": "Intimate Friend of the All-Merciful"
+    },
+    {
+      "id": 122,
+      "name": "بَرٌّ",
+      "transliteration": "Barr",
+      "translation": "Dutiful"
+    },
+    {
+      "id": 123,
+      "name": "مَبَرٌّ",
+      "transliteration": "Mabarr",
+      "translation": "Fulfiller of Oaths"
+    },
+    {
+      "id": 124,
+      "name": "وَجِيهٌ",
+      "transliteration": "Wajīh",
+      "translation": "Eminent"
+    },
+    {
+      "id": 125,
+      "name": "نَصِيحٌ",
+      "transliteration": "Naṣīḥ",
+      "translation": "Sincere Well-Wisher"
+    },
+    {
+      "id": 126,
+      "name": "نَاصِحٌ",
+      "transliteration": "Nāṣiḥ",
+      "translation": "Sincere Advisor"
+    },
+    {
+      "id": 127,
+      "name": "وَكِيلٌ",
+      "transliteration": "Wakīl",
+      "translation": "Entrusted"
+    },
+    {
+      "id": 128,
+      "name": "مُتَوَكِّلٌ",
+      "transliteration": "Mutawwakil",
+      "translation": "Wholly Reliant on Allah"
+    },
+    {
+      "id": 129,
+      "name": "كَفِيلٌ",
+      "transliteration": "Kafīl",
+      "translation": "Guarantor"
+    },
+    {
+      "id": 130,
+      "name": "شَفِيقٌ",
+      "transliteration": "Shafīq",
+      "translation": "Tenderhearted"
+    },
+    {
+      "id": 131,
+      "name": "مُقِيمُ السُّنَّةِ",
+      "transliteration": "Muqīmu s-Sunnah",
+      "translation": "Upholder of the Sunnah"
+    },
+    {
+      "id": 132,
+      "name": "مُقدَّسٌ",
+      "transliteration": "Muqaddas",
+      "translation": "Pure and Inviolate"
+    },
+    {
+      "id": 133,
+      "name": "رُوحُ الْقُدُسِ",
+      "transliteration": "Rūḥu l-Qudus",
+      "translation": "Pure Spirit"
+    },
+    {
+      "id": 134,
+      "name": "رُوحُ الْحَقِّ",
+      "transliteration": "Rūḥu l-Ḥaqq",
+      "translation": "Spirit of Truth"
+    },
+    {
+      "id": 135,
+      "name": "رُوحُ الْقِسْطِ",
+      "transliteration": "Rūḥu l-Qisṭ",
+      "translation": "Spirit of Justice"
+    },
+    {
+      "id": 136,
+      "name": "كَافٍ",
+      "transliteration": "Kāfī",
+      "translation": "Sufficer"
+    },
+    {
+      "id": 137,
+      "name": "مُكْتَفٍ",
+      "transliteration": "Muktafī",
+      "translation": "Contented"
+    },
+    {
+      "id": 138,
+      "name": "بَالِغٌ",
+      "transliteration": "Bāligh",
+      "translation": "Accomplished"
+    },
+    {
+      "id": 139,
+      "name": "مُبَلِّغٌ",
+      "transliteration": "Muballigh",
+      "translation": "Conveyor"
+    },
+    {
+      "id": 140,
+      "name": "شَافٍ",
+      "transliteration": "Shāfī",
+      "translation": "Healer"
+    },
+    {
+      "id": 141,
+      "name": "وَاصِلٌ",
+      "transliteration": "Wāṣil",
+      "translation": "Attainer"
+    },
+    {
+      "id": 142,
+      "name": "مَوْصُولٌ",
+      "transliteration": "Mawṣūl",
+      "translation": "Connected"
+    },
+    {
+      "id": 143,
+      "name": "سَابِقٌ",
+      "transliteration": "Sābiq",
+      "translation": "Forerunner"
+    },
+    {
+      "id": 144,
+      "name": "سَائِقٌ",
+      "transliteration": "Sā’iq",
+      "translation": "Driver"
+    },
+    {
+      "id": 145,
+      "name": "هَادٍ",
+      "transliteration": "Hādī",
+      "translation": "Guide"
+    },
+    {
+      "id": 146,
+      "name": "مُهْدٍ",
+      "transliteration": "Muhdi",
+      "translation": "Guider"
+    },
+    {
+      "id": 147,
+      "name": "مُقَدَّمٌ",
+      "transliteration": "Muqaddam",
+      "translation": "Foremost"
+    },
+    {
+      "id": 148,
+      "name": "عَزِيزٌ",
+      "transliteration": "ʿAzīz",
+      "translation": "Mighty"
+    },
+    {
+      "id": 149,
+      "name": "فَاضِلٌ",
+      "transliteration": "Fāḍil",
+      "translation": "Outstanding"
+    },
+    {
+      "id": 150,
+      "name": "مُفَضَّلٌ",
+      "transliteration": "Mufaḍḍal",
+      "translation": "Favoured"
+    },
+    {
+      "id": 151,
+      "name": "فَاتِحٌ",
+      "transliteration": "Fātiḥ",
+      "translation": "Conqueror"
+    },
+    {
+      "id": 152,
+      "name": "مِفْتَاحٌ",
+      "transliteration": "Miftāḥ",
+      "translation": "Key"
+    },
+    {
+      "id": 153,
+      "name": "مِفْتَاحُ الرَّحْمَةِ",
+      "transliteration": "Miftāḥu r-Raḥmah",
+      "translation": "Key to Mercy"
+    },
+    {
+      "id": 154,
+      "name": "مِفْتَاحُ الْجَنَّةِ",
+      "transliteration": "Miftāḥu l-Jannah",
+      "translation": "Key to the Garden"
+    },
+    {
+      "id": 155,
+      "name": "عَلَمُ الْإِيمَانِ",
+      "transliteration": "ʿAlamu l-Īmān",
+      "translation": "Sign of Faith"
+    },
+    {
+      "id": 156,
+      "name": "عَلَمُ الْيَقِينِ",
+      "transliteration": "ʿAlamu l-Yaqīn",
+      "translation": "Sign of Certainty"
+    },
+    {
+      "id": 157,
+      "name": "دَلِيلُ الْخَيْرَاتِ",
+      "transliteration": "Dalīlu l-Khayrāt",
+      "translation": "Guide to Benefits"
+    },
+    {
+      "id": 158,
+      "name": "مُصَحِّحُ الْحَسَنَاتِ",
+      "transliteration": "Musaḥḥihu l-Ḥasanāt",
+      "translation": "Verifier of Good Deeds"
+    },
+    {
+      "id": 159,
+      "name": "مُقِيلُ الْعَثَرَاتِ",
+      "transliteration": "Muqīlu l-ʿAtharāt",
+      "translation": "Pardoner of Errors"
+    },
+    {
+      "id": 160,
+      "name": "صَفُوحٌ عَنِ الزَّلَّاتِ",
+      "transliteration": "Ṣafūḥun ʿani z-Zallāt",
+      "translation": "Overlooker of Lapses"
+    },
+    {
+      "id": 161,
+      "name": "صَاحِبُ الشَّفَاعَةِ",
+      "transliteration": "Ṣaḥību sh-Shafāʿah",
+      "translation": "Possessor of Intercession"
+    },
+    {
+      "id": 162,
+      "name": "صَاحِبُ الْمَقَامِ",
+      "transliteration": "Ṣāḥibu l-Maqām",
+      "translation": "Possessor of the Lofty Station"
+    },
+    {
+      "id": 163,
+      "name": "صَاحِبُ الْقَدَمِ",
+      "transliteration": "Ṣāḥibu l-Qadam",
+      "translation": "Possessor of Precedence"
+    },
+    {
+      "id": 164,
+      "name": "مَخْصُوصٌ بِالْعِزِّ",
+      "transliteration": "Makhṣūṣ bi-l ʿIzz",
+      "translation": "One Singled out for Glory"
+    },
+    {
+      "id": 165,
+      "name": "مَخْصُوصٌ بِالْمَجْدِ",
+      "transliteration": "Makhṣūṣ bi-l-Majd",
+      "translation": "One Distinguished by Splendour"
+    },
+    {
+      "id": 166,
+      "name": "مَخْصُوصٌ بِالشَّرَفِ",
+      "transliteration": "Makhṣūṣ bi-sh-Sharaf",
+      "translation": "One Distinguished by Nobility"
+    },
+    {
+      "id": 167,
+      "name": "صَاحِبُ الْوَسِيلَةِ",
+      "transliteration": "Ṣāḥibu l-Wasīlah",
+      "translation": "Possessor of Privileged Access"
+    },
+    {
+      "id": 168,
+      "name": "صَاحِبُ السَّيْفِ",
+      "transliteration": "Ṣāḥibu s-Sayf",
+      "translation": "Possessor of the Sword"
+    },
+    {
+      "id": 169,
+      "name": "صَاحِبُ الْفَضِيلَةِ",
+      "transliteration": "Ṣāḥību l-Faḍīlah",
+      "translation": "Possessor of Virtue"
+    },
+    {
+      "id": 170,
+      "name": "صَاحِبُ الْإِزَارِ",
+      "transliteration": "Ṣāḥibu l-Izār",
+      "translation": "Wearer of the Sarong"
+    },
+    {
+      "id": 171,
+      "name": "صَاحِبُ الْحُجَّةِ",
+      "transliteration": "Ṣāḥibu l-Ḥujjah",
+      "translation": "Possessor of Proof"
+    },
+    {
+      "id": 172,
+      "name": "صَاحِبُ السُّلْطَانِ",
+      "transliteration": "Ṣāḥibu s-Sulṭān",
+      "translation": "Possessor of Authority"
+    },
+    {
+      "id": 173,
+      "name": "صَاحِبُ الرِّدَاءِ",
+      "transliteration": "Ṣāḥibu r-Ridā’",
+      "translation": "Wearer of the Mantle"
+    },
+    {
+      "id": 174,
+      "name": "صَاحِبُ الدَّرَجَةِ الرَّفِيعَةِ",
+      "transliteration": "Ṣāḥibu d-Darajati r-Rafīʿah",
+      "translation": "Possessor of Exalted Rank"
+    },
+    {
+      "id": 175,
+      "name": "صَاحِبُ التَّاجِ",
+      "transliteration": "Ṣāḥibu t-Tāj",
+      "translation": "Wearer of the Crown or Turban"
+    },
+    {
+      "id": 176,
+      "name": "صَاحِبُ الْمِغْفَرِ",
+      "transliteration": "Ṣāḥibu l-Mighfar",
+      "translation": "Wearer of the Helmet"
+    },
+    {
+      "id": 177,
+      "name": "صَاحِبُ اللِّوَاءِ",
+      "transliteration": "Ṣāḥibu l-Liwā’",
+      "translation": "Possessor of the Banner"
+    },
+    {
+      "id": 178,
+      "name": "صَاحِبُ الْمِعْرَاجِ",
+      "transliteration": "Ṣāḥibu l-Miʿrāj",
+      "translation": "Possessor of the Ascension"
+    },
+    {
+      "id": 179,
+      "name": "صَاحِبُ الْقَضِيبِ",
+      "transliteration": "Ṣāḥibu l-Qaḍīb",
+      "translation": "Possessor of the Staff"
+    },
+    {
+      "id": 180,
+      "name": "صَاحِبُ الْبُرَاقِ",
+      "transliteration": "Ṣāḥibu l-Burāq",
+      "translation": "Rider of the Buraq"
+    },
+    {
+      "id": 181,
+      "name": "صَاحِبُ الْخَاتَمِ",
+      "transliteration": "Ṣāḥibu l-Khātam",
+      "translation": "Possessor of the Seal of Prophethood"
+    },
+    {
+      "id": 182,
+      "name": "صَاحِبُ الْعَلَامَةِ",
+      "transliteration": "Ṣāḥibu l-ʿAlāmah",
+      "translation": "Possessor of the Mark"
+    },
+    {
+      "id": 183,
+      "name": "صَاحِبُ الْبُرْهَانِ",
+      "transliteration": "Ṣāḥibu l-Burhān",
+      "translation": "Possessor of Proof"
+    },
+    {
+      "id": 184,
+      "name": "صَاحِبُ الْبَيَانِ",
+      "transliteration": "Ṣāḥibu l-Bayān",
+      "translation": "Possessor of Elucidation"
+    },
+    {
+      "id": 185,
+      "name": "فَصِيحُ اللِّسَانِ",
+      "transliteration": "Faṣīḥu l-Lisān",
+      "translation": "Eloquent of Tongue"
+    },
+    {
+      "id": 186,
+      "name": "مُطَهَّرُ الْجَنَانِ",
+      "transliteration": "Muṭahharu l-Janān",
+      "translation": "Purified of Soul"
+    },
+    {
+      "id": 187,
+      "name": "رَؤُوفٌ",
+      "transliteration": "Raūf",
+      "translation": "Gentle or Kindly"
+    },
+    {
+      "id": 188,
+      "name": "رَحِيمٌ",
+      "transliteration": "Raḥīm",
+      "translation": "Merciful"
+    },
+    {
+      "id": 189,
+      "name": "اُذُنُ خَيْرٍ",
+      "transliteration": "Udhunu Khayr",
+      "translation": "Hearer of Good"
+    },
+    {
+      "id": 190,
+      "name": "صَحِيحُ الْإِسْلَامِ",
+      "transliteration": "Ṣaḥīḥu l-Islām",
+      "translation": "Sound in Islam"
+    },
+    {
+      "id": 191,
+      "name": "سَيِّدُ الْكَوْنَيْنِ",
+      "transliteration": "Sayyidu l-Kawnayn",
+      "translation": "Master of Both Worlds"
+    },
+    {
+      "id": 192,
+      "name": "عَيْنُ النَّعِيمِ",
+      "transliteration": "ʿAynu n-Naʿīm",
+      "translation": "Source of Bliss"
+    },
+    {
+      "id": 193,
+      "name": "عَيْنُ الْغُرِّ",
+      "transliteration": "ʿAynu l-Ghurr",
+      "translation": "Superior of the Enlightened Ones"
+    },
+    {
+      "id": 194,
+      "name": "سَعْدُ اللهِ",
+      "transliteration": "Saʿdullāh",
+      "translation": "Allah’s Felicity for Creation"
+    },
+    {
+      "id": 195,
+      "name": "سَعْدُ الْخَلْقِ",
+      "transliteration": "Saʿdu l-Khalq",
+      "translation": "Felicity of Creation"
+    },
+    {
+      "id": 196,
+      "name": "خَطِيبُ الْأُمَمِ",
+      "transliteration": "Khaṭību l-Umam",
+      "translation": "Speaker Addressing All Nations"
+    },
+    {
+      "id": 197,
+      "name": "عَلَمُ الْهُدَى",
+      "transliteration": "ʿAlamu l-Hudā",
+      "translation": "Banner of Guidance"
+    },
+    {
+      "id": 198,
+      "name": "كَاشِفُ الْكُرَبِ",
+      "transliteration": "Kāshifu l-Kurab",
+      "translation": "Dispeller of Fears"
+    },
+    {
+      "id": 199,
+      "name": "رَافِعُ الرُّتَبِ",
+      "transliteration": "Rāfiʿu r-Rutab",
+      "translation": "Raiser of Ranks"
+    },
+    {
+      "id": 200,
+      "name": "عِزُّ الْعَرَبِ",
+      "transliteration": "ʿIzzu l-ʿArab",
+      "translation": "Glory of the Arabs"
+    },
+    {
+      "id": 201,
+      "name": "صَاحِبُ الْفَرَجِ",
+      "transliteration": "Ṣāḥibu l-Faraj",
+      "translation": "Bringer of Relief"
+    },
+    {
+      "id": 202,
+      "name": "كَرِيمُ الْمَخْرَجِ",
+      "transliteration": "Karīmu l-Makhraj",
+      "translation": "Most Noble in Lineage"
+    }
+  ]

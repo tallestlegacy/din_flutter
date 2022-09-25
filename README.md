@@ -1,6 +1,6 @@
 # Din
 
-This is a simple material UI Quran Reader.
+This is a simple material UI Quran and Sunnah reader.
 
 🤟 Works on Android, iOS, Linux, Windows and Mac. Thank you Flutter 💖!
 
@@ -15,19 +15,49 @@ flutter run
 ## TODO
 
 - [ ] Find a designer
-- [ ] Publish on PlayStore
+- [x] Publish on PlayStore
 - [ ] Publish on Flathub
 - [ ] Publish on F-Droid
-- [ ] Create website
 
 ## Features
 
 - [x] Quran
-- [ ] Hadith and Sunnah
+- [x] Hadith and Sunnah
+- [ ] Madrasa
 - [ ] Multiple translations
+- [ ] Learning resources
+- [ ] Favourites
+- [ ] Text sharing
+- [ ] Application reviews and Release notes
+- [ ] User manual
+- [ ] Search quran
+- [ ] Search every other list
+- [ ] Islamic calendar
+- [ ] Optional reminders (Prayer and Fasting)
+
+## Customisation
+
+- [x] Arabic / English / Transliteration toggles
+- [ ] Scroll Direction
+- [x] App colors and theme
+- [ ] Arabic and English fonts
 
 ## UI
 
 | light                    | dark                          |
 | ------------------------ | ----------------------------- |
 | ![](./_assets/surah.jpg) | ![](./_assets/surah-dark.jpg) |
+
+## Building
+
+For minimal app bundle size :
+
+```sh
+ flutter build appbundle --target-platform android-arm,android-arm64
+```
+
+For minimal apk size :
+
+```sh
+flutter build apk --split-per-abi
+```
