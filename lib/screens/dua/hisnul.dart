@@ -1,4 +1,5 @@
 import 'package:din/components/back_button.dart';
+import 'package:din/components/padded_text.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
@@ -85,6 +86,8 @@ class HisnulReference extends StatelessWidget {
           leading: const CustomBackButton(),
           title: Text("${ref['title']}"),
           actions: const [TextSettingsAction(), ThemeToggleButton()],
+          titleTextStyle:
+              const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
@@ -113,39 +116,34 @@ class HisnulReference extends StatelessWidget {
                     Visibility(
                       visible:
                           settingsStoreController.showTransliteration.value,
-                      child: Text(
-                        ref['hadiths'][index]['transliteration']
+                      child: PaddedText(
+                        text: ref['hadiths'][index]['transliteration']
                             .toString()
                             .replaceAll("\n", " "),
-                        style: TextStyle(
-                          fontSize: settingsStoreController.fontSize.value,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2
-                              ?.color,
-                        ),
+                        fontSize: settingsStoreController.fontSize.value,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText2?.color,
                       ),
                     ),
                     Visibility(
                       visible: settingsStoreController.showTranslation.value,
-                      child: Text(
-                        ref['hadiths'][index]['translation']
+                      child: PaddedText(
+                        text: ref['hadiths'][index]['translation']
                             .toString()
                             .replaceAll("\n", " "),
-                        style: TextStyle(
-                          fontSize: settingsStoreController.fontSize.value,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText1
-                              ?.color,
-                        ),
+                        fontSize: settingsStoreController.fontSize.value,
+                        color:
+                            Theme.of(context).primaryTextTheme.bodyText1?.color,
                       ),
                     ),
                   ],
                 ),
                 leading: Text(
                   "${ref['hadiths'][index]['id']}",
-                  style: const TextStyle(color: Colors.grey),
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: settingsStoreController.fontSize.value,
+                  ),
                 ),
               ),
             ),

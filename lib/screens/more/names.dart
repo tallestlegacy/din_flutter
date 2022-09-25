@@ -58,7 +58,7 @@ class _NamesState extends State<Names> {
                 title: const Text("99 Names"),
                 leading: const CustomBackButton(),
                 bottom: TabBar(
-                  labelPadding: const EdgeInsets.all(8),
+                  labelPadding: const EdgeInsets.only(bottom: 8),
                   tabs: const [
                     Text("Allah"),
                     Text("Muhammad"),

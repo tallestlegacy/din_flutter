@@ -1,15 +1,13 @@
 import 'package:din/screens/more/about_app.dart';
 import 'package:din/screens/more/about_developer.dart';
 import 'package:din/screens/more/appearance.dart';
-import 'package:din/screens/more/learning_resources/learning_resources.dart';
 import 'package:din/screens/more/names.dart';
 import 'package:din/screens/more/reader_preferences.dart';
 import 'package:din/util/network.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/link.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class MoreScreen extends StatelessWidget {
   final ScrollController scrollController;
@@ -38,30 +36,11 @@ class MoreScreen extends StatelessWidget {
                   const Text("99 Names of Allah and the prophet Muhammad (ﷺ.)"),
               onTap: () => push(const Names()),
             ),
-            ListTile(
-              leading: const Icon(Icons.stars_rounded),
-              title: const Text("Allah's promises"),
-              onTap: () {},
-              enabled: false,
-            ),
-            ListTile(
-              leading: const Icon(Icons.bookmark),
-              title: const Text("Learning resources"),
-              subtitle: const Text("Books, websites, videos, alphabet"),
-              onTap: () => push(const LearningResources()),
-            ),
-            ListTile(
-              leading: const Icon(Icons.favorite),
-              title: const Text("Favourites"),
-              subtitle: const Text("Aya, hadith, names of allah"),
-              onTap: () {},
-              enabled: false,
-            ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.text_format_rounded),
               title: const Text("Reader preferences"),
-              subtitle: const Text("Size, fonts, display format"),
+              subtitle: const Text("Size, text display format"),
               onTap: () => push(const ReaderPreferences()),
             ),
             ListTile(
@@ -70,36 +49,34 @@ class MoreScreen extends StatelessWidget {
               subtitle: const Text("Theme modes, accent colors"),
               onTap: () => push(const Appearance()),
             ),
-            ListTile(
-              leading: const Icon(Icons.translate_rounded),
-              title: const Text("Translations"),
-              subtitle: const Text("Multiple translations, language selection"),
-              onTap: () => {},
-              enabled: false,
-            ),
             const Divider(),
-            const ListTile(
-              leading: Icon(Icons.school_rounded),
-              title: Text("How to use this app"),
-              subtitle: Text("User guide"),
-              enabled: false,
+            ListTile(
+              leading: const Icon(Icons.share_rounded),
+              title: const Text("Share"),
+              onTap: () async {
+                await FlutterShare.share(
+                  title: 'Share the app',
+                  linkUrl:
+                      'https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt',
+                  chooserTitle: 'Share the app',
+                );
+              },
             ),
-            const ListTile(
-              leading: Icon(Icons.share_rounded),
-              title: Text("Share"),
-              enabled: false,
-            ),
-            const ListTile(
-              leading: Icon(Icons.thumbs_up_down_rounded),
-              title: Text("Rate the app"),
-              enabled: false,
+            ListTile(
+              leading: const Icon(Icons.thumbs_up_down_rounded),
+              title: const Text("Rate the app"),
+              onTap: () {
+                openLink(
+                    "https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt");
+              },
             ),
             ListTile(
               leading: const Icon(Icons.question_answer_rounded),
               title: const Text("Help and Feedback"),
               subtitle: const Text("Contact, recommendations"),
-              onTap: () => launchUri(context, Uri.parse("https://google.com")),
-              enabled: false,
+              onTap: () => openLink(
+                "mailto:tallestlegacy@gmail.com?subject=Din > Help and Feedback",
+              ),
             ),
             const Divider(),
             ListTile(
@@ -109,15 +86,13 @@ class MoreScreen extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.badge_outlined),
-              title:
-                  const Text("Meet the developer"), // TODO find a better icon
+              title: const Text("Meet the developer"),
               onTap: () => push(const AboutDeveloper()),
             ),
             ListTile(
               leading: const Icon(Icons.code_rounded),
               title: const Text("Sources and Licencing"),
-              onTap: () => {},
-              enabled: false,
+              onTap: () => openLink("https://github.com/tallestlegacy/din_dt"),
             ),
           ],
         ));

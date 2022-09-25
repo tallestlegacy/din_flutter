@@ -1,6 +1,6 @@
 # Din
 
-This is a simple material UI Quran Reader.
+This is a simple material UI Quran and Sunnah reader.
 
 🤟 Works on Android, iOS, Linux, Windows and Mac. Thank you Flutter 💖!
 
@@ -15,10 +15,9 @@ flutter run
 ## TODO
 
 - [ ] Find a designer
-- [ ] Publish on PlayStore
+- [x] Publish on PlayStore
 - [ ] Publish on Flathub
 - [ ] Publish on F-Droid
-- [ ] Create website
 
 ## Features
 

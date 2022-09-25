@@ -113,7 +113,7 @@ class _QuranPageState extends State<QuranPage> {
               subtitle: Text("${_chapters[index]['translation']}"),
               leading: Text("${_chapters[index]['id']}"),
               title: Text(
-                "${_chapters[index]['name']}",
+                "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
                 style: Theme.of(context).primaryTextTheme.bodyText2,
               ),
               trailing: Text(

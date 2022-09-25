@@ -1,4 +1,5 @@
 import 'package:din/components/back_button.dart';
+import 'package:din/util/network.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -9,7 +10,7 @@ class AboutDeveloper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("About me"),
+        title: const Text("This is me"),
         leading: const CustomBackButton(),
         backgroundColor: Theme.of(context).backgroundColor,
       ),
@@ -24,20 +25,29 @@ class AboutDeveloper extends StatelessWidget {
                 style: Theme.of(context).textTheme.headline6,
               ),
             ),
-            const ListTile(
-              leading: Icon(FontAwesomeIcons.github),
-              title: Text("Github"),
-              subtitle: Text("tallestlegacy@github.com"),
+            ListTile(
+              leading: const Icon(FontAwesomeIcons.github),
+              title: const Text("Github"),
+              subtitle: const Text("github.com/tallestlegacy"),
+              onTap: () {
+                openLink("https://github.com/tallestlegacy");
+              },
             ),
-            const ListTile(
-              leading: Icon(FontAwesomeIcons.linkedin),
-              title: Text("LinkedIn"),
-              subtitle: Text("linkedin.com/in/marvin-mokua"),
+            ListTile(
+              leading: const Icon(FontAwesomeIcons.linkedin),
+              title: const Text("LinkedIn"),
+              subtitle: const Text("linkedin.com/in/marvin-mokua"),
+              onTap: () {
+                openLink("https://linkedin.com/in/marvin-mokua");
+              },
             ),
-            const ListTile(
-              leading: Icon(Icons.mail),
-              title: Text("Email"),
-              subtitle: Text("tallestlegacy@gmail.com"),
+            ListTile(
+              leading: const Icon(Icons.mail),
+              title: const Text("Email"),
+              subtitle: const Text("tallestlegacy@gmail.com"),
+              onTap: () {
+                openLink("mailto:tallestlegacy@gmail.com");
+              },
             ),
           ],
         ),
