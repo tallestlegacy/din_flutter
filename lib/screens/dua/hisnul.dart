@@ -86,8 +86,10 @@ class HisnulReference extends StatelessWidget {
           leading: const CustomBackButton(),
           title: Text("${ref['title']}"),
           actions: const [TextSettingsAction(), ThemeToggleButton()],
-          titleTextStyle:
-              const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+          titleTextStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+              color: Theme.of(context).colorScheme.onSecondary),
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),

@@ -73,42 +73,40 @@ class Appearance extends StatelessWidget {
         backgroundColor: Theme.of(context).backgroundColor,
         leading: const CustomBackButton(),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Padding(
+      body: ListView(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(16),
+            child: Padding(
               padding: EdgeInsets.all(16),
-              child: Padding(
-                padding: EdgeInsets.all(16),
-                child: VersePreview(),
+              child: VersePreview(),
+            ),
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.light_mode_outlined),
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                "Light mode accent",
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
             ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.light_mode_outlined),
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  "Light mode accent",
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
+            subtitle: getColors(false),
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.dark_mode_outlined),
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: Text(
+                "Dark mode accent",
+                style: TextStyle(color: Theme.of(context).primaryColor),
               ),
-              subtitle: getColors(false),
             ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.dark_mode_outlined),
-              title: Padding(
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Text(
-                  "Dark mode accent",
-                  style: TextStyle(color: Theme.of(context).primaryColor),
-                ),
-              ),
-              subtitle: getColors(true),
-            )
-          ],
-        ),
+            subtitle: getColors(true),
+          )
+        ],
       ),
     );
   }

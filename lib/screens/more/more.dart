@@ -8,12 +8,43 @@ import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_share/flutter_share.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
-class MoreScreen extends StatelessWidget {
+class MoreScreen extends StatefulWidget {
   final ScrollController scrollController;
 
   const MoreScreen({Key? key, required this.scrollController})
       : super(key: key);
+
+  @override
+  State<MoreScreen> createState() => _MoreScreenState();
+}
+
+class _MoreScreenState extends State<MoreScreen> {
+  Future<PackageInfo> getPackageInfo() async {
+    return await PackageInfo.fromPlatform();
+  }
+
+  PackageInfo _packageInfo = PackageInfo(
+    appName: '',
+    packageName: '',
+    version: '',
+    buildNumber: '',
+    buildSignature: '',
+  );
+
+  Future<void> _initPackageInfo() async {
+    final info = await PackageInfo.fromPlatform();
+    setState(() {
+      _packageInfo = info;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initPackageInfo();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +125,15 @@ class MoreScreen extends StatelessWidget {
               title: const Text("Sources and Licencing"),
               onTap: () => openLink("https://github.com/tallestlegacy/din_dt"),
             ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Text(
+                _packageInfo.version,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+            )
           ],
         ));
   }

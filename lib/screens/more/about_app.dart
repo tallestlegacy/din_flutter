@@ -17,10 +17,11 @@ It contains a complete quran, a few dua, hadith and other sunnah.
       appBar: AppBar(
         title: const Text("About the app"),
         leading: const CustomBackButton(),
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: const SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.only(top: 32, bottom: 16, left: 16, right: 16),
           child: MarkdownBody(
             data: data,
           ),

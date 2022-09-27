@@ -14,6 +14,7 @@ class ThemeToggleButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         appearanceStoreController.setForceDarkMode(!Get.isDarkMode);
+        Get.changeThemeMode(ThemeMode.light);
         Get.changeTheme(Styles(
           isDarkMode: !Get.isDarkMode,
           swatch: !Get.isDarkMode

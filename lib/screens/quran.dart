@@ -1,9 +1,11 @@
 import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
+import 'package:din/util/store.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:din/components/surah.dart';
+import 'package:get/get.dart';
 
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
@@ -43,6 +45,8 @@ class _QuranPageState extends State<QuranPage> {
   @override
   Widget build(BuildContext context) {
     final PageController pageController = PageController();
+    final SettingsStoreController settingsStoreController =
+        Get.put(SettingsStoreController());
 
     void onPageChanged(int page) {
       setState(() {
@@ -83,13 +87,19 @@ class _QuranPageState extends State<QuranPage> {
                 slivers: [
                   SliverList(
                     delegate: SliverChildListDelegate([
-                      Text(
-                        "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-                        style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontSize: 32,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 8, bottom: 32, left: 8, right: 8),
+                        child: Obx(
+                          () => Text(
+                            "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: settingsStoreController.fontSize * 3,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                        textAlign: TextAlign.center,
                       ),
                     ]),
                   ),
