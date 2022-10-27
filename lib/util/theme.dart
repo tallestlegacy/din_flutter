@@ -40,9 +40,8 @@ class Styles {
       primaryTextTheme: TextTheme(
         bodyText1: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
         bodyText2: TextStyle(
-            color:
-                isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100),
-            fontFamily: "Naskh"),
+          color: isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100),
+        ),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: backgroundColor,
