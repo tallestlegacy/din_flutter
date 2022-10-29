@@ -1,6 +1,7 @@
 import 'package:din/screens/more/about_app.dart';
 import 'package:din/screens/more/about_developer.dart';
 import 'package:din/screens/more/appearance.dart';
+import 'package:din/screens/more/favourites.dart';
 import 'package:din/screens/more/names.dart';
 import 'package:din/screens/more/reader_preferences.dart';
 import 'package:din/util/network.dart';
@@ -60,6 +61,11 @@ class _MoreScreenState extends State<MoreScreen> {
         ),
         body: ListView(
           children: [
+            ListTile(
+              leading: const Icon(Icons.favorite_rounded),
+              title: const Text("Favourites"),
+              onTap: () => push(Favourites()),
+            ),
             ListTile(
               leading: const Icon(Icons.stars_rounded),
               title: const Text("99 Names"),

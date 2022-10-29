@@ -32,9 +32,11 @@ class _SurahState extends State<Surah> {
         "transliteration": transliteration["verses"][i],
       });
     }
-    setState(() {
-      _verses = verses;
-    });
+    if (mounted) {
+      setState(() {
+        _verses = verses;
+      });
+    }
   }
 
   @override

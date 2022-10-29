@@ -82,6 +82,11 @@ class Styles {
         iconColor: accentColor,
       ),
       scaffoldBackgroundColor: backgroundColor,
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+              side: MaterialStatePropertyAll(BorderSide(
+        color: primarySwatch,
+      )))),
       textTheme: TextTheme(
         headline6: TextStyle(
           fontSize: 16,

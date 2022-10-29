@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:din/util/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -107,15 +109,39 @@ class AppearanceStoreController extends GetxController {
 
 class GlobalStoreController extends GetxController {
   final box = GetStorage();
-  var lastSurahIndex = 0.obs;
+  var currentSurah = 0.obs;
+  RxList favouriteVerses = [].obs;
 
-  void setLastSurahIndex(int pageIndex) {
-    lastSurahIndex(pageIndex);
-    box.write("lastSurahIndex", pageIndex);
+  void setcurrentSurah(int pageIndex) {
+    currentSurah(pageIndex);
+    box.write("currentSurah", pageIndex);
+  }
+
+  void addFavouriteAya(aya) {
+    if (!isFavouriteVerse(aya)) {
+      favouriteVerses.add(aya);
+    } else {
+      favouriteVerses.remove(aya);
+    }
+    box.write("favouriteVerses", jsonEncode(favouriteVerses));
+  }
+
+  bool isFavouriteVerse(aya) {
+    bool fav = false;
+
+    for (var a in favouriteVerses) {
+      if (a['id'] == aya['id'] && a['chapter'] == aya['chapter']) {
+        fav = true;
+        break;
+      }
+    }
+
+    return fav;
   }
 
   GlobalStoreController() {
-    lastSurahIndex(box.read("lastSurahIndex") ?? 0);
+    currentSurah(box.read("currentSurah") ?? 0);
+    favouriteVerses(jsonDecode(box.read("favouriteVerses") ?? "[]"));
   }
 }
 

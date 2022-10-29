@@ -1,18 +1,97 @@
 import 'package:din/components/padded_text.dart';
+import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:flutter_share/flutter_share.dart';
 
 class Verse extends StatelessWidget {
   final verse;
+  final chapter;
 
-  const Verse({super.key, this.verse});
+  const Verse({super.key, required this.verse, this.chapter});
 
   @override
   Widget build(BuildContext context) {
     final SettingsStoreController settingsStoreController =
         Get.put(SettingsStoreController());
+
+    onLongPressVerse() async {
+      final GlobalStoreController globalStoreController =
+          Get.put(GlobalStoreController());
+
+      final chapters =
+          await LoadJson().load("assets/json/quran_editions/en.chapters.json");
+      var currentChapter = chapters[globalStoreController.currentSurah.value];
+
+      String shareText = "Quran ${currentChapter['id']}:${verse['id']}\n\n"
+          "${verse['text']}\n\n"
+          "${verse['translation']}\n\n"
+          "(${currentChapter['name']} - ${currentChapter['translation']} )";
+
+      showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: ((context) {
+          return Container(
+            height: 150,
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16),
+                topRight: Radius.circular(16),
+              ),
+              color: Theme.of(context).canvasColor,
+            ),
+            child: Wrap(
+              direction: Axis.horizontal,
+              alignment: WrapAlignment.end,
+              spacing: 8,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    Clipboard.setData(ClipboardData(text: shareText));
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.copy_rounded),
+                ),
+                IconButton(
+                  onPressed: () async {
+                    await FlutterShare.share(
+                      title: "Quran $currentChapter:${verse['id']}\n\n",
+                      text: shareText,
+                    ).then((value) {
+                      Navigator.pop(context);
+                    });
+                  },
+                  icon: const Icon(Icons.share_rounded),
+                ),
+                Obx(
+                  () => IconButton(
+                    icon: Icon(
+                        globalStoreController.favouriteVerses.isNotEmpty &&
+                                globalStoreController.isFavouriteVerse(verse)
+                            ? Icons.favorite_rounded
+                            : Icons.favorite_outline_rounded),
+                    onPressed: () {
+                      var v = verse;
+                      v['chapter'] = currentChapter['id'];
+                      globalStoreController.addFavouriteAya(verse);
+                      Navigator.pop(context);
+                    },
+                  ),
+                )
+              ],
+            ),
+          );
+        }),
+      );
+    }
+
     return ListTile(
+      enableFeedback: true,
+      onLongPress: onLongPressVerse,
       leading: Obx(
         () => Text(
           verse['id'].toString(),

@@ -27,9 +27,10 @@ flutter run
 - [ ] Multiple translations
 - [ ] Learning resources
 - [ ] Favourites
-- [ ] Text sharing
 - [ ] Application reviews and Release notes
 - [ ] User manual
+
+- [ ] Text sharing
 - [ ] Search quran
 - [ ] Search every other list
 - [ ] Islamic calendar

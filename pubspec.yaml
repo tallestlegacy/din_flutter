@@ -5,7 +5,7 @@ description: An open source Quran reader using material design and Flutter.
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.6
+version: 1.0.8
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -54,10 +54,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   #fonts:
-    #- family: Naskh
-    # fonts:
-    #    - asset: assets/fonts/DroidNaskh-Regular.ttf
-    #    - asset: assets/fonts/DroidNaskh-Bold.ttf
+  #- family: Naskh
+  # fonts:
+  #    - asset: assets/fonts/DroidNaskh-Regular.ttf
+  #    - asset: assets/fonts/DroidNaskh-Bold.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

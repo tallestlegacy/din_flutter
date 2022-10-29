@@ -37,22 +37,27 @@ class _QuranPageState extends State<QuranPage> {
     return "Din";
   }
 
+  final PageController pageController = PageController();
+  final SettingsStoreController settingsStoreController =
+      Get.put(SettingsStoreController());
+  final GlobalStoreController globalStoreController =
+      Get.put(GlobalStoreController());
+
   @override
   void initState() {
     super.initState();
     getChapters();
+
+    if (mounted) {}
   }
 
   @override
   Widget build(BuildContext context) {
-    final PageController pageController = PageController();
-    final SettingsStoreController settingsStoreController =
-        Get.put(SettingsStoreController());
-
     void onPageChanged(int page) {
       setState(() {
         _currentPage = page;
       });
+      globalStoreController.currentSurah(page);
     }
 
     return Scaffold(
