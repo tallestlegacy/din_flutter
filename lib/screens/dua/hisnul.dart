@@ -3,6 +3,7 @@ import 'package:din/components/padded_text.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
+import 'package:din/util/string_locale.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,15 @@ class _HisnulState extends State<Hisnul> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Hisnul Muslim"),
-        actions: const [ThemeToggleButton()],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search_rounded),
+            onPressed: () {
+              showSearch(context: context, delegate: HisnulSearch(_refs));
+            },
+          ),
+          const ThemeToggleButton(),
+        ],
       ),
       body: ListView.builder(
         controller: widget.scrollController,
@@ -65,6 +74,96 @@ class _HisnulState extends State<Hisnul> {
         },
         itemCount: _refs.length,
       ),
+    );
+  }
+}
+
+class HisnulSearch extends SearchDelegate {
+  List<String> searchTerms = [
+    "Apple",
+    "Banana",
+    "Mango",
+    "Pear",
+    "Watermelons",
+    "Blueberries",
+    "Pineapples",
+    "Strawberries"
+  ];
+
+  List refs = [];
+  HisnulSearch(this.refs);
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            if (query == "") {
+              close(context, null);
+            } else {
+              query = "";
+            }
+          },
+          icon: const Icon(Icons.close_rounded))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back_rounded));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List matchQuery = [];
+    for (var ref in refs) {
+      if (ref["title"].toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(ref);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result["title"]),
+          onTap: () => Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => HisnulReference(ref: result),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List matchQuery = [];
+    for (var ref in refs) {
+      if (ref["title"].toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(ref);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+          title: Text(result["title"]),
+          onTap: () => Navigator.push(
+            context,
+            CupertinoPageRoute(
+              builder: (context) => HisnulReference(ref: result),
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -99,9 +198,7 @@ class HisnulReference extends StatelessWidget {
               () => ListTile(
                 title: readerStoreController.showArabicText.value
                     ? Text(
-                        ref['hadiths'][index]['text']
-                            .toString()
-                            .replaceAll("\n", " "),
+                        ref['hadiths'][index]['text'].replaceAll("\n", " "),
                         style: TextStyle(
                           fontSize: readerStoreController.fontSize.value * 1.25,
                           color: Theme.of(context)
@@ -118,7 +215,6 @@ class HisnulReference extends StatelessWidget {
                       visible: readerStoreController.showTransliteration.value,
                       child: PaddedText(
                         text: ref['hadiths'][index]['transliteration']
-                            .toString()
                             .replaceAll("\n", " "),
                         fontSize: readerStoreController.fontSize.value,
                         color:
@@ -129,7 +225,6 @@ class HisnulReference extends StatelessWidget {
                       visible: readerStoreController.showTranslation.value,
                       child: PaddedText(
                         text: ref['hadiths'][index]['translation']
-                            .toString()
                             .replaceAll("\n", " "),
                         fontSize: readerStoreController.fontSize.value,
                         color:
@@ -139,7 +234,7 @@ class HisnulReference extends StatelessWidget {
                   ],
                 ),
                 leading: Text(
-                  "${ref['hadiths'][index]['id']}",
+                  toFarsi(ref['hadiths'][index]['id']),
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: readerStoreController.fontSize.value,

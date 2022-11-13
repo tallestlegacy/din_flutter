@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:din/components/surah.dart';
 import 'package:get/get.dart';
 
+import '../util/string_locale.dart';
+
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
 
@@ -32,7 +34,7 @@ class _QuranPageState extends State<QuranPage> {
   String getChapterText(int page) {
     if (page >= 0 && page <= 114) {
       var chapter = _chapters[page];
-      return "${chapter['id']}  -  ${chapter['name']}  -  ${chapter['translation']}";
+      return "${toFarsi(chapter['id'])}  -  ${chapter['name']}  -  ${chapter['translation']}";
     }
     return "Din";
   }
@@ -128,13 +130,13 @@ class _QuranPageState extends State<QuranPage> {
             },
             child: ListTile(
               subtitle: Text("${_chapters[index]['translation']}"),
-              leading: Text("${_chapters[index]['id']}"),
+              leading: Text(toFarsi(_chapters[index]['id'])),
               title: Text(
                 "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
                 style: Theme.of(context).primaryTextTheme.bodyText2,
               ),
               trailing: Text(
-                "${_chapters[index]['total_verses']}",
+                toFarsi(_chapters[index]['total_verses']),
                 style: Theme.of(context).primaryTextTheme.bodyText2,
               ),
             ),

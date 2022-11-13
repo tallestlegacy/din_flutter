@@ -1,5 +1,6 @@
 import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
+import 'package:din/util/string_locale.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -94,7 +95,7 @@ class _NamesState extends State<Names> {
                                         readerStoreController.fontSize.value;
                                     return ListTile(
                                       leading: Text(
-                                        (index + 1).toString(),
+                                        toFarsi(index + 1),
                                         style: TextStyle(fontSize: fontSize),
                                       ),
                                       title: Text(

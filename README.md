@@ -54,7 +54,7 @@ flutter run
 For minimal app bundle size :
 
 ```sh
- flutter build appbundle --target-platform android-arm,android-arm64
+ flutter build appbundle --target-platform android-arm,android-arm64 --build-number <n>
 ```
 
 For minimal apk size :

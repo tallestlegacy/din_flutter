@@ -1,6 +1,7 @@
 import 'package:din/components/padded_text.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
+import 'package:din/util/string_locale.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -94,7 +95,7 @@ class Verse extends StatelessWidget {
       onLongPress: onLongPressVerse,
       leading: Obx(
         () => Text(
-          verse['id'].toString(),
+          toFarsi(verse['id']),
           style: TextStyle(
               color: Colors.grey,
               fontSize: readerStoreController.fontSize.value),

@@ -2,6 +2,7 @@ import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
+import 'package:din/util/string_locale.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,15 @@ class _BukhariState extends State<Bukhari> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sahih Bukhari"),
-        actions: const [ThemeToggleButton()],
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search_rounded),
+            onPressed: () {
+              showSearch(context: context, delegate: BukhariSearch());
+            },
+          ),
+          const ThemeToggleButton(),
+        ],
       ),
       body: ListView.builder(
         controller: widget.scrollController,
@@ -84,6 +93,32 @@ class _BukhariState extends State<Bukhari> {
         ),
       ),
     );
+  }
+}
+
+class BukhariSearch extends SearchDelegate {
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    // TODO: implement buildActions
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    // TODO: implement buildLeading
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // TODO: implement buildResults
+    throw UnimplementedError();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // TODO: implement buildSuggestions
+    throw UnimplementedError();
   }
 }
 
@@ -137,7 +172,7 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
             child: Obx(
               () => ListTile(
                 leading: Text(
-                  _hadiths[index]['id'].toString(),
+                  toFarsi(_hadiths[index]['id']),
                   style: TextStyle(
                       color: Colors.grey,
                       fontSize: readerStoreController.fontSize.value),
