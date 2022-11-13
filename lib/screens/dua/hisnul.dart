@@ -75,8 +75,8 @@ class HisnulReference extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsStoreController settingsStoreController =
-        Get.put(SettingsStoreController());
+    final ReaderStoreController readerStoreController =
+        Get.put(ReaderStoreController());
 
     return SafeArea(
       bottom: true,
@@ -97,14 +97,13 @@ class HisnulReference extends StatelessWidget {
           itemBuilder: (context, index) => Card(
             child: Obx(
               () => ListTile(
-                title: settingsStoreController.showArabicText.value
+                title: readerStoreController.showArabicText.value
                     ? Text(
                         ref['hadiths'][index]['text']
                             .toString()
                             .replaceAll("\n", " "),
                         style: TextStyle(
-                          fontSize:
-                              settingsStoreController.fontSize.value * 1.25,
+                          fontSize: readerStoreController.fontSize.value * 1.25,
                           color: Theme.of(context)
                               .primaryTextTheme
                               .bodyText2
@@ -116,24 +115,23 @@ class HisnulReference extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Visibility(
-                      visible:
-                          settingsStoreController.showTransliteration.value,
+                      visible: readerStoreController.showTransliteration.value,
                       child: PaddedText(
                         text: ref['hadiths'][index]['transliteration']
                             .toString()
                             .replaceAll("\n", " "),
-                        fontSize: settingsStoreController.fontSize.value,
+                        fontSize: readerStoreController.fontSize.value,
                         color:
                             Theme.of(context).primaryTextTheme.bodyText2?.color,
                       ),
                     ),
                     Visibility(
-                      visible: settingsStoreController.showTranslation.value,
+                      visible: readerStoreController.showTranslation.value,
                       child: PaddedText(
                         text: ref['hadiths'][index]['translation']
                             .toString()
                             .replaceAll("\n", " "),
-                        fontSize: settingsStoreController.fontSize.value,
+                        fontSize: readerStoreController.fontSize.value,
                         color:
                             Theme.of(context).primaryTextTheme.bodyText1?.color,
                       ),
@@ -144,7 +142,7 @@ class HisnulReference extends StatelessWidget {
                   "${ref['hadiths'][index]['id']}",
                   style: TextStyle(
                     color: Colors.grey,
-                    fontSize: settingsStoreController.fontSize.value,
+                    fontSize: readerStoreController.fontSize.value,
                   ),
                 ),
               ),

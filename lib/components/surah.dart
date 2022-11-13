@@ -50,11 +50,11 @@ class _SurahState extends State<Surah> {
     return SliverList(
         delegate: SliverChildBuilderDelegate(
       (context, index) => Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
             Verse(verse: _verses[index]),
-            if (index != _verses.length - 1) const Divider()
+            if (index != _verses.length - 1) const Divider(height: 0)
           ],
         ),
       ),

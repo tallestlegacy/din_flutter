@@ -37,9 +37,8 @@ class _QuranPageState extends State<QuranPage> {
     return "Din";
   }
 
-  final PageController pageController = PageController();
-  final SettingsStoreController settingsStoreController =
-      Get.put(SettingsStoreController());
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
 
@@ -47,8 +46,6 @@ class _QuranPageState extends State<QuranPage> {
   void initState() {
     super.initState();
     getChapters();
-
-    if (mounted) {}
   }
 
   @override
@@ -59,6 +56,10 @@ class _QuranPageState extends State<QuranPage> {
       });
       globalStoreController.currentSurah(page);
     }
+
+    PageController pageController = PageController(
+        // initialPage: globalStoreController.currentSurah.value,
+        );
 
     return Scaffold(
       body: NestedScrollView(
@@ -101,7 +102,7 @@ class _QuranPageState extends State<QuranPage> {
                             "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
-                              fontSize: settingsStoreController.fontSize * 3,
+                              fontSize: readerStoreController.fontSize * 3,
                             ),
                             textAlign: TextAlign.center,
                           ),
@@ -139,7 +140,7 @@ class _QuranPageState extends State<QuranPage> {
             ),
           ),
           separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+              const Divider(height: 0),
         ),
       ),
     );

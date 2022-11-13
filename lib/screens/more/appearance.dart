@@ -77,10 +77,7 @@ class Appearance extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.all(16),
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: VersePreview(),
-            ),
+            child: VersePreview(),
           ),
           const Divider(),
           ListTile(

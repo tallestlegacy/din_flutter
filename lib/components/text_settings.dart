@@ -7,8 +7,8 @@ class TextSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsStoreController settingsStoreController =
-        Get.put(SettingsStoreController());
+    final ReaderStoreController readerStoreController =
+        Get.put(ReaderStoreController());
     return Column(
       children: [
         Padding(
@@ -21,9 +21,9 @@ class TextSettings extends StatelessWidget {
         Obx(
           () => SwitchListTile(
             title: const Text("Arabic text"),
-            value: settingsStoreController.showArabicText.value,
+            value: readerStoreController.showArabicText.value,
             onChanged: ((value) {
-              settingsStoreController.setShowArabicText(value);
+              readerStoreController.setShowArabicText(value);
             }),
             inactiveThumbColor: Colors.grey,
             inactiveTrackColor: Colors.grey.withAlpha(100),
@@ -32,9 +32,9 @@ class TextSettings extends StatelessWidget {
         Obx(
           () => SwitchListTile(
             title: const Text("Transliteration"),
-            value: settingsStoreController.showTransliteration.value,
+            value: readerStoreController.showTransliteration.value,
             onChanged: ((value) {
-              settingsStoreController.setTransliteration(value);
+              readerStoreController.setTransliteration(value);
             }),
             inactiveThumbColor: Colors.grey,
             inactiveTrackColor: Colors.grey.withAlpha(100),
@@ -43,9 +43,9 @@ class TextSettings extends StatelessWidget {
         Obx(
           () => SwitchListTile(
             title: const Text("Translation"),
-            value: settingsStoreController.showTranslation.value,
+            value: readerStoreController.showTranslation.value,
             onChanged: ((value) {
-              settingsStoreController.setTranslation(value);
+              readerStoreController.setTranslation(value);
             }),
             inactiveThumbColor: Colors.grey,
             inactiveTrackColor: Colors.grey.withAlpha(100),
@@ -59,12 +59,12 @@ class TextSettings extends StatelessWidget {
           ),
         ),
         Obx(() => Slider(
-              value: settingsStoreController.fontSize.value,
-              onChanged: settingsStoreController.setFontSize,
+              value: readerStoreController.fontSize.value,
+              onChanged: readerStoreController.setFontSize,
               min: 8,
               max: 24,
               divisions: 8,
-              label: settingsStoreController.fontSize.value.toInt().toString(),
+              label: readerStoreController.fontSize.value.toInt().toString(),
             ))
       ],
     );

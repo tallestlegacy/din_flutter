@@ -115,8 +115,8 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsStoreController settingsStoreController =
-        Get.put(SettingsStoreController());
+    final ReaderStoreController readerStoreController =
+        Get.put(ReaderStoreController());
     return SafeArea(
       bottom: true,
       top: false,
@@ -140,17 +140,17 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
                   _hadiths[index]['id'].toString(),
                   style: TextStyle(
                       color: Colors.grey,
-                      fontSize: settingsStoreController.fontSize.value),
+                      fontSize: readerStoreController.fontSize.value),
                 ),
                 title: Text(
                   _hadiths[index]['by'],
-                  style: TextStyle(
-                      fontSize: settingsStoreController.fontSize.value),
+                  style:
+                      TextStyle(fontSize: readerStoreController.fontSize.value),
                 ),
                 subtitle: Text(
                   _hadiths[index]['text'],
-                  style: TextStyle(
-                      fontSize: settingsStoreController.fontSize.value),
+                  style:
+                      TextStyle(fontSize: readerStoreController.fontSize.value),
                 ),
               ),
             ),

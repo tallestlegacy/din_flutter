@@ -14,8 +14,8 @@ class Verse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsStoreController settingsStoreController =
-        Get.put(SettingsStoreController());
+    final ReaderStoreController readerStoreController =
+        Get.put(ReaderStoreController());
 
     onLongPressVerse() async {
       final GlobalStoreController globalStoreController =
@@ -97,39 +97,39 @@ class Verse extends StatelessWidget {
           verse['id'].toString(),
           style: TextStyle(
               color: Colors.grey,
-              fontSize: settingsStoreController.fontSize.value),
+              fontSize: readerStoreController.fontSize.value),
         ),
       ),
-      contentPadding: const EdgeInsets.all(0),
+      contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       minVerticalPadding: 0,
       title: Obx(
         () => Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Visibility(
-                visible: settingsStoreController.showArabicText.value,
+                visible: readerStoreController.showArabicText.value,
                 child: PaddedText(
                   text: verse['text'],
                   textAlign: TextAlign.right,
-                  fontSize: settingsStoreController.fontSize.value * 1.5,
+                  fontSize: readerStoreController.fontSize.value * 1.5,
                   fontWeight: FontWeight.w400,
                   color: Theme.of(context).primaryTextTheme.bodyText2?.color,
                 ),
               ),
               Visibility(
-                visible: settingsStoreController.showTransliteration.value,
+                visible: readerStoreController.showTransliteration.value,
                 child: PaddedText(
                   text: verse['transliteration'],
                   color: Theme.of(context).primaryTextTheme.bodyText2?.color,
-                  fontSize: settingsStoreController.fontSize.value,
+                  fontSize: readerStoreController.fontSize.value,
                 ),
               ),
               Visibility(
-                visible: settingsStoreController.showTranslation.value,
+                visible: readerStoreController.showTranslation.value,
                 child: PaddedText(
                   text: verse['translation'],
                   color: Theme.of(context).primaryTextTheme.bodyText1?.color,
-                  fontSize: settingsStoreController.fontSize.value,
+                  fontSize: readerStoreController.fontSize.value,
                 ),
               )
             ]),
@@ -149,7 +149,7 @@ class VersePreview extends StatelessWidget {
         border: Border.all(width: 2, color: Theme.of(context).backgroundColor),
       ),
       child: const Padding(
-          padding: EdgeInsets.all(16),
+          padding: EdgeInsets.all(0),
           child: Verse(
             verse: {
               "id": 1,

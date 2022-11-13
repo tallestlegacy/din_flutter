@@ -6,7 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-class SettingsStoreController extends GetxController {
+/// Reader Store Controller
+/// manages the reading experience for users
+
+class ReaderStoreController extends GetxController {
   var showTranslation = true.obs;
   var showTransliteration = true.obs;
   var showArabicText = true.obs;
@@ -40,7 +43,7 @@ class SettingsStoreController extends GetxController {
     box.write("fontSize", value);
   }
 
-  SettingsStoreController() {
+  ReaderStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
     showArabicText(box.read("showArabicText") ?? true);
@@ -48,6 +51,8 @@ class SettingsStoreController extends GetxController {
   }
 }
 
+/// Appearance Store Controller
+/// manages teh app theme
 class AppearanceStoreController extends GetxController {
   var swatch = Colors.blue.obs;
   var darkSwatch = Colors.blue.obs;
@@ -106,6 +111,9 @@ class AppearanceStoreController extends GetxController {
     forceDarkMode(box.read("forceDarkMode") ?? false);
   }
 }
+
+/// Global Store Controller
+/// Collects general user interaction info
 
 class GlobalStoreController extends GetxController {
   final box = GetStorage();

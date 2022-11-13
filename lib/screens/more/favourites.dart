@@ -41,6 +41,7 @@ class _FavouritesState extends State<Favourites> {
         leading: const CustomBackButton(),
         title: const Text("Favourites"),
         actions: const [TextSettingsAction(), ThemeToggleButton()],
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Obx(() {
         if (globalStoreController.favouriteVerses.isEmpty) {
@@ -51,12 +52,12 @@ class _FavouritesState extends State<Favourites> {
 
         var favChapters = {};
 
-        globalStoreController.favouriteVerses.forEach((verse) {
+        for (var verse in globalStoreController.favouriteVerses) {
           if (favChapters[verse['chapter']] == null) {
             favChapters[verse['chapter']] = [];
           }
           favChapters[verse['chapter']].add(verse);
-        });
+        }
 
         var keys = favChapters.keys.toList();
 

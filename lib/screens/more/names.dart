@@ -38,8 +38,8 @@ class _NamesState extends State<Names> {
 
   @override
   Widget build(BuildContext context) {
-    final SettingsStoreController settingsStoreController =
-        Get.put(SettingsStoreController());
+    final ReaderStoreController readerStoreController =
+        Get.put(ReaderStoreController());
 
     return DefaultTabController(
       length: 2,
@@ -91,7 +91,7 @@ class _NamesState extends State<Names> {
                                 Obx(
                                   (() {
                                     double fontSize =
-                                        settingsStoreController.fontSize.value;
+                                        readerStoreController.fontSize.value;
                                     return ListTile(
                                       leading: Text(
                                         (index + 1).toString(),

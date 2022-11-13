@@ -26,7 +26,7 @@ flutter run
 - [ ] Madrasa
 - [ ] Multiple translations
 - [ ] Learning resources
-- [ ] Favourites
+- [x] Favourites (requires a more efficient way of handling verses for multiple translations)
 - [ ] Application reviews and Release notes
 - [ ] User manual
 
