@@ -1,7 +1,7 @@
 import 'dart:math';
 
 String toFarsi(int i) {
-  const farsi = "۰۱۲۳۴۵۶۷۸۹";
+  const farsi = "۰۱٢٣٤٥٦٧٨٩";
   String numStr = i.toString();
 
   for (int i = 0; i < farsi.length; i++) {

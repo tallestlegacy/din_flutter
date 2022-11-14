@@ -61,38 +61,34 @@ class _FavouritesState extends State<Favourites> {
 
         var keys = favChapters.keys.toList();
 
-        return ListView(children: [
-          const Divider(),
-          ...keys.map((key) {
-            var chapter = {};
-            if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
-            var verses = <Widget>[];
+        return ListView(
+            children: keys.map((key) {
+          var chapter = {};
+          if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
+          var verses = <Widget>[];
 
-            favChapters[key].forEach((verse) {
-              verses.add(Padding(
-                padding: const EdgeInsets.all(8),
-                child: Verse(verse: verse),
-              ));
-            });
+          favChapters[key].forEach((verse) {
+            verses.add(Padding(
+              padding: const EdgeInsets.all(8),
+              child: Verse(verse: verse),
+            ));
+          });
 
-            return Column(
-              children: [
-                if (_chapters.isNotEmpty)
-                  Container(
-                    margin: const EdgeInsets.only(top: 32),
-                    child: Text(
-                      "${chapter['name']} - ${chapter['translation']}",
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
+          return Column(
+            children: [
+              if (_chapters.isNotEmpty)
+                Container(
+                  margin: const EdgeInsets.only(top: 32),
+                  child: Text(
+                    "${chapter['name']} - ${chapter['translation']}",
+                    style: Theme.of(context).textTheme.headline6,
                   ),
-                Column(
-                  children: verses,
                 ),
-                const Divider(),
-              ],
-            );
-          }).toList()
-        ]);
+              Column(children: verses),
+              if (keys.last != key) const Divider(),
+            ],
+          );
+        }).toList());
       }),
     );
   }

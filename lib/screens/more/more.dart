@@ -64,7 +64,7 @@ class _MoreScreenState extends State<MoreScreen> {
             ListTile(
               leading: const Icon(Icons.favorite_rounded),
               title: const Text("Favourites"),
-              onTap: () => push(Favourites()),
+              onTap: () => push(const Favourites()),
             ),
             ListTile(
               leading: const Icon(Icons.stars_rounded),
