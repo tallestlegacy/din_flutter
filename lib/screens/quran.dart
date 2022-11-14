@@ -34,7 +34,7 @@ class _QuranPageState extends State<QuranPage> {
   String getChapterText(int page) {
     if (page >= 0 && page <= 114) {
       var chapter = _chapters[page];
-      return "${toFarsi(chapter['id'])}  -  ${chapter['name']}  -  ${chapter['translation']}";
+      return "${toFarsi(chapter['id'])}  -  ${chapter['name']} (${chapter['id']}. ${chapter['translation']})";
     }
     return "Din";
   }
@@ -128,16 +128,22 @@ class _QuranPageState extends State<QuranPage> {
               pageController.jumpToPage(index);
               Scaffold.of(context).closeDrawer();
             },
-            child: ListTile(
-              subtitle: Text("${_chapters[index]['translation']}"),
-              leading: Text(toFarsi(_chapters[index]['id'])),
-              title: Text(
-                "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
-                style: Theme.of(context).primaryTextTheme.bodyText2,
-              ),
-              trailing: Text(
-                toFarsi(_chapters[index]['total_verses']),
-                style: Theme.of(context).primaryTextTheme.bodyText2,
+            child: Obx(
+              () => ListTile(
+                subtitle: Text("${_chapters[index]['translation']}"),
+                leading: Text(readerStoreController.showTranslation.value
+                    ? _chapters[index]['id'].toString()
+                    : toFarsi(_chapters[index]['id'])),
+                title: Text(
+                  "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
+                  style: Theme.of(context).primaryTextTheme.bodyText2,
+                ),
+                trailing: Text(
+                  readerStoreController.showTranslation.value
+                      ? _chapters[index]['total_verses'].toString()
+                      : toFarsi(_chapters[index]['total_verses']),
+                  style: Theme.of(context).primaryTextTheme.bodyText2,
+                ),
               ),
             ),
           ),

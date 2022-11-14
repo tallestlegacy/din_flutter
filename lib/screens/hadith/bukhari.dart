@@ -29,6 +29,9 @@ class _BukhariState extends State<Bukhari> {
     }
   }
 
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
+
   @override
   void initState() {
     super.initState();
@@ -41,12 +44,13 @@ class _BukhariState extends State<Bukhari> {
       appBar: AppBar(
         title: const Text("Sahih Bukhari"),
         actions: [
+          /*
           IconButton(
             icon: const Icon(Icons.search_rounded),
             onPressed: () {
               showSearch(context: context, delegate: BukhariSearch());
             },
-          ),
+          ),*/
           const ThemeToggleButton(),
         ],
       ),
@@ -68,25 +72,29 @@ class _BukhariState extends State<Bukhari> {
               ),
             ),
             for (var book in _volumes[index]['books'])
-              Card(
-                child: ListTile(
-                  title: Text(
-                    "${book['name']}",
-                  ),
-                  trailing: Text(
-                    "${book['length']}",
-                    style: const TextStyle(color: Colors.grey),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) => BukhariHadiths(
-                          book: book,
+              Obx(
+                () => Card(
+                  child: ListTile(
+                    title: Text(
+                      "${book['name']}",
+                    ),
+                    trailing: Text(
+                      readerStoreController.showTranslation.value
+                          ? "${book['length']}"
+                          : toFarsi(book['length']),
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => BukhariHadiths(
+                            book: book,
+                          ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               )
           ],
@@ -172,7 +180,9 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
             child: Obx(
               () => ListTile(
                 leading: Text(
-                  toFarsi(_hadiths[index]['id']),
+                  readerStoreController.showTranslation.value
+                      ? _hadiths[index]['id'].toString()
+                      : toFarsi(_hadiths[index]['id']),
                   style: TextStyle(
                       color: Colors.grey,
                       fontSize: readerStoreController.fontSize.value),

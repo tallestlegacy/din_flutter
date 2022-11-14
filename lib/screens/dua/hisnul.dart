@@ -31,6 +31,9 @@ class _HisnulState extends State<Hisnul> {
     }
   }
 
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
+
   @override
   void initState() {
     super.initState();
@@ -57,16 +60,20 @@ class _HisnulState extends State<Hisnul> {
         padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
           return Card(
-            child: ListTile(
-              trailing: Text(
-                "${_refs[index]['hadiths'].length}",
-                style: const TextStyle(color: Colors.grey),
-              ),
-              title: Text("${_refs[index]['title']}"),
-              onTap: () => Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => HisnulReference(ref: _refs[index]),
+            child: Obx(
+              () => ListTile(
+                trailing: Text(
+                  readerStoreController.showTranslation.value
+                      ? _refs[index]['hadiths'].length.toString()
+                      : toFarsi(_refs[index]['hadiths'].length),
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                title: Text("${_refs[index]['title']}"),
+                onTap: () => Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => HisnulReference(ref: _refs[index]),
+                  ),
                 ),
               ),
             ),
@@ -234,7 +241,9 @@ class HisnulReference extends StatelessWidget {
                   ],
                 ),
                 leading: Text(
-                  toFarsi(ref['hadiths'][index]['id']),
+                  readerStoreController.showTranslation.value
+                      ? ref['hadiths'][index]['id'].toString()
+                      : toFarsi(ref['hadiths'][index]['id']),
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: readerStoreController.fontSize.value,

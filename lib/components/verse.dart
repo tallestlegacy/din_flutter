@@ -95,7 +95,9 @@ class Verse extends StatelessWidget {
       onLongPress: onLongPressVerse,
       leading: Obx(
         () => Text(
-          toFarsi(verse['id']),
+          readerStoreController.showTranslation.value
+              ? verse['id'].toString()
+              : toFarsi(verse['id']),
           style: TextStyle(
               color: Colors.grey,
               fontSize: readerStoreController.fontSize.value),
