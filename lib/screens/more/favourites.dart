@@ -21,6 +21,9 @@ class _FavouritesState extends State<Favourites> {
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
 
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
+
   List _chapters = [];
   final Map<int, List> _quran = {};
 
@@ -109,17 +112,48 @@ class _FavouritesState extends State<Favourites> {
             }
 
             return Card(
-              child: Column(
-                children: [
-                  if (_chapters.isNotEmpty)
-                    ListTile(
-                      title: Text(
-                        "${toFarsi(chapter["id"])} - ${chapter['name']} (${chapter["id"]}. ${chapter['translation']})",
-                        style: Theme.of(context).textTheme.headline6,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                child: Column(
+                  children: [
+                    if (_chapters.isNotEmpty)
+                      Obx(
+                        () => ListTile(
+                          leading: Text(
+                            readerStoreController.showTranslation.value
+                                ? chapter["id"].toString()
+                                : toFarsi(chapter["id"]),
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText2
+                                  ?.color,
+                              fontSize:
+                                  readerStoreController.fontSize.value * 2,
+                            ),
+                          ),
+                          title: Text(
+                            readerStoreController.showTranslation.value
+                                ? "${chapter["translation"]} (${chapter["name"]})"
+                                : chapter['name'],
+                            style: TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText2
+                                  ?.color,
+                              fontSize:
+                                  readerStoreController.fontSize.value * 2,
+                            ),
+                          ),
+                          trailing: Icon(
+                            Icons.my_library_books_rounded,
+                            size: readerStoreController.fontSize.value * 2,
+                          ),
+                        ),
                       ),
-                    ),
-                  Column(children: verses),
-                ],
+                    Column(children: verses),
+                  ],
+                ),
               ),
             );
           }).toList());

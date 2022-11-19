@@ -46,47 +46,57 @@ class Verse extends StatelessWidget {
               color: Theme.of(context).canvasColor,
             ),
             child: Wrap(
-              direction: Axis.horizontal,
-              alignment: WrapAlignment.end,
-              spacing: 8,
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Clipboard.setData(ClipboardData(text: shareText));
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(Icons.copy_rounded),
+                Text("Quran $chapter:${verse["id"]}"),
+                Wrap(
+                  direction: Axis.horizontal,
+                  alignment: WrapAlignment.end,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  spacing: 8,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Clipboard.setData(ClipboardData(text: shareText));
+                        Navigator.pop(context);
+                      },
+                      icon: const Icon(Icons.copy_rounded),
+                    ),
+                    IconButton(
+                      onPressed: () async {
+                        await FlutterShare.share(
+                          title: "Quran $currentChapter:${verse['id']}\n\n",
+                          text: shareText,
+                        ).then((value) {
+                          Navigator.pop(context);
+                        });
+                      },
+                      icon: const Icon(Icons.share_rounded),
+                    ),
+                    Obx(
+                      () => IconButton(
+                        icon: Icon(
+                            globalStoreController.favouriteVerses.isNotEmpty &&
+                                    globalStoreController.isFavouriteVerse({
+                                      "chapter": currentChapter["id"],
+                                      "id": verse["id"]
+                                    })
+                                ? Icons.favorite_rounded
+                                : Icons.favorite_outline_rounded),
+                        onPressed: () {
+                          var v = verse;
+                          v['chapter'] = currentChapter['id'];
+                          globalStoreController.addFavouriteAya({
+                            "chapter": currentChapter["id"],
+                            "id": verse["id"]
+                          });
+                          Navigator.pop(context);
+                        },
+                      ),
+                    )
+                  ],
                 ),
-                IconButton(
-                  onPressed: () async {
-                    await FlutterShare.share(
-                      title: "Quran $currentChapter:${verse['id']}\n\n",
-                      text: shareText,
-                    ).then((value) {
-                      Navigator.pop(context);
-                    });
-                  },
-                  icon: const Icon(Icons.share_rounded),
-                ),
-                Obx(
-                  () => IconButton(
-                    icon: Icon(
-                        globalStoreController.favouriteVerses.isNotEmpty &&
-                                globalStoreController.isFavouriteVerse({
-                                  "chapter": currentChapter["id"],
-                                  "id": verse["id"]
-                                })
-                            ? Icons.favorite_rounded
-                            : Icons.favorite_outline_rounded),
-                    onPressed: () {
-                      var v = verse;
-                      v['chapter'] = currentChapter['id'];
-                      globalStoreController.addFavouriteAya(
-                          {"chapter": currentChapter["id"], "id": verse["id"]});
-                      Navigator.pop(context);
-                    },
-                  ),
-                )
               ],
             ),
           );
