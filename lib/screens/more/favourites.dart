@@ -124,10 +124,7 @@ class _FavouritesState extends State<Favourites> {
                                 ? chapter["id"].toString()
                                 : toFarsi(chapter["id"]),
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyText2
-                                  ?.color,
+                              color: Theme.of(context).primaryColor,
                               fontSize:
                                   readerStoreController.fontSize.value * 2,
                             ),
@@ -137,10 +134,7 @@ class _FavouritesState extends State<Favourites> {
                                 ? "${chapter["translation"]} (${chapter["name"]})"
                                 : chapter['name'],
                             style: TextStyle(
-                              color: Theme.of(context)
-                                  .primaryTextTheme
-                                  .bodyText2
-                                  ?.color,
+                              color: Theme.of(context).primaryColor,
                               fontSize:
                                   readerStoreController.fontSize.value * 2,
                             ),

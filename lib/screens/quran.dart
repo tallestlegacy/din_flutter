@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'package:din/components/surah.dart';
 import 'package:get/get.dart';
-
 import '../util/string_locale.dart';
 
 class QuranPage extends StatefulWidget {
@@ -62,9 +61,7 @@ class _QuranPageState extends State<QuranPage> {
       globalStoreController.currentSurah(page);
     }
 
-    PageController pageController = PageController(
-        // initialPage: globalStoreController.currentSurah.value,
-        );
+    PageController pageController = PageController();
 
     return Scaffold(
       body: NestedScrollView(
@@ -80,7 +77,9 @@ class _QuranPageState extends State<QuranPage> {
               ),
               leading: IconButton(
                 icon: const Icon(Icons.menu_rounded),
-                onPressed: () => Scaffold.of(context).openDrawer(),
+                onPressed: () {
+                  Scaffold.of(context).openDrawer();
+                },
               ),
               snap: true,
               floating: true,
@@ -90,6 +89,7 @@ class _QuranPageState extends State<QuranPage> {
           ];
         },
         body: PageView(
+          key: const PageStorageKey<String>("quran page"),
           reverse: true,
           controller: pageController,
           onPageChanged: onPageChanged,
@@ -133,6 +133,10 @@ class _QuranPageState extends State<QuranPage> {
             },
             child: Obx(
               () => ListTile(
+                selected: pageController.page == (_chapters[index]["id"] - 1),
+                selectedColor:
+                    Theme.of(context).primaryTextTheme.bodyText2?.color,
+                selectedTileColor: Theme.of(context).primaryColor.withAlpha(50),
                 subtitle: Text("${_chapters[index]['translation']}"),
                 leading: Text(readerStoreController.showTranslation.value
                     ? _chapters[index]['id'].toString()
