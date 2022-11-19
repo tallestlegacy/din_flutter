@@ -129,8 +129,11 @@ class GlobalStoreController extends GetxController {
     if (!isFavouriteVerse(aya)) {
       favouriteVerses.add(aya);
     } else {
-      favouriteVerses.remove(aya);
+      favouriteVerses.removeWhere((element) =>
+          element["id"] == aya["id"] && element["chapter"] == aya["chapter"]);
     }
+    favouriteVerses.sort((a, b) => a["id"] - b["id"]);
+    favouriteVerses.sort((a, b) => a["chapter"] - b["chapter"]);
     box.write("favouriteVerses", jsonEncode(favouriteVerses));
   }
 
@@ -143,7 +146,6 @@ class GlobalStoreController extends GetxController {
         break;
       }
     }
-
     return fav;
   }
 

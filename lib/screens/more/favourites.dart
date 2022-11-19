@@ -1,8 +1,11 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/components/verse.dart';
 import 'package:din/util/json.dart';
 import 'package:din/util/store.dart';
+import 'package:din/util/string_locale.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,23 +22,55 @@ class _FavouritesState extends State<Favourites> {
       Get.put(GlobalStoreController());
 
   List _chapters = [];
+  final Map<int, List> _quran = {};
 
   Future<void> getChapters() async {
     final data =
         await LoadJson().load("assets/json/quran_editions/en.chapters.json");
-    setState(() {
-      _chapters = data;
-    });
+    if (mounted) {
+      setState(() {
+        _chapters = data;
+      });
+    }
+  }
+
+  Future<void> getSurah(int chapter) async {
+    var surah = await getVerses(chapter);
+
+    if (mounted) {
+      setState(() {
+        _quran[chapter] = surah;
+      });
+    }
+  }
+
+  Map<int, List> chapterMap(var list) {
+    final Map<int, List> favChapters = {};
+    for (var verse in list) {
+      if (favChapters[verse['chapter']] == null) {
+        favChapters[verse['chapter']] = [];
+      }
+      favChapters[verse['chapter']]?.add(verse);
+    }
+
+    return favChapters;
   }
 
   @override
   void initState() {
     super.initState();
+    getChapters();
+
+    // Init Chapters
+
+    for (int chapter
+        in chapterMap(globalStoreController.favouriteVerses).keys) {
+      getSurah(chapter);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    getChapters();
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
@@ -43,53 +78,53 @@ class _FavouritesState extends State<Favourites> {
         actions: const [TextSettingsAction(), ThemeToggleButton()],
         backgroundColor: Theme.of(context).backgroundColor,
       ),
-      body: Obx(() {
-        if (globalStoreController.favouriteVerses.isEmpty) {
-          return const Center(
-            child: Icon(Icons.format_quote_rounded),
-          );
-        }
-
-        var favChapters = {};
-
-        for (var verse in globalStoreController.favouriteVerses) {
-          if (favChapters[verse['chapter']] == null) {
-            favChapters[verse['chapter']] = [];
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Obx(() {
+          if (globalStoreController.favouriteVerses.isEmpty) {
+            return const Center(
+              child: Icon(Icons.format_quote_rounded),
+            );
           }
-          favChapters[verse['chapter']].add(verse);
-        }
 
-        var keys = favChapters.keys.toList();
+          Map<int, List> favChapters =
+              chapterMap(globalStoreController.favouriteVerses);
 
-        return ListView(
-            children: keys.map((key) {
-          var chapter = {};
-          if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
-          var verses = <Widget>[];
+          var keys = favChapters.keys.toList();
+          return ListView(
+              children: keys.map((key) {
+            var chapter = {};
+            if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
 
-          favChapters[key].forEach((verse) {
-            verses.add(Padding(
-              padding: const EdgeInsets.all(8),
-              child: Verse(verse: verse),
-            ));
-          });
+            var verses = <Widget>[];
 
-          return Column(
-            children: [
-              if (_chapters.isNotEmpty)
-                Container(
-                  margin: const EdgeInsets.only(top: 32),
-                  child: Text(
-                    "${chapter['name']} - ${chapter['translation']}",
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
-                ),
-              Column(children: verses),
-              if (keys.last != key) const Divider(),
-            ],
-          );
-        }).toList());
-      }),
+            if (_quran.length >= favChapters.length) {
+              favChapters[key]?.forEach((verse) {
+                verses.add(const Divider(height: 0));
+                verses.add(Verse(
+                  verse: _quran[verse["chapter"]]?[verse["id"] - 1],
+                  chapter: verse["chapter"],
+                ));
+              });
+            }
+
+            return Card(
+              child: Column(
+                children: [
+                  if (_chapters.isNotEmpty)
+                    ListTile(
+                      title: Text(
+                        "${toFarsi(chapter["id"])} - ${chapter['name']} (${chapter["id"]}. ${chapter['translation']})",
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
+                    ),
+                  Column(children: verses),
+                ],
+              ),
+            );
+          }).toList());
+        }),
+      ),
     );
   }
 }

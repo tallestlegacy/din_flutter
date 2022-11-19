@@ -25,10 +25,13 @@ class _QuranPageState extends State<QuranPage> {
   Future<void> getChapters() async {
     final data =
         await LoadJson().load("assets/json/quran_editions/en.chapters.json");
-    setState(() {
-      _chapters = data;
-      _currentPage = _currentPage < 0 ? 0 : _currentPage;
-    });
+
+    if (mounted) {
+      setState(() {
+        _chapters = data;
+        _currentPage = _currentPage < 0 ? 0 : _currentPage;
+      });
+    }
   }
 
   String getChapterText(int page) {

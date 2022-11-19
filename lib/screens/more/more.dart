@@ -36,9 +36,12 @@ class _MoreScreenState extends State<MoreScreen> {
 
   Future<void> _initPackageInfo() async {
     final info = await PackageInfo.fromPlatform();
-    setState(() {
-      _packageInfo = info;
-    });
+
+    if (mounted) {
+      setState(() {
+        _packageInfo = info;
+      });
+    }
   }
 
   @override

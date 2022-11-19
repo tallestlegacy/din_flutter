@@ -9,9 +9,9 @@ import 'package:flutter_share/flutter_share.dart';
 
 class Verse extends StatelessWidget {
   final verse;
-  final chapter;
+  final int chapter;
 
-  const Verse({super.key, required this.verse, this.chapter});
+  const Verse({super.key, required this.verse, required this.chapter});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Verse extends StatelessWidget {
 
       final chapters =
           await LoadJson().load("assets/json/quran_editions/en.chapters.json");
-      var currentChapter = chapters[globalStoreController.currentSurah.value];
+      var currentChapter = chapters[chapter - 1];
 
       String shareText = "Quran ${currentChapter['id']}:${verse['id']}\n\n"
           "${verse['text']}\n\n"
@@ -72,13 +72,17 @@ class Verse extends StatelessWidget {
                   () => IconButton(
                     icon: Icon(
                         globalStoreController.favouriteVerses.isNotEmpty &&
-                                globalStoreController.isFavouriteVerse(verse)
+                                globalStoreController.isFavouriteVerse({
+                                  "chapter": currentChapter["id"],
+                                  "id": verse["id"]
+                                })
                             ? Icons.favorite_rounded
                             : Icons.favorite_outline_rounded),
                     onPressed: () {
                       var v = verse;
                       v['chapter'] = currentChapter['id'];
-                      globalStoreController.addFavouriteAya(verse);
+                      globalStoreController.addFavouriteAya(
+                          {"chapter": currentChapter["id"], "id": verse["id"]});
                       Navigator.pop(context);
                     },
                   ),
@@ -161,6 +165,7 @@ class VersePreview extends StatelessWidget {
                   "In the name of Allah, the Entirely Merciful, the Especially Merciful",
               "transliteration": "Bismi Allahi alrrahmani alrraheemi"
             },
+            chapter: 1,
           )),
     );
   }

@@ -14,24 +14,9 @@ class Surah extends StatefulWidget {
 class _SurahState extends State<Surah> {
   List<dynamic> _verses = [];
 
-  Future<void> getVerses() async {
-    final text = await LoadJson().load(
-        "assets/json/quran_editions/\$.original/${widget.chapter['id']}.json");
-    final transliteration = await LoadJson().load(
-        "assets/json/quran_editions/\$.transliteration/${widget.chapter['id']}.json");
-    final translation = await LoadJson().load(
-        "assets/json/quran_editions/en.quran-in-english/${widget.chapter['id']}.json");
+  Future<void> initGetVerses() async {
+    List<dynamic> verses = await getVerses(widget.chapter["id"]);
 
-    var verses = [];
-
-    for (var i = 0; i < text["verses"].length; i++) {
-      verses.add({
-        "id": i + 1,
-        "text": text["verses"][i],
-        "translation": translation["verses"][i],
-        "transliteration": transliteration["verses"][i],
-      });
-    }
     if (mounted) {
       setState(() {
         _verses = verses;
@@ -42,7 +27,7 @@ class _SurahState extends State<Surah> {
   @override
   void initState() {
     super.initState();
-    getVerses();
+    initGetVerses();
   }
 
   @override
@@ -53,7 +38,10 @@ class _SurahState extends State<Surah> {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
-            Verse(verse: _verses[index]),
+            Verse(
+              verse: _verses[index],
+              chapter: widget.chapter["id"],
+            ),
             if (index != _verses.length - 1) const Divider(height: 0)
           ],
         ),
