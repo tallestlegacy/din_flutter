@@ -86,17 +86,6 @@ class _HisnulState extends State<Hisnul> {
 }
 
 class HisnulSearch extends SearchDelegate {
-  List<String> searchTerms = [
-    "Apple",
-    "Banana",
-    "Mango",
-    "Pear",
-    "Watermelons",
-    "Blueberries",
-    "Pineapples",
-    "Strawberries"
-  ];
-
   List refs = [];
   HisnulSearch(this.refs);
 
@@ -137,14 +126,16 @@ class HisnulSearch extends SearchDelegate {
       itemBuilder: (context, index) {
         var result = matchQuery[index];
         return ListTile(
-          title: Text(result["title"]),
-          onTap: () => Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => HisnulReference(ref: result),
-            ),
-          ),
-        );
+            title: Text(result["title"]),
+            onTap: () {
+              close(context, null);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => HisnulReference(ref: result),
+                ),
+              );
+            });
       },
     );
   }
