@@ -26,11 +26,11 @@ flutter run
 - [ ] Madrasa
 - [ ] Multiple translations
 - [ ] Learning resources
-- [x] Favourites (requires a more efficient way of handling verses for multiple translations)
+- [x] Favourites
 - [ ] Application reviews and Release notes
 - [ ] User manual
 
-- [ ] Text sharing
+- [x] Text sharing
 - [ ] Search quran
 - [ ] Search every other list
 - [ ] Islamic calendar
@@ -39,7 +39,7 @@ flutter run
 ## Customisation
 
 - [x] Arabic / English / Transliteration toggles
-- [ ] Scroll Direction
+- [x] Scroll Direction
 - [x] App colors and theme
 - [ ] Arabic and English fonts
 

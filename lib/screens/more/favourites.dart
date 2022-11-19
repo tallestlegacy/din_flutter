@@ -126,7 +126,7 @@ class _FavouritesState extends State<Favourites> {
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize:
-                                  readerStoreController.fontSize.value * 2,
+                                  readerStoreController.fontSize.value * 1.5,
                             ),
                           ),
                           title: Text(
@@ -136,12 +136,12 @@ class _FavouritesState extends State<Favourites> {
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize:
-                                  readerStoreController.fontSize.value * 2,
+                                  readerStoreController.fontSize.value * 1.5,
                             ),
                           ),
                           trailing: Icon(
                             Icons.my_library_books_rounded,
-                            size: readerStoreController.fontSize.value * 2,
+                            size: readerStoreController.fontSize.value * 1.5,
                           ),
                         ),
                       ),

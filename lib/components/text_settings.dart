@@ -1,3 +1,4 @@
+import 'package:din/components/divider.dart';
 import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +10,8 @@ class TextSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ReaderStoreController readerStoreController =
         Get.put(ReaderStoreController());
-    return Column(
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.all(16),
@@ -91,7 +93,12 @@ class TextSettingsAction extends StatelessWidget {
                 ),
                 color: Theme.of(context).canvasColor,
               ),
-              child: const TextSettings(),
+              child: Column(
+                children: const [
+                  HandleBar(),
+                  TextSettings(),
+                ],
+              ),
             );
           }),
         );

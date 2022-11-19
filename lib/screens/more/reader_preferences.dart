@@ -1,10 +1,14 @@
 import 'package:din/components/back_button.dart';
 import 'package:din/components/text_settings.dart';
 import 'package:din/components/verse.dart';
+import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ReaderPreferences extends StatelessWidget {
-  const ReaderPreferences({super.key});
+  ReaderPreferences({super.key});
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +19,34 @@ class ReaderPreferences extends StatelessWidget {
         backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Column(
-        children: const [
-          Padding(
+        children: [
+          const Padding(
             padding: EdgeInsets.all(16),
             child: VersePreview(),
           ),
-          Divider(),
-          TextSettings(),
+          const Divider(),
+          const TextSettings(),
+          const Divider(),
+          Obx(
+            () => SwitchListTile(
+              value: readerStoreController.reverseScrolling.value,
+              onChanged: (bool? value) =>
+                  readerStoreController.setReverseScrolling(value!),
+              title: ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                minVerticalPadding: 0,
+                minLeadingWidth: 0,
+                title: const Text("Reverse page scroll direction"),
+                leading: Icon(
+                  readerStoreController.reverseScrolling.value
+                      ? Icons.swipe_right_rounded
+                      : Icons.swipe_left_rounded,
+                ),
+              ),
+              inactiveThumbColor: Colors.grey,
+              inactiveTrackColor: Colors.grey.withAlpha(100),
+            ),
+          )
         ],
       ),
     );

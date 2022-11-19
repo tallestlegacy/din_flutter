@@ -81,7 +81,7 @@ class _MoreScreenState extends State<MoreScreen> {
               leading: const Icon(Icons.text_format_rounded),
               title: const Text("Reader preferences"),
               subtitle: const Text("Size, text display format"),
-              onTap: () => push(const ReaderPreferences()),
+              onTap: () => push(ReaderPreferences()),
             ),
             ListTile(
               leading: const Icon(Icons.palette_outlined),

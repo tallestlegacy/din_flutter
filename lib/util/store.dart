@@ -14,6 +14,7 @@ class ReaderStoreController extends GetxController {
   var showTransliteration = true.obs;
   var showArabicText = true.obs;
   var fontSize = 12.0.obs;
+  var reverseScrolling = true.obs;
 
   final box = GetStorage();
 
@@ -43,11 +44,17 @@ class ReaderStoreController extends GetxController {
     box.write("fontSize", value);
   }
 
+  void setReverseScrolling(bool value) {
+    reverseScrolling(value);
+    box.write("reverseScrolling", value);
+  }
+
   ReaderStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
     showArabicText(box.read("showArabicText") ?? true);
     fontSize(box.read("fontSize") ?? 12);
+    reverseScrolling(box.read("reverseScrolling") ?? true);
   }
 }
 

@@ -89,8 +89,7 @@ class _QuranPageState extends State<QuranPage> {
           ];
         },
         body: PageView(
-          key: const PageStorageKey<String>("quran page"),
-          reverse: true,
+          reverse: readerStoreController.reverseScrolling.value,
           controller: pageController,
           onPageChanged: onPageChanged,
           children: <Widget>[
@@ -125,6 +124,7 @@ class _QuranPageState extends State<QuranPage> {
       ),
       drawer: Drawer(
         child: ListView.separated(
+          key: const PageStorageKey<String>("quran drawer"),
           itemCount: _chapters.length,
           itemBuilder: (context, index) => InkWell(
             onTap: () {
