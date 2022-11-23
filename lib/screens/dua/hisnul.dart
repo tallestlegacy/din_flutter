@@ -1,13 +1,14 @@
-import 'package:din/components/back_button.dart';
-import 'package:din/components/padded_text.dart';
-import 'package:din/components/text_settings.dart';
-import 'package:din/util/json.dart';
-import 'package:din/util/store.dart';
-import 'package:din/util/string_locale.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/components/back_button.dart';
+import '/components/padded_text.dart';
+import '/components/text_settings.dart';
+import '/util/json.dart';
+import '/util/store.dart';
+import '/util/string_locale.dart';
+import '/widgets/theme_toggle_button.dart';
 
 class Hisnul extends StatefulWidget {
   final ScrollController scrollController;

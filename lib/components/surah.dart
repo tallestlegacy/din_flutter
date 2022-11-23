@@ -1,7 +1,7 @@
-import 'package:din/components/verse.dart';
 import 'package:flutter/material.dart';
 
-import '../util/json.dart';
+import '/components/verse.dart';
+import '/util/json.dart';
 
 class Surah extends StatefulWidget {
   final chapter;

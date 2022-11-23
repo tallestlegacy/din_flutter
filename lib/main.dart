@@ -1,10 +1,11 @@
-import 'package:din/screens/app.dart';
-import 'package:din/util/store.dart';
-import 'package:din/util/theme.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '/screens/app.dart';
+import '/util/store.dart';
+import '/util/theme.dart';
 
 void main() async {
   await GetStorage.init();

@@ -1,12 +1,12 @@
-import 'package:din/components/text_settings.dart';
-import 'package:din/util/json.dart';
-import 'package:din/util/store.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
-
-import 'package:din/components/surah.dart';
 import 'package:get/get.dart';
-import '../util/string_locale.dart';
+
+import '/components/surah.dart';
+import '/components/text_settings.dart';
+import '/util/json.dart';
+import '/util/store.dart';
+import '/widgets/theme_toggle_button.dart';
+import '/util/string_locale.dart';
 
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;

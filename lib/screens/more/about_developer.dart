@@ -1,7 +1,8 @@
-import 'package:din/components/back_button.dart';
-import 'package:din/util/network.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import '/components/back_button.dart';
+import '/util/network.dart';
 
 class AboutDeveloper extends StatelessWidget {
   const AboutDeveloper({super.key});

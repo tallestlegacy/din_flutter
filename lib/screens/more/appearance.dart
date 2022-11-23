@@ -1,10 +1,11 @@
-import 'package:din/components/back_button.dart';
-import 'package:din/components/verse.dart';
-import 'package:din/util/store.dart';
-import 'package:din/util/theme.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/components/back_button.dart';
+import '/components/verse.dart';
+import '/util/store.dart';
+import '/util/theme.dart';
+import '/widgets/theme_toggle_button.dart';
 
 class Appearance extends StatelessWidget {
   const Appearance({super.key});

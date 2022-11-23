@@ -1,14 +1,15 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
-import 'package:din/components/back_button.dart';
-import 'package:din/components/text_settings.dart';
-import 'package:din/components/verse.dart';
-import 'package:din/util/json.dart';
-import 'package:din/util/store.dart';
-import 'package:din/util/string_locale.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/components/back_button.dart';
+import '/components/text_settings.dart';
+import '/components/verse.dart';
+import '/util/json.dart';
+import '/util/store.dart';
+import '/util/string_locale.dart';
+import '/widgets/theme_toggle_button.dart';
 
 class Favourites extends StatefulWidget {
   const Favourites({super.key});

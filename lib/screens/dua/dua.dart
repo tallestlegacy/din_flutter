@@ -1,4 +1,4 @@
-import 'package:din/screens/dua/hisnul.dart';
+import '/screens/dua/hisnul.dart';
 import 'package:flutter/material.dart';
 
 class Dua extends StatelessWidget {

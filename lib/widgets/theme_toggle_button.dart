@@ -1,5 +1,5 @@
-import 'package:din/util/store.dart';
-import 'package:din/util/theme.dart';
+import '/util/store.dart';
+import '/util/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -1,4 +1,4 @@
-import 'package:din/screens/hadith/bukhari.dart';
+import '/screens/hadith/bukhari.dart';
 import 'package:flutter/material.dart';
 
 class Hadith extends StatefulWidget {

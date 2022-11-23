@@ -1,9 +1,9 @@
-import 'package:din/screens/dua/dua.dart';
-import 'package:din/widgets/scroll_to_hide.dart';
-import 'package:din/screens/debug.dart';
-import 'package:din/screens/hadith/hadith.dart';
-import 'package:din/screens/quran.dart';
-import 'package:din/screens/more/more.dart';
+import '/screens/dua/dua.dart';
+import '/widgets/scroll_to_hide.dart';
+import '/screens/debug.dart';
+import '/screens/hadith/hadith.dart';
+import '/screens/quran.dart';
+import '/screens/more/more.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,8 @@
-import 'package:din/components/divider.dart';
-import 'package:din/util/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/util/store.dart';
+import '/components/divider.dart';
 
 class TextSettings extends StatelessWidget {
   const TextSettings({super.key});
