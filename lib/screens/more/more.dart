@@ -1,3 +1,5 @@
+import 'package:din/screens/more/translations.dart';
+
 import '/screens/more/about_app.dart';
 import '/screens/more/about_developer.dart';
 import '/screens/more/appearance.dart';
@@ -75,6 +77,12 @@ class _MoreScreenState extends State<MoreScreen> {
               subtitle:
                   const Text("99 Names of Allah and the prophet Muhammad (ﷺ.)"),
               onTap: () => push(const Names()),
+            ),
+            ListTile(
+              leading: const Icon(Icons.translate_rounded),
+              title: const Text("Translations"),
+              subtitle: const Text("en, fr, ru, bg ..."),
+              onTap: () => push(const Translations()),
             ),
             const Divider(),
             ListTile(

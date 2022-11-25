@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:din/util/network.dart';
+
 import '/util/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -176,5 +178,25 @@ class DebugController extends GetxController {
 
   DebugController() {
     countObs(box.read("count") ?? 0);
+  }
+}
+
+/// Translations store controller
+/// stores translations and API data
+
+class TranslationsStoreController extends GetxController {
+  var box = GetStorage();
+
+  RxList quranTranslations = [].obs;
+
+  Future<void> updateQuranTranslations() async {
+    var data = await fetchTranslations();
+    quranTranslations(data);
+    box.write("quranTranslations", jsonEncode(quranTranslations.toJson()));
+  }
+
+  TranslationsStoreController() {
+    quranTranslations(jsonDecode(box.read("quranTranslations") ?? "[]"));
+    if (quranTranslations.isEmpty || true) updateQuranTranslations();
   }
 }

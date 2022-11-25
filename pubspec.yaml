@@ -20,6 +20,7 @@ dependencies:
   flutter_markdown: ^0.6.12
   flutter_share: ^2.0.0
   package_info_plus: ^1.4.3+1
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
