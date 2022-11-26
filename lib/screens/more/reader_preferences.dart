@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/components/back_button.dart';
-import '/components/text_settings.dart';
-import '/components/verse.dart';
+import '/widgets/back_button.dart';
+import '/widgets/text_settings.dart';
+import '/widgets/verse.dart';
 import '/util/store.dart';
 
 class ReaderPreferences extends StatelessWidget {

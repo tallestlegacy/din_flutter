@@ -1,11 +1,9 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/components/back_button.dart';
-import '/components/text_settings.dart';
-import '/components/verse.dart';
+import '/widgets/back_button.dart';
+import '/widgets/text_settings.dart';
+import '/widgets/verse.dart';
 import '/util/json.dart';
 import '/util/store.dart';
 import '/util/string_locale.dart';
@@ -82,78 +80,76 @@ class _FavouritesState extends State<Favourites> {
         actions: const [TextSettingsAction(), ThemeToggleButton()],
         backgroundColor: Theme.of(context).backgroundColor,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Obx(() {
-          if (globalStoreController.favouriteVerses.isEmpty) {
-            return const Center(
-              child: Icon(Icons.format_quote_rounded),
-            );
-          }
+      body: Obx(() {
+        if (globalStoreController.favouriteVerses.isEmpty) {
+          return const Center(
+            child: Icon(Icons.format_quote_rounded),
+          );
+        }
 
-          Map<int, List> favChapters =
-              chapterMap(globalStoreController.favouriteVerses);
+        Map<int, List> favChapters =
+            chapterMap(globalStoreController.favouriteVerses);
 
-          var keys = favChapters.keys.toList();
-          return ListView(
-              children: keys.map((key) {
-            var chapter = {};
-            if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
+        var keys = favChapters.keys.toList();
+        return ListView(
+            padding: const EdgeInsets.all(8),
+            children: keys.map((key) {
+              var chapter = {};
+              if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
 
-            var verses = <Widget>[];
+              var verses = <Widget>[];
 
-            if (_quran.length >= favChapters.length) {
-              favChapters[key]?.forEach((verse) {
-                verses.add(const Divider(height: 0));
-                verses.add(Verse(
-                  verse: _quran[verse["chapter"]]?[verse["id"] - 1],
-                  chapter: verse["chapter"],
-                ));
-              });
-            }
+              if (_quran.length >= favChapters.length) {
+                favChapters[key]?.forEach((verse) {
+                  verses.add(const Divider(height: 0));
+                  verses.add(Verse(
+                    verse: _quran[verse["chapter"]]?[verse["id"] - 1],
+                    chapter: verse["chapter"],
+                  ));
+                });
+              }
 
-            return Card(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8),
-                child: Column(
-                  children: [
-                    if (_chapters.isNotEmpty)
-                      Obx(
-                        () => ListTile(
-                          leading: Text(
-                            readerStoreController.showTranslation.value
-                                ? chapter["id"].toString()
-                                : toFarsi(chapter["id"]),
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize:
-                                  readerStoreController.fontSize.value * 1.5,
+              return Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Column(
+                    children: [
+                      if (_chapters.isNotEmpty)
+                        Obx(
+                          () => ListTile(
+                            leading: Text(
+                              readerStoreController.showTranslation.value
+                                  ? chapter["id"].toString()
+                                  : toFarsi(chapter["id"]),
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize:
+                                    readerStoreController.fontSize.value * 1.5,
+                              ),
                             ),
-                          ),
-                          title: Text(
-                            readerStoreController.showTranslation.value
-                                ? "${chapter["translation"]} (${chapter["name"]})"
-                                : chapter['name'],
-                            style: TextStyle(
-                              color: Theme.of(context).primaryColor,
-                              fontSize:
-                                  readerStoreController.fontSize.value * 1.5,
+                            title: Text(
+                              readerStoreController.showTranslation.value
+                                  ? "${chapter["translation"]} (${chapter["name"]})"
+                                  : chapter['name'],
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize:
+                                    readerStoreController.fontSize.value * 1.5,
+                              ),
                             ),
-                          ),
-                          trailing: Icon(
-                            Icons.my_library_books_rounded,
-                            size: readerStoreController.fontSize.value * 1.5,
+                            trailing: Icon(
+                              Icons.my_library_books_rounded,
+                              size: readerStoreController.fontSize.value * 1.5,
+                            ),
                           ),
                         ),
-                      ),
-                    Column(children: verses),
-                  ],
+                      Column(children: verses),
+                    ],
+                  ),
                 ),
-              ),
-            );
-          }).toList());
-        }),
-      ),
+              );
+            }).toList());
+      }),
     );
   }
 }

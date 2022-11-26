@@ -1,16 +1,9 @@
-<<<<<<< Updated upstream:lib/components/verse.dart
-=======
-import 'package:din/widgets/padded_text.dart';
-import 'package:din/util/json.dart';
-import 'package:din/util/store.dart';
-import 'package:din/util/string_locale.dart';
->>>>>>> Stashed changes:lib/widgets/verse.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_share/flutter_share.dart';
 
-import '/components/padded_text.dart';
+import '/widgets/padded_text.dart';
 import '/util/json.dart';
 import '/util/store.dart';
 import '/util/string_locale.dart';

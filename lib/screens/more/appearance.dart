@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/components/back_button.dart';
-import '/components/verse.dart';
+import '/widgets/back_button.dart';
+import '/widgets/verse.dart';
 import '/util/store.dart';
 import '/util/theme.dart';
 import '/widgets/theme_toggle_button.dart';

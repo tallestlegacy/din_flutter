@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/components/back_button.dart';
-import '/components/padded_text.dart';
-import '/components/text_settings.dart';
+import '/widgets/back_button.dart';
+import '/widgets/padded_text.dart';
+import '/widgets/text_settings.dart';
 import '/util/json.dart';
 import '/util/store.dart';
 import '/util/string_locale.dart';

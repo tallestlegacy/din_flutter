@@ -1,10 +1,6 @@
-<<<<<<< Updated upstream:lib/components/surah.dart
-=======
-import 'package:din/widgets/verse.dart';
->>>>>>> Stashed changes:lib/widgets/surah.dart
 import 'package:flutter/material.dart';
 
-import '/components/verse.dart';
+import '/widgets/verse.dart';
 import '/util/json.dart';
 
 class Surah extends StatefulWidget {

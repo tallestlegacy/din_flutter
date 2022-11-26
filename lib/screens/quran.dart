@@ -1,8 +1,9 @@
+import 'package:din/widgets/surah.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
-import '/components/surah.dart';
-import '/components/text_settings.dart';
+import '/widgets/text_settings.dart';
 import '/util/json.dart';
 import '/util/store.dart';
 import '/widgets/theme_toggle_button.dart';

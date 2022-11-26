@@ -1,13 +1,8 @@
-<<<<<<< Updated upstream:lib/components/text_settings.dart
-=======
-import 'package:din/widgets/divider.dart';
-import 'package:din/util/store.dart';
->>>>>>> Stashed changes:lib/widgets/text_settings.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '/util/store.dart';
-import '/components/divider.dart';
+import '/widgets/divider.dart';
 
 class TextSettings extends StatelessWidget {
   const TextSettings({super.key});

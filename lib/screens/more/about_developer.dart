@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '/components/back_button.dart';
+import '/widgets/icons.dart';
+import '/widgets/back_button.dart';
 import '/util/network.dart';
 
 class AboutDeveloper extends StatelessWidget {
@@ -33,7 +34,9 @@ class AboutDeveloper extends StatelessWidget {
               onTap: () {
                 openLink("https://github.com/tallestlegacy");
               },
+              trailing: linkIcon,
             ),
+            const Divider(),
             ListTile(
               leading: const Icon(FontAwesomeIcons.linkedin),
               title: const Text("LinkedIn"),
@@ -41,7 +44,9 @@ class AboutDeveloper extends StatelessWidget {
               onTap: () {
                 openLink("https://linkedin.com/in/marvin-mokua");
               },
+              trailing: linkIcon,
             ),
+            const Divider(),
             ListTile(
               leading: const Icon(Icons.mail),
               title: const Text("Email"),
@@ -49,6 +54,7 @@ class AboutDeveloper extends StatelessWidget {
               onTap: () {
                 openLink("mailto:tallestlegacy@gmail.com");
               },
+              trailing: linkIcon,
             ),
           ],
         ),

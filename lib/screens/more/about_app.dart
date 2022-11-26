@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
-import '/components/back_button.dart';
+import '/widgets/back_button.dart';
 
 class AboutApp extends StatelessWidget {
   const AboutApp({super.key});

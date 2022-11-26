@@ -1,4 +1,7 @@
-import 'package:din/screens/more/translations.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_share/flutter_share.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import '/screens/more/about_app.dart';
 import '/screens/more/about_developer.dart';
@@ -6,12 +9,10 @@ import '/screens/more/appearance.dart';
 import '/screens/more/favourites.dart';
 import '/screens/more/names.dart';
 import '/screens/more/reader_preferences.dart';
+import '/screens/more/translations.dart';
 import '/util/network.dart';
+import '/widgets/icons.dart';
 import '/widgets/theme_toggle_button.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 
 class MoreScreen extends StatefulWidget {
   final ScrollController scrollController;
@@ -67,11 +68,6 @@ class _MoreScreenState extends State<MoreScreen> {
         body: ListView(
           children: [
             ListTile(
-              leading: const Icon(Icons.favorite_rounded),
-              title: const Text("Favourites"),
-              onTap: () => push(const Favourites()),
-            ),
-            ListTile(
               leading: const Icon(Icons.stars_rounded),
               title: const Text("99 Names"),
               subtitle:
@@ -84,7 +80,26 @@ class _MoreScreenState extends State<MoreScreen> {
               subtitle: const Text("en, fr, ru, bg ..."),
               onTap: () => push(const Translations()),
             ),
+            ListTile(
+              leading: const Icon(Icons.favorite_rounded),
+              title: const Text("Favourites"),
+              subtitle: const Text("Favourite verses"),
+              onTap: () => push(const Favourites()),
+            ),
             const Divider(),
+            ListTile(
+              leading: const Icon(Icons.palette_outlined),
+              title: const Text("Appearance"),
+              subtitle: const Text("Theme modes, accent colors"),
+              onTap: () => push(const Appearance()),
+            ),
+            ListTile(
+              enabled: false,
+              leading: const Icon(Icons.translate_rounded),
+              title: const Text("Editions"),
+              subtitle: const Text("Translations of the Quran"),
+              onTap: () {},
+            ),
             ListTile(
               leading: const Icon(Icons.text_format_rounded),
               title: const Text("Reader preferences"),
@@ -92,10 +107,11 @@ class _MoreScreenState extends State<MoreScreen> {
               onTap: () => push(ReaderPreferences()),
             ),
             ListTile(
-              leading: const Icon(Icons.palette_outlined),
-              title: const Text("Appearance"),
-              subtitle: const Text("Theme modes, accent colors"),
-              onTap: () => push(const Appearance()),
+              enabled: false,
+              leading: const Icon(Icons.notifications),
+              title: const Text("Notifications"),
+              subtitle: const Text("Prayer times, fasting, holidays"),
+              onTap: () {},
             ),
             const Divider(),
             ListTile(
@@ -117,6 +133,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 openLink(
                     "https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt");
               },
+              trailing: linkIcon,
             ),
             ListTile(
               leading: const Icon(Icons.question_answer_rounded),
@@ -125,6 +142,7 @@ class _MoreScreenState extends State<MoreScreen> {
               onTap: () => openLink(
                 "mailto:tallestlegacy@gmail.com?subject=Din > Help and Feedback",
               ),
+              trailing: linkIcon,
             ),
             const Divider(),
             ListTile(
@@ -141,6 +159,7 @@ class _MoreScreenState extends State<MoreScreen> {
               leading: const Icon(Icons.code_rounded),
               title: const Text("Sources and Licencing"),
               onTap: () => openLink("https://github.com/tallestlegacy/din_dt"),
+              trailing: linkIcon,
             ),
             const Divider(),
             Padding(
