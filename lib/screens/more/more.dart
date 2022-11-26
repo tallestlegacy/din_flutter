@@ -9,7 +9,7 @@ import '/screens/more/appearance.dart';
 import '/screens/more/favourites.dart';
 import '/screens/more/names.dart';
 import '/screens/more/reader_preferences.dart';
-import '/screens/more/translations.dart';
+import 'translations/translations.dart';
 import '/util/network.dart';
 import '/widgets/icons.dart';
 import '/widgets/theme_toggle_button.dart';
@@ -75,12 +75,6 @@ class _MoreScreenState extends State<MoreScreen> {
               onTap: () => push(const Names()),
             ),
             ListTile(
-              leading: const Icon(Icons.translate_rounded),
-              title: const Text("Translations"),
-              subtitle: const Text("en, fr, ru, bg ..."),
-              onTap: () => push(const Translations()),
-            ),
-            ListTile(
               leading: const Icon(Icons.favorite_rounded),
               title: const Text("Favourites"),
               subtitle: const Text("Favourite verses"),
@@ -94,11 +88,10 @@ class _MoreScreenState extends State<MoreScreen> {
               onTap: () => push(const Appearance()),
             ),
             ListTile(
-              enabled: false,
               leading: const Icon(Icons.translate_rounded),
-              title: const Text("Editions"),
-              subtitle: const Text("Translations of the Quran"),
-              onTap: () {},
+              title: const Text("Translations"),
+              subtitle: const Text("en, fr, ru, bg ..."),
+              onTap: () => push(Translations()),
             ),
             ListTile(
               leading: const Icon(Icons.text_format_rounded),

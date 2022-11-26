@@ -197,6 +197,6 @@ class TranslationsStoreController extends GetxController {
 
   TranslationsStoreController() {
     quranTranslations(jsonDecode(box.read("quranTranslations") ?? "[]"));
-    if (quranTranslations.isEmpty || true) updateQuranTranslations();
+    if (quranTranslations.isEmpty) updateQuranTranslations();
   }
 }

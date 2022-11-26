@@ -14,6 +14,8 @@ class _DebugState extends State<Debug> {
 
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
+  final TranslationsStoreController translationsStoreController =
+      Get.put(TranslationsStoreController());
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class _DebugState extends State<Debug> {
     return Scaffold(
       body: Center(
         child: Text(
-          globalStoreController.favouriteVerses.value.toString(),
+          translationsStoreController.quranTranslations.toString(),
         ),
       ),
     );
