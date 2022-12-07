@@ -11,9 +11,7 @@ import '/util/string_locale.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class Hisnul extends StatefulWidget {
-  final ScrollController scrollController;
-
-  const Hisnul({Key? key, required this.scrollController}) : super(key: key);
+  const Hisnul({Key? key}) : super(key: key);
 
   @override
   State<Hisnul> createState() => _HisnulState();
@@ -57,7 +55,6 @@ class _HisnulState extends State<Hisnul> {
         ],
       ),
       body: ListView.builder(
-        controller: widget.scrollController,
         padding: const EdgeInsets.all(8),
         itemBuilder: (context, index) {
           return Card(

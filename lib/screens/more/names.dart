@@ -95,7 +95,10 @@ class _NamesState extends State<Names> {
                                         readerStoreController.fontSize.value;
                                     return ListTile(
                                       leading: Text(
-                                        toFarsi(index + 1),
+                                        readerStoreController
+                                                .showTranslation.value
+                                            ? (index + 1).toString()
+                                            : toFarsi(index + 1),
                                         style: TextStyle(fontSize: fontSize),
                                       ),
                                       title: Text(

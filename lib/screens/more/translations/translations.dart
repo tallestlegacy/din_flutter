@@ -1,4 +1,5 @@
 import 'package:din/screens/more/translations/translation.dart';
+import 'package:din/util/network.dart';
 import 'package:din/util/store.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -39,12 +40,31 @@ class Translations extends StatelessWidget {
       Language(emoji: "🇸🇪", abbrev: "sv", language: "svenska"),
     ];
 
+    final TranslationsStoreController translationsStoreController =
+        Get.put(TranslationsStoreController());
+
     return Scaffold(
-      appBar: AppBar(title: const Text("Translations")),
+      appBar: AppBar(
+        title: const Text("Translations"),
+        actions: const [
+          IconButton(
+            onPressed: fetchTranslations,
+            icon: Icon(Icons.refresh_rounded),
+          )
+        ],
+      ),
       body: ListView(
         children: [
-          const ListTile(
-            title: Text("Installed"),
+          ListTile(
+            title: const Text("Installed"),
+            subtitle: Obx(
+              () => Column(
+                children: translationsStoreController.downloadedQuranEditions
+                    .map((e) => Translation(
+                        language: e["language"], edition: e["edition"]))
+                    .toList(),
+              ),
+            ),
           ),
           const Divider(),
           ListTile(
@@ -100,7 +120,11 @@ class LanguageScreen extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          for (String edition in editions) Translation(edition: edition)
+          for (String edition in editions)
+            Translation(
+              edition: edition,
+              language: language.abbrev,
+            )
         ],
       ),
     );

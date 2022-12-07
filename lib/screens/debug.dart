@@ -10,8 +10,6 @@ class Debug extends StatefulWidget {
 }
 
 class _DebugState extends State<Debug> {
-  double _value = 20;
-
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
   final TranslationsStoreController translationsStoreController =
@@ -22,9 +20,7 @@ class _DebugState extends State<Debug> {
     final List<String> _tabs = <String>['Tab 1', 'Tab 2'];
     return Scaffold(
       body: Center(
-        child: Text(
-          translationsStoreController.quranTranslations.toString(),
-        ),
+        child: Text(translationsStoreController.defaultTranslation.toString()),
       ),
     );
   }

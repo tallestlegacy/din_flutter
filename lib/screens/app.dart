@@ -41,9 +41,9 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
-      Dua(scrollController: scrollController),
-      Hadith(scrollController: scrollController),
-      MoreScreen(scrollController: scrollController),
+      const Dua(),
+      const Hadith(),
+      const MoreScreen(),
       const Debug()
     ];
     return SafeArea(
@@ -55,33 +55,28 @@ class _AppState extends State<App> {
           controller: scrollController,
           child: SizedBox(
             height: 64,
-            child: BottomNavigationBar(
-              currentIndex: _selectedIndex,
-              onTap: handleNavigationTap,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
+            child: NavigationBar(
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: handleNavigationTap,
+              destinations: const <NavigationDestination>[
+                NavigationDestination(
                   icon: const Icon(Icons.menu_book_rounded),
                   label: 'Quran',
                 ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                NavigationDestination(
                   icon: const Icon(Icons.try_sms_star_rounded),
                   label: 'Dua',
                 ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                NavigationDestination(
                   icon: const Icon(Icons.book),
                   label: 'Hadith',
                 ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
+                NavigationDestination(
                   icon: const Icon(Icons.menu_open_rounded),
                   label: 'More',
                 ),
                 if (kDebugMode)
-                  BottomNavigationBarItem(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                  NavigationDestination(
                     icon: const Icon(Icons.bug_report_rounded),
                     label: 'Debug',
                   ),

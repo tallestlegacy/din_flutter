@@ -29,7 +29,7 @@ class Styles {
       background: isDarkMode ? Colors.grey.shade900 : primarySwatch.shade50,
       onBackground: Colors.indigoAccent,
       surface: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade200,
-      onSurface: isDarkMode ? Colors.white : primarySwatch.shade900,
+      onSurface: isDarkMode ? primarySwatch.shade50 : primarySwatch.shade900,
     );
 
     return ThemeData(
@@ -61,6 +61,13 @@ class Styles {
         showSelectedLabels: true,
         showUnselectedLabels: false,
         enableFeedback: true,
+      ),
+      navigationBarTheme: NavigationBarThemeData(
+        backgroundColor: colorScheme.secondary,
+        labelTextStyle:
+            MaterialStatePropertyAll(TextStyle(color: colorScheme.onSurface)),
+        elevation: 0,
+        indicatorColor: colorScheme.onSecondary.withAlpha(50),
       ),
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onSecondary,

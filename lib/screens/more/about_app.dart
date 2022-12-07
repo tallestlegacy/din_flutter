@@ -8,10 +8,24 @@ class AboutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String data = """
-Din is a free and open source educational app for curious minds, new converts
-and regular users that need a quick reference to common literary sources.  
-It contains a complete quran, a few dua, hadith and other sunnah.
+    const String data = """ 
+### Vision
+I wanted to create an application than includes everyone, a platform that doesn't 
+discriminate user preferences, whether it's font size or text colour. To create
+an inclusive environment where everyone can be comfortable reading their Quran and 
+Hadith or Dua how they felt was best for them.  
+
+Din is an open source, ad-free mobile app for the anyone interested in Islamic
+literature and canon, for the average muslim and for any curious cats who need a
+reference or want to learn the Islamic way.
+
+Feel free to choose your prefered translation, or whether to show translations 
+altogether. **Change the default theme**, choose wether you want to swipe left to
+right or right to left.
+
+### Privacy Policy
+Din does not need or collect any user data. All your preferences and network
+information is left on your device.
 """;
 
     return Scaffold(

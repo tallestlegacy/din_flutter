@@ -10,8 +10,7 @@ import '/util/string_locale.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class Bukhari extends StatefulWidget {
-  final ScrollController scrollController;
-  const Bukhari({Key? key, required this.scrollController}) : super(key: key);
+  const Bukhari({Key? key}) : super(key: key);
 
   @override
   State<Bukhari> createState() => _BukhariState();
@@ -44,6 +43,7 @@ class _BukhariState extends State<Bukhari> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sahih Bukhari"),
+        // ignore: prefer_const_literals_to_create_immutables
         actions: [
           /*
           IconButton(
@@ -56,7 +56,6 @@ class _BukhariState extends State<Bukhari> {
         ],
       ),
       body: ListView.builder(
-        controller: widget.scrollController,
         padding: const EdgeInsets.all(8),
         itemCount: _volumes.length,
         itemBuilder: (context, index) => Column(

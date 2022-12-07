@@ -187,7 +187,10 @@ class DebugController extends GetxController {
 class TranslationsStoreController extends GetxController {
   var box = GetStorage();
 
+  var defaultTranslation =
+      {"language": "en", "edition": "quran-in-english"}.obs;
   RxList quranTranslations = [].obs;
+  RxList downloadedQuranEditions = [].obs;
 
   Future<void> updateQuranTranslations() async {
     var data = await fetchTranslations();
@@ -195,8 +198,38 @@ class TranslationsStoreController extends GetxController {
     box.write("quranTranslations", jsonEncode(quranTranslations.toJson()));
   }
 
+  bool editionIsDownloaded(String language, String edition) {
+    return downloadedQuranEditions.firstWhereOrNull(
+            (e) => e["language"] == language && e["edition"] == edition) !=
+        null;
+  }
+
+  Future<void> saveEdition(String language, String edition, var data) async {
+    for (var i = 0; i < data.length; i++) {
+      box.write("quran_$language-$edition-${i + 1}", jsonEncode(data[i]));
+    }
+
+    downloadedQuranEditions.removeWhere(
+        (e) => e["language"] == language && e["edition"] == edition);
+    downloadedQuranEditions.add({"language": language, "edition": edition});
+
+    box.write("downloadedQuranEditions", jsonEncode(downloadedQuranEditions));
+  }
+
+  dynamic getEditionChapter(String language, String edition, int chapter) {
+    return jsonDecode(box.read("quran_$language-$edition-$chapter"));
+  }
+
+  void setTranslation(var translation) {
+    defaultTranslation(translation);
+    box.write("defaultTranslation", jsonEncode(defaultTranslation));
+  }
+
   TranslationsStoreController() {
     quranTranslations(jsonDecode(box.read("quranTranslations") ?? "[]"));
+    downloadedQuranEditions(
+        jsonDecode(box.read("downloadedQuranEditions") ?? "[]"));
+
     if (quranTranslations.isEmpty) updateQuranTranslations();
   }
 }

@@ -26,7 +26,7 @@ Future<List<String>> fetchEditions(String language) async {
     print(e.toString());
   }
 
-  return ["NULL"];
+  return [];
 }
 
 Future<dynamic> fetchTranslations() async {
@@ -48,11 +48,28 @@ Future<dynamic> fetchTranslations() async {
     }
 
     translations.sort((a, b) => a["language"].compareTo(b["language"]));
-
     print(translations.toString());
     return (translations);
   } catch (e) {
     //print(e.toString());
+  }
+
+  return [];
+}
+
+Future<List> fetchEdition(String language, String edition) async {
+  try {
+    String url = "$editionsUrl/$language/$edition/chapters.json";
+
+    print("downloading $url");
+
+    var data = (await http.get(Uri.parse(url))).body;
+    print(data.toString());
+    print("DOWNLOADED >>>>>> $url");
+
+    return (jsonDecode(data));
+  } catch (e) {
+    print(e.toString());
   }
 
   return [];
