@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import "package:http/http.dart" as http;
 
@@ -20,10 +21,14 @@ Future<List<String>> fetchEditions(String language) async {
 
     var data = (await http.get(Uri.parse(url))).body;
 
-    print(data.toString());
+    if (kDebugMode) {
+      print(data.toString());
+    }
     return (jsonDecode(data).keys.toList());
   } catch (e) {
-    print(e.toString());
+    if (kDebugMode) {
+      print(e.toString());
+    }
   }
 
   return [];
@@ -48,7 +53,9 @@ Future<dynamic> fetchTranslations() async {
     }
 
     translations.sort((a, b) => a["language"].compareTo(b["language"]));
-    print(translations.toString());
+    if (kDebugMode) {
+      print(translations.toString());
+    }
     return (translations);
   } catch (e) {
     //print(e.toString());
@@ -61,15 +68,23 @@ Future<List> fetchEdition(String language, String edition) async {
   try {
     String url = "$editionsUrl/$language/$edition/chapters.json";
 
-    print("downloading $url");
+    if (kDebugMode) {
+      print("downloading $url");
+    }
 
     var data = (await http.get(Uri.parse(url))).body;
-    print(data.toString());
-    print("DOWNLOADED >>>>>> $url");
+    if (kDebugMode) {
+      print(data.toString());
+    }
+    if (kDebugMode) {
+      print("DOWNLOADED >>>>>> $url");
+    }
 
     return (jsonDecode(data));
   } catch (e) {
-    print(e.toString());
+    if (kDebugMode) {
+      print(e.toString());
+    }
   }
 
   return [];

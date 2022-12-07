@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Translations extends StatelessWidget {
-  Translations({super.key});
+  const Translations({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,7 @@ class Language {
 }
 
 class LanguageScreen extends StatelessWidget {
-  Language language;
+  final Language language;
 
   LanguageScreen({super.key, required this.language});
 

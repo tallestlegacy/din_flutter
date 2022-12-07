@@ -4,6 +4,7 @@ import '/widgets/verse.dart';
 import '/util/json.dart';
 
 class Surah extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final chapter;
 
   const Surah({Key? key, this.chapter}) : super(key: key);

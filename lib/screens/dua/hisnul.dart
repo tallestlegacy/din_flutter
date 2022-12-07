@@ -165,6 +165,7 @@ class HisnulSearch extends SearchDelegate {
 }
 
 class HisnulReference extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final ref;
   const HisnulReference({Key? key, required this.ref}) : super(key: key);
 

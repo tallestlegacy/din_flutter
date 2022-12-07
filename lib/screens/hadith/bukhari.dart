@@ -131,6 +131,7 @@ class BukhariSearch extends SearchDelegate {
 }
 
 class BukhariHadiths extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final book;
   const BukhariHadiths({Key? key, required this.book}) : super(key: key);
 

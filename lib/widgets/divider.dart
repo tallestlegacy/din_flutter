@@ -11,7 +11,7 @@ class HandleBar extends StatelessWidget {
       height: 4,
       decoration: BoxDecoration(
           color: Colors.grey.withAlpha(100),
-          borderRadius: BorderRadius.all(Radius.circular(8))),
+          borderRadius: const BorderRadius.all(Radius.circular(8))),
     );
   }
 }

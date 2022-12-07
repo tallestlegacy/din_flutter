@@ -11,6 +11,6 @@ class Hadith extends StatefulWidget {
 class _HadithState extends State<Hadith> {
   @override
   Widget build(BuildContext context) {
-    return Bukhari();
+    return const Bukhari();
   }
 }

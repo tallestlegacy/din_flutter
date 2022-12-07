@@ -101,7 +101,7 @@ class _MoreScreenState extends State<MoreScreen> {
                     leading: const Icon(Icons.translate_rounded),
                     title: const Text("Translations"),
                     subtitle: const Text("en, fr, ru, bg ..."),
-                    onTap: () => push(Translations()),
+                    onTap: () => push(const Translations()),
                   ),
                 ListTile(
                   leading: const Icon(Icons.text_format_rounded),

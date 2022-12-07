@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class Translation extends StatefulWidget {
-  String language;
-  String edition;
-  Translation({super.key, required this.language, required this.edition});
+  final String language;
+  final String edition;
+  const Translation({super.key, required this.language, required this.edition});
 
   @override
   State<Translation> createState() => _TranslationState();

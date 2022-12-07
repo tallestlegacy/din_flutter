@@ -1,5 +1,3 @@
-import 'dart:math';
-
 String toFarsi(int i) {
   const farsi = "۰۱٢٣٤٥٦٧٨٩";
   String numStr = i.toString();

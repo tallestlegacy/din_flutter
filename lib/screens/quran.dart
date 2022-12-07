@@ -153,11 +153,23 @@ class _QuranPageState extends State<QuranPage> {
                     "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
                     style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
-                  trailing: Text(
-                    readerStoreController.showTranslation.value
-                        ? _chapters[index]['total_verses'].toString()
-                        : toFarsi(_chapters[index]['total_verses']),
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                  trailing: Wrap(
+                    spacing: 4,
+                    children: [
+                      Text(
+                        readerStoreController.showTranslation.value
+                            ? _chapters[index]['total_verses'].toString()
+                            : toFarsi(_chapters[index]['total_verses']),
+                        style: TextStyle(
+                          color: Theme.of(context)
+                              .primaryTextTheme
+                              .bodyText2!
+                              .color,
+                          fontSize: 10,
+                        ),
+                      ),
+                      const Icon(Icons.my_library_books_rounded, size: 14)
+                    ],
                   ),
                 ),
               ),

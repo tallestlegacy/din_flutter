@@ -9,6 +9,7 @@ import '/util/store.dart';
 import '/util/string_locale.dart';
 
 class Verse extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final verse;
   final int chapter;
 
