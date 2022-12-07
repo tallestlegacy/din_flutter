@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_share/flutter_share.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:share_plus/share_plus.dart';
 
 import '/screens/more/about_app.dart';
 import '/screens/more/about_developer.dart';
@@ -129,11 +129,8 @@ class _MoreScreenState extends State<MoreScreen> {
                   leading: const Icon(Icons.share_rounded),
                   title: const Text("Share"),
                   onTap: () async {
-                    await FlutterShare.share(
-                      title: 'Share the app',
-                      linkUrl:
-                          'https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt',
-                      chooserTitle: 'Share the app',
+                    await Share.share(
+                      'Din - Quran and Sunnah (PlayStore) \n https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt',
                     );
                   },
                 ),

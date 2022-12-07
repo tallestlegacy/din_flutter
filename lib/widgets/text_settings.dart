@@ -61,14 +61,27 @@ class TextSettings extends StatelessWidget {
             style: const TextStyle(fontSize: 12, color: Colors.grey),
           ),
         ),
-        Obx(() => Slider(
-              value: readerStoreController.fontSize.value,
-              onChanged: readerStoreController.setFontSize,
-              min: 8,
-              max: 24,
-              divisions: 8,
-              label: readerStoreController.fontSize.value.toInt().toString(),
-            ))
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Flex(
+            direction: Axis.horizontal,
+            children: [
+              const Icon(Icons.text_decrease_rounded),
+              Expanded(
+                  child: Obx(() => Slider(
+                        value: readerStoreController.fontSize.value,
+                        onChanged: readerStoreController.setFontSize,
+                        min: 8,
+                        max: 24,
+                        divisions: 8,
+                        label: readerStoreController.fontSize.value
+                            .toInt()
+                            .toString(),
+                      ))),
+              const Icon(Icons.text_increase_rounded),
+            ],
+          ),
+        )
       ],
     );
   }

@@ -6,11 +6,11 @@ class HandleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8),
-      width: 60,
+      margin: const EdgeInsets.only(top: 8, bottom: 16),
+      width: 40,
       height: 4,
-      decoration: const BoxDecoration(
-          color: Colors.grey,
+      decoration: BoxDecoration(
+          color: Colors.grey.withAlpha(100),
           borderRadius: BorderRadius.all(Radius.circular(8))),
     );
   }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_share/flutter_share.dart';
+import "package:share_plus/share_plus.dart";
 
 import '/widgets/padded_text.dart';
 import '/util/json.dart';
@@ -66,10 +66,7 @@ class Verse extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () async {
-                        await FlutterShare.share(
-                          title: "Quran $currentChapter:${verse['id']}\n\n",
-                          text: shareText,
-                        ).then((value) {
+                        await Share.share(shareText).then((value) {
                           Navigator.pop(context);
                         });
                       },

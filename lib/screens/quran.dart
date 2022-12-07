@@ -1,5 +1,6 @@
 import 'package:din/widgets/surah.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -86,6 +87,10 @@ class _QuranPageState extends State<QuranPage> {
               floating: true,
               actions: const [TextSettingsAction(), ThemeToggleButton()],
               backgroundColor: Theme.of(context).backgroundColor,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                statusBarColor: Theme.of(context).colorScheme.surface,
+                systemStatusBarContrastEnforced: false,
+              ),
             ),
           ];
         },

@@ -1,10 +1,11 @@
+import 'package:flutter/services.dart';
+
 import '/screens/dua/dua.dart';
 import '/widgets/scroll_to_hide.dart';
 import '/screens/debug.dart';
 import '/screens/hadith/hadith.dart';
 import '/screens/quran.dart';
 import '/screens/more/more.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -46,44 +47,74 @@ class _AppState extends State<App> {
       const MoreScreen(),
       const Debug()
     ];
+
+    List icons = const [
+      {
+        "icon": Icon(Icons.menu_book_rounded),
+        "label": 'Quran',
+      },
+      {
+        "icon": Icon(Icons.try_sms_star_rounded),
+        "label": 'Dua',
+      },
+      {
+        "icon": Icon(Icons.book_rounded),
+        "label": 'Hadith',
+      },
+      {
+        "icon": Icon(Icons.menu_open_rounded),
+        "label": 'More',
+      },
+      {
+        "icon": Icon(Icons.bug_report_rounded),
+        "label": 'Debug',
+      }
+    ];
+
     return SafeArea(
       bottom: true,
       top: false,
       child: Scaffold(
-        body: screens[_selectedIndex],
-        bottomNavigationBar: ScrollToHide(
-          controller: scrollController,
-          child: SizedBox(
-            height: 64,
-            child: NavigationBar(
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: handleNavigationTap,
-              destinations: const <NavigationDestination>[
-                NavigationDestination(
-                  icon: const Icon(Icons.menu_book_rounded),
-                  label: 'Quran',
+        body: Row(
+          children: [
+            Expanded(
+                child: IndexedStack(
+              index: _selectedIndex,
+              children: screens,
+            )),
+            if (MediaQuery.of(context).size.width >= 600)
+              SafeArea(
+                child: NavigationRail(
+                  destinations: [
+                    for (var e in icons)
+                      NavigationRailDestination(
+                          icon: e["icon"], label: Text(e["label"]))
+                  ],
+                  selectedIndex: _selectedIndex,
+                  onDestinationSelected: handleNavigationTap,
                 ),
-                NavigationDestination(
-                  icon: const Icon(Icons.try_sms_star_rounded),
-                  label: 'Dua',
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.book),
-                  label: 'Hadith',
-                ),
-                NavigationDestination(
-                  icon: const Icon(Icons.menu_open_rounded),
-                  label: 'More',
-                ),
-                if (kDebugMode)
-                  NavigationDestination(
-                    icon: const Icon(Icons.bug_report_rounded),
-                    label: 'Debug',
-                  ),
-              ],
-            ),
-          ),
+              ),
+          ],
         ),
+        bottomNavigationBar: (MediaQuery.of(context).size.width < 600)
+            ? ScrollToHide(
+                controller: scrollController,
+                child: SizedBox(
+                  height: 64,
+                  child: NavigationBar(
+                    selectedIndex: _selectedIndex,
+                    onDestinationSelected: handleNavigationTap,
+                    destinations: <NavigationDestination>[
+                      for (var e in icons)
+                        NavigationDestination(
+                          icon: e["icon"],
+                          label: e["label"],
+                        ),
+                    ],
+                  ),
+                ),
+              )
+            : null,
       ),
     );
   }

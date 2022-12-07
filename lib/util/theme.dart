@@ -23,7 +23,7 @@ class Styles {
       secondary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade200,
       onSecondary: isDarkMode ? Colors.grey.shade300 : primarySwatch.shade900,
       tertiary: primarySwatch.shade400,
-      onTertiary: primarySwatch.shade600,
+      onTertiary: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade200,
       error: Colors.amber,
       onError: Colors.red,
       background: isDarkMode ? Colors.grey.shade900 : primarySwatch.shade50,
@@ -67,6 +67,11 @@ class Styles {
         labelTextStyle:
             MaterialStatePropertyAll(TextStyle(color: colorScheme.onSurface)),
         elevation: 0,
+        indicatorColor: colorScheme.onSecondary.withAlpha(50),
+      ),
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
+        elevation: 2,
         indicatorColor: colorScheme.onSecondary.withAlpha(50),
       ),
       tabBarTheme: TabBarTheme(
