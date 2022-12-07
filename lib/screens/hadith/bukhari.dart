@@ -82,7 +82,7 @@ class _BukhariState extends State<Bukhari> {
                       readerStoreController.showTranslation.value
                           ? "${book['length']}"
                           : toFarsi(book['length']),
-                      style: const TextStyle(color: Colors.grey),
+                      style: const TextStyle(color: Colors.grey, fontSize: 10),
                     ),
                     onTap: () {
                       Navigator.push(

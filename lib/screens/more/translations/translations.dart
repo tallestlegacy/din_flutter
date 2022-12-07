@@ -1,6 +1,8 @@
 import 'package:din/screens/more/translations/translation.dart';
 import 'package:din/util/network.dart';
 import 'package:din/util/store.dart';
+import 'package:din/widgets/back_button.dart';
+import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -46,48 +48,47 @@ class Translations extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Translations"),
-        actions: const [
-          IconButton(
-            onPressed: fetchTranslations,
-            icon: Icon(Icons.refresh_rounded),
-          )
-        ],
+        leading: const CustomBackButton(),
+        actions: const [ThemeToggleButton()],
       ),
-      body: ListView(
-        children: [
-          ListTile(
-            title: const Text("Installed"),
-            subtitle: Obx(
-              () => Column(
-                children: translationsStoreController.downloadedQuranEditions
-                    .map((e) => Translation(
-                        language: e["language"], edition: e["edition"]))
-                    .toList(),
+      body: RefreshIndicator(
+        onRefresh: fetchTranslations,
+        child: ListView(
+          children: [
+            ListTile(
+              title: const Text("Installed"),
+              subtitle: Obx(
+                () => Column(
+                  children: translationsStoreController.downloadedQuranEditions
+                      .map((e) => Translation(
+                          language: e["language"], edition: e["edition"]))
+                      .toList(),
+                ),
               ),
             ),
-          ),
-          const Divider(),
-          ListTile(
-            title: const Text("Languages"),
-            subtitle: Column(children: [
-              for (var language in languages)
-                ListTile(
-                  leading: Text(language.emoji),
-                  title: Text(language.language),
-                  subtitle: Text(language.abbrev),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      CupertinoPageRoute(
-                        builder: (context) =>
-                            LanguageScreen(language: language),
-                      ),
-                    );
-                  },
-                )
-            ]),
-          )
-        ],
+            const Divider(),
+            ListTile(
+              title: const Text("Languages"),
+              subtitle: Column(children: [
+                for (var language in languages)
+                  ListTile(
+                    leading: Text(language.emoji),
+                    title: Text(language.language),
+                    subtitle: Text(language.abbrev),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) =>
+                              LanguageScreen(language: language),
+                        ),
+                      );
+                    },
+                  )
+              ]),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -116,6 +117,7 @@ class LanguageScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        leading: const CustomBackButton(),
         title: Text(language.language),
       ),
       body: ListView(

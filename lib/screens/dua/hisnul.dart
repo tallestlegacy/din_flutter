@@ -64,7 +64,7 @@ class _HisnulState extends State<Hisnul> {
                   readerStoreController.showTranslation.value
                       ? _refs[index]['hadiths'].length.toString()
                       : toFarsi(_refs[index]['hadiths'].length),
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey, fontSize: 10),
                 ),
                 title: Text("${_refs[index]['title']}"),
                 onTap: () => Navigator.push(

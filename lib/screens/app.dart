@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import '/screens/dua/dua.dart';
@@ -65,10 +66,11 @@ class _AppState extends State<App> {
         "icon": Icon(Icons.menu_open_rounded),
         "label": 'More',
       },
-      {
-        "icon": Icon(Icons.bug_report_rounded),
-        "label": 'Debug',
-      }
+      if (kDebugMode)
+        {
+          "icon": Icon(Icons.bug_report_rounded),
+          "label": 'Debug',
+        }
     ];
 
     return SafeArea(
@@ -100,8 +102,9 @@ class _AppState extends State<App> {
             ? ScrollToHide(
                 controller: scrollController,
                 child: SizedBox(
-                  height: 64,
+                  height: 72,
                   child: NavigationBar(
+                    backgroundColor: Theme.of(context).backgroundColor,
                     selectedIndex: _selectedIndex,
                     onDestinationSelected: handleNavigationTap,
                     destinations: <NavigationDestination>[

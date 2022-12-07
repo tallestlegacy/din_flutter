@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Styles {
   MaterialColor swatch;
@@ -23,7 +24,7 @@ class Styles {
       secondary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade200,
       onSecondary: isDarkMode ? Colors.grey.shade300 : primarySwatch.shade900,
       tertiary: primarySwatch.shade400,
-      onTertiary: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade200,
+      onTertiary: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade800,
       error: Colors.amber,
       onError: Colors.red,
       background: isDarkMode ? Colors.grey.shade900 : primarySwatch.shade50,
@@ -66,8 +67,9 @@ class Styles {
         backgroundColor: colorScheme.secondary,
         labelTextStyle:
             MaterialStatePropertyAll(TextStyle(color: colorScheme.onSurface)),
-        elevation: 0,
+        elevation: 1,
         indicatorColor: colorScheme.onSecondary.withAlpha(50),
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
       ),
       navigationRailTheme: NavigationRailThemeData(
         backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
@@ -96,9 +98,9 @@ class Styles {
       scaffoldBackgroundColor: backgroundColor,
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
-              side: MaterialStatePropertyAll(BorderSide(
-        color: primarySwatch,
-      )))),
+              side: MaterialStatePropertyAll(
+        BorderSide(color: primarySwatch),
+      ))),
       textTheme: TextTheme(
         headline6: TextStyle(
           fontSize: 16,
