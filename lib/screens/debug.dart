@@ -20,7 +20,8 @@ class _DebugState extends State<Debug> {
     final List<String> _tabs = <String>['Tab 1', 'Tab 2'];
     return Scaffold(
       body: Center(
-        child: Text(translationsStoreController.defaultTranslation.toString()),
+        child: Obx(() =>
+            Text(translationsStoreController.defaultTranslation.toString())),
       ),
     );
   }

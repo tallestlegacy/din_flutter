@@ -95,3 +95,33 @@ class _TranslationState extends State<Translation> {
     );
   }
 }
+
+class TranslationRadio extends StatelessWidget {
+  final translation;
+  TranslationRadio({super.key, required this.translation});
+
+  final TranslationsStoreController translationsStoreController =
+      Get.put(TranslationsStoreController());
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(
+      () => RadioListTile(
+        value: translation,
+        groupValue: translationsStoreController.defaultTranslation,
+        selected: translationsStoreController.defaultTranslation["edition"] ==
+                translation["edition"] &&
+            translationsStoreController.defaultTranslation["language"] ==
+                translation["language"],
+        onChanged: (value) {
+          translationsStoreController.setTranslation({
+            "edition": translation["edition"].toString(),
+            "language": translation["language"].toString(),
+          });
+        },
+        title: Text(translation["edition"]),
+        subtitle: Text(translation["language"]),
+      ),
+    );
+  }
+}

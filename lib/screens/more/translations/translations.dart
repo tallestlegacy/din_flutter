@@ -60,9 +60,11 @@ class Translations extends StatelessWidget {
               subtitle: Obx(
                 () => Column(
                   children: translationsStoreController.downloadedQuranEditions
-                      .map((e) => Translation(
-                          language: e["language"], edition: e["edition"]))
-                      .toList(),
+                      .map((e) {
+                    return TranslationRadio(
+                      translation: e,
+                    );
+                  }).toList(),
                 ),
               ),
             ),

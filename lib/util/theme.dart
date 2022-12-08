@@ -33,95 +33,104 @@ class Styles {
     );
 
     return ThemeData(
-      useMaterial3: true,
-      colorScheme: colorScheme,
-      primaryColor: accentColor,
-      primarySwatch: primarySwatch,
-      primaryTextTheme: TextTheme(
-        bodyText1: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
-        bodyText2: TextStyle(
-          color: isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100),
+        useMaterial3: true,
+        colorScheme: colorScheme,
+        primaryColor: accentColor,
+        primarySwatch: primarySwatch,
+        primaryTextTheme: TextTheme(
+          bodyText1:
+              TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
+          bodyText2: TextStyle(
+            color:
+                isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100),
+          ),
         ),
-      ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: backgroundColor,
-        titleTextStyle: TextStyle(
-          color: colorScheme.onSecondary,
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+        appBarTheme: AppBarTheme(
+          backgroundColor: backgroundColor,
+          titleTextStyle: TextStyle(
+            color: colorScheme.onSecondary,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+          iconTheme: IconThemeData(color: colorScheme.onSecondary),
+          scrolledUnderElevation: 1,
+          shadowColor: primarySwatch.shade100,
         ),
-        iconTheme: IconThemeData(color: colorScheme.onSecondary),
-        scrolledUnderElevation: 1,
-        shadowColor: primarySwatch.shade100,
-      ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        backgroundColor: colorScheme.secondary,
-        selectedItemColor: colorScheme.onSecondary,
-        unselectedItemColor: colorScheme.onSecondary,
-        showSelectedLabels: true,
-        showUnselectedLabels: false,
-        enableFeedback: true,
-      ),
-      navigationBarTheme: NavigationBarThemeData(
-        backgroundColor: colorScheme.secondary,
-        labelTextStyle:
-            MaterialStatePropertyAll(TextStyle(color: colorScheme.onSurface)),
-        elevation: 1,
-        indicatorColor: colorScheme.onSecondary.withAlpha(50),
-        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-      ),
-      navigationRailTheme: NavigationRailThemeData(
-        backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
-        elevation: 2,
-        indicatorColor: colorScheme.onSecondary.withAlpha(50),
-      ),
-      tabBarTheme: TabBarTheme(
-        labelColor: colorScheme.onSecondary,
-        labelStyle: const TextStyle(fontWeight: FontWeight.bold),
-        indicatorSize: TabBarIndicatorSize.label,
-      ),
-      cardTheme: CardTheme(
-          color: cardColor,
-          elevation: 0.5,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-      iconTheme: IconThemeData(
-        color: accentColor,
-      ),
-      listTileTheme: ListTileThemeData(
-        dense: true,
-        minLeadingWidth: 4,
-        minVerticalPadding: 16,
-        iconColor: accentColor,
-      ),
-      scaffoldBackgroundColor: backgroundColor,
-      outlinedButtonTheme: OutlinedButtonThemeData(
-          style: ButtonStyle(
-              side: MaterialStatePropertyAll(
-        BorderSide(color: primarySwatch),
-      ))),
-      textTheme: TextTheme(
-        headline6: TextStyle(
-          fontSize: 16,
-          color: primarySwatch[200],
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: colorScheme.secondary,
+          selectedItemColor: colorScheme.onSecondary,
+          unselectedItemColor: colorScheme.onSecondary,
+          showSelectedLabels: true,
+          showUnselectedLabels: false,
+          enableFeedback: true,
         ),
-      ),
-      checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStatePropertyAll(primarySwatch),
-        checkColor: const MaterialStatePropertyAll(Colors.white),
-      ),
-      switchTheme: SwitchThemeData(
-        thumbColor: MaterialStatePropertyAll(primarySwatch),
-        trackColor: MaterialStatePropertyAll(primarySwatch.shade100),
-      ),
-      sliderTheme: SliderThemeData(
-        thumbColor: isDarkMode ? Colors.white : primarySwatch,
-        activeTrackColor: primarySwatch.shade300,
-        inactiveTrackColor: isDarkMode
-            ? primarySwatch.shade100.withAlpha(50)
-            : primarySwatch.shade100,
-        valueIndicatorColor: accentColor,
-      ),
-    );
+        navigationBarTheme: NavigationBarThemeData(
+          backgroundColor: colorScheme.secondary,
+          labelTextStyle:
+              MaterialStatePropertyAll(TextStyle(color: colorScheme.onSurface)),
+          elevation: 1,
+          indicatorColor: colorScheme.onSecondary.withAlpha(50),
+          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        ),
+        navigationRailTheme: NavigationRailThemeData(
+          backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
+          elevation: 2,
+          indicatorColor: colorScheme.onSecondary.withAlpha(50),
+        ),
+        tabBarTheme: TabBarTheme(
+          labelColor: colorScheme.onSecondary,
+          labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          indicatorSize: TabBarIndicatorSize.label,
+        ),
+        cardTheme: CardTheme(
+            color: cardColor,
+            elevation: 0.5,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+        iconTheme: IconThemeData(
+          color: accentColor,
+        ),
+        listTileTheme: ListTileThemeData(
+          dense: true,
+          minLeadingWidth: 4,
+          minVerticalPadding: 16,
+          iconColor: accentColor,
+        ),
+        scaffoldBackgroundColor: backgroundColor,
+        outlinedButtonTheme: OutlinedButtonThemeData(
+            style: ButtonStyle(
+                side: MaterialStatePropertyAll(
+          BorderSide(color: primarySwatch),
+        ))),
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            fontSize: 16,
+            color: primarySwatch[200],
+          ),
+        ),
+        checkboxTheme: CheckboxThemeData(
+          fillColor: MaterialStatePropertyAll(primarySwatch),
+          checkColor: const MaterialStatePropertyAll(Colors.white),
+        ),
+        switchTheme: SwitchThemeData(
+          thumbColor: MaterialStatePropertyAll(primarySwatch),
+          trackColor: MaterialStatePropertyAll(primarySwatch.shade100),
+        ),
+        sliderTheme: SliderThemeData(
+          thumbColor: isDarkMode ? Colors.white : primarySwatch,
+          activeTrackColor: primarySwatch.shade300,
+          inactiveTrackColor: isDarkMode
+              ? primarySwatch.shade100.withAlpha(50)
+              : primarySwatch.shade100,
+          valueIndicatorColor: accentColor,
+        ),
+        radioTheme: RadioThemeData(overlayColor:
+            MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.orange.withOpacity(.32);
+          }
+          return Colors.transparent;
+        })));
   }
 }

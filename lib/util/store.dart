@@ -187,7 +187,7 @@ class DebugController extends GetxController {
 class TranslationsStoreController extends GetxController {
   var box = GetStorage();
 
-  var defaultTranslation =
+  RxMap defaultTranslation =
       {"language": "en", "edition": "quran-in-english"}.obs;
   RxList quranTranslations = [].obs;
   RxList downloadedQuranEditions = [].obs;
@@ -205,8 +205,9 @@ class TranslationsStoreController extends GetxController {
   }
 
   Future<void> saveEdition(String language, String edition, var data) async {
-    for (var i = 0; i < data.length; i++) {
-      box.write("quran_$language-$edition-${i + 1}", jsonEncode(data[i]));
+    for (var i = 1; i < data.length; i++) {
+      print("Adding $i");
+      box.write("quran_$language-$edition-$i", jsonEncode(data[i]));
     }
 
     downloadedQuranEditions.removeWhere(
@@ -229,6 +230,14 @@ class TranslationsStoreController extends GetxController {
     quranTranslations(jsonDecode(box.read("quranTranslations") ?? "[]"));
     downloadedQuranEditions(
         jsonDecode(box.read("downloadedQuranEditions") ?? "[]"));
+
+    var tr = jsonDecode(
+        box.read("defaultTranslation") ?? defaultTranslation.toString());
+
+    setTranslation({
+      "edition": tr["edition"].toString(),
+      "language": tr["language"].toString(),
+    });
 
     if (quranTranslations.isEmpty) updateQuranTranslations();
   }
