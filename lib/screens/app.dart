@@ -76,47 +76,28 @@ class _AppState extends State<App> {
       bottom: true,
       top: false,
       child: Scaffold(
-        body: Row(
-          children: [
-            Expanded(
-                child: IndexedStack(
-              index: _selectedIndex,
-              children: screens,
-            )),
-            if (MediaQuery.of(context).size.width >= 600)
-              SafeArea(
-                child: NavigationRail(
-                  destinations: [
-                    for (var e in icons)
-                      NavigationRailDestination(
-                          icon: e["icon"], label: Text(e["label"]))
-                  ],
-                  selectedIndex: _selectedIndex,
-                  onDestinationSelected: handleNavigationTap,
-                ),
-              ),
-          ],
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: screens,
         ),
-        bottomNavigationBar: (MediaQuery.of(context).size.width < 600)
-            ? ScrollToHide(
-                controller: scrollController,
-                child: SizedBox(
-                  height: 72,
-                  child: NavigationBar(
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    selectedIndex: _selectedIndex,
-                    onDestinationSelected: handleNavigationTap,
-                    destinations: <NavigationDestination>[
-                      for (var e in icons)
-                        NavigationDestination(
-                          icon: e["icon"],
-                          label: e["label"],
-                        ),
-                    ],
+        bottomNavigationBar: ScrollToHide(
+          controller: scrollController,
+          child: SizedBox(
+            height: 72,
+            child: NavigationBar(
+              backgroundColor: Theme.of(context).backgroundColor,
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: handleNavigationTap,
+              destinations: <NavigationDestination>[
+                for (var e in icons)
+                  NavigationDestination(
+                    icon: e["icon"],
+                    label: e["label"],
                   ),
-                ),
-              )
-            : null,
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

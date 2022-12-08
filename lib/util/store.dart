@@ -232,7 +232,7 @@ class TranslationsStoreController extends GetxController {
         jsonDecode(box.read("downloadedQuranEditions") ?? "[]"));
 
     var tr = jsonDecode(
-        box.read("defaultTranslation") ?? defaultTranslation.toString());
+        box.read("defaultTranslation") ?? jsonEncode(defaultTranslation));
 
     setTranslation({
       "edition": tr["edition"].toString(),

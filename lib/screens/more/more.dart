@@ -96,13 +96,12 @@ class _MoreScreenState extends State<MoreScreen> {
                   subtitle: const Text("Theme modes, accent colors"),
                   onTap: () => push(const Appearance()),
                 ),
-                if (kDebugMode) // TODO add feature
-                  ListTile(
-                    leading: const Icon(Icons.translate_rounded),
-                    title: const Text("Translations"),
-                    subtitle: const Text("en, fr, ru, bg ..."),
-                    onTap: () => push(const Translations()),
-                  ),
+                ListTile(
+                  leading: const Icon(Icons.translate_rounded),
+                  title: const Text("Translations"),
+                  subtitle: const Text("en, fr, ru, bg ..."),
+                  onTap: () => push(const Translations()),
+                ),
                 ListTile(
                   leading: const Icon(Icons.text_format_rounded),
                   title: const Text("Reader preferences"),

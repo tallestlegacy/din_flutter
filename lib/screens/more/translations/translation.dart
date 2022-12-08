@@ -105,19 +105,20 @@ class TranslationRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var t = {
+      "edition": translation["edition"].toString(),
+      "language": translation["language"].toString(),
+    };
     return Obx(
       () => RadioListTile(
-        value: translation,
+        value: t,
         groupValue: translationsStoreController.defaultTranslation,
         selected: translationsStoreController.defaultTranslation["edition"] ==
                 translation["edition"] &&
             translationsStoreController.defaultTranslation["language"] ==
                 translation["language"],
         onChanged: (value) {
-          translationsStoreController.setTranslation({
-            "edition": translation["edition"].toString(),
-            "language": translation["language"].toString(),
-          });
+          translationsStoreController.setTranslation(t);
         },
         title: Text(translation["edition"]),
         subtitle: Text(translation["language"]),
