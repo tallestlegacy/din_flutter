@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:din/util/json.dart';
 import 'package:din/util/network.dart';
 
 import '/util/theme.dart';
@@ -206,8 +207,8 @@ class TranslationsStoreController extends GetxController {
 
   Future<void> saveEdition(String language, String edition, var data) async {
     for (var i = 1; i < data.length; i++) {
-      print("Adding $i");
-      box.write("quran_$language-$edition-$i", jsonEncode(data[i]));
+      // save to local json
+      await writeChapter(language, edition, data[i]);
     }
 
     downloadedQuranEditions.removeWhere(

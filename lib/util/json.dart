@@ -1,8 +1,10 @@
 // ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'dart:convert';
+import 'dart:io';
 import 'package:din/util/store.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
 
 class LoadJson {
   Future load(String path) async {
@@ -17,19 +19,16 @@ Future<dynamic> getVerses(int chapter) async {
   TranslationsStoreController translationsStoreController =
       TranslationsStoreController();
 
+  String language = translationsStoreController.defaultTranslation["language"];
+  String edition = translationsStoreController.defaultTranslation["edition"];
+
   if (translationsStoreController.defaultTranslation["edition"] !=
       "quran-in-english") {
-    String edition = translationsStoreController.defaultTranslation["edition"];
-    String language =
-        translationsStoreController.defaultTranslation["language"];
-    var chapterStore = translationsStoreController.box
-        .read("quran_$language-$edition-$chapter");
-    if (chapterStore != null) {
-      translation = jsonDecode(chapterStore);
-    } else {
-      translation = await LoadJson().load(
-          "assets/json/quran_editions/en.quran-in-english/${chapter}.json");
-    }
+    final directory = await getApplicationDocumentsDirectory();
+    String path = directory.path;
+
+    final file = File("$path/quran_$language-${edition}_$chapter.json");
+    translation = jsonDecode(await file.readAsString());
   } else {
     translation = await LoadJson()
         .load("assets/json/quran_editions/en.quran-in-english/${chapter}.json");
@@ -52,4 +51,13 @@ Future<dynamic> getVerses(int chapter) async {
   }
 
   return verses;
+}
+
+Future<void> writeChapter(String language, String edition, var chapter) async {
+  // get directory
+  final directory = await getApplicationDocumentsDirectory();
+  String path = directory.path;
+  final file = File("$path/quran_$language-${edition}_${chapter["id"]}.json");
+  print("writing to ${file.path}");
+  file.writeAsString(jsonEncode(chapter));
 }
