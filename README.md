@@ -24,7 +24,7 @@ flutter run
 - [x] Quran
 - [x] Hadith and Sunnah
 - [ ] Madrasa
-- [ ] Multiple translations
+- [x] Multiple translations
 - [ ] Learning resources
 - [x] Favourites
 - [ ] Application reviews and Release notes

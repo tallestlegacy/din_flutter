@@ -2,7 +2,8 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:din/util/store.dart';
+import '/utils/store.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -14,7 +15,7 @@ class LoadJson {
   }
 }
 
-Future<dynamic> getVerses(int chapter) async {
+Future<List> getVerses(int chapter) async {
   var translation;
   TranslationsStoreController translationsStoreController =
       TranslationsStoreController();
@@ -27,7 +28,7 @@ Future<dynamic> getVerses(int chapter) async {
     final directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
 
-    final file = File("$path/quran_$language-${edition}_$chapter.json");
+    final file = File("$path/quran/$language/$edition/$chapter.json");
     translation = jsonDecode(await file.readAsString());
   } else {
     translation = await LoadJson()
@@ -44,9 +45,9 @@ Future<dynamic> getVerses(int chapter) async {
   for (var i = 0; i < text["verses"].length; i++) {
     verses.add({
       "id": i + 1,
-      "text": text["verses"][i],
-      "translation": translation["verses"][i],
-      "transliteration": transliteration["verses"][i],
+      "text": text["verses"][i].toString(),
+      "translation": translation["verses"][i].toString(),
+      "transliteration": transliteration["verses"][i].toString(),
     });
   }
 
@@ -57,7 +58,14 @@ Future<void> writeChapter(String language, String edition, var chapter) async {
   // get directory
   final directory = await getApplicationDocumentsDirectory();
   String path = directory.path;
-  final file = File("$path/quran_$language-${edition}_${chapter["id"]}.json");
-  print("writing to ${file.path}");
+
+  final folder =
+      await Directory("$path/quran/$language/$edition").create(recursive: true);
+  final file = File("${folder.path}/${chapter["id"]}.json");
+
+  if (kDebugMode) {
+    print("writing to ${file.path}");
+  }
+
   file.writeAsString(jsonEncode(chapter));
 }

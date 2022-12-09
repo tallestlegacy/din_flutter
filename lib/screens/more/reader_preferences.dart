@@ -1,10 +1,12 @@
+import 'package:din/widgets/font_setting.dart';
+import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '/widgets/back_button.dart';
 import '/widgets/text_settings.dart';
 import '/widgets/verse.dart';
-import '/util/store.dart';
+import '/utils/store.dart';
 
 class ReaderPreferences extends StatelessWidget {
   ReaderPreferences({super.key});
@@ -18,13 +20,16 @@ class ReaderPreferences extends StatelessWidget {
         title: const Text("Reader preferences"),
         leading: const CustomBackButton(),
         backgroundColor: Theme.of(context).backgroundColor,
+        actions: const [ThemeToggleButton()],
       ),
-      body: Column(
+      body: ListView(
         children: [
           const Padding(
             padding: EdgeInsets.all(16),
             child: VersePreview(),
           ),
+          const Divider(),
+          const FontSetting(),
           const Divider(),
           const TextSettings(),
           const Divider(),
@@ -47,7 +52,7 @@ class ReaderPreferences extends StatelessWidget {
               inactiveThumbColor: Colors.grey,
               inactiveTrackColor: Colors.grey.withAlpha(100),
             ),
-          )
+          ),
         ],
       ),
     );

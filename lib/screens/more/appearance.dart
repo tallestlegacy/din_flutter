@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 
 import '/widgets/back_button.dart';
 import '/widgets/verse.dart';
-import '/util/store.dart';
-import '/util/theme.dart';
+import '/utils/store.dart';
+import '/utils/theme.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class Appearance extends StatelessWidget {

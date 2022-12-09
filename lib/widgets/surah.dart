@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '/widgets/verse.dart';
-import '/util/json.dart';
+import '../utils/json.dart';
 
 class Surah extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables

@@ -1,12 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import "package:share_plus/share_plus.dart";
 
 import '/widgets/padded_text.dart';
-import '/util/json.dart';
-import '/util/store.dart';
-import '/util/string_locale.dart';
+import '../utils/json.dart';
+import '../utils/store.dart';
+import '../utils/string_locale.dart';
 
 class Verse extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
@@ -112,8 +114,10 @@ class Verse extends StatelessWidget {
               ? verse['id'].toString()
               : toFarsi(verse['id']),
           style: TextStyle(
-              color: Colors.grey,
-              fontSize: readerStoreController.fontSize.value),
+            color: Colors.grey,
+            fontSize: readerStoreController.fontSize.value,
+            fontFamily: readerStoreController.arabicFont.value,
+          ),
         ),
       ),
       contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
@@ -129,6 +133,7 @@ class Verse extends StatelessWidget {
                   textAlign: TextAlign.right,
                   fontSize: readerStoreController.fontSize.value * 1.5,
                   fontWeight: FontWeight.w400,
+                  fontFamily: readerStoreController.arabicFont.value,
                   color: Theme.of(context).primaryTextTheme.bodyText2?.color,
                 ),
               ),
@@ -154,8 +159,38 @@ class Verse extends StatelessWidget {
   }
 }
 
-class VersePreview extends StatelessWidget {
+class VersePreview extends StatefulWidget {
   const VersePreview({super.key});
+
+  @override
+  State<VersePreview> createState() => _VersePreviewState();
+}
+
+class _VersePreviewState extends State<VersePreview> {
+  var _verse = {
+    "id": 1,
+    "text": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+    "translation":
+        "In the name of Allah, the Entirely Merciful, the Especially Merciful",
+    "transliteration": "Bismi Allahi alrrahmani alrraheemi"
+  };
+
+  void init() async {
+    var chapter = await getVerses(Random().nextInt(114) + 1);
+
+    if (mounted) {
+      setState(() {
+        _verse = chapter[Random().nextInt(chapter.length)];
+      });
+      print(chapter[Random().nextInt(chapter.length)]);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    init();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -164,16 +199,10 @@ class VersePreview extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         border: Border.all(width: 2, color: Theme.of(context).backgroundColor),
       ),
-      child: const Padding(
-          padding: EdgeInsets.all(0),
+      child: Padding(
+          padding: const EdgeInsets.all(0),
           child: Verse(
-            verse: {
-              "id": 1,
-              "text": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-              "translation":
-                  "In the name of Allah, the Entirely Merciful, the Especially Merciful",
-              "transliteration": "Bismi Allahi alrrahmani alrraheemi"
-            },
+            verse: _verse,
             chapter: 1,
           )),
     );

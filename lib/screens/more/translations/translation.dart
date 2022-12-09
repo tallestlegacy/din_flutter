@@ -1,5 +1,5 @@
-import 'package:din/util/network.dart';
-import 'package:din/util/store.dart';
+import '/utils/network.dart';
+import '/utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -60,6 +60,23 @@ class _TranslationState extends State<Translation> {
         setState(() {
           _state = "downloaded";
         });
+
+        final scaffold = ScaffoldMessenger.of(context);
+        scaffold.showSnackBar(
+          SnackBar(
+            content: Text(
+                '${widget.edition} downloaded successfully. Do you want this as your new default?'),
+            action: SnackBarAction(
+                label: 'OK',
+                onPressed: () {
+                  translationsStoreController.setTranslation({
+                    "edition": widget.edition.toString(),
+                    "language": widget.language.toString(),
+                  });
+                  scaffold.hideCurrentSnackBar();
+                }),
+          ),
+        );
       }
     } else {
       if (mounted) {
@@ -111,12 +128,13 @@ class TranslationRadio extends StatelessWidget {
     };
     return Obx(
       () => RadioListTile(
-        value: t,
-        groupValue: translationsStoreController.defaultTranslation,
-        selected: translationsStoreController.defaultTranslation["edition"] ==
-                translation["edition"] &&
-            translationsStoreController.defaultTranslation["language"] ==
-                translation["language"],
+        activeColor: Theme.of(context).primaryColor,
+        value: "${t["language"]}-${t["edition"]}",
+        groupValue:
+            "${translationsStoreController.defaultTranslation["language"]}-${translationsStoreController.defaultTranslation["edition"]}",
+        selected:
+            "${translationsStoreController.defaultTranslation["language"]}-${translationsStoreController.defaultTranslation["edition"]}" ==
+                "${t["language"]}-${t["edition"]}",
         onChanged: (value) {
           translationsStoreController.setTranslation(t);
         },

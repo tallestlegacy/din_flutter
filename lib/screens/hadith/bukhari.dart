@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 
 import '/widgets/back_button.dart';
 import '/widgets/text_settings.dart';
-import '/util/json.dart';
-import '/util/store.dart';
-import '/util/string_locale.dart';
+import '/utils/json.dart';
+import '/utils/store.dart';
+import '/utils/string_locale.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class Bukhari extends StatefulWidget {
@@ -82,7 +82,11 @@ class _BukhariState extends State<Bukhari> {
                       readerStoreController.showTranslation.value
                           ? "${book['length']}"
                           : toFarsi(book['length']),
-                      style: const TextStyle(color: Colors.grey, fontSize: 10),
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 10,
+                        fontFamily: readerStoreController.arabicFont.value,
+                      ),
                     ),
                     onTap: () {
                       Navigator.push(
@@ -185,8 +189,10 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
                       ? _hadiths[index]['id'].toString()
                       : toFarsi(_hadiths[index]['id']),
                   style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: readerStoreController.fontSize.value),
+                    color: Colors.grey,
+                    fontSize: readerStoreController.fontSize.value,
+                    fontFamily: readerStoreController.arabicFont.value,
+                  ),
                 ),
                 title: Text(
                   _hadiths[index]['by'],

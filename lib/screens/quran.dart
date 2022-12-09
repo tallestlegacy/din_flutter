@@ -1,14 +1,14 @@
-import 'package:din/widgets/surah.dart';
+import '/widgets/surah.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
 import '/widgets/text_settings.dart';
-import '/util/json.dart';
-import '/util/store.dart';
+import '../utils/json.dart';
+import '../utils/store.dart';
 import '/widgets/theme_toggle_button.dart';
-import '/util/string_locale.dart';
+import '../utils/string_locale.dart';
 
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
@@ -114,6 +114,8 @@ class _QuranPageState extends State<QuranPage> {
                               style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: readerStoreController.fontSize * 3,
+                                fontFamily:
+                                    readerStoreController.arabicFont.value,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -146,9 +148,14 @@ class _QuranPageState extends State<QuranPage> {
                   selectedTileColor:
                       Theme.of(context).primaryColor.withAlpha(50),
                   subtitle: Text("${_chapters[index]['translation']}"),
-                  leading: Text(readerStoreController.showTranslation.value
-                      ? _chapters[index]['id'].toString()
-                      : toFarsi(_chapters[index]['id'])),
+                  leading: Text(
+                    readerStoreController.showTranslation.value
+                        ? _chapters[index]['id'].toString()
+                        : toFarsi(_chapters[index]['id']),
+                    style: TextStyle(
+                      fontFamily: readerStoreController.arabicFont.value,
+                    ),
+                  ),
                   title: Text(
                     "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
                     style: Theme.of(context).primaryTextTheme.bodyText2,
@@ -166,9 +173,11 @@ class _QuranPageState extends State<QuranPage> {
                               .bodyText2!
                               .color,
                           fontSize: 10,
+                          fontFamily: readerStoreController.arabicFont.value,
                         ),
                       ),
-                      const Icon(Icons.my_library_books_rounded, size: 14)
+                      const Icon(Icons.my_library_books_rounded,
+                          size: 14, color: Colors.grey)
                     ],
                   ),
                 ),

@@ -5,7 +5,7 @@ description: An open source Quran reader using material design and Flutter.
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.10
+version: 1.1.0-beta
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -41,35 +41,21 @@ flutter:
     - assets/json/quran_editions/en.quran-in-english/
     - assets/json/hadith/bukhari/
     - assets/json/hadith/hisnulmuslim/
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
 
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
+  fonts:
 
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
+    - family: NotoSansArabic                                  # sans
+      fonts:
+        - asset: assets/fonts/NotoSansArabic-Regular.ttf
 
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  #fonts:
-  #- family: Naskh
-  # fonts:
-  #    - asset: assets/fonts/DroidNaskh-Regular.ttf
-  #    - asset: assets/fonts/DroidNaskh-Bold.ttf
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+    - family: NotoNaskhArabic                                 # sans-serif
+      fonts:
+        - asset: assets/fonts/NotoNaskhArabic-Regular.ttf
+
+    - family: NotoNastaliqUrdu                                # serif
+      fonts:
+        - asset: assets/fonts/NotoNastaliqUrdu-Regular.ttf
+    
+    - family: NotoKufiArabic                                # kufi
+      fonts:
+        - asset: assets/fonts/NotoKufiArabic-Regular.ttf

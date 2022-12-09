@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import '/widgets/back_button.dart';
 import '/widgets/padded_text.dart';
 import '/widgets/text_settings.dart';
-import '/util/json.dart';
-import '/util/store.dart';
-import '/util/string_locale.dart';
+import '/utils/json.dart';
+import '/utils/store.dart';
+import '/utils/string_locale.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class Hisnul extends StatefulWidget {
@@ -64,7 +64,10 @@ class _HisnulState extends State<Hisnul> {
                   readerStoreController.showTranslation.value
                       ? _refs[index]['hadiths'].length.toString()
                       : toFarsi(_refs[index]['hadiths'].length),
-                  style: const TextStyle(color: Colors.grey, fontSize: 10),
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 10,
+                      fontFamily: readerStoreController.arabicFont.value),
                 ),
                 title: Text("${_refs[index]['title']}"),
                 onTap: () => Navigator.push(
@@ -202,6 +205,7 @@ class HisnulReference extends StatelessWidget {
                               .primaryTextTheme
                               .bodyText2
                               ?.color,
+                          fontFamily: readerStoreController.arabicFont.value,
                         ),
                       )
                     : null,
@@ -237,6 +241,7 @@ class HisnulReference extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: readerStoreController.fontSize.value,
+                    fontFamily: readerStoreController.arabicFont.value,
                   ),
                 ),
               ),

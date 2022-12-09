@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import '/widgets/back_button.dart';
 import '/widgets/text_settings.dart';
 import '/widgets/verse.dart';
-import '/util/json.dart';
-import '/util/store.dart';
-import '/util/string_locale.dart';
+import '/utils/json.dart';
+import '/utils/store.dart';
+import '/utils/string_locale.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class Favourites extends StatefulWidget {
@@ -125,6 +125,8 @@ class _FavouritesState extends State<Favourites> {
                                 color: Theme.of(context).primaryColor,
                                 fontSize:
                                     readerStoreController.fontSize.value * 1.5,
+                                fontFamily:
+                                    readerStoreController.arabicFont.value,
                               ),
                             ),
                             title: Text(

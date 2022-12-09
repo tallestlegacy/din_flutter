@@ -1,8 +1,7 @@
-import 'package:din/screens/more/translations/translation.dart';
-import 'package:din/util/network.dart';
-import 'package:din/util/store.dart';
-import 'package:din/widgets/back_button.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
+import '/screens/more/translations/translation.dart';
+import '/utils/store.dart';
+import '/widgets/back_button.dart';
+import '/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -92,9 +91,7 @@ class Translations extends StatelessWidget {
                             children: translationsStoreController
                                 .downloadedQuranEditions
                                 .map((e) {
-                              return TranslationRadio(
-                                translation: e,
-                              );
+                              return TranslationRadio(translation: e);
                             }).toList(),
                           ),
                         ),

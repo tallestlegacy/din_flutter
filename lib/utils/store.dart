@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:din/util/json.dart';
-import 'package:din/util/network.dart';
-
-import '/util/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '/utils/json.dart';
+import '/utils/network.dart';
+import '/utils/theme.dart';
 
 /// Reader Store Controller
 /// manages the reading experience for users
@@ -18,6 +18,13 @@ class ReaderStoreController extends GetxController {
   var showArabicText = true.obs;
   var fontSize = 12.0.obs;
   var reverseScrolling = true.obs;
+  var arabicFont = "NotoNaskhArabic".obs;
+  final arabicFonts = [
+    "NotoNaskhArabic",
+    "NotoSansArabic",
+    "NotoNastaliqUrdu",
+    "NotoKufiArabic",
+  ];
 
   final box = GetStorage();
 
@@ -47,6 +54,11 @@ class ReaderStoreController extends GetxController {
     box.write("fontSize", value);
   }
 
+  void setArabicFont(String value) {
+    arabicFont(value);
+    box.write("arabicFont", value);
+  }
+
   void setReverseScrolling(bool value) {
     reverseScrolling(value);
     box.write("reverseScrolling", value);
@@ -58,6 +70,7 @@ class ReaderStoreController extends GetxController {
     showArabicText(box.read("showArabicText") ?? true);
     fontSize(box.read("fontSize") ?? 12);
     reverseScrolling(box.read("reverseScrolling") ?? true);
+    arabicFont(box.read("arabicFont") ?? arabicFonts[0]);
   }
 }
 

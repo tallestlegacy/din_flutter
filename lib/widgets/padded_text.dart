@@ -6,6 +6,7 @@ class PaddedText extends StatelessWidget {
   final Color? color;
   final double fontSize;
   final FontWeight fontWeight;
+  final String fontFamily;
 
   const PaddedText({
     super.key,
@@ -14,6 +15,7 @@ class PaddedText extends StatelessWidget {
     this.color = Colors.grey,
     this.fontSize = 12,
     this.fontWeight = FontWeight.normal,
+    this.fontFamily = "",
   });
 
   @override
@@ -28,6 +30,7 @@ class PaddedText extends StatelessWidget {
           fontSize: fontSize,
           fontWeight: fontWeight,
           height: 1.5,
+          fontFamily: fontFamily,
         ),
       ),
     );

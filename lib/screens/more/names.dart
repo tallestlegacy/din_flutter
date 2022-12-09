@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 
 import '/widgets/back_button.dart';
 import '/widgets/text_settings.dart';
-import '/util/string_locale.dart';
+import '/utils/string_locale.dart';
 import '/widgets/theme_toggle_button.dart';
-import '/util/json.dart';
-import '/util/store.dart';
+import '/utils/json.dart';
+import '/utils/store.dart';
 
 class Names extends StatefulWidget {
   const Names({super.key});
@@ -18,6 +18,9 @@ class Names extends StatefulWidget {
 class _NamesState extends State<Names> {
   List<dynamic> _namesOfAllah = [];
   List<dynamic> _namesOfMuhammad = [];
+
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
 
   Future<void> getNames() async {
     final data1 = await LoadJson().load("assets/json/99 names of Allah.json");
@@ -39,9 +42,6 @@ class _NamesState extends State<Names> {
 
   @override
   Widget build(BuildContext context) {
-    final ReaderStoreController readerStoreController =
-        Get.put(ReaderStoreController());
-
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -99,7 +99,11 @@ class _NamesState extends State<Names> {
                                                 .showTranslation.value
                                             ? (index + 1).toString()
                                             : toFarsi(index + 1),
-                                        style: TextStyle(fontSize: fontSize),
+                                        style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontFamily: readerStoreController
+                                              .arabicFont.value,
+                                        ),
                                       ),
                                       title: Text(
                                         "${names[index]["name"]} - ${names[index]["transliteration"]}",

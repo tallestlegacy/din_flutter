@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -11,7 +12,7 @@ import '/screens/more/favourites.dart';
 import '/screens/more/names.dart';
 import '/screens/more/reader_preferences.dart';
 import 'translations/translations.dart';
-import '/util/network.dart';
+import '/utils/network.dart';
 import '/widgets/icons.dart';
 import '/widgets/theme_toggle_button.dart';
 
@@ -85,6 +86,25 @@ class _MoreScreenState extends State<MoreScreen> {
               ],
             ),
           ),
+          if (kDebugMode) // TODO remove divider
+            const Divider(),
+          if (kDebugMode) // TODO add features
+            ListTile(
+                title: const Text("Tools"),
+                subtitle: Column(children: [
+                  ListTile(
+                    enabled: false,
+                    leading: const Icon(FontAwesomeIcons.compass),
+                    title: const Text("Qibla"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    enabled: false,
+                    leading: const Icon(Icons.calendar_month_rounded),
+                    title: const Text("Islamic Calendar"),
+                    onTap: () {},
+                  ),
+                ])),
           const Divider(),
           ListTile(
             title: const Text("Customisation"),

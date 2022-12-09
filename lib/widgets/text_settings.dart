@@ -1,7 +1,8 @@
+import 'package:din/widgets/font_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '/util/store.dart';
+import '../utils/store.dart';
 import '/widgets/divider.dart';
 
 class TextSettings extends StatelessWidget {
@@ -22,45 +23,33 @@ class TextSettings extends StatelessWidget {
           ),
         ),
         Obx(
-          () => SwitchListTile(
+          () => CheckboxListTile(
             title: const Text("Arabic text"),
             value: readerStoreController.showArabicText.value,
             onChanged: ((value) {
-              readerStoreController.setShowArabicText(value);
+              readerStoreController.setShowArabicText(value!);
             }),
-            inactiveThumbColor: Colors.grey,
-            inactiveTrackColor: Colors.grey.withAlpha(100),
           ),
         ),
         Obx(
-          () => SwitchListTile(
+          () => CheckboxListTile(
             title: const Text("Transliteration"),
             value: readerStoreController.showTransliteration.value,
             onChanged: ((value) {
-              readerStoreController.setTransliteration(value);
+              readerStoreController.setTransliteration(value!);
             }),
-            inactiveThumbColor: Colors.grey,
-            inactiveTrackColor: Colors.grey.withAlpha(100),
           ),
         ),
         Obx(
-          () => SwitchListTile(
+          () => CheckboxListTile(
             title: const Text("Translation"),
             value: readerStoreController.showTranslation.value,
             onChanged: ((value) {
-              readerStoreController.setTranslation(value);
+              readerStoreController.setTranslation(value!);
             }),
-            inactiveThumbColor: Colors.grey,
-            inactiveTrackColor: Colors.grey.withAlpha(100),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "Text Size".toUpperCase(),
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-        ),
+        const Divider(),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Flex(
@@ -81,7 +70,7 @@ class TextSettings extends StatelessWidget {
               const Icon(Icons.text_increase_rounded),
             ],
           ),
-        )
+        ),
       ],
     );
   }
@@ -111,6 +100,8 @@ class TextSettingsAction extends StatelessWidget {
                 children: const [
                   HandleBar(),
                   TextSettings(),
+                  Divider(),
+                  FontSetting(),
                 ],
               ),
             );

@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '/widgets/icons.dart';
 import '/widgets/back_button.dart';
-import '/util/network.dart';
+import '/utils/network.dart';
 
 class AboutDeveloper extends StatelessWidget {
   const AboutDeveloper({super.key});

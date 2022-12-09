@@ -1,4 +1,4 @@
-import '/util/store.dart';
+import '../utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
