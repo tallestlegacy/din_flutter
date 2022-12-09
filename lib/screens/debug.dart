@@ -21,7 +21,7 @@ class _DebugState extends State<Debug> {
     return Scaffold(
       body: Center(
         child: Obx(() =>
-            Text(translationsStoreController.defaultTranslation.toString())),
+            Text(translationsStoreController.quranTranslations.toString())),
       ),
     );
   }

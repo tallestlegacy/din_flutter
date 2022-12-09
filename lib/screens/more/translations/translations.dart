@@ -5,6 +5,7 @@ import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 class Translations extends StatelessWidget {
@@ -40,6 +41,7 @@ class Translations extends StatelessWidget {
       Language(emoji: "🇸🇴", abbrev: "so", language: "Soomaali"),
       Language(emoji: "🇦🇱", abbrev: "sq", language: "shqiptare"),
       Language(emoji: "🇸🇪", abbrev: "sv", language: "svenska"),
+      Language(emoji: "🇹🇿", abbrev: "sw", language: "Kiswahili"),
     ];
 
     final TranslationsStoreController translationsStoreController =
@@ -50,46 +52,79 @@ class Translations extends StatelessWidget {
         title: const Text("Translations"),
         leading: const CustomBackButton(),
         actions: const [ThemeToggleButton()],
+        backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: RefreshIndicator(
-        onRefresh: fetchTranslations,
-        child: ListView(
-          children: [
-            ListTile(
-              title: const Text("Installed"),
-              subtitle: Obx(
-                () => Column(
-                  children: translationsStoreController.downloadedQuranEditions
-                      .map((e) {
-                    return TranslationRadio(
-                      translation: e,
-                    );
-                  }).toList(),
-                ),
-              ),
-            ),
-            const Divider(),
-            ListTile(
-              title: const Text("Languages"),
-              subtitle: Column(children: [
-                for (var language in languages)
-                  ListTile(
-                    leading: Text(language.emoji),
-                    title: Text(language.language),
-                    subtitle: Text(language.abbrev),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) =>
-                              LanguageScreen(language: language),
-                        ),
-                      );
-                    },
+        onRefresh: translationsStoreController.updateQuranTranslations,
+        child: Obx(
+          () => Container(
+            child: translationsStoreController.quranTranslations.isEmpty
+                ? ListView(
+                    padding: const EdgeInsets.all(40),
+                    children: [
+                      Flex(
+                        direction: Axis.vertical,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            children: const [
+                              Icon(FontAwesomeIcons.solidHandBackFist),
+                              Icon(Icons.arrow_downward_rounded),
+                            ],
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text("Pull to refresh",
+                                style: TextStyle(
+                                  fontSize: 12,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
                   )
-              ]),
-            )
-          ],
+                : ListView(
+                    children: [
+                      ListTile(
+                        title: const Text("Installed"),
+                        subtitle: Obx(
+                          () => Column(
+                            children: translationsStoreController
+                                .downloadedQuranEditions
+                                .map((e) {
+                              return TranslationRadio(
+                                translation: e,
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                      ),
+                      const Divider(),
+                      ListTile(
+                        title: const Text("Available Languages"),
+                        subtitle: Column(children: [
+                          for (var language in languages)
+                            ListTile(
+                              leading: Text(language.emoji,
+                                  style: const TextStyle(fontSize: 20)),
+                              trailing: const Icon(Icons.chevron_right_rounded),
+                              title: Text(language.language),
+                              subtitle: Text(language.abbrev),
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  CupertinoPageRoute(
+                                    builder: (context) =>
+                                        LanguageScreen(language: language),
+                                  ),
+                                );
+                              },
+                            )
+                        ]),
+                      )
+                    ],
+                  ),
+          ),
         ),
       ),
     );
