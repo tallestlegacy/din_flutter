@@ -97,6 +97,7 @@ class TextSettingsAction extends StatelessWidget {
                 color: Theme.of(context).canvasColor,
               ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: const [
                   HandleBar(),
                   TextSettings(),

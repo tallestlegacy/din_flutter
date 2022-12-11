@@ -182,7 +182,6 @@ class _VersePreviewState extends State<VersePreview> {
       setState(() {
         _verse = chapter[Random().nextInt(chapter.length)];
       });
-      print(chapter[Random().nextInt(chapter.length)]);
     }
   }
 

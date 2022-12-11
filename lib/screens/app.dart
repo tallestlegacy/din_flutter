@@ -1,4 +1,3 @@
-import 'package:din/screens/more/favourites.dart';
 import 'package:flutter/foundation.dart';
 
 import '/screens/dua/dua.dart';

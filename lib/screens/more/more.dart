@@ -90,8 +90,9 @@ class _MoreScreenState extends State<MoreScreen> {
             const Divider(),
           if (kDebugMode) // TODO add features
             ListTile(
-                title: const Text("Tools"),
-                subtitle: Column(children: [
+              title: const Text("Tools"),
+              subtitle: Column(
+                children: [
                   ListTile(
                     enabled: false,
                     leading: const Icon(FontAwesomeIcons.compass),
@@ -100,11 +101,19 @@ class _MoreScreenState extends State<MoreScreen> {
                   ),
                   ListTile(
                     enabled: false,
+                    leading: const Icon(Icons.av_timer_rounded),
+                    title: const Text("Prayer Times"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    enabled: false,
                     leading: const Icon(Icons.calendar_month_rounded),
                     title: const Text("Islamic Calendar"),
                     onTap: () {},
                   ),
-                ])),
+                ],
+              ),
+            ),
           const Divider(),
           ListTile(
             title: const Text("Customisation"),

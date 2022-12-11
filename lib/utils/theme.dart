@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class Styles {
   MaterialColor swatch;
@@ -22,8 +23,8 @@ class Styles {
       onPrimary: primarySwatch.shade900,
       secondary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade200,
       onSecondary: isDarkMode ? Colors.grey.shade300 : primarySwatch.shade900,
-      tertiary: primarySwatch.shade400,
-      onTertiary: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade800,
+      tertiary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade600,
+      onTertiary: isDarkMode ? Colors.white : Colors.white,
       error: Colors.amber,
       onError: Colors.red,
       background: isDarkMode ? Colors.grey.shade900 : primarySwatch.shade50,
@@ -31,6 +32,10 @@ class Styles {
       surface: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade200,
       onSurface: isDarkMode ? primarySwatch.shade50 : primarySwatch.shade900,
     );
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      systemNavigationBarColor: colorScheme.tertiary,
+    ));
 
     return ThemeData(
       useMaterial3: true,
