@@ -82,10 +82,9 @@ class _BukhariState extends State<Bukhari> {
                       readerStoreController.showTranslation.value
                           ? "${book['length']}"
                           : toFarsi(book['length']),
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 10,
-                        fontFamily: readerStoreController.arabicFont.value,
+                      style: googleFontify(
+                        readerStoreController.arabicFont.value,
+                        const TextStyle(color: Colors.grey, fontSize: 10),
                       ),
                     ),
                     onTap: () {
@@ -188,10 +187,12 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
                   readerStoreController.showTranslation.value
                       ? _hadiths[index]['id'].toString()
                       : toFarsi(_hadiths[index]['id']),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: readerStoreController.fontSize.value,
-                    fontFamily: readerStoreController.arabicFont.value,
+                  style: googleFontify(
+                    readerStoreController.arabicFont.value,
+                    TextStyle(
+                      color: Colors.grey,
+                      fontSize: readerStoreController.fontSize.value,
+                    ),
                   ),
                 ),
                 title: Text(

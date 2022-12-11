@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:din/utils/store.dart';
-import "package:get/get.dart";
+import '../utils/json.dart';
 import '/constants/strings.dart';
 
 const Widget linkIcon = Icon(
@@ -31,9 +31,9 @@ class DinAppIcon extends StatelessWidget {
               applyHeightToFirstAscent: true,
               applyHeightToLastDescent: false,
             ),
-            style: TextStyle(
-              fontSize: 48,
-              fontFamily: readerStoreController.arabicFont.value,
+            style: googleFontify(
+              readerStoreController.arabicFont.value,
+              const TextStyle(fontSize: 48),
             ),
           ),
         ),

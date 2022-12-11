@@ -99,10 +99,10 @@ class _NamesState extends State<Names> {
                                                 .showTranslation.value
                                             ? (index + 1).toString()
                                             : toFarsi(index + 1),
-                                        style: TextStyle(
-                                          fontSize: fontSize,
-                                          fontFamily: readerStoreController
+                                        style: googleFontify(
+                                          readerStoreController
                                               .arabicFont.value,
+                                          TextStyle(fontSize: fontSize),
                                         ),
                                       ),
                                       title: Text(

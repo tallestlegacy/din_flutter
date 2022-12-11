@@ -1,4 +1,3 @@
-import 'package:din/widgets/font_setting.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -102,7 +101,7 @@ class TextSettingsAction extends StatelessWidget {
                   HandleBar(),
                   TextSettings(),
                   Divider(),
-                  FontSetting(),
+                  // FontSetting(),
                 ],
               ),
             );

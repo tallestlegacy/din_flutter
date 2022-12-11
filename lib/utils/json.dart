@@ -2,6 +2,9 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 import '/utils/store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -68,4 +71,9 @@ Future<void> writeChapter(String language, String edition, var chapter) async {
   }
 
   file.writeAsString(jsonEncode(chapter));
+}
+
+TextStyle googleFontify(String fontName, TextStyle? style) {
+  if (fontName != "") return GoogleFonts.getFont(fontName, textStyle: style);
+  return style!;
 }

@@ -113,10 +113,12 @@ class Verse extends StatelessWidget {
           readerStoreController.showTranslation.value
               ? verse['id'].toString()
               : toFarsi(verse['id']),
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: readerStoreController.fontSize.value,
-            fontFamily: readerStoreController.arabicFont.value,
+          style: googleFontify(
+            readerStoreController.arabicFont.value,
+            TextStyle(
+              color: Colors.grey,
+              fontSize: readerStoreController.fontSize.value,
+            ),
           ),
         ),
       ),
@@ -133,7 +135,8 @@ class Verse extends StatelessWidget {
                   textAlign: TextAlign.right,
                   fontSize: readerStoreController.fontSize.value * 1.5,
                   fontWeight: FontWeight.w400,
-                  fontFamily: readerStoreController.arabicFont.value,
+                  //fontFamily: readerStoreController.arabicFont.value,
+                  googleFont: readerStoreController.arabicFont.value,
                   color: Theme.of(context).primaryTextTheme.bodyText2?.color,
                 ),
               ),

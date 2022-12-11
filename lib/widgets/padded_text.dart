@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:google_fonts/google_fonts.dart";
 
 class PaddedText extends StatelessWidget {
   final String text;
@@ -6,7 +7,8 @@ class PaddedText extends StatelessWidget {
   final Color? color;
   final double fontSize;
   final FontWeight fontWeight;
-  final String fontFamily;
+  // final String fontFamily;
+  final String googleFont;
 
   const PaddedText({
     super.key,
@@ -15,24 +17,26 @@ class PaddedText extends StatelessWidget {
     this.color = Colors.grey,
     this.fontSize = 12,
     this.fontWeight = FontWeight.normal,
-    this.fontFamily = "",
+    // this.fontFamily = "",
+    this.googleFont = "",
   });
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = TextStyle(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      height: 1.5,
+    );
+
     return Padding(
       padding: const EdgeInsets.all(4),
-      child: Text(
-        text,
-        textAlign: textAlign,
-        style: TextStyle(
-          color: color,
-          fontSize: fontSize,
-          fontWeight: fontWeight,
-          height: 1.5,
-          fontFamily: fontFamily,
-        ),
-      ),
+      child: Text(text,
+          textAlign: textAlign,
+          style: googleFont != ""
+              ? GoogleFonts.getFont(googleFont, textStyle: textStyle)
+              : textStyle),
     );
   }
 }

@@ -14,14 +14,15 @@ class _DebugState extends State<Debug> {
       Get.put(GlobalStoreController());
   final TranslationsStoreController translationsStoreController =
       Get.put(TranslationsStoreController());
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
 
   @override
   Widget build(BuildContext context) {
     final List<String> _tabs = <String>['Tab 1', 'Tab 2'];
     return Scaffold(
       body: Center(
-        child: Obx(() =>
-            Text(translationsStoreController.quranTranslations.toString())),
+        child: Obx(() => Text(readerStoreController.arabicFont.value)),
       ),
     );
   }

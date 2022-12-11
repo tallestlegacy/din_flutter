@@ -121,12 +121,14 @@ class _FavouritesState extends State<Favourites> {
                               readerStoreController.showTranslation.value
                                   ? chapter["id"].toString()
                                   : toFarsi(chapter["id"]),
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize:
-                                    readerStoreController.fontSize.value * 1.5,
-                                fontFamily:
-                                    readerStoreController.arabicFont.value,
+                              style: googleFontify(
+                                readerStoreController.arabicFont.value,
+                                TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize:
+                                      readerStoreController.fontSize.value *
+                                          1.5,
+                                ),
                               ),
                             ),
                             title: Text(

@@ -64,10 +64,10 @@ class _HisnulState extends State<Hisnul> {
                   readerStoreController.showTranslation.value
                       ? _refs[index]['hadiths'].length.toString()
                       : toFarsi(_refs[index]['hadiths'].length),
-                  style: TextStyle(
-                      color: Colors.grey,
-                      fontSize: 10,
-                      fontFamily: readerStoreController.arabicFont.value),
+                  style: googleFontify(
+                    readerStoreController.arabicFont.value,
+                    const TextStyle(color: Colors.grey, fontSize: 10),
+                  ),
                 ),
                 title: Text("${_refs[index]['title']}"),
                 onTap: () => Navigator.push(
@@ -199,13 +199,16 @@ class HisnulReference extends StatelessWidget {
                 title: readerStoreController.showArabicText.value
                     ? Text(
                         ref['hadiths'][index]['text'].replaceAll("\n", " "),
-                        style: TextStyle(
-                          fontSize: readerStoreController.fontSize.value * 1.25,
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2
-                              ?.color,
-                          fontFamily: readerStoreController.arabicFont.value,
+                        style: googleFontify(
+                          readerStoreController.arabicFont.value,
+                          TextStyle(
+                            fontSize:
+                                readerStoreController.fontSize.value * 1.25,
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText2
+                                ?.color,
+                          ),
                         ),
                       )
                     : null,
@@ -238,10 +241,12 @@ class HisnulReference extends StatelessWidget {
                   readerStoreController.showTranslation.value
                       ? ref['hadiths'][index]['id'].toString()
                       : toFarsi(ref['hadiths'][index]['id']),
-                  style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: readerStoreController.fontSize.value,
-                    fontFamily: readerStoreController.arabicFont.value,
+                  style: googleFontify(
+                    readerStoreController.arabicFont.value,
+                    TextStyle(
+                      color: Colors.grey,
+                      fontSize: readerStoreController.fontSize.value,
+                    ),
                   ),
                 ),
               ),

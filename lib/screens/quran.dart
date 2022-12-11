@@ -111,11 +111,12 @@ class _QuranPageState extends State<QuranPage> {
                           child: Obx(
                             () => Text(
                               "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: readerStoreController.fontSize * 3,
-                                fontFamily:
-                                    readerStoreController.arabicFont.value,
+                              style: googleFontify(
+                                readerStoreController.arabicFont.value,
+                                TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize:
+                                        readerStoreController.fontSize * 3),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -152,9 +153,8 @@ class _QuranPageState extends State<QuranPage> {
                     readerStoreController.showTranslation.value
                         ? _chapters[index]['id'].toString()
                         : toFarsi(_chapters[index]['id']),
-                    style: TextStyle(
-                      fontFamily: readerStoreController.arabicFont.value,
-                    ),
+                    style: googleFontify(
+                        readerStoreController.arabicFont.value, null),
                   ),
                   title: Text(
                     "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
@@ -167,13 +167,15 @@ class _QuranPageState extends State<QuranPage> {
                         readerStoreController.showTranslation.value
                             ? _chapters[index]['total_verses'].toString()
                             : toFarsi(_chapters[index]['total_verses']),
-                        style: TextStyle(
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2!
-                              .color,
-                          fontSize: 10,
-                          fontFamily: readerStoreController.arabicFont.value,
+                        style: googleFontify(
+                          readerStoreController.arabicFont.value,
+                          TextStyle(
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText2!
+                                .color,
+                            fontSize: 10,
+                          ),
                         ),
                       ),
                       const Icon(Icons.my_library_books_rounded,
