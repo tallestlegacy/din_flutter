@@ -141,6 +141,8 @@ class GlobalStoreController extends GetxController {
   RxDouble lat = 0.0.obs;
   RxDouble lon = 0.0.obs;
 
+  RxBool drawerIsOpen = false.obs;
+
   RxMap<dynamic, dynamic> prayerTimes = {}.obs;
 
   void setcurrentSurah(int pageIndex) {

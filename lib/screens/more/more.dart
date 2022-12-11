@@ -87,33 +87,33 @@ class _MoreScreenState extends State<MoreScreen> {
               ],
             ),
           ),
-          if (kDebugMode) // TODO remove divider
-            const Divider(),
-          if (kDebugMode) // TODO add features
-            ListTile(
-              title: const Text("Tools"),
-              subtitle: Column(
-                children: [
+          const Divider(),
+          ListTile(
+            title: const Text("Tools"),
+            subtitle: Column(
+              children: [
+                if (kDebugMode) // TODO add features
                   ListTile(
                     enabled: false,
                     leading: const Icon(Icons.explore_rounded),
                     title: const Text("Qibla"),
                     onTap: () {},
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.av_timer_rounded),
-                    title: const Text("Prayer Times"),
-                    onTap: () => push(PrayerTimes()),
-                  ),
+                ListTile(
+                  leading: const Icon(Icons.av_timer_rounded),
+                  title: const Text("Prayer Times"),
+                  onTap: () => push(PrayerTimes()),
+                ),
+                if (kDebugMode) // TODO add features
                   ListTile(
                     enabled: false,
-                    leading: const Icon(Icons.calendar_month_rounded),
+                    leading: const Icon(Icons.event_note_rounded),
                     title: const Text("Islamic Calendar"),
                     onTap: () {},
                   ),
-                ],
-              ),
+              ],
             ),
+          ),
           const Divider(),
           ListTile(
             title: const Text("Customisation"),

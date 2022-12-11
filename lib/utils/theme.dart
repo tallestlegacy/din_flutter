@@ -23,7 +23,7 @@ class Styles {
       onPrimary: primarySwatch.shade900,
       secondary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade200,
       onSecondary: isDarkMode ? Colors.grey.shade300 : primarySwatch.shade900,
-      tertiary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade600,
+      tertiary: isDarkMode ? primarySwatch.shade200 : primarySwatch.shade600,
       onTertiary: isDarkMode ? Colors.white : Colors.white,
       error: Colors.amber,
       onError: Colors.red,
@@ -84,7 +84,6 @@ class Styles {
       ),
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onSecondary,
-        labelStyle: const TextStyle(fontWeight: FontWeight.bold),
         indicatorSize: TabBarIndicatorSize.label,
       ),
       cardTheme: CardTheme(
@@ -139,6 +138,12 @@ class Styles {
             ? primarySwatch.shade100.withAlpha(50)
             : primarySwatch.shade100,
         valueIndicatorColor: accentColor,
+      ),
+      progressIndicatorTheme: ProgressIndicatorThemeData(
+        color: colorScheme.primary,
+      ),
+      chipTheme: ChipThemeData(
+        backgroundColor: colorScheme.surface.withAlpha(100),
       ),
     );
   }

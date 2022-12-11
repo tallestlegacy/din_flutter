@@ -1,6 +1,6 @@
 const din = "دين";
 
-final arabicFonts = [
+const arabicFonts = [
   "Default",
   "Aref Ruqaa",
   "Amiri",
@@ -27,4 +27,19 @@ final arabicFonts = [
   "Tajawal",
   "Vazirmatn",
   "Vibes",
+];
+
+const prayers = [
+  "Fajr",
+  "Dhuhr",
+  "Asr",
+  "Maghrib",
+  "Isha",
+];
+const prayersArabic = [
+  "الفجر",
+  "الظهر",
+  "العصر",
+  "المغرب",
+  "العشاء",
 ];
