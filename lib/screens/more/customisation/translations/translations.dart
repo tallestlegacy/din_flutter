@@ -1,11 +1,12 @@
-import '/screens/more/translations/translation.dart';
-import '/utils/store.dart';
-import '/widgets/back_button.dart';
-import '/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+
+import 'translation.dart';
+import '/utils/store.dart';
+import '/widgets/back_button.dart';
+import '/widgets/theme_toggle_button.dart';
 
 class Translations extends StatelessWidget {
   const Translations({super.key});
@@ -79,10 +80,6 @@ class Translations extends StatelessWidget {
                                   fontSize: 12,
                                 )),
                           ),
-                          IconButton(
-                              onPressed: translationsStoreController
-                                  .updateQuranTranslations,
-                              icon: const Icon(Icons.refresh_rounded))
                         ],
                       ),
                     ],

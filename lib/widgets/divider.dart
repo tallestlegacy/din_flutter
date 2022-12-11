@@ -15,3 +15,13 @@ class HandleBar extends StatelessWidget {
     );
   }
 }
+
+class Spacing extends StatelessWidget {
+  final double padding;
+  const Spacing({super.key, this.padding = 8});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(padding: EdgeInsets.all(padding));
+  }
+}

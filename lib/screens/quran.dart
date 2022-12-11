@@ -91,6 +91,7 @@ class _QuranPageState extends State<QuranPage> {
                 snap: true,
                 floating: true,
                 actions: const [TextSettingsAction(), ThemeToggleButton()],
+                elevation: 2,
                 backgroundColor: Theme.of(context).backgroundColor,
               ),
             ];
@@ -107,16 +108,16 @@ class _QuranPageState extends State<QuranPage> {
                       delegate: SliverChildListDelegate([
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 8, bottom: 32, left: 8, right: 8),
+                              top: 16, bottom: 32, left: 8, right: 8),
                           child: Obx(
                             () => Text(
                               "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
                               style: googleFontify(
                                 readerStoreController.arabicFont.value,
                                 TextStyle(
-                                    color: Theme.of(context).primaryColor,
-                                    fontSize:
-                                        readerStoreController.fontSize * 3),
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: readerStoreController.fontSize * 3,
+                                ),
                               ),
                               textAlign: TextAlign.center,
                             ),

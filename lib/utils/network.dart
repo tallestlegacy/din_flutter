@@ -7,7 +7,9 @@ import "package:http/http.dart" as http;
 Future<void> openLink(String url) async {
   if (!await launchUrl(
     Uri.parse(url),
-    mode: LaunchMode.inAppWebView,
+    mode: url.contains("http")
+        ? LaunchMode.inAppWebView
+        : LaunchMode.externalApplication,
   )) {
     throw "Could not launch $url";
   }
@@ -88,4 +90,20 @@ Future<List> fetchEdition(String language, String edition) async {
   }
 
   return [];
+}
+
+Future<Map> fetchPrayerTimes(double lat, double lon) async {
+  try {
+    String url =
+        "http://api.aladhan.com/v1/calendar?latitude=$lat&longitude=$lon&method=2";
+
+    var data = (await http.get(Uri.parse(url))).body;
+    return jsonDecode(data);
+  } catch (e) {
+    if (kDebugMode) {
+      print(e.toString());
+    }
+  }
+
+  return {};
 }

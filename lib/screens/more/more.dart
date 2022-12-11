@@ -1,3 +1,4 @@
+import 'package:din/screens/more/tools/prayer_times.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -5,13 +6,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '/screens/more/about_app.dart';
-import '/screens/more/about_developer.dart';
-import '/screens/more/appearance.dart';
-import '/screens/more/favourites.dart';
-import '/screens/more/names.dart';
-import '/screens/more/reader_preferences.dart';
-import 'translations/translations.dart';
+import 'about/about_app.dart';
+import 'about/about_developer.dart';
+import 'customisation/appearance.dart';
+import 'inspiration/favourites.dart';
+import 'inspiration/names.dart';
+import 'customisation/reader_preferences.dart';
+import 'customisation/translations/translations.dart';
 import '/utils/network.dart';
 import '/widgets/icons.dart';
 import '/widgets/theme_toggle_button.dart';
@@ -95,15 +96,14 @@ class _MoreScreenState extends State<MoreScreen> {
                 children: [
                   ListTile(
                     enabled: false,
-                    leading: const Icon(FontAwesomeIcons.compass),
+                    leading: const Icon(Icons.explore_rounded),
                     title: const Text("Qibla"),
                     onTap: () {},
                   ),
                   ListTile(
-                    enabled: false,
                     leading: const Icon(Icons.av_timer_rounded),
                     title: const Text("Prayer Times"),
-                    onTap: () {},
+                    onTap: () => push(PrayerTimes()),
                   ),
                   ListTile(
                     enabled: false,

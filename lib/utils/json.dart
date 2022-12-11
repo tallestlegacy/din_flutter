@@ -75,6 +75,8 @@ Future<void> writeChapter(String language, String edition, var chapter) async {
 }
 
 TextStyle googleFontify(String fontName, TextStyle? style) {
-  if (fontName != "") return GoogleFonts.getFont(fontName, textStyle: style);
-  return style!;
+  if (fontName != "" && fontName != "Default") {
+    return GoogleFonts.getFont(fontName, textStyle: style);
+  }
+  return style ?? const TextStyle();
 }

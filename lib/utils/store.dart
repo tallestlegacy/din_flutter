@@ -138,6 +138,11 @@ class GlobalStoreController extends GetxController {
   var currentSurah = 0.obs;
   RxList favouriteVerses = [].obs;
 
+  RxDouble lat = 0.0.obs;
+  RxDouble lon = 0.0.obs;
+
+  RxMap<dynamic, dynamic> prayerTimes = {}.obs;
+
   void setcurrentSurah(int pageIndex) {
     currentSurah(pageIndex);
     box.write("currentSurah", pageIndex);
@@ -167,9 +172,24 @@ class GlobalStoreController extends GetxController {
     return fav;
   }
 
+  void setLocation(double latitude, double longitude) {
+    lat(latitude);
+    lon(longitude);
+    box.write("lat", lat.value);
+    box.write("lon", lon.value);
+  }
+
+  void setPrayerTimeForMonth(var data) {
+    prayerTimes(data);
+    box.write("prayerTimes", jsonEncode(data));
+  }
+
   GlobalStoreController() {
     currentSurah(box.read("currentSurah") ?? 0);
     favouriteVerses(jsonDecode(box.read("favouriteVerses") ?? "[]"));
+    lat(box.read("lat") ?? 0.0);
+    lat(box.read("lat") ?? 0.0);
+    prayerTimes(jsonDecode(box.read("prayerTimes") ?? "{}"));
   }
 }
 

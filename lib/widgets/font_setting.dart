@@ -17,7 +17,7 @@ class FontSetting extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PaddedText(text: "Arabic fonts (Experimental)", padding: 8),
+        const PaddedText(text: "Arabic fonts", padding: 8),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Wrap(

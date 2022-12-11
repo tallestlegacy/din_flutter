@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 import '/screens/dua/dua.dart';
 import '/widgets/scroll_to_hide.dart';
@@ -40,6 +41,12 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    if (mounted) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Theme.of(context).colorScheme.tertiary,
+      ));
+    }
+
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
       const Dua(),

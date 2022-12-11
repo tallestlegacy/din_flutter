@@ -129,6 +129,7 @@ class TranslationRadio extends StatelessWidget {
     };
     return Obx(
       () => RadioListTile(
+        controlAffinity: ListTileControlAffinity.trailing,
         activeColor: Theme.of(context).primaryColor,
         value: "${t["language"]}-${t["edition"]}",
         groupValue:

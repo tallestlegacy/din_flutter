@@ -41,7 +41,8 @@ flutter run
 - [x] Arabic / English / Transliteration toggles
 - [x] Scroll Direction
 - [x] App colors and theme
-- [ ] Arabic and English fonts
+- [x] Arabic fonts
+- [ ] Other UI fonts
 
 ## UI
 

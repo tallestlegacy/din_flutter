@@ -21,7 +21,7 @@ class _DebugState extends State<Debug> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Obx(() => Text(readerStoreController.arabicFont.value)),
+        child: Obx(() => Text(globalStoreController.prayerTimes.toString())),
       ),
     );
   }
