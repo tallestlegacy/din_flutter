@@ -1,3 +1,4 @@
+import 'package:din/screens/more/favourites.dart';
 import 'package:flutter/foundation.dart';
 
 import '/screens/dua/dua.dart';
@@ -45,7 +46,7 @@ class _AppState extends State<App> {
       const Dua(),
       const Hadith(),
       const MoreScreen(),
-      const Debug()
+      if (kDebugMode) const Debug()
     ];
 
     List icons = const [
@@ -72,31 +73,65 @@ class _AppState extends State<App> {
         }
     ];
 
-    return SafeArea(
-      bottom: true,
-      top: false,
-      child: Scaffold(
-        body: IndexedStack(
-          index: _selectedIndex,
-          children: screens,
-        ),
-        bottomNavigationBar: ScrollToHide(
-          controller: scrollController,
-          child: SizedBox(
-            height: 72,
-            child: NavigationBar(
-              backgroundColor: Theme.of(context).backgroundColor,
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: handleNavigationTap,
-              destinations: <NavigationDestination>[
-                for (var e in icons)
-                  NavigationDestination(
-                    icon: e["icon"],
-                    label: e["label"],
+    return WillPopScope(
+      onWillPop: () async {
+        setState(() {
+          _selectedIndex = 0;
+        });
+        return false;
+      },
+      child: SafeArea(
+        bottom: true,
+        top: false,
+        child: Scaffold(
+          body: MediaQuery.of(context).size.width < 600
+              ? IndexedStack(
+                  index: _selectedIndex,
+                  children: screens,
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: IndexedStack(
+                        index: _selectedIndex,
+                        children: screens,
+                      ),
+                    ),
+                    NavigationRail(
+                      minExtendedWidth: 160,
+                      destinations: <NavigationRailDestination>[
+                        for (var e in icons)
+                          NavigationRailDestination(
+                            icon: e["icon"],
+                            label: Text(e["label"]),
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          ),
+                      ],
+                      selectedIndex: _selectedIndex,
+                      onDestinationSelected: handleNavigationTap,
+                    ),
+                  ],
+                ),
+          bottomNavigationBar: MediaQuery.of(context).size.width < 600
+              ? ScrollToHide(
+                  controller: scrollController,
+                  child: SizedBox(
+                    height: 72,
+                    child: NavigationBar(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      selectedIndex: _selectedIndex,
+                      onDestinationSelected: handleNavigationTap,
+                      destinations: <NavigationDestination>[
+                        for (var e in icons)
+                          NavigationDestination(
+                            icon: e["icon"],
+                            label: e["label"],
+                          ),
+                      ],
+                    ),
                   ),
-              ],
-            ),
-          ),
+                )
+              : null,
         ),
       ),
     );

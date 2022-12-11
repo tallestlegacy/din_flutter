@@ -75,6 +75,7 @@ class Styles {
         backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
         elevation: 2,
         indicatorColor: colorScheme.onSecondary.withAlpha(50),
+        // /labelType: NavigationRailLabelType.selected,
       ),
       tabBarTheme: TabBarTheme(
         labelColor: colorScheme.onSecondary,

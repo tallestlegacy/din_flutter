@@ -61,8 +61,8 @@ class TextSettings extends StatelessWidget {
                         value: readerStoreController.fontSize.value,
                         onChanged: readerStoreController.setFontSize,
                         min: 8,
-                        max: 24,
-                        divisions: 8,
+                        max: 32,
+                        divisions: (32 - 8) ~/ 2,
                         label: readerStoreController.fontSize.value
                             .toInt()
                             .toString(),

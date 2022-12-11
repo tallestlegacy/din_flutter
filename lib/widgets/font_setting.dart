@@ -1,6 +1,8 @@
-import 'package:din/utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '/utils/store.dart';
+import '/constants/strings.dart';
 
 class FontSetting extends StatelessWidget {
   const FontSetting({super.key});
@@ -9,8 +11,6 @@ class FontSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     final ReaderStoreController readerStoreController =
         Get.put(ReaderStoreController());
-
-    String din = "دين";
 
     return Container(
       padding: const EdgeInsets.all(16),

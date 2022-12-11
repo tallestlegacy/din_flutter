@@ -72,12 +72,17 @@ class Translations extends StatelessWidget {
                             ],
                           ),
                           const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text("Pull to refresh",
+                            padding: EdgeInsets.symmetric(vertical: 16),
+                            child: Text(
+                                "Pull to refresh or press the refresh button.",
                                 style: TextStyle(
                                   fontSize: 12,
                                 )),
                           ),
+                          IconButton(
+                              onPressed: translationsStoreController
+                                  .updateQuranTranslations,
+                              icon: const Icon(Icons.refresh_rounded))
                         ],
                       ),
                     ],
