@@ -6,9 +6,9 @@ import 'package:get/get.dart';
 import "package:share_plus/share_plus.dart";
 
 import '/widgets/padded_text.dart';
-import '../utils/json.dart';
-import '../utils/store.dart';
-import '../utils/string_locale.dart';
+import '/utils/json.dart';
+import '/utils/store.dart';
+import '/utils/string_locale.dart';
 
 class Verse extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables

@@ -1,8 +1,10 @@
+import 'package:din/widgets/padded_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/store.dart';
+import '/utils/store.dart';
 import '/widgets/divider.dart';
+import 'font_setting.dart';
 
 class TextSettings extends StatelessWidget {
   const TextSettings({super.key});
@@ -11,16 +13,10 @@ class TextSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ReaderStoreController readerStoreController =
         Get.put(ReaderStoreController());
-    return Wrap(
-      alignment: WrapAlignment.center,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            "Text Format".toUpperCase(),
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
-          ),
-        ),
+        const PaddedText(text: "Text formats", padding: 8),
         Obx(
           () => CheckboxListTile(
             title: const Text("Arabic text"),
@@ -88,6 +84,7 @@ class TextSettingsAction extends StatelessWidget {
           context: context,
           builder: ((context) {
             return Container(
+              height: 1000,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
@@ -101,7 +98,7 @@ class TextSettingsAction extends StatelessWidget {
                   HandleBar(),
                   TextSettings(),
                   Divider(),
-                  // FontSetting(),
+                  FontSetting(),
                 ],
               ),
             );

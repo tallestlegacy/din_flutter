@@ -114,6 +114,7 @@ class _TranslationState extends State<Translation> {
 }
 
 class TranslationRadio extends StatelessWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final translation;
   TranslationRadio({super.key, required this.translation});
 

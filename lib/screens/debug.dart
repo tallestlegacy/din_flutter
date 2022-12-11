@@ -19,7 +19,6 @@ class _DebugState extends State<Debug> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> _tabs = <String>['Tab 1', 'Tab 2'];
     return Scaffold(
       body: Center(
         child: Obx(() => Text(readerStoreController.arabicFont.value)),

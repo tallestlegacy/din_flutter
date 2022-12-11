@@ -1,7 +1,8 @@
+import 'package:din/widgets/padded_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/json.dart';
+import '/utils/json.dart';
 import '/utils/store.dart';
 import '/constants/strings.dart';
 
@@ -13,37 +14,41 @@ class FontSetting extends StatelessWidget {
     final ReaderStoreController readerStoreController =
         Get.put(ReaderStoreController());
 
-    return ListTile(
-      title: const Text("Arabic Fonts (Experimental)"),
-      subtitle: Wrap(
-        runSpacing: 12,
-        spacing: 12,
-        children: readerStoreController.arabicFonts
-            .map(
-              (fontFamily) => Obx(
-                () => ActionChip(
-                  visualDensity: VisualDensity.compact,
-                  backgroundColor:
-                      readerStoreController.arabicFont.value == fontFamily
-                          ? Theme.of(context).backgroundColor
-                          : null,
-                  label: const Text(din),
-                  labelStyle: googleFontify(
-                    fontFamily,
-                    TextStyle(
-                        fontSize: readerStoreController.fontSize.value * 1.2),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const PaddedText(text: "Arabic fonts (Experimental)", padding: 8),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Wrap(
+            direction: Axis.horizontal,
+            children: arabicFonts
+                .map(
+                  (fontFamily) => Container(
+                    margin: const EdgeInsets.all(4),
+                    child: Obx(
+                      () => ActionChip(
+                        visualDensity: VisualDensity.compact,
+                        backgroundColor:
+                            readerStoreController.arabicFont.value == fontFamily
+                                ? Theme.of(context).backgroundColor
+                                : null,
+                        label: const Text(din),
+                        labelStyle: googleFontify(fontFamily, null),
+                        surfaceTintColor: Theme.of(context).primaryColor,
+                        onPressed: () {
+                          readerStoreController.setArabicFont(fontFamily);
+                        },
+                        side: BorderSide(
+                            color: Theme.of(context).colorScheme.secondary),
+                      ),
+                    ),
                   ),
-                  surfaceTintColor: Theme.of(context).primaryColor,
-                  onPressed: () {
-                    readerStoreController.setArabicFont(fontFamily);
-                  },
-                  side: BorderSide(
-                      color: Theme.of(context).colorScheme.secondary),
-                ),
-              ),
-            )
-            .toList(),
-      ),
+                )
+                .toList(),
+          ),
+        ),
+      ],
     );
   }
 }

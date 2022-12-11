@@ -9,6 +9,7 @@ class PaddedText extends StatelessWidget {
   final FontWeight fontWeight;
   // final String fontFamily;
   final String googleFont;
+  final double padding;
 
   const PaddedText({
     super.key,
@@ -19,6 +20,7 @@ class PaddedText extends StatelessWidget {
     this.fontWeight = FontWeight.normal,
     // this.fontFamily = "",
     this.googleFont = "",
+    this.padding = 4,
   });
 
   @override
@@ -31,7 +33,7 @@ class PaddedText extends StatelessWidget {
     );
 
     return Padding(
-      padding: const EdgeInsets.all(4),
+      padding: EdgeInsets.all(padding),
       child: Text(text,
           textAlign: textAlign,
           style: googleFont != ""

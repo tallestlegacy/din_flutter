@@ -44,20 +44,20 @@ flutter:
     - assets/json/hadith/bukhari/
     - assets/json/hadith/hisnulmuslim/
 
-  fonts:
-
-    - family: NotoSansArabic                                  # sans
-      fonts:
-        - asset: assets/fonts/NotoSansArabic-Regular.ttf
-
-    - family: NotoNaskhArabic                                 # sans-serif
-      fonts:
-        - asset: assets/fonts/NotoNaskhArabic-Regular.ttf
-
-    - family: NotoNastaliqUrdu                                # serif
-      fonts:
-        - asset: assets/fonts/NotoNastaliqUrdu-Regular.ttf
-    
-    - family: NotoKufiArabic                                # kufi
-      fonts:
-        - asset: assets/fonts/NotoKufiArabic-Regular.ttf
+#  fonts:
+#
+#    - family: NotoSansArabic                                  # sans
+#      fonts:
+#        - asset: assets/fonts/NotoSansArabic-Regular.ttf
+#
+#    - family: NotoNaskhArabic                                 # sans-serif
+#      fonts:
+#        - asset: assets/fonts/NotoNaskhArabic-Regular.ttf
+#
+#    - family: NotoNastaliqUrdu                                # serif
+#      fonts:
+#        - asset: assets/fonts/NotoNastaliqUrdu-Regular.ttf
+#    
+#    - family: NotoKufiArabic                                # kufi
+#      fonts:
+#        - asset: assets/fonts/NotoKufiArabic-Regular.ttf

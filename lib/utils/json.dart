@@ -19,6 +19,7 @@ class LoadJson {
 }
 
 Future<List> getVerses(int chapter) async {
+  // ignore: prefer_typing_uninitialized_variables
   var translation;
   TranslationsStoreController translationsStoreController =
       TranslationsStoreController();

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '/constants/strings.dart';
 import '/utils/json.dart';
 import '/utils/network.dart';
 import '/utils/theme.dart';
@@ -19,17 +20,6 @@ class ReaderStoreController extends GetxController {
   var fontSize = 12.0.obs;
   var reverseScrolling = true.obs;
   var arabicFont = "".obs;
-  final arabicFonts = [
-    "",
-    //"Noto Naskh Arabic",
-    "Noto Sans Arabic",
-    "Noto Nastaliq Urdu",
-    "Noto Kufi Arabic",
-    "Tajawal",
-    "Aref Ruqaa",
-    "Amiri",
-    "Cairo",
-  ];
 
   final box = GetStorage();
 
