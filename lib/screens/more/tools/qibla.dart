@@ -82,12 +82,14 @@ class Qibla extends StatelessWidget {
                       Column(
                         children: [
                           ListTile(
-                            title: const Text("Current Coordinates"),
+                            enabled: false,
+                            title: const Text("Current Location"),
                             subtitle: Text(
                                 "lat : ${globalStoreController.lat.value}º     "
                                 "lon : ${globalStoreController.lon.value}º"),
                           ),
                           ListTile(
+                            enabled: false,
                             title: const Text("Relative Angle"),
                             subtitle: Text("${getQiblaAngle(
                               globalStoreController.lat.value,

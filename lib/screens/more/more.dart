@@ -82,9 +82,15 @@ class _MoreScreenState extends State<MoreScreen> {
                 ListTile(
                   leading: const Icon(Icons.favorite_rounded),
                   title: const Text("Favourites"),
-                  subtitle: const Text("Favourite verses"),
                   onTap: () => push(const Favourites()),
                 ),
+                if (kDebugMode) // TODO add feature
+                  ListTile(
+                    enabled: false,
+                    leading: const Icon(Icons.menu_book_rounded),
+                    title: const Text("Juz"),
+                    onTap: () {},
+                  ),
               ],
             ),
           ),
@@ -93,6 +99,22 @@ class _MoreScreenState extends State<MoreScreen> {
             title: const Text("Tools"),
             subtitle: Column(
               children: [
+                if (kDebugMode) // TODO add feature
+                  ListTile(
+                    enabled: false,
+                    leading: const Icon(Icons.search_rounded),
+                    title: const Text("Global Search"),
+                    subtitle:
+                        const Text("Quran, Dua and Hadith full text search"),
+                    onTap: () {},
+                  ),
+                if (kDebugMode) // TODO add features
+                  ListTile(
+                    enabled: false,
+                    leading: const Icon(Icons.event_note_rounded),
+                    title: const Text("Hijri Calendar"),
+                    onTap: () {},
+                  ),
                 ListTile(
                   leading: const Icon(Icons.explore_rounded),
                   title: const Text("Qibla"),
@@ -103,13 +125,6 @@ class _MoreScreenState extends State<MoreScreen> {
                   title: const Text("Prayer Times"),
                   onTap: () => push(const PrayerTimes()),
                 ),
-                if (kDebugMode) // TODO add features
-                  ListTile(
-                    enabled: false,
-                    leading: const Icon(Icons.event_note_rounded),
-                    title: const Text("Islamic Calendar"),
-                    onTap: () {},
-                  ),
               ],
             ),
           ),

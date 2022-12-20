@@ -17,6 +17,9 @@ Future<void> openLink(String url) async {
 
 String editionsUrl = "https://din-99-default-rtdb.firebaseio.com/editions";
 
+String quranEditionsIndexUrl =
+    "https://din-99-default-rtdb.firebaseio.com/editions/_index";
+
 Future<List<String>> fetchEditions(String language) async {
   try {
     String url = "$editionsUrl/$language.json?shallow=true";
@@ -38,23 +41,14 @@ Future<List<String>> fetchEditions(String language) async {
 
 Future<dynamic> fetchTranslations() async {
   try {
-    String url = "$editionsUrl.json?shallow=true";
+    String url = "$quranEditionsIndexUrl.json";
 
     var data = (await http.get(Uri.parse(url))).body;
     List translations = [];
-    var iter = jsonDecode(data).keys.toList();
+    translations = jsonDecode(data);
 
-    for (int i = 0; i < iter.length; i++) {
-      String language = iter[i];
-      List editions = await fetchEditions(language);
+    translations.sort((a, b) => a["abbrev"].compareTo(b["abbrev"]));
 
-      translations.add({
-        "language": language,
-        "editions": editions,
-      });
-    }
-
-    translations.sort((a, b) => a["language"].compareTo(b["language"]));
     if (kDebugMode) {
       print(translations.toString());
     }

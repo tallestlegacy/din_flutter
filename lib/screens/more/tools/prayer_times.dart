@@ -28,11 +28,13 @@ class _PrayerTimesState extends State<PrayerTimes> {
   }
 
   setPrayerTimes() async {
-    var prayerTimes = await fetchPrayerTimes(
+    Map prayerTimes = await fetchPrayerTimes(
       globalStoreController.lat.value,
       globalStoreController.lon.value,
     );
-    globalStoreController.setPrayerTimeForMonth(prayerTimes);
+    if (prayerTimes.isNotEmpty) {
+      globalStoreController.setPrayerTimeForMonth(prayerTimes);
+    }
   }
 
   initPrayerData() async {
@@ -82,7 +84,8 @@ class _PrayerTimesState extends State<PrayerTimes> {
           await setPrayerTimes();
         },
         child: Obx(
-          () => globalStoreController.prayerTimes.isNotEmpty
+          () => globalStoreController.prayerTimes.isNotEmpty &&
+                  globalStoreController.prayerTimes["data"].length > day
               ? ListView(
                   children: [
                     if (loading) const LinearProgressIndicator(),

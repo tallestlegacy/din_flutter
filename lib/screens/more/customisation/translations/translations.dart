@@ -13,7 +13,7 @@ class Translations extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List languages = [
+/*     List languages = [
       Language(emoji: "🇸🇦", abbrev: "ar", language: "عربى"),
       Language(emoji: "🇦🇿", abbrev: "az", language: "Azərbaycan"),
       Language(emoji: "🇧🇬", abbrev: "bg", language: "български"),
@@ -42,7 +42,8 @@ class Translations extends StatelessWidget {
       Language(emoji: "🇦🇱", abbrev: "sq", language: "shqiptare"),
       Language(emoji: "🇸🇪", abbrev: "sv", language: "svenska"),
       Language(emoji: "🇹🇿", abbrev: "sw", language: "Kiswahili"),
-    ];
+      Language(emoji: "🇨🇳", abbrev: "zh", language: "中国人"),
+    ]; */
 
     final TranslationsStoreController translationsStoreController =
         Get.put(TranslationsStoreController());
@@ -75,7 +76,7 @@ class Translations extends StatelessWidget {
                           const Padding(
                             padding: EdgeInsets.symmetric(vertical: 16),
                             child: Text(
-                                "Pull to refresh or press the refresh button.",
+                                "Ensure network is turned on then pull to refresh.",
                                 style: TextStyle(
                                   fontSize: 12,
                                 )),
@@ -90,11 +91,16 @@ class Translations extends StatelessWidget {
                         title: const Text("Installed"),
                         subtitle: Obx(
                           () => Column(
-                            children: translationsStoreController
-                                .downloadedQuranEditions
-                                .map((e) {
-                              return TranslationRadio(translation: e);
-                            }).toList(),
+                            children: [
+                              TranslationRadio(translation: const {
+                                "edition": "default",
+                                "language": "en",
+                              }),
+                              for (var translation
+                                  in translationsStoreController
+                                      .downloadedQuranEditions)
+                                TranslationRadio(translation: translation)
+                            ],
                           ),
                         ),
                       ),
@@ -102,20 +108,21 @@ class Translations extends StatelessWidget {
                       ListTile(
                         title: const Text("Available Languages"),
                         subtitle: Column(children: [
-                          for (var language in languages)
+                          for (var language
+                              in translationsStoreController.quranTranslations)
                             ListTile(
-                              leading: Text(language.emoji,
+                              leading: Text(language["emoji"],
                                   style: const TextStyle(fontSize: 20)),
                               trailing: const Icon(Icons.chevron_right_rounded),
-                              title: Text(language.language),
-                              subtitle: Text(language.abbrev),
+                              title: Text(language["language"]),
+                              subtitle: Text(language["abbrev"]),
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  CupertinoPageRoute(
-                                    builder: (context) =>
-                                        LanguageScreen(language: language),
-                                  ),
+                                  CupertinoPageRoute(builder: (context) {
+                                    return LanguageScreen(
+                                        language: Language.fromJson(language));
+                                  }),
                                 );
                               },
                             )
@@ -134,8 +141,23 @@ class Language {
   String emoji = "🤔";
   String language = "NULL";
   String abbrev = "NULL";
+  List editions = [];
 
-  Language({required this.emoji, required this.language, required this.abbrev});
+  Language({
+    required this.emoji,
+    required this.language,
+    required this.abbrev,
+    required this.editions,
+  });
+
+  factory Language.fromJson(dynamic json) {
+    return Language(
+      emoji: json["emoji"],
+      language: json["language"],
+      abbrev: json["abbrev"],
+      editions: json["editions"],
+    );
+  }
 }
 
 class LanguageScreen extends StatelessWidget {
@@ -149,7 +171,7 @@ class LanguageScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List editions = translationsStoreController.quranTranslations.firstWhere(
-        (element) => element["language"] == language.abbrev)["editions"];
+        (element) => element["abbrev"] == language.abbrev)["editions"];
 
     return Scaffold(
       appBar: AppBar(

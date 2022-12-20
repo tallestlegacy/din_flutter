@@ -181,7 +181,7 @@ class GlobalStoreController extends GetxController {
     box.write("lon", lon.value);
   }
 
-  void setPrayerTimeForMonth(var data) {
+  void setPrayerTimeForMonth(Map data) {
     prayerTimes(data);
     box.write("prayerTimes", jsonEncode(data));
   }
@@ -218,15 +218,16 @@ class DebugController extends GetxController {
 class TranslationsStoreController extends GetxController {
   var box = GetStorage();
 
-  RxMap defaultTranslation =
-      {"language": "en", "edition": "quran-in-english"}.obs;
+  RxMap defaultTranslation = {"language": "en", "edition": "default"}.obs;
   RxList quranTranslations = [].obs;
   RxList downloadedQuranEditions = [].obs;
 
   Future<void> updateQuranTranslations() async {
     var data = await fetchTranslations();
-    quranTranslations(data);
-    box.write("quranTranslations", jsonEncode(quranTranslations.toJson()));
+    if (data.isNotEmpty) {
+      quranTranslations(data);
+      box.write("quranTranslations", jsonEncode(quranTranslations.toJson()));
+    }
   }
 
   bool editionIsDownloaded(String language, String edition) {

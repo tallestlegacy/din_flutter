@@ -27,8 +27,9 @@ Future<List> getVerses(int chapter) async {
   String language = translationsStoreController.defaultTranslation["language"];
   String edition = translationsStoreController.defaultTranslation["edition"];
 
-  if (translationsStoreController.defaultTranslation["edition"] !=
-      "quran-in-english") {
+  print(">>> {$language,  $edition}");
+
+  if (edition != "default" && edition != "quran-in-english") {
     final directory = await getApplicationDocumentsDirectory();
     String path = directory.path;
 
