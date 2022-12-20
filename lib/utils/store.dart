@@ -19,7 +19,7 @@ class ReaderStoreController extends GetxController {
   var showArabicText = true.obs;
   var fontSize = 12.0.obs;
   var reverseScrolling = true.obs;
-  var arabicFont = "".obs;
+  var arabicFont = "Noto Naskh Arabic".obs;
 
   final box = GetStorage();
 

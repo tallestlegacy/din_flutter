@@ -1,4 +1,5 @@
 import 'package:din/screens/more/tools/prayer_times.dart';
+import 'package:din/screens/more/tools/qibla.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -92,13 +93,11 @@ class _MoreScreenState extends State<MoreScreen> {
             title: const Text("Tools"),
             subtitle: Column(
               children: [
-                if (kDebugMode) // TODO add features
-                  ListTile(
-                    enabled: false,
-                    leading: const Icon(Icons.explore_rounded),
-                    title: const Text("Qibla"),
-                    onTap: () {},
-                  ),
+                ListTile(
+                  leading: const Icon(Icons.explore_rounded),
+                  title: const Text("Qibla"),
+                  onTap: () => push(Qibla()),
+                ),
                 ListTile(
                   leading: const Icon(Icons.av_timer_rounded),
                   title: const Text("Prayer Times"),

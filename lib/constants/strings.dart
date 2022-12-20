@@ -1,7 +1,7 @@
 const din = "دين";
 
 const arabicFonts = [
-  "Default",
+  "Noto Naskh Arabic",
   "Aref Ruqaa",
   "Amiri",
   "Almarai",
@@ -16,7 +16,6 @@ const arabicFonts = [
   "Mada",
   "Markazi Text",
   "Mirza",
-  "Noto Naskh Arabic",
   "Noto Sans Arabic",
   "Noto Nastaliq Urdu",
   "Noto Kufi Arabic",

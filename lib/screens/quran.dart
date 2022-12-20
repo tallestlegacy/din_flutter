@@ -65,126 +65,132 @@ class _QuranPageState extends State<QuranPage> {
 
     PageController pageController = PageController();
 
-    return Scaffold(
-      body: NestedScrollView(
-        controller: widget.scrollController,
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            SliverAppBar(
-              title: Text(
-                getChapterText(_currentPage),
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+    return AnnotatedRegion(
+      value: SystemUiOverlayStyle(
+        statusBarColor: Theme.of(context).backgroundColor,
+      ),
+      child: Scaffold(
+        body: NestedScrollView(
+          controller: widget.scrollController,
+          floatHeaderSlivers: true,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return <Widget>[
+              SliverAppBar(
+                title: Text(
+                  getChapterText(_currentPage),
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w500),
+                ),
+                leading: IconButton(
+                  icon: const Icon(Icons.menu_rounded),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                ),
+                snap: true,
+                floating: true,
+                actions: const [TextSettingsAction(), ThemeToggleButton()],
+                elevation: 2,
+                backgroundColor: Theme.of(context).backgroundColor,
               ),
-              leading: IconButton(
-                icon: const Icon(Icons.menu_rounded),
-                onPressed: () {
-                  Scaffold.of(context).openDrawer();
-                },
-              ),
-              snap: true,
-              floating: true,
-              actions: const [TextSettingsAction(), ThemeToggleButton()],
-              elevation: 2,
-              backgroundColor: Theme.of(context).backgroundColor,
-            ),
-          ];
-        },
-        body: PageView(
-          reverse: readerStoreController.reverseScrolling.value,
-          controller: pageController,
-          onPageChanged: onPageChanged,
-          children: <Widget>[
-            for (var chapter in _chapters)
-              CustomScrollView(
-                slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate([
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 16, bottom: 32, left: 8, right: 8),
-                        child: Obx(
-                          () => Text(
-                            "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-                            style: googleFontify(
-                              readerStoreController.arabicFont.value,
-                              TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize: readerStoreController.fontSize * 3,
+            ];
+          },
+          body: PageView(
+            reverse: readerStoreController.reverseScrolling.value,
+            controller: pageController,
+            onPageChanged: onPageChanged,
+            children: <Widget>[
+              for (var chapter in _chapters)
+                CustomScrollView(
+                  slivers: [
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 16, bottom: 32, left: 8, right: 8),
+                          child: Obx(
+                            () => Text(
+                              "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+                              style: googleFontify(
+                                readerStoreController.arabicFont.value,
+                                TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: readerStoreController.fontSize * 3,
+                                ),
                               ),
+                              textAlign: TextAlign.center,
                             ),
-                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ]),
+                    ),
+                    Surah(
+                      chapter: chapter,
+                    )
+                  ],
+                )
+            ],
+          ),
+        ),
+        onDrawerChanged: (isOpened) {
+          globalStoreController.drawerIsOpen(isOpened);
+        },
+        drawer: Drawer(
+          child: ListView.separated(
+            key: const PageStorageKey<String>("quran drawer"),
+            itemCount: _chapters.length,
+            itemBuilder: (context, index) => InkWell(
+              onTap: () {
+                pageController.jumpToPage(index);
+                Scaffold.of(context).closeDrawer();
+              },
+              child: Obx(
+                () => ListTile(
+                  selected: pageController.page == (_chapters[index]["id"] - 1),
+                  selectedColor:
+                      Theme.of(context).primaryTextTheme.bodyText2?.color,
+                  selectedTileColor:
+                      Theme.of(context).primaryColor.withAlpha(50),
+                  subtitle: Text("${_chapters[index]['translation']}"),
+                  leading: Text(
+                    readerStoreController.showTranslation.value
+                        ? _chapters[index]['id'].toString()
+                        : toFarsi(_chapters[index]['id']),
+                    style: googleFontify(
+                        readerStoreController.arabicFont.value, null),
+                  ),
+                  title: Text(
+                    "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                  ),
+                  trailing: Wrap(
+                    spacing: 4,
+                    children: [
+                      Text(
+                        readerStoreController.showTranslation.value
+                            ? _chapters[index]['total_verses'].toString()
+                            : toFarsi(_chapters[index]['total_verses']),
+                        style: googleFontify(
+                          readerStoreController.arabicFont.value,
+                          TextStyle(
+                            color: Theme.of(context)
+                                .primaryTextTheme
+                                .bodyText2!
+                                .color,
+                            fontSize: 10,
                           ),
                         ),
                       ),
-                    ]),
+                      const Icon(Icons.my_library_books_rounded,
+                          size: 14, color: Colors.grey)
+                    ],
                   ),
-                  Surah(
-                    chapter: chapter,
-                  )
-                ],
-              )
-          ],
-        ),
-      ),
-      onDrawerChanged: (isOpened) {
-        globalStoreController.drawerIsOpen(isOpened);
-      },
-      drawer: Drawer(
-        child: ListView.separated(
-          key: const PageStorageKey<String>("quran drawer"),
-          itemCount: _chapters.length,
-          itemBuilder: (context, index) => InkWell(
-            onTap: () {
-              pageController.jumpToPage(index);
-              Scaffold.of(context).closeDrawer();
-            },
-            child: Obx(
-              () => ListTile(
-                selected: pageController.page == (_chapters[index]["id"] - 1),
-                selectedColor:
-                    Theme.of(context).primaryTextTheme.bodyText2?.color,
-                selectedTileColor: Theme.of(context).primaryColor.withAlpha(50),
-                subtitle: Text("${_chapters[index]['translation']}"),
-                leading: Text(
-                  readerStoreController.showTranslation.value
-                      ? _chapters[index]['id'].toString()
-                      : toFarsi(_chapters[index]['id']),
-                  style: googleFontify(
-                      readerStoreController.arabicFont.value, null),
-                ),
-                title: Text(
-                  "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
-                  style: Theme.of(context).primaryTextTheme.bodyText2,
-                ),
-                trailing: Wrap(
-                  spacing: 4,
-                  children: [
-                    Text(
-                      readerStoreController.showTranslation.value
-                          ? _chapters[index]['total_verses'].toString()
-                          : toFarsi(_chapters[index]['total_verses']),
-                      style: googleFontify(
-                        readerStoreController.arabicFont.value,
-                        TextStyle(
-                          color: Theme.of(context)
-                              .primaryTextTheme
-                              .bodyText2!
-                              .color,
-                          fontSize: 10,
-                        ),
-                      ),
-                    ),
-                    const Icon(Icons.my_library_books_rounded,
-                        size: 14, color: Colors.grey)
-                  ],
                 ),
               ),
             ),
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(height: 0),
           ),
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(height: 0),
         ),
       ),
     );
