@@ -16,9 +16,16 @@ class Qibla extends StatelessWidget {
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
 
-  setLocation() async {
+  setLocation(BuildContext context) async {
     Position position = await determinePosition();
     globalStoreController.setLocation(position.latitude, position.longitude);
+
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      const SnackBar(
+        content: Text('Location confirmed.'),
+      ),
+    );
   }
 
   @override
@@ -27,12 +34,12 @@ class Qibla extends StatelessWidget {
       appBar: AppBar(
         leading: const CustomBackButton(),
         title: const Text("Qibla"),
-        actions: const [
+        actions: [
           IconButton(
-            onPressed: determinePosition,
-            icon: Icon(Icons.my_location_rounded),
+            onPressed: () => setLocation(context),
+            icon: const Icon(Icons.my_location_rounded),
           ),
-          ThemeToggleButton(),
+          const ThemeToggleButton(),
         ],
       ),
       body: Container(
