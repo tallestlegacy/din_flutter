@@ -190,7 +190,7 @@ class GlobalStoreController extends GetxController {
     currentSurah(box.read("currentSurah") ?? 0);
     favouriteVerses(jsonDecode(box.read("favouriteVerses") ?? "[]"));
     lat(box.read("lat") ?? 0.0);
-    lat(box.read("lat") ?? 0.0);
+    lon(box.read("lon") ?? 0.0);
     prayerTimes(jsonDecode(box.read("prayerTimes") ?? "{}"));
   }
 }

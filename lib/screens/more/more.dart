@@ -101,7 +101,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 ListTile(
                   leading: const Icon(Icons.av_timer_rounded),
                   title: const Text("Prayer Times"),
-                  onTap: () => push(PrayerTimes()),
+                  onTap: () => push(const PrayerTimes()),
                 ),
                 if (kDebugMode) // TODO add features
                   ListTile(
@@ -125,16 +125,16 @@ class _MoreScreenState extends State<MoreScreen> {
                   onTap: () => push(const Appearance()),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.translate_rounded),
-                  title: const Text("Translations"),
-                  subtitle: const Text("en, fr, ru, bg ..."),
-                  onTap: () => push(const Translations()),
-                ),
-                ListTile(
                   leading: const Icon(Icons.text_format_rounded),
                   title: const Text("Reader preferences"),
                   subtitle: const Text("Size, text display format"),
                   onTap: () => push(ReaderPreferences()),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.translate_rounded),
+                  title: const Text("Translation"),
+                  subtitle: const Text("en, fr, ru, bg ..."),
+                  onTap: () => push(const Translations()),
                 ),
                 if (kDebugMode) // TODO add feature
                   ListTile(

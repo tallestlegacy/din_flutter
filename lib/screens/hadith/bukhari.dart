@@ -32,6 +32,16 @@ class _BukhariState extends State<Bukhari> {
   final ReaderStoreController readerStoreController =
       Get.put(ReaderStoreController());
 
+  List getAllBooks(List<dynamic> volumes) {
+    List books = [];
+
+    for (var volume in volumes) {
+      books.addAll(volume["books"]);
+    }
+
+    return books;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -43,15 +53,15 @@ class _BukhariState extends State<Bukhari> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Sahih Bukhari"),
-        // ignore: prefer_const_literals_to_create_immutables
         actions: [
-          /*
           IconButton(
             icon: const Icon(Icons.search_rounded),
             onPressed: () {
-              showSearch(context: context, delegate: BukhariSearch());
+              showSearch(
+                  context: context,
+                  delegate: BukhariSearch(refs: getAllBooks(_volumes)));
             },
-          ),*/
+          ),
           const ThemeToggleButton(),
         ],
       ),
@@ -108,28 +118,85 @@ class _BukhariState extends State<Bukhari> {
 }
 
 class BukhariSearch extends SearchDelegate {
+  List refs = [];
+  BukhariSearch({required this.refs});
+
   @override
   List<Widget>? buildActions(BuildContext context) {
-    // TODO: implement buildActions
-    throw UnimplementedError();
+    return [
+      IconButton(
+          onPressed: () {
+            if (query == "") {
+              close(context, null);
+            } else {
+              query = "";
+            }
+          },
+          icon: const Icon(Icons.close_rounded))
+    ];
   }
 
   @override
   Widget? buildLeading(BuildContext context) {
-    // TODO: implement buildLeading
-    throw UnimplementedError();
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back_rounded));
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
+    List matchQuery = [];
+    for (var ref in refs) {
+      if (ref["name"].toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(ref);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+            title: Text(result["name"]),
+            onTap: () {
+              close(context, null);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => BukhariHadiths(book: result),
+                ),
+              );
+            });
+      },
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions
-    throw UnimplementedError();
+    List matchQuery = [];
+    for (var ref in refs) {
+      if (ref["name"].toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(ref);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = matchQuery[index];
+        return ListTile(
+            title: Text(result["name"]),
+            onTap: () {
+              close(context, null);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => BukhariHadiths(book: result),
+                ),
+              );
+            });
+      },
+    );
   }
 }
 

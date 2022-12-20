@@ -68,7 +68,7 @@ class _PrayerTimesState extends State<PrayerTimes> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Prayer Times"),
-        backgroundColor: Theme.of(context).backgroundColor,
+        //backgroundColor: Theme.of(context).backgroundColor,
         actions: [
           IconButton(
             onPressed: initPrayerData,

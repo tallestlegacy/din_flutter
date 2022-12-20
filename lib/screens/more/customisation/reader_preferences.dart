@@ -19,7 +19,8 @@ class ReaderPreferences extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Reader preferences"),
         leading: const CustomBackButton(),
-        backgroundColor: Theme.of(context).backgroundColor,
+        //backgroundColor: Theme.of(context).backgroundColor,
+        elevation: 1,
         actions: const [ThemeToggleButton()],
       ),
       body: ListView(

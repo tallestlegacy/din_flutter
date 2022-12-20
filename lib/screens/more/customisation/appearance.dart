@@ -71,7 +71,7 @@ class Appearance extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Appearance"),
         actions: const [ThemeToggleButton()],
-        backgroundColor: Theme.of(context).backgroundColor,
+        elevation: 1,
         leading: const CustomBackButton(),
       ),
       body: ListView(

@@ -58,20 +58,25 @@ class Qibla extends StatelessWidget {
                         shape: const CircleBorder(),
                         shadowColor: Colors.grey.withAlpha(100),
                         elevation: 1,
-                        child: SmoothCompass(
-                          compassAsset: Stack(
-                            children: [
-                              Image.asset("assets/png/ticks.png"),
-                              Transform.rotate(
-                                angle: (pi / 180) *
-                                    getQiblaAngle(
-                                      globalStoreController.lat.value,
-                                      globalStoreController.lon.value,
-                                    ),
-                                child: Image.asset("assets/png/pick.png"),
+                        child: Stack(
+                          children: [
+                            Image.asset("assets/png/top.png"),
+                            SmoothCompass(
+                              compassAsset: Stack(
+                                children: [
+                                  Image.asset("assets/png/ticks.png"),
+                                  Transform.rotate(
+                                    angle: (pi / 180) *
+                                        getQiblaAngle(
+                                          globalStoreController.lat.value,
+                                          globalStoreController.lon.value,
+                                        ),
+                                    child: Image.asset("assets/png/pick.png"),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                       Column(

@@ -78,7 +78,7 @@ class _FavouritesState extends State<Favourites> {
         leading: const CustomBackButton(),
         title: const Text("Favourites"),
         actions: const [TextSettingsAction(), ThemeToggleButton()],
-        backgroundColor: Theme.of(context).backgroundColor,
+        //backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Obx(() {
         if (globalStoreController.favouriteVerses.isEmpty) {

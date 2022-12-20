@@ -14,7 +14,7 @@ class AboutDeveloper extends StatelessWidget {
       appBar: AppBar(
         title: const Text("This is me"),
         leading: const CustomBackButton(),
-        backgroundColor: Theme.of(context).backgroundColor,
+        //backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

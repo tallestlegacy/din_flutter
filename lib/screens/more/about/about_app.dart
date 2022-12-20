@@ -32,7 +32,7 @@ information is left on your device.
       appBar: AppBar(
         title: const Text("About the app"),
         leading: const CustomBackButton(),
-        backgroundColor: Theme.of(context).backgroundColor,
+        //backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: const SingleChildScrollView(
         child: Padding(

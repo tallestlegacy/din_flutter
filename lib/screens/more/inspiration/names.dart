@@ -67,6 +67,8 @@ class _NamesState extends State<Names> {
                   indicatorColor: Theme.of(context).primaryColor,
                 ),
                 actions: const [TextSettingsAction(), ThemeToggleButton()],
+                scrolledUnderElevation: 1,
+                elevation: 1,
               ),
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             ),

@@ -52,7 +52,7 @@ class Translations extends StatelessWidget {
         title: const Text("Translations"),
         leading: const CustomBackButton(),
         actions: const [ThemeToggleButton()],
-        backgroundColor: Theme.of(context).backgroundColor,
+        //backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: RefreshIndicator(
         onRefresh: translationsStoreController.updateQuranTranslations,

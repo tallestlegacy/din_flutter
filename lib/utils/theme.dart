@@ -57,7 +57,7 @@ class Styles {
         ),
         iconTheme: IconThemeData(color: colorScheme.onSecondary),
         scrolledUnderElevation: 1,
-        shadowColor: primarySwatch.shade100,
+        shadowColor: primarySwatch.shade100.withAlpha(100),
         surfaceTintColor: primarySwatch,
       ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
