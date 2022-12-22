@@ -1,3 +1,4 @@
+import 'package:din/screens/more/info/info.dart';
 import 'package:din/screens/more/tools/prayer_times.dart';
 import 'package:din/screens/more/tools/qibla.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,8 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
-import 'about/about_app.dart';
-import 'about/about_developer.dart';
+import 'info/about_app.dart';
+import 'info/about_developer.dart';
 import 'customisation/appearance.dart';
 import 'inspiration/favourites.dart';
 import 'inspiration/names.dart';
@@ -67,6 +68,7 @@ class _MoreScreenState extends State<MoreScreen> {
         // backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: ListView(
+        padding: const EdgeInsets.symmetric(vertical: 16),
         children: [
           ListTile(
             title: const Text("Inspiration"),
@@ -163,73 +165,16 @@ class _MoreScreenState extends State<MoreScreen> {
             ),
           ),
           const Divider(),
-          ListTile(
-            title: const Text("Review and Share"),
-            subtitle: Column(
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.share_rounded),
-                  title: const Text("Share"),
-                  onTap: () async {
-                    await Share.share(
-                      'Din - Quran and Sunnah (PlayStore) \n https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt',
-                    );
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.thumbs_up_down_rounded),
-                  title: const Text("Rate the app"),
-                  onTap: () {
-                    openLink(
-                        "https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt");
-                  },
-                  trailing: linkIcon,
-                ),
-                ListTile(
-                  leading: const Icon(Icons.question_answer_rounded),
-                  title: const Text("Help and Feedback"),
-                  subtitle: const Text("Contact, recommendations"),
-                  onTap: () => openLink(
-                    "mailto:tallestlegacy@gmail.com?subject=Din > Help and Feedback",
-                  ),
-                  trailing: linkIcon,
-                ),
-              ],
-            ),
+          Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.info_outline_rounded),
+                title: const Text("App Info"),
+                subtitle: Text(_packageInfo.version),
+                onTap: () => push(const Info()),
+              ),
+            ],
           ),
-          const Divider(),
-          ListTile(
-            title: const Text("App details"),
-            subtitle: Column(
-              children: [
-                ListTile(
-                  leading: const Icon(Icons.info_outline_rounded),
-                  title: const Text("About the app"),
-                  onTap: () => push(const AboutApp()),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.badge_outlined),
-                  title: const Text("Meet the developer"),
-                  onTap: () => push(const AboutDeveloper()),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.code_rounded),
-                  title: const Text("Sources and Licencing"),
-                  onTap: () =>
-                      openLink("https://github.com/tallestlegacy/din_dt"),
-                  trailing: linkIcon,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Text(
-              _packageInfo.version,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            ),
-          )
         ],
       ),
     );

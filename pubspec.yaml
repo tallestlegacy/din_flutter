@@ -25,7 +25,9 @@ dependencies:
   google_fonts: ^3.0.1
   geolocator: ^9.0.2
   flutter_local_notifications: ^12.0.4
-  smooth_compass: ^2.0.2
+  flutter_svg: ^1.1.6
+  sensors_plus: ^2.0.1
+  vector_graphics: ^0.0.5
 
 dev_dependencies:
   flutter_test:
@@ -38,7 +40,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    #- assets/svg/
+    - assets/svg/
     - assets/png/
     - assets/json/
     - assets/json/quran_editions/

@@ -140,6 +140,7 @@ class GlobalStoreController extends GetxController {
 
   RxDouble lat = 0.0.obs;
   RxDouble lon = 0.0.obs;
+  RxBool locationInitialised = false.obs;
 
   RxBool drawerIsOpen = false.obs;
 
@@ -177,8 +178,10 @@ class GlobalStoreController extends GetxController {
   void setLocation(double latitude, double longitude) {
     lat(latitude);
     lon(longitude);
+    locationInitialised(true);
     box.write("lat", lat.value);
     box.write("lon", lon.value);
+    box.write("locationInitialised", locationInitialised.value);
   }
 
   void setPrayerTimeForMonth(Map data) {
@@ -191,6 +194,7 @@ class GlobalStoreController extends GetxController {
     favouriteVerses(jsonDecode(box.read("favouriteVerses") ?? "[]"));
     lat(box.read("lat") ?? 0.0);
     lon(box.read("lon") ?? 0.0);
+    locationInitialised(box.read("locationInitialised") ?? false);
     prayerTimes(jsonDecode(box.read("prayerTimes") ?? "{}"));
   }
 }
@@ -236,6 +240,11 @@ class TranslationsStoreController extends GetxController {
         null;
   }
 
+  bool editionIsDefaault(String language, String edition) {
+    return defaultTranslation["language"] == language &&
+        defaultTranslation["edition"] == edition;
+  }
+
   Future<void> saveEdition(String language, String edition, var data) async {
     for (var i = 1; i < data.length; i++) {
       // save to local json
@@ -247,6 +256,12 @@ class TranslationsStoreController extends GetxController {
     downloadedQuranEditions.add({"language": language, "edition": edition});
 
     box.write("downloadedQuranEditions", jsonEncode(downloadedQuranEditions));
+  }
+
+  Future<void> deleteEdition(String language, String edition) async {
+    downloadedQuranEditions.removeWhere(
+        (e) => e["language"] == language && e["edition"] == edition);
+    await deleteEditionFromStorage(language, edition);
   }
 
   dynamic getEditionChapter(String language, String edition, int chapter) {

@@ -31,19 +31,28 @@ class _TranslationState extends State<Translation> {
     }
   }
 
+  // helpful getters
+  get isNotDownloaded => _state == "not_downloaded";
+  get isDownloading => _state == "downloading";
+  get isDownloaded => translationsStoreController.editionIsDownloaded(
+      widget.language, widget.edition);
+  get isDownloadFailure => _state == "download_failure";
+  get isDefault =>
+      translationsStoreController.defaultTranslation["language"] ==
+          widget.language &&
+      translationsStoreController.defaultTranslation["edition"] ==
+          widget.edition;
+
   void handleTap() {
-    if (_state == "downloaded") {
-      translationsStoreController.setTranslation({
-        "language": widget.language,
-        "edition": widget.edition,
-      });
+    if (isDownloaded) {
+      makeDefault();
     } else {
       download();
     }
   }
 
   Future<void> download() async {
-    if (_state == "downloading") return;
+    if (isDownloading) return;
 
     if (mounted) {
       setState(() {
@@ -87,27 +96,67 @@ class _TranslationState extends State<Translation> {
     }
   }
 
+  void makeDefault() {
+    translationsStoreController.setTranslation({
+      "language": widget.language,
+      "edition": widget.edition,
+    });
+
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('${widget.edition} is now the default translation'),
+      ),
+    );
+  }
+
+  void delete() async {
+    await translationsStoreController.deleteEdition(
+        widget.language, widget.edition);
+
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        content: Text('Deleted ${widget.edition} from local storage'),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => ListTile(
-        leading: const Icon(Icons.translate_rounded),
         onTap: handleTap,
-        onLongPress: download,
+        enabled: !isDownloading,
         title: Text(widget.edition),
-        trailing: Icon(() {
-          switch (_state) {
-            case "downloading":
-              return Icons.downloading_rounded;
-            case "downloaded":
-              return Icons.download_done;
-          }
+        subtitle: isDefault ? const Text("Default") : null,
+        leading: Icon(() {
+          if (isDownloading) return Icons.downloading_rounded;
           if (translationsStoreController.editionIsDownloaded(
               widget.language, widget.edition)) {
             return Icons.download_done_rounded;
           }
           return Icons.download_rounded;
         }()),
+        trailing: isDownloaded
+            ? PopupMenuButton(
+                itemBuilder: (context) => [
+                  PopupMenuItem(
+                    onTap: makeDefault,
+                    child: const Text("Make Default"),
+                  ),
+                  PopupMenuItem(
+                    onTap: download,
+                    child: const Text("Redownload"),
+                  ),
+                  PopupMenuItem(
+                    enabled: !isDefault,
+                    onTap: delete,
+                    child: const Text("Delete"),
+                  ),
+                ],
+              )
+            : null,
       ),
     );
   }

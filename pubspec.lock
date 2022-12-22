@@ -125,13 +125,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.13"
-  flutter_sensors:
-    dependency: transitive
+  flutter_svg:
+    dependency: "direct main"
     description:
-      name: flutter_sensors
+      name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.6"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -324,6 +324,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.2"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  path_parsing:
+    dependency: transitive
+    description:
+      name: path_parsing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   path_provider:
     dependency: "direct main"
     description:
@@ -401,6 +415,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  sensors_plus:
+    dependency: "direct main"
+    description:
+      name: sensors_plus
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
+  sensors_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: sensors_plus_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.3"
   share_plus:
     dependency: "direct main"
     description:
@@ -420,13 +448,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
-  smooth_compass:
-    dependency: "direct main"
-    description:
-      name: smooth_compass
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
   source_span:
     dependency: transitive
     description:
@@ -546,6 +567,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.7"
+  vector_graphics:
+    dependency: "direct main"
+    description:
+      name: vector_graphics
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
+  vector_graphics_codec:
+    dependency: transitive
+    description:
+      name: vector_graphics_codec
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   vector_math:
     dependency: transitive
     description:

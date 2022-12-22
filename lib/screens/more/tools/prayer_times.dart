@@ -72,9 +72,15 @@ class _PrayerTimesState extends State<PrayerTimes> {
         title: const Text("Prayer Times"),
         //backgroundColor: Theme.of(context).backgroundColor,
         actions: [
-          IconButton(
-            onPressed: initPrayerData,
-            icon: const Icon(Icons.my_location_rounded),
+          Obx(
+            () => IconButton(
+              onPressed: () => initPrayerData(),
+              icon: loading
+                  ? const Icon(Icons.location_searching_rounded)
+                  : globalStoreController.locationInitialised.value
+                      ? const Icon(Icons.my_location_rounded)
+                      : const Icon(Icons.add_location_alt_rounded),
+            ),
           ),
           const ThemeToggleButton(),
         ],

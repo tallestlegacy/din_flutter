@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:din/utils/store.dart';
-import '../utils/json.dart';
-import '/constants/strings.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 const Widget linkIcon = Icon(
   Icons.link_rounded,
@@ -11,31 +8,20 @@ const Widget linkIcon = Icon(
 );
 
 class DinAppIcon extends StatelessWidget {
-  const DinAppIcon({super.key});
+  final double size;
+  const DinAppIcon({super.key, this.size = 100});
 
   @override
   Widget build(BuildContext context) {
-    final ReaderStoreController readerStoreController =
-        Get.put(ReaderStoreController());
-    return Obx(
-      () => Center(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(100)),
-            color: Theme.of(context).backgroundColor.withAlpha(50),
-          ),
-          padding: const EdgeInsets.all(16),
-          child: Text(
-            din,
-            textHeightBehavior: const TextHeightBehavior(
-              applyHeightToFirstAscent: true,
-              applyHeightToLastDescent: false,
-            ),
-            style: googleFontify(
-              readerStoreController.arabicFont.value,
-              const TextStyle(fontSize: 48),
-            ),
-          ),
+    return Container(
+      padding: const EdgeInsets.all(32),
+      child: Material(
+        shape: const CircleBorder(),
+        elevation: 2,
+        child: SvgPicture.asset(
+          "assets/svg/din.svg",
+          color: Theme.of(context).primaryColor,
+          width: size,
         ),
       ),
     );

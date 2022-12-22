@@ -16,15 +16,16 @@ flutter run
 
 - [ ] Find a designer
 - [x] Publish on PlayStore
-- [ ] Publish on Flathub
-- [ ] Publish on F-Droid
 
 ## Features
 
 - [x] Quran
+- [ ] Quran Recitations
+- [ ] Dua Recitations
 - [x] Hadith and Sunnah
 - [ ] Madrasa
 - [x] Multiple translations
+- [ ] Abridged explanations of the Quran
 - [ ] Learning resources
 - [x] Favourites
 - [ ] Application reviews and Release notes

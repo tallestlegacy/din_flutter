@@ -1,3 +1,5 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
 import '../utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,9 +22,16 @@ class _DebugState extends State<Debug> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Obx(() =>
-            Text(translationsStoreController.quranTranslations.toString())),
+      body: ListView(
+        children: [
+          SvgPicture.asset(
+            "assets/svg/compass.svg",
+            height: 200,
+            color: Colors.red,
+          ),
+          Obx(() =>
+              Text(translationsStoreController.quranTranslations.toString())),
+        ],
       ),
     );
   }
