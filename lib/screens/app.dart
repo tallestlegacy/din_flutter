@@ -1,10 +1,12 @@
-import 'package:din/screens/dua/dua.dart';
-import 'package:din/widgets/scroll_to_hide.dart';
-import 'package:din/screens/debug.dart';
-import 'package:din/screens/hadith/hadith.dart';
-import 'package:din/screens/quran.dart';
-import 'package:din/screens/more/more.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
+
+import '/screens/dua/dua.dart';
+import '/widgets/scroll_to_hide.dart';
+import '/screens/debug.dart';
+import '/screens/hadith/hadith.dart';
+import '/screens/quran.dart';
+import '/screens/more/more.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatefulWidget {
@@ -39,55 +41,103 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    if (mounted) {
+      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Theme.of(context).colorScheme.tertiary,
+      ));
+    }
+
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
-      Dua(scrollController: scrollController),
-      Hadith(scrollController: scrollController),
-      MoreScreen(scrollController: scrollController),
-      const Debug()
+      const Dua(),
+      const Hadith(),
+      const MoreScreen(),
+      if (kDebugMode) const Debug()
     ];
-    return SafeArea(
-      bottom: true,
-      top: false,
-      child: Scaffold(
-        body: screens[_selectedIndex],
-        bottomNavigationBar: ScrollToHide(
-          controller: scrollController,
-          child: SizedBox(
-            height: 64,
-            child: BottomNavigationBar(
-              currentIndex: _selectedIndex,
-              onTap: handleNavigationTap,
-              items: <BottomNavigationBarItem>[
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  icon: const Icon(Icons.menu_book_rounded),
-                  label: 'Quran',
+
+    List icons = const [
+      {
+        "icon": Icon(Icons.menu_book_rounded),
+        "label": 'Quran',
+      },
+      {
+        "icon": Icon(Icons.try_sms_star_rounded),
+        "label": 'Dua',
+      },
+      {
+        "icon": Icon(Icons.book_rounded),
+        "label": 'Hadith',
+      },
+      {
+        "icon": Icon(Icons.menu_open_rounded),
+        "label": 'More',
+      },
+      if (kDebugMode)
+        {
+          "icon": Icon(Icons.bug_report_rounded),
+          "label": 'Debug',
+        }
+    ];
+
+    return WillPopScope(
+      onWillPop: () async {
+        setState(() {
+          _selectedIndex = 0;
+        });
+        return false;
+      },
+      child: SafeArea(
+        bottom: true,
+        top: false,
+        child: Scaffold(
+          body: MediaQuery.of(context).size.width < 600
+              ? IndexedStack(
+                  index: _selectedIndex,
+                  children: screens,
+                )
+              : Row(
+                  children: [
+                    Expanded(
+                      child: IndexedStack(
+                        index: _selectedIndex,
+                        children: screens,
+                      ),
+                    ),
+                    NavigationRail(
+                      minExtendedWidth: 160,
+                      destinations: <NavigationRailDestination>[
+                        for (var e in icons)
+                          NavigationRailDestination(
+                            icon: e["icon"],
+                            label: Text(e["label"]),
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                          ),
+                      ],
+                      selectedIndex: _selectedIndex,
+                      onDestinationSelected: handleNavigationTap,
+                    ),
+                  ],
                 ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  icon: const Icon(Icons.try_sms_star_rounded),
-                  label: 'Dua',
-                ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  icon: const Icon(Icons.book),
-                  label: 'Hadith',
-                ),
-                BottomNavigationBarItem(
-                  backgroundColor: Theme.of(context).colorScheme.secondary,
-                  icon: const Icon(Icons.menu_open_rounded),
-                  label: 'More',
-                ),
-                if (kDebugMode)
-                  BottomNavigationBarItem(
-                    backgroundColor: Theme.of(context).colorScheme.secondary,
-                    icon: const Icon(Icons.bug_report_rounded),
-                    label: 'Debug',
+          bottomNavigationBar: MediaQuery.of(context).size.width < 600
+              ? ScrollToHide(
+                  controller: scrollController,
+                  child: SizedBox(
+                    height: 72,
+                    child: NavigationBar(
+                      backgroundColor: Theme.of(context).backgroundColor,
+                      selectedIndex: _selectedIndex,
+                      onDestinationSelected: handleNavigationTap,
+                      destinations: <NavigationDestination>[
+                        for (var e in icons)
+                          NavigationDestination(
+                            icon: e["icon"],
+                            label: e["label"],
+                          ),
+                      ],
+                    ),
                   ),
-              ],
-            ),
-          ),
+                )
+              : null,
         ),
       ),
     );

@@ -1,17 +1,17 @@
-import 'package:din/screens/app.dart';
-import 'package:din/util/store.dart';
-import 'package:din/util/theme.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
+import '/screens/app.dart';
+import 'utils/store.dart';
+import 'utils/theme.dart';
+
 void main() async {
   await GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(const DinFlutterApp());
-
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(systemNavigationBarColor: Colors.black));
 }
 
 class DinFlutterApp extends StatelessWidget {

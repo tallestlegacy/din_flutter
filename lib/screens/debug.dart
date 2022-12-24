@@ -1,5 +1,8 @@
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../utils/store.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:get/get.dart';
 
 class Debug extends StatefulWidget {
   const Debug({super.key});
@@ -9,30 +12,26 @@ class Debug extends StatefulWidget {
 }
 
 class _DebugState extends State<Debug> {
-  double _value = 20;
+  final GlobalStoreController globalStoreController =
+      Get.put(GlobalStoreController());
+  final TranslationsStoreController translationsStoreController =
+      Get.put(TranslationsStoreController());
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
 
   @override
   Widget build(BuildContext context) {
-    final List<String> _tabs = <String>['Tab 1', 'Tab 2'];
     return Scaffold(
-      body: Center(
-        child: IconButton(
-          icon: const Icon(Icons.navigate_next_rounded),
-          onPressed: () {
-            Navigator.push(
-              context,
-              PageTransition(
-                child: Scaffold(
-                  appBar: AppBar(
-                    title: const Text("Hello"),
-                  ),
-                ),
-                type: PageTransitionType.rightToLeftJoined,
-                childCurrent: this.widget,
-              ),
-            );
-          },
-        ),
+      body: ListView(
+        children: [
+          SvgPicture.asset(
+            "assets/svg/compass.svg",
+            height: 200,
+            color: Colors.red,
+          ),
+          Obx(() =>
+              Text(translationsStoreController.quranTranslations.toString())),
+        ],
       ),
     );
   }

@@ -16,20 +16,22 @@ flutter run
 
 - [ ] Find a designer
 - [x] Publish on PlayStore
-- [ ] Publish on Flathub
-- [ ] Publish on F-Droid
 
 ## Features
 
 - [x] Quran
+- [ ] Quran Recitations
+- [ ] Dua Recitations
 - [x] Hadith and Sunnah
 - [ ] Madrasa
-- [ ] Multiple translations
+- [x] Multiple translations
+- [ ] Abridged explanations of the Quran
 - [ ] Learning resources
-- [ ] Favourites
-- [ ] Text sharing
+- [x] Favourites
 - [ ] Application reviews and Release notes
 - [ ] User manual
+
+- [x] Text sharing
 - [ ] Search quran
 - [ ] Search every other list
 - [ ] Islamic calendar
@@ -38,9 +40,10 @@ flutter run
 ## Customisation
 
 - [x] Arabic / English / Transliteration toggles
-- [ ] Scroll Direction
+- [x] Scroll Direction
 - [x] App colors and theme
-- [ ] Arabic and English fonts
+- [x] Arabic fonts
+- [ ] Other UI fonts
 
 ## UI
 
@@ -53,7 +56,7 @@ flutter run
 For minimal app bundle size :
 
 ```sh
- flutter build appbundle --target-platform android-arm,android-arm64
+ flutter build appbundle --target-platform android-arm,android-arm64 --build-number <n>
 ```
 
 For minimal apk size :

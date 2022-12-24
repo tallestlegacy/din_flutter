@@ -1,5 +1,5 @@
-import 'package:din/util/store.dart';
-import 'package:din/util/theme.dart';
+import '../utils/store.dart';
+import '../utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +14,7 @@ class ThemeToggleButton extends StatelessWidget {
     return IconButton(
       onPressed: () {
         appearanceStoreController.setForceDarkMode(!Get.isDarkMode);
+        Get.changeThemeMode(ThemeMode.light);
         Get.changeTheme(Styles(
           isDarkMode: !Get.isDarkMode,
           swatch: !Get.isDarkMode
