@@ -1,8 +1,13 @@
+// ignore_for_file: unused_import, prefer_const_constructors_in_immutables
+
 import 'dart:async';
 import 'dart:math';
 
+import 'package:din/screens/more/tools/prayer_times.dart';
+import 'package:din/utils/adhan.dart';
 import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,10 +25,14 @@ class Qibla extends StatefulWidget {
   State<Qibla> createState() => _QiblaState();
 }
 
-class _QiblaState extends State<Qibla> {
+class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 10),
+    vsync: this,
+  )..repeat();
 
   bool loading = false;
 
@@ -32,18 +41,15 @@ class _QiblaState extends State<Qibla> {
     setState(() {
       loading = true;
     });
-    Position position = await determinePosition();
-    globalStoreController.setLocation(position.latitude, position.longitude);
+
+    String msg = await globalStoreController.setLocation();
+
     setState(() {
       loading = false;
     });
 
     final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      const SnackBar(
-        content: Text('Location confirmed.'),
-      ),
-    );
+    scaffold.showSnackBar(SnackBar(content: Text(msg)));
   }
 
   // orientation
@@ -69,6 +75,7 @@ class _QiblaState extends State<Qibla> {
 
   @override
   void dispose() {
+    _controller.dispose();
     super.dispose();
     for (final subscription in _streamSubscriptions) {
       subscription.cancel();
@@ -82,8 +89,10 @@ class _QiblaState extends State<Qibla> {
     }
 
     double tangent = atan2(y, x);
+    //double theta = -((tangent) - pi / 2) % (pi * 2);
+    //return theta >= pi ? theta - (2 * pi) : theta;
 
-    return (tangent - pi / 2);
+    return -((tangent) - pi / 2) % (pi * 2);
   }
 
   @override
@@ -106,60 +115,20 @@ class _QiblaState extends State<Qibla> {
           const ThemeToggleButton(),
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Obx(
-          () => Center(
-            child: !globalStoreController.locationInitialised.value
-                ? const Text(
+      body: Obx(
+        () => Container(
+          child: !globalStoreController.locationInitialised.value
+              ? const Center(
+                  child: Text(
                     "Enable location services then click the 'add location' icon button.",
                     textAlign: TextAlign.center,
-                  )
-                : Wrap(
-                    runSpacing: 16,
-                    alignment: WrapAlignment.center,
+                  ),
+                )
+              : SafeArea(
+                  bottom: true,
+                  child: Stack(
+                    alignment: AlignmentDirectional.center,
                     children: [
-                      Material(
-                        shape: const CircleBorder(),
-                        shadowColor: Colors.grey.withAlpha(300),
-                        elevation: 1,
-                        child: Stack(
-                          alignment: AlignmentDirectional.center,
-                          children: [
-                            Image.asset("assets/png/top.png"),
-                            AnimatedContainer(
-                              duration: const Duration(milliseconds: 400),
-                              child: Transform.rotate(
-                                angle: compassAngle,
-                                child: Stack(
-                                  alignment: AlignmentDirectional.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                      "assets/svg/compass.svg",
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .onSurface,
-                                    ),
-                                    Transform.rotate(
-                                      angle: (pi / 180) *
-                                          getQiblaAngle(
-                                            globalStoreController.lat.value,
-                                            globalStoreController.lon.value,
-                                          ),
-                                      child: SvgPicture.asset(
-                                        "assets/svg/needle.svg",
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .tertiary,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       Column(
                         children: [
                           ListTile(
@@ -171,17 +140,68 @@ class _QiblaState extends State<Qibla> {
                           ),
                           ListTile(
                             enabled: false,
-                            title: const Text("Relative Angle"),
+                            title: const Text("Angle relative to Qibla"),
                             subtitle: Text("${getQiblaAngle(
                               globalStoreController.lat.value,
                               globalStoreController.lon.value,
-                            )}º"),
+                            ).toPrecision(2)}º"),
                           ),
+                          if (kDebugMode)
+                            ListTile(
+                              enabled: false,
+                              title: const Text("Angle relative to Qibla"),
+                              subtitle: Text("$x, $y, $z}º"),
+                            ),
                         ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Material(
+                          shape: const CircleBorder(),
+                          shadowColor: Colors.grey.withAlpha(300),
+                          elevation: 1,
+                          child: Stack(
+                            alignment: AlignmentDirectional.center,
+                            children: [
+                              Image.asset("assets/png/top.png"),
+                              AnimatedBuilder(
+                                animation: _controller,
+                                builder: (context, child) => RotationTransition(
+                                  turns: AlwaysStoppedAnimation(
+                                      compassAngle / (pi * 2)),
+                                  child: Stack(
+                                    alignment: AlignmentDirectional.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        "assets/svg/compass.svg",
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onSurface,
+                                      ),
+                                      Transform.rotate(
+                                        angle: (pi / 180) *
+                                            getQiblaAngle(
+                                              globalStoreController.lat.value,
+                                              globalStoreController.lon.value,
+                                            ),
+                                        child: SvgPicture.asset(
+                                          "assets/svg/needle.svg",
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .tertiary,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ],
                   ),
-          ),
+                ),
         ),
       ),
     );

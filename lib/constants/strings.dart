@@ -1,4 +1,5 @@
 const din = "دين";
+const bismi = "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ";
 
 const arabicFonts = [
   "Noto Naskh Arabic",

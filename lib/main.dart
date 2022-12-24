@@ -9,8 +9,10 @@ import 'utils/theme.dart';
 
 void main() async {
   await GetStorage.init();
+
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   runApp(const DinFlutterApp());
 }
 

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -9,6 +10,7 @@ import '/constants/strings.dart';
 import '/utils/json.dart';
 import '/utils/network.dart';
 import '/utils/theme.dart';
+import 'location.dart';
 
 /// Reader Store Controller
 /// manages the reading experience for users
@@ -146,9 +148,10 @@ class GlobalStoreController extends GetxController {
 
   RxMap<dynamic, dynamic> prayerTimes = {}.obs;
 
-  void setcurrentSurah(int pageIndex) {
+  void setCurrentSurah(int pageIndex) {
     currentSurah(pageIndex);
     box.write("currentSurah", pageIndex);
+    print("Set Current Surah >> ${currentSurah.value}");
   }
 
   void addFavouriteAya(aya) {
@@ -175,13 +178,20 @@ class GlobalStoreController extends GetxController {
     return fav;
   }
 
-  void setLocation(double latitude, double longitude) {
-    lat(latitude);
-    lon(longitude);
-    locationInitialised(true);
-    box.write("lat", lat.value);
-    box.write("lon", lon.value);
-    box.write("locationInitialised", locationInitialised.value);
+  Future<String> setLocation() async {
+    try {
+      Position position = await determinePosition();
+
+      lat(position.latitude);
+      lon(position.longitude);
+      locationInitialised(true);
+      box.write("lat", lat.value);
+      box.write("lon", lon.value);
+      box.write("locationInitialised", locationInitialised.value);
+      return "Location confirmed";
+    } catch (e) {
+      return "Please enable location services";
+    }
   }
 
   void setPrayerTimeForMonth(Map data) {
@@ -196,6 +206,8 @@ class GlobalStoreController extends GetxController {
     lon(box.read("lon") ?? 0.0);
     locationInitialised(box.read("locationInitialised") ?? false);
     prayerTimes(jsonDecode(box.read("prayerTimes") ?? "{}"));
+
+    print("Current Surah >> ${currentSurah.value}");
   }
 }
 
@@ -262,6 +274,7 @@ class TranslationsStoreController extends GetxController {
     downloadedQuranEditions.removeWhere(
         (e) => e["language"] == language && e["edition"] == edition);
     await deleteEditionFromStorage(language, edition);
+    box.write("downloadedQuranEditions", jsonEncode(downloadedQuranEditions));
   }
 
   dynamic getEditionChapter(String language, String edition, int chapter) {

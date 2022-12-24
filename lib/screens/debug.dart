@@ -1,5 +1,7 @@
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:din/services/local_notification.dart';
+import 'package:din/widgets/sabt.dart';
 
+import '../utils/adhan.dart';
 import '../utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -21,16 +23,23 @@ class _DebugState extends State<Debug> {
 
   @override
   Widget build(BuildContext context) {
+    // Definitions
+
+    var prayerTimes = getAdhan(0.5, 35);
+
+    return SliverAppBarStatus();
+
     return Scaffold(
       body: ListView(
         children: [
-          SvgPicture.asset(
-            "assets/svg/compass.svg",
-            height: 200,
-            color: Colors.red,
-          ),
-          Obx(() =>
-              Text(translationsStoreController.quranTranslations.toString())),
+          Obx(() => Text(readerStoreController.arabicFont.value.toString())),
+          Text(prayerTimes.fajr.toString()),
+          Text(prayerTimes.dhuhr.toString()),
+          Text(prayerTimes.asr!.toLocal().toString()),
+          Text(prayerTimes.maghrib.toString()),
+          Text(prayerTimes.ishabefore.toString()),
+          Text(prayerTimes.isha!.toLocal().toString()),
+          ElevatedButton(onPressed: showNotification, child: Text("Click me"))
         ],
       ),
     );

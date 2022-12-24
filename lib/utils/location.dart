@@ -23,6 +23,10 @@ Future<Position> determinePosition() async {
         'Location permissions are permanently denied, we cannot request permissions.');
   }
 
+  if (permission == LocationPermission.unableToDetermine) {
+    permission = await Geolocator.requestPermission();
+  }
+
   return await Geolocator.getCurrentPosition();
 }
 

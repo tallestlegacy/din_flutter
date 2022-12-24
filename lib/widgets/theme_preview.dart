@@ -36,7 +36,7 @@ class ThemePreview extends StatelessWidget {
         );
 
     return SizedBox(
-      height: 160,
+      height: 150,
       width: 80,
       child: Obx(
         () => GestureDetector(
@@ -70,7 +70,7 @@ class ThemePreview extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(1),
+              padding: const EdgeInsets.all(2),
               child: Column(
                 children: [
                   Container(
@@ -79,17 +79,16 @@ class ThemePreview extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: color.withAlpha(30),
                       borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(6)),
+                          const BorderRadius.vertical(top: Radius.circular(10)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        if (selected)
-                          Icon(
-                            Icons.check_circle_rounded,
-                            color: selected ? color : Colors.transparent,
-                          )
+                        Icon(
+                          Icons.check_circle_rounded,
+                          color: selected ? color : Colors.transparent,
+                        ),
                       ],
                     ),
                   ),
@@ -99,7 +98,7 @@ class ThemePreview extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        for (double i in [6, 3, 14, 5, 3])
+                        for (double i in [6, 4, 14, 5, 3])
                           Container(
                             margin: const EdgeInsets.symmetric(
                                 vertical: 2, horizontal: 8),

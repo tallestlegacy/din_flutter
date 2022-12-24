@@ -1,3 +1,4 @@
+import 'package:din/widgets/bismi.dart';
 import 'package:flutter/material.dart';
 
 import '/widgets/verse.dart';
@@ -33,21 +34,33 @@ class _SurahState extends State<Surah> {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-        delegate: SliverChildBuilderDelegate(
-      (context, index) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-          children: [
-            Verse(
-              verse: _verses[index],
-              chapter: widget.chapter["id"],
+    return CustomScrollView(slivers: [
+      SliverList(
+        delegate: SliverChildListDelegate([
+          if (widget.chapter["id"] > 1)
+            const Padding(
+              padding: EdgeInsets.only(top: 16, bottom: 32, left: 8, right: 8),
+              child: Bismi(),
             ),
-            if (index != _verses.length - 1) const Divider(height: 0)
-          ],
-        ),
+        ]),
       ),
-      childCount: _verses.length,
-    ));
+      SliverList(
+          key: PageStorageKey<String>("quran surah ${widget.chapter["id"]}"),
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  Verse(
+                    verse: _verses[index],
+                    chapter: widget.chapter["id"],
+                  ),
+                  if (index != _verses.length - 1) const Divider(height: 0)
+                ],
+              ),
+            ),
+            childCount: _verses.length,
+          ))
+    ]);
   }
 }

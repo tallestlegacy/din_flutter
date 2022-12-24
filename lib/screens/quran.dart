@@ -1,3 +1,7 @@
+import 'package:din/widgets/bismi.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
+
+import '../constants/strings.dart';
 import '/widgets/surah.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,10 +39,15 @@ class _QuranPageState extends State<QuranPage> {
     }
   }
 
-  String getChapterText(int page) {
+  String getChapterText(int page, {bool? showTranslation}) {
+    if (_chapters.isEmpty) return "Din";
+
     if (page >= 0 && page <= 114) {
       var chapter = _chapters[page];
-      return "${toFarsi(chapter['id'])}  -  ${chapter['name']} (${chapter['id']}. ${chapter['translation']})";
+      if (showTranslation ?? false) {
+        return "${chapter['id']}. ${chapter['translation']} (${toFarsi(chapter['id'])}  -  ${chapter['name']})";
+      }
+      return "${toFarsi(chapter['id'])}  -  ${chapter['name']}";
     }
     return "Din";
   }
@@ -55,15 +64,28 @@ class _QuranPageState extends State<QuranPage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    globalStoreController.setCurrentSurah(_currentPage);
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final autoScrollController = AutoScrollController(
+      viewportBoundaryGetter: () =>
+          Rect.fromLTRB(0, 0, 0, MediaQuery.of(context).padding.bottom),
+      axis: Axis.vertical,
+    );
+
     void onPageChanged(int page) {
       setState(() {
         _currentPage = page;
       });
-      globalStoreController.currentSurah(page);
+      globalStoreController.setCurrentSurah(_currentPage);
     }
 
-    PageController pageController = PageController();
+    PageController pageController =
+        PageController(initialPage: globalStoreController.currentSurah.value);
 
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
@@ -76,15 +98,24 @@ class _QuranPageState extends State<QuranPage> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
-                title: Text(
-                  getChapterText(_currentPage),
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.w500),
+                title: Obx(
+                  () => Text(
+                    getChapterText(
+                      globalStoreController.currentSurah.value,
+                      showTranslation:
+                          readerStoreController.showTranslation.value,
+                    ),
+                    style: const TextStyle(
+                        fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
                 ),
                 leading: IconButton(
                   icon: const Icon(Icons.menu_rounded),
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
+                    autoScrollController.scrollToIndex(
+                        globalStoreController.currentSurah.value,
+                        preferPosition: AutoScrollPosition.middle);
                   },
                 ),
                 snap: true,
@@ -101,33 +132,8 @@ class _QuranPageState extends State<QuranPage> {
             onPageChanged: onPageChanged,
             children: <Widget>[
               for (var chapter in _chapters)
-                CustomScrollView(
-                  slivers: [
-                    SliverList(
-                      delegate: SliverChildListDelegate([
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              top: 16, bottom: 32, left: 8, right: 8),
-                          child: Obx(
-                            () => Text(
-                              "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-                              style: googleFontify(
-                                readerStoreController.arabicFont.value,
-                                TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontSize: readerStoreController.fontSize * 3,
-                                ),
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        ),
-                      ]),
-                    ),
-                    Surah(
-                      chapter: chapter,
-                    )
-                  ],
+                Surah(
+                  chapter: chapter,
                 )
             ],
           ),
@@ -137,6 +143,7 @@ class _QuranPageState extends State<QuranPage> {
         },
         drawer: Drawer(
           child: ListView.separated(
+            controller: autoScrollController,
             key: const PageStorageKey<String>("quran drawer"),
             itemCount: _chapters.length,
             itemBuilder: (context, index) => InkWell(
@@ -145,45 +152,51 @@ class _QuranPageState extends State<QuranPage> {
                 Scaffold.of(context).closeDrawer();
               },
               child: Obx(
-                () => ListTile(
-                  selected: pageController.page == (_chapters[index]["id"] - 1),
-                  selectedColor:
-                      Theme.of(context).primaryTextTheme.bodyText2?.color,
-                  selectedTileColor:
-                      Theme.of(context).primaryColor.withAlpha(50),
-                  subtitle: Text("${_chapters[index]['translation']}"),
-                  leading: Text(
-                    readerStoreController.showTranslation.value
-                        ? _chapters[index]['id'].toString()
-                        : toFarsi(_chapters[index]['id']),
-                    style: googleFontify(
-                        readerStoreController.arabicFont.value, null),
-                  ),
-                  title: Text(
-                    "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
-                  ),
-                  trailing: Wrap(
-                    spacing: 4,
-                    children: [
-                      Text(
-                        readerStoreController.showTranslation.value
-                            ? _chapters[index]['total_verses'].toString()
-                            : toFarsi(_chapters[index]['total_verses']),
-                        style: googleFontify(
-                          readerStoreController.arabicFont.value,
-                          TextStyle(
-                            color: Theme.of(context)
-                                .primaryTextTheme
-                                .bodyText2!
-                                .color,
-                            fontSize: 10,
+                () => AutoScrollTag(
+                  controller: autoScrollController,
+                  index: index,
+                  key: ValueKey(index),
+                  child: ListTile(
+                    selected:
+                        pageController.page == (_chapters[index]["id"] - 1),
+                    selectedColor:
+                        Theme.of(context).primaryTextTheme.bodyText2?.color,
+                    selectedTileColor:
+                        Theme.of(context).primaryColor.withAlpha(50),
+                    subtitle: Text("${_chapters[index]['translation']}"),
+                    leading: Text(
+                      readerStoreController.showTranslation.value
+                          ? _chapters[index]['id'].toString()
+                          : toFarsi(_chapters[index]['id']),
+                      style: googleFontify(
+                          readerStoreController.arabicFont.value, null),
+                    ),
+                    title: Text(
+                      "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
+                      style: Theme.of(context).primaryTextTheme.bodyText2,
+                    ),
+                    trailing: Wrap(
+                      spacing: 4,
+                      children: [
+                        Text(
+                          readerStoreController.showTranslation.value
+                              ? _chapters[index]['total_verses'].toString()
+                              : toFarsi(_chapters[index]['total_verses']),
+                          style: googleFontify(
+                            readerStoreController.arabicFont.value,
+                            TextStyle(
+                              color: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyText2!
+                                  .color,
+                              fontSize: 10,
+                            ),
                           ),
                         ),
-                      ),
-                      const Icon(Icons.my_library_books_rounded,
-                          size: 14, color: Colors.grey)
-                    ],
+                        const Icon(Icons.my_library_books_rounded,
+                            size: 14, color: Colors.grey)
+                      ],
+                    ),
                   ),
                 ),
               ),

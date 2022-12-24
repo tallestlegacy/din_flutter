@@ -81,10 +81,12 @@ class TextSettingsAction extends StatelessWidget {
       onPressed: () {
         showModalBottomSheet(
           backgroundColor: Colors.transparent,
+          isScrollControlled: true,
           context: context,
           builder: ((context) {
             return Container(
-              height: 1000,
+              constraints:
+                  BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(16),
@@ -92,14 +94,19 @@ class TextSettingsAction extends StatelessWidget {
                 ),
                 color: Theme.of(context).canvasColor,
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  HandleBar(),
-                  TextSettings(),
-                  Divider(),
-                  FontSetting(),
-                ],
+              child: SafeArea(
+                bottom: true,
+                child: ListView(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  children: const [
+                    HandleBar(),
+                    TextSettings(),
+                    Divider(),
+                    FontSetting(),
+                  ],
+                ),
               ),
             );
           }),

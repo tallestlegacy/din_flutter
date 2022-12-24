@@ -1,22 +1,17 @@
 import 'package:din/screens/more/info/info.dart';
+import 'package:din/screens/more/inspiration/juz/juz.dart';
 import 'package:din/screens/more/tools/prayer_times.dart';
 import 'package:din/screens/more/tools/qibla.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:share_plus/share_plus.dart';
 
-import 'info/about_app.dart';
-import 'info/about_developer.dart';
 import 'customisation/appearance.dart';
 import 'inspiration/favourites.dart';
 import 'inspiration/names.dart';
 import 'customisation/reader_preferences.dart';
 import 'customisation/translations/translations.dart';
-import '/utils/network.dart';
-import '/widgets/icons.dart';
 import '/widgets/theme_toggle_button.dart';
 
 class MoreScreen extends StatefulWidget {
@@ -86,13 +81,12 @@ class _MoreScreenState extends State<MoreScreen> {
                   title: const Text("Favourites"),
                   onTap: () => push(const Favourites()),
                 ),
-                if (kDebugMode) // TODO add feature
-                  ListTile(
-                    enabled: false,
-                    leading: const Icon(Icons.menu_book_rounded),
-                    title: const Text("Juz"),
-                    onTap: () {},
-                  ),
+                ListTile(
+                  enabled: true,
+                  leading: const Icon(Icons.menu_book_rounded),
+                  title: const Text("Juz"),
+                  onTap: () => push(const Juz()),
+                ),
               ],
             ),
           ),
@@ -124,8 +118,8 @@ class _MoreScreenState extends State<MoreScreen> {
                 ),
                 ListTile(
                   leading: const Icon(Icons.av_timer_rounded),
-                  title: const Text("Prayer Times"),
-                  onTap: () => push(const PrayerTimes()),
+                  title: const Text("Adhan"),
+                  onTap: () => push(const PrayerTimesScreen()),
                 ),
               ],
             ),
@@ -138,7 +132,6 @@ class _MoreScreenState extends State<MoreScreen> {
                 ListTile(
                   leading: const Icon(Icons.palette_outlined),
                   title: const Text("Appearance"),
-                  subtitle: const Text("Theme modes, accent colors"),
                   onTap: () => push(const Appearance()),
                 ),
                 ListTile(
