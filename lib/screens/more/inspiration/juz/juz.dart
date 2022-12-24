@@ -1,6 +1,7 @@
 import 'package:din/screens/more/inspiration/juz/juz_data.dart';
 import 'package:din/screens/more/inspiration/juz/juz_reader.dart';
 import 'package:din/utils/store.dart';
+import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/text_settings.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,6 +20,7 @@ class Juz extends StatelessWidget {
         Get.put(ReaderStoreController());
     return Scaffold(
       appBar: AppBar(
+        leading: const CustomBackButton(),
         title: const Text("Juz"),
         actions: const [
           TextSettingsAction(),

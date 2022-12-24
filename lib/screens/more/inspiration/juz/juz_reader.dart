@@ -1,6 +1,7 @@
 import 'package:din/screens/more/inspiration/juz/juz_data.dart';
 import 'package:din/utils/store.dart';
 import 'package:din/utils/string_locale.dart';
+import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/bismi.dart';
 import 'package:din/widgets/text_settings.dart';
 import 'package:din/widgets/theme_toggle_button.dart';
@@ -74,6 +75,7 @@ class _JuzReaderState extends State<JuzReader> {
     Juz _juz = Juz.fromJson(juz[widget.id - 1]);
     return Scaffold(
       appBar: AppBar(
+        leading: const CustomBackButton(),
         actions: const [TextSettingsAction(), ThemeToggleButton()],
         title: Text("${toFarsi(widget.id)} " "   ${_juz.name}"),
       ),

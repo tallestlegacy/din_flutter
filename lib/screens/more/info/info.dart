@@ -1,9 +1,11 @@
 import 'package:din/widgets/back_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '/widgets/divider.dart';
 import '/screens/more/info/about_app.dart';
 import '/screens/more/info/about_developer.dart';
 import '/utils/network.dart';
@@ -115,10 +117,21 @@ class _InfoState extends State<Info> {
                       const Divider(),
                       ListTile(
                         leading: const Icon(Icons.info_rounded),
-                        enabled: false,
                         title: Text("Version ${_packageInfo.version}"),
                         subtitle: Text(
                             "(Build number : ${_packageInfo.buildNumber})"),
+                        trailing: copyIcon,
+                        onLongPress: () {
+                          String versionInfo = "Version ${_packageInfo.version}"
+                              "(Build number : ${_packageInfo.buildNumber})";
+                          Clipboard.setData(ClipboardData(text: versionInfo));
+                          var scaffold = ScaffoldMessenger.of(context);
+                          scaffold.showSnackBar(
+                            const SnackBar(
+                              content: Text("Copied version info"),
+                            ),
+                          );
+                        },
                       )
                     ],
                   ),
@@ -131,6 +144,7 @@ class _InfoState extends State<Info> {
                       ListTile(
                         leading: const Icon(Icons.share_rounded),
                         title: const Text("Share"),
+                        trailing: shareIcon,
                         onTap: () async {
                           await Share.share(
                             'Din - Quran and Sunnah (PlayStore) \n https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt',
@@ -155,7 +169,7 @@ class _InfoState extends State<Info> {
                         ),
                         trailing: linkIcon,
                       ),
-                      const SizedBox(height: 64)
+                      const Spacing(padding: 64),
                     ],
                   ),
                 ),

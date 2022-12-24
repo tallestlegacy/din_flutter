@@ -6,6 +6,16 @@ const Widget linkIcon = Icon(
   color: Colors.grey,
   size: 16,
 );
+const Widget copyIcon = Icon(
+  Icons.copy_rounded,
+  color: Colors.grey,
+  size: 16,
+);
+const Widget shareIcon = Icon(
+  Icons.share_rounded,
+  color: Colors.grey,
+  size: 16,
+);
 
 class DinAppIcon extends StatelessWidget {
   final double size;

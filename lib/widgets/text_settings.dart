@@ -105,6 +105,7 @@ class TextSettingsAction extends StatelessWidget {
                     TextSettings(),
                     Divider(),
                     FontSetting(),
+                    Spacing(padding: 16),
                   ],
                 ),
               ),
