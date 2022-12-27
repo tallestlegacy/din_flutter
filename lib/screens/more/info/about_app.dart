@@ -49,7 +49,6 @@ The app is actively being built and the following improvements are underway
 
 And here are some of the incoming features
 1.  Adhan notifications
-1.  Quran text without breaking ayah (Optional)
 1.  Global search (quran, hadith and dua) with match highlighting
 1.  Quran commentary (from online sources)
 1.  99 names commentary (from online sources)

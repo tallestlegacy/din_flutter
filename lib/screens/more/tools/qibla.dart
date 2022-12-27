@@ -29,6 +29,7 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
   final GlobalStoreController globalStoreController =
       Get.put(GlobalStoreController());
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
+
   late final AnimationController _controller = AnimationController(
     duration: const Duration(seconds: 10),
     vsync: this,
@@ -76,10 +77,10 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
-    super.dispose();
     for (final subscription in _streamSubscriptions) {
       subscription.cancel();
     }
+    super.dispose();
   }
 
   double get compassAngle {

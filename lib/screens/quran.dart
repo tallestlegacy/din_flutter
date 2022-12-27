@@ -1,7 +1,5 @@
-import 'package:din/widgets/bismi.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../constants/strings.dart';
 import '/widgets/surah.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,10 +7,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '/widgets/text_settings.dart';
-import '../utils/json.dart';
-import '../utils/store.dart';
+import '/utils/json.dart';
+import '/utils/store.dart';
 import '/widgets/theme_toggle_button.dart';
-import '../utils/string_locale.dart';
+import '/utils/string_locale.dart';
 
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
@@ -45,9 +43,9 @@ class _QuranPageState extends State<QuranPage> {
     if (page >= 0 && page <= 114) {
       var chapter = _chapters[page];
       if (showTranslation ?? false) {
-        return "${chapter['id']}. ${chapter['translation']} (${toFarsi(chapter['id'])}  -  ${chapter['name']})";
+        return "${chapter['id']}. ${chapter['translation']}   ( ${chapter['name']} )";
       }
-      return "${toFarsi(chapter['id'])}  -  ${chapter['name']}";
+      return "(${toFarsi(chapter['id'])})  ${chapter['name']}";
     }
     return "Din";
   }
@@ -103,7 +101,8 @@ class _QuranPageState extends State<QuranPage> {
                     getChapterText(
                       globalStoreController.currentSurah.value,
                       showTranslation:
-                          readerStoreController.showTranslation.value,
+                          readerStoreController.showTranslation.value &&
+                              !readerStoreController.ayaSpans.value,
                     ),
                     style: const TextStyle(
                         fontSize: 16, fontWeight: FontWeight.w500),
@@ -114,14 +113,16 @@ class _QuranPageState extends State<QuranPage> {
                   onPressed: () {
                     Scaffold.of(context).openDrawer();
                     autoScrollController.scrollToIndex(
-                        globalStoreController.currentSurah.value,
-                        preferPosition: AutoScrollPosition.middle);
+                      globalStoreController.currentSurah.value,
+                      preferPosition: AutoScrollPosition.middle,
+                    );
                   },
                 ),
                 snap: true,
                 floating: true,
+                forceElevated: true,
                 actions: const [TextSettingsAction(), ThemeToggleButton()],
-                elevation: 2,
+                elevation: 1,
                 backgroundColor: Theme.of(context).backgroundColor,
               ),
             ];

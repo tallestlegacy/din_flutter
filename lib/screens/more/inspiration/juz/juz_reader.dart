@@ -25,7 +25,6 @@ class _JuzReaderState extends State<JuzReader> {
 
   List _chaptersIndex = [];
   List _chapters = [];
-  int _count = 0;
 
   Future<void> getChapters() async {
     final data =
@@ -50,9 +49,7 @@ class _JuzReaderState extends State<JuzReader> {
       if (mounted) {
         chapters.add(verses);
 
-        setState(() {
-          _count += verses.length;
-        });
+        setState(() {});
       }
     }
 
@@ -72,26 +69,26 @@ class _JuzReaderState extends State<JuzReader> {
 
   @override
   Widget build(BuildContext context) {
-    Juz _juz = Juz.fromJson(juz[widget.id - 1]);
+    Juz thisJuz = Juz.fromJson(juz[widget.id - 1]);
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
         actions: const [TextSettingsAction(), ThemeToggleButton()],
-        title: Text("${toFarsi(widget.id)} " "   ${_juz.name}"),
+        title: Text("${toFarsi(widget.id)} " "   ${thisJuz.name}"),
       ),
       body: _chapters.isNotEmpty && _chaptersIndex.isNotEmpty
           ? ListView.builder(
               itemBuilder: (context, index) {
-                return Column(
-                  children: [
-                    //* Chapter tag
-                    Obx(
-                      () => Padding(
+                return Obx(
+                  () => Column(
+                    children: [
+                      //* Chapter tag
+                      Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Card(
                           child: ListTile(
                             leading: Text(
-                              "\u06dd${toFarsi(_juz.chapters[index])}",
+                              "\u06dd${toFarsi(thisJuz.chapters[index])}",
                               style: googleFontify(
                                 "Harmattan",
                                 TextStyle(
@@ -102,7 +99,8 @@ class _JuzReaderState extends State<JuzReader> {
                               ),
                             ),
                             title: Text(
-                              _chaptersIndex[_juz.chapters[index] - 1]["name"]
+                              _chaptersIndex[thisJuz.chapters[index] - 1]
+                                      ["name"]
                                   .toString(),
                               style: googleFontify(
                                 readerStoreController.arabicFont.value,
@@ -115,8 +113,8 @@ class _JuzReaderState extends State<JuzReader> {
                               textAlign: TextAlign.end,
                             ),
                             subtitle: Text(
-                              "${_chaptersIndex[_juz.chapters[index] - 1]["translation"]}  "
-                              "(${_juz.verses[_juz.chapters[index].toString()].join(" - ")})",
+                              "${_chaptersIndex[thisJuz.chapters[index] - 1]["translation"]}  "
+                              "(${thisJuz.verses[thisJuz.chapters[index].toString()].join(" - ")})",
                               style: TextStyle(
                                 fontSize: readerStoreController.fontSize.value,
                               ),
@@ -124,31 +122,61 @@ class _JuzReaderState extends State<JuzReader> {
                           ),
                         ),
                       ),
-                    ),
-                    //* Bismi Allahi
-                    if (_chaptersIndex[_juz.chapters[index] - 1]["id"] != 1 &&
-                        _juz.verses[_juz.chapters[index].toString()][0] == 1)
-                      const Padding(
-                        padding: EdgeInsets.only(top: 32, bottom: 8),
-                        child: Bismi(),
-                      ),
-                    //* Verses
-                    ListView.separated(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 32, horizontal: 8),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemBuilder: (context, _index) => Verse(
-                          verse: _chapters[index][_index],
-                          chapter: _juz.chapters[index]),
-                      itemCount: _chapters[index].length,
-                      separatorBuilder: (BuildContext context, int index) =>
-                          const Divider(height: 0),
-                    )
-                  ],
+                      //* Bismi Allahi
+                      if (_chaptersIndex[thisJuz.chapters[index] - 1]["id"] !=
+                              1 &&
+                          thisJuz.verses[thisJuz.chapters[index].toString()]
+                                  [0] ==
+                              1)
+                        const Padding(
+                          padding: EdgeInsets.only(top: 32, bottom: 8),
+                          child: Bismi(),
+                        ),
+                      //* Verses
+                      readerStoreController.ayaSpans.value
+                          ? Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 32, horizontal: 16),
+                              child: Text.rich(
+                                textAlign: TextAlign.center,
+                                TextSpan(
+                                  style: googleFontify(
+                                    readerStoreController.arabicFont.value,
+                                    TextStyle(
+                                      fontSize:
+                                          readerStoreController.fontSize.value *
+                                              1.5,
+                                      height: 2.5,
+                                    ),
+                                  ),
+                                  children: [
+                                    for (var verse in _chapters[index])
+                                      Verse(
+                                              verse: verse,
+                                              chapter: thisJuz.chapters[index])
+                                          .span(context)
+                                  ],
+                                ),
+                              ),
+                            )
+                          : ListView.separated(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 32, horizontal: 8),
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemBuilder: (context, _index) => Verse(
+                                  verse: _chapters[index][_index],
+                                  chapter: thisJuz.chapters[index]),
+                              itemCount: _chapters[index].length,
+                              separatorBuilder:
+                                  (BuildContext context, int index) =>
+                                      const Divider(height: 0),
+                            )
+                    ],
+                  ),
                 );
               },
-              itemCount: _juz.chapters.length,
+              itemCount: thisJuz.chapters.length,
             )
           : const LinearProgressIndicator(),
     );

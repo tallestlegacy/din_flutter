@@ -1,3 +1,4 @@
+import 'package:din/screens/more/customisation/recitation.dart';
 import 'package:din/screens/more/info/info.dart';
 import 'package:din/screens/more/inspiration/juz/juz.dart';
 import 'package:din/screens/more/tools/prayer_times.dart';
@@ -137,13 +138,17 @@ class _MoreScreenState extends State<MoreScreen> {
                 ListTile(
                   leading: const Icon(Icons.text_format_rounded),
                   title: const Text("Reader preferences"),
-                  subtitle: const Text("Size, text display format"),
+                  subtitle: const Text("Size, text display format, fontface"),
                   onTap: () => push(ReaderPreferences()),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.spatial_audio_off_rounded),
+                  title: const Text("Recitation"),
+                  onTap: () => push(const Recitation()),
                 ),
                 ListTile(
                   leading: const Icon(Icons.translate_rounded),
                   title: const Text("Translation"),
-                  subtitle: const Text("en, fr, ru, bg ..."),
                   onTap: () => push(const Translations()),
                 ),
                 if (kDebugMode) // TODO add feature

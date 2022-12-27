@@ -14,6 +14,8 @@ class Styles {
     MaterialColor primarySwatch = swatch;
 
     Color? accentColor = primarySwatch[200];
+    Color? text2 =
+        isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100);
     Color? backgroundColor = isDarkMode ? Colors.grey[900] : primarySwatch[50];
     Color? cardColor = isDarkMode ? Colors.grey[850] : Colors.white;
 
@@ -115,7 +117,13 @@ class Styles {
         ),
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStatePropertyAll(primarySwatch),
+        fillColor: MaterialStateProperty.resolveWith<Color>(
+            (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return isDarkMode ? Colors.grey.shade500 : Colors.grey.shade400;
+          }
+          return primarySwatch;
+        }),
         checkColor: const MaterialStatePropertyAll(Colors.white),
       ),
       switchTheme: SwitchThemeData(

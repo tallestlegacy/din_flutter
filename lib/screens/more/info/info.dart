@@ -1,7 +1,9 @@
 import 'package:din/widgets/back_button.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -82,6 +84,7 @@ class _InfoState extends State<Info> {
                 ? null
                 : FlexibleSpaceBar(
                     background: Container(
+                      padding: const EdgeInsets.all(8),
                       color: Theme.of(context).primaryColor,
                       child: const DinAppIcon(),
                     ),
@@ -107,9 +110,16 @@ class _InfoState extends State<Info> {
                         title: const Text("Meet the developer"),
                         onTap: () => push(const AboutDeveloper()),
                       ),
+                      if (kDebugMode) // TODO add page and relevant icon
+                        ListTile(
+                          leading: const Icon(Icons.assignment),
+                          title: const Text("Attributions"),
+                          onTap: () => openLink(
+                              "https://github.com/tallestlegacy/din_dt"),
+                        ),
                       ListTile(
                         leading: const Icon(Icons.code_rounded),
-                        title: const Text("Sources and Licencing"),
+                        title: const Text("Source Code"),
                         onTap: () =>
                             openLink("https://github.com/tallestlegacy/din_dt"),
                         trailing: linkIcon,

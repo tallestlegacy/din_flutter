@@ -13,60 +13,67 @@ class TextSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     final ReaderStoreController readerStoreController =
         Get.put(ReaderStoreController());
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const PaddedText(text: "Text formats", padding: 8),
-        Obx(
-          () => CheckboxListTile(
+    return Obx(
+      () => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const PaddedText(text: "Text formats", padding: 8),
+          CheckboxListTile(
+            enabled: !readerStoreController.ayaSpans.value,
             title: const Text("Arabic text"),
             value: readerStoreController.showArabicText.value,
             onChanged: ((value) {
               readerStoreController.setShowArabicText(value!);
             }),
           ),
-        ),
-        Obx(
-          () => CheckboxListTile(
+          CheckboxListTile(
+            enabled: !readerStoreController.ayaSpans.value,
             title: const Text("Transliteration"),
             value: readerStoreController.showTransliteration.value,
             onChanged: ((value) {
               readerStoreController.setTransliteration(value!);
             }),
           ),
-        ),
-        Obx(
-          () => CheckboxListTile(
+          CheckboxListTile(
+            enabled: !readerStoreController.ayaSpans.value,
             title: const Text("Translation"),
             value: readerStoreController.showTranslation.value,
             onChanged: ((value) {
               readerStoreController.setTranslation(value!);
             }),
           ),
-        ),
-        const Divider(),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Flex(
-            direction: Axis.horizontal,
-            children: [
-              const Icon(Icons.text_decrease_rounded),
-              Expanded(
-                  child: Obx(() => Slider(
-                        value: readerStoreController.fontSize.value,
-                        onChanged: readerStoreController.setFontSize,
-                        min: 8,
-                        max: 32,
-                        divisions: (32 - 8) ~/ 2,
-                        label: readerStoreController.fontSize.value
-                            .toInt()
-                            .toString(),
-                      ))),
-              const Icon(Icons.text_increase_rounded),
-            ],
+          CheckboxListTile(
+            title: const Text("Aya Breaks"),
+            subtitle: const Text("Experimental"),
+            value: readerStoreController.ayaSpans.value,
+            onChanged: ((value) {
+              readerStoreController.setAyaSpans(value!);
+            }),
           ),
-        ),
-      ],
+          const Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Flex(
+              direction: Axis.horizontal,
+              children: [
+                const Icon(Icons.text_decrease_rounded),
+                Expanded(
+                    child: Obx(() => Slider(
+                          value: readerStoreController.fontSize.value,
+                          onChanged: readerStoreController.setFontSize,
+                          min: 8,
+                          max: 32,
+                          divisions: (32 - 8) ~/ 2,
+                          label: readerStoreController.fontSize.value
+                              .toInt()
+                              .toString(),
+                        ))),
+                const Icon(Icons.text_increase_rounded),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

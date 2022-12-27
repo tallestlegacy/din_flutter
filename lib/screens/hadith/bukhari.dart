@@ -137,13 +137,12 @@ class BukhariSearch extends SearchDelegate {
   }
 
   @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
+  Widget buildLeading(BuildContext context) => IconButton(
         onPressed: () {
           close(context, null);
         },
-        icon: const Icon(Icons.arrow_back_rounded));
-  }
+        icon: const Icon(Icons.arrow_back_rounded),
+      );
 
   @override
   Widget buildResults(BuildContext context) {
@@ -173,31 +172,7 @@ class BukhariSearch extends SearchDelegate {
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    List matchQuery = [];
-    for (var ref in refs) {
-      if (ref["name"].toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(ref);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-            title: Text(result["name"]),
-            onTap: () {
-              close(context, null);
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => BukhariHadiths(book: result),
-                ),
-              );
-            });
-      },
-    );
-  }
+  Widget buildSuggestions(BuildContext context) => buildResults(context);
 }
 
 class BukhariHadiths extends StatefulWidget {

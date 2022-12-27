@@ -7,9 +7,7 @@ import "package:http/http.dart" as http;
 Future<void> openLink(String url) async {
   if (!await launchUrl(
     Uri.parse(url),
-    mode: url.contains("http")
-        ? LaunchMode.inAppWebView
-        : LaunchMode.externalApplication,
+    mode: LaunchMode.externalApplication,
   )) {
     throw "Could not launch $url";
   }

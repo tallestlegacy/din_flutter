@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../widgets/verse.dart';
 import '/utils/json.dart';
 import '/utils/string_locale.dart';
 
@@ -60,21 +61,32 @@ class Juz extends StatelessWidget {
                         style: googleFontify(
                           readerStoreController.arabicFont.value,
                           TextStyle(
-                            fontSize:
-                                readerStoreController.fontSize.value * 1.5,
+                            fontSize: readerStoreController.fontSize.value * 2,
                             color: Theme.of(context).colorScheme.tertiary,
                           ),
                         ),
                         textAlign: TextAlign.right,
                       ),
-                      subtitle: readerStoreController.showTranslation.value
-                          ? Text(
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          if (readerStoreController.showTransliteration.value)
+                            Text(
+                              section["transliteration"],
+                              style: TextStyle(
+                                fontSize: readerStoreController.fontSize.value,
+                              ),
+                            ),
+                          if (readerStoreController.showTranslation.value)
+                            Text(
                               section["translation"],
                               style: TextStyle(
                                 fontSize: readerStoreController.fontSize.value,
                               ),
-                            )
-                          : null,
+                            ),
+                        ],
+                      ),
                       trailing: Wrap(
                         spacing: 4,
                         children: [

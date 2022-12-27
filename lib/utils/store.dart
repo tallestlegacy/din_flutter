@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:din/constants/every_aya.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -21,7 +22,9 @@ class ReaderStoreController extends GetxController {
   var showArabicText = true.obs;
   var fontSize = 12.0.obs;
   var reverseScrolling = true.obs;
-  var arabicFont = "Noto Naskh Arabic".obs;
+  var ayaSpans = false.obs;
+  var arabicFont = "Amiri".obs;
+  var recitor = everyAya["1"]!["subfolder"].obs;
 
   final box = GetStorage();
 
@@ -61,13 +64,25 @@ class ReaderStoreController extends GetxController {
     box.write("reverseScrolling", value);
   }
 
+  void setAyaSpans(bool value) {
+    ayaSpans(value);
+    box.write("ayaSpans", value);
+  }
+
+  void setRecitor(String value) {
+    recitor(value);
+    box.write("recitor", value);
+  }
+
   ReaderStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
     showArabicText(box.read("showArabicText") ?? true);
+    ayaSpans(box.read("ayaSpans") ?? false);
     fontSize(box.read("fontSize") ?? 12);
     reverseScrolling(box.read("reverseScrolling") ?? true);
     arabicFont(box.read("arabicFont") ?? arabicFonts[0]);
+    recitor(box.read("recitor") ?? everyAya["1"]!["subfolder"]);
   }
 }
 
@@ -151,7 +166,6 @@ class GlobalStoreController extends GetxController {
   void setCurrentSurah(int pageIndex) {
     currentSurah(pageIndex);
     box.write("currentSurah", pageIndex);
-    print("Set Current Surah >> ${currentSurah.value}");
   }
 
   void addFavouriteAya(aya) {
@@ -206,8 +220,6 @@ class GlobalStoreController extends GetxController {
     lon(box.read("lon") ?? 0.0);
     locationInitialised(box.read("locationInitialised") ?? false);
     prayerTimes(jsonDecode(box.read("prayerTimes") ?? "{}"));
-
-    print("Current Surah >> ${currentSurah.value}");
   }
 }
 

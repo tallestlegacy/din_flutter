@@ -8,7 +8,7 @@ const arabicFonts = [
   "Almarai",
   "Cairo",
   "Changa",
-  //"Gulzar",
+  //! "Gulzar",
   "Harmattan",
   "IBM Plex Sans Arabic",
   "Katibeh",

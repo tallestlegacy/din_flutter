@@ -25,7 +25,9 @@ Future<List> getVerses(int chapter) async {
   String language = translationsStoreController.defaultTranslation["language"];
   String edition = translationsStoreController.defaultTranslation["edition"];
 
-  print(">>> {$language,  $edition}");
+  if (kDebugMode) {
+    print(">>> {$language,  $edition}");
+  }
 
   if (edition != "default" && edition != "quran-in-english") {
     final directory = await getApplicationDocumentsDirectory();

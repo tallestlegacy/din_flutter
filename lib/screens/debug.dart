@@ -1,10 +1,13 @@
-import 'package:din/services/local_notification.dart';
-import 'package:din/widgets/sabt.dart';
+import 'package:din/utils/json.dart';
+import 'package:din/widgets/text_settings.dart';
+import 'package:din/widgets/verse.dart';
 
 import '../utils/adhan.dart';
 import '../utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../utils/string_locale.dart';
 
 class Debug extends StatefulWidget {
   const Debug({super.key});
@@ -21,26 +24,54 @@ class _DebugState extends State<Debug> {
   final ReaderStoreController readerStoreController =
       Get.put(ReaderStoreController());
 
+  List _verses = [];
+
+  Future<void> initVerses() async {
+    List verses = await getVerses(1);
+    if (mounted) {
+      setState(() {
+        _verses = verses;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initVerses();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final readerStoreController = Get.put(ReaderStoreController());
     // Definitions
 
     var prayerTimes = getAdhan(0.5, 35);
 
-    return SliverAppBarStatus();
-
-    return Scaffold(
-      body: ListView(
-        children: [
-          Obx(() => Text(readerStoreController.arabicFont.value.toString())),
-          Text(prayerTimes.fajr.toString()),
-          Text(prayerTimes.dhuhr.toString()),
-          Text(prayerTimes.asr!.toLocal().toString()),
-          Text(prayerTimes.maghrib.toString()),
-          Text(prayerTimes.ishabefore.toString()),
-          Text(prayerTimes.isha!.toLocal().toString()),
-          ElevatedButton(onPressed: showNotification, child: Text("Click me"))
-        ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          actions: const [TextSettingsAction()],
+        ),
+        body: Center(
+          child: SingleChildScrollView(
+            child: Obx(
+              () => Text.rich(
+                textAlign: TextAlign.center,
+                TextSpan(
+                  style: TextStyle(
+                    fontSize: readerStoreController.fontSize.value * 1.5,
+                    height: 1.5,
+                  ),
+                  children: [
+                    for (var verse in _verses)
+                      Verse(verse: verse, chapter: 1).span(context)
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
