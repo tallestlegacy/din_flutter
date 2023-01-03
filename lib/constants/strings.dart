@@ -29,6 +29,15 @@ const arabicFonts = [
   "Vibes",
 ];
 
+const ayaEndFonts = [
+  "Amiri",
+  "Harmattan",
+  "Lateef",
+  "Noto Nastaliq Urdu",
+  "Scheherazade New",
+  "Noto Naskh Arabic",
+];
+
 const prayers = [
   "Fajr",
   "Dhuhr",
@@ -43,3 +52,13 @@ const prayersArabic = [
   "المغرب",
   "العشاء",
 ];
+
+const sura1aya1 = {
+  "id": 1,
+  "text": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+  "translation":
+      "In the name of Allah, the Entirely Merciful, the Especially Merciful",
+  "transliteration": "Bismi Allahi alrrahmani alrraheemi"
+};
+
+const String everyAyaUrl = "https://everyayah.com/data";

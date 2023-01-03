@@ -74,7 +74,11 @@ class _JuzReaderState extends State<JuzReader> {
       appBar: AppBar(
         leading: const CustomBackButton(),
         actions: const [TextSettingsAction(), ThemeToggleButton()],
-        title: Text("${toFarsi(widget.id)} " "   ${thisJuz.name}"),
+        title: Obx(
+          () => Text(readerStoreController.showTranslation.value
+              ? "${widget.id} " "   ${thisJuz.translation}"
+              : "${toFarsi(widget.id)} " "   ${thisJuz.name}"),
+        ),
       ),
       body: _chapters.isNotEmpty && _chaptersIndex.isNotEmpty
           ? ListView.builder(
@@ -88,9 +92,11 @@ class _JuzReaderState extends State<JuzReader> {
                         child: Card(
                           child: ListTile(
                             leading: Text(
-                              "\u06dd${toFarsi(thisJuz.chapters[index])}",
+                              readerStoreController.showTranslation.value
+                                  ? "${thisJuz.chapters[index]}"
+                                  : toFarsi(thisJuz.chapters[index]),
                               style: googleFontify(
-                                "Harmattan",
+                                readerStoreController.arabicFont.value,
                                 TextStyle(
                                   fontSize:
                                       readerStoreController.fontSize.value * 2,
@@ -123,8 +129,11 @@ class _JuzReaderState extends State<JuzReader> {
                         ),
                       ),
                       //* Bismi Allahi
-                      if (_chaptersIndex[thisJuz.chapters[index] - 1]["id"] !=
+                      if (_chaptersIndex[thisJuz.chapters[index] - 1]
+                                  ["id"] !=
                               1 &&
+                          _chaptersIndex[thisJuz.chapters[index] - 1]["id"] !=
+                              9 &&
                           thisJuz.verses[thisJuz.chapters[index].toString()]
                                   [0] ==
                               1)
@@ -150,11 +159,26 @@ class _JuzReaderState extends State<JuzReader> {
                                     ),
                                   ),
                                   children: [
-                                    for (var verse in _chapters[index])
+                                    for (var verse in _chapters[index]) ...[
                                       Verse(
                                               verse: verse,
                                               chapter: thisJuz.chapters[index])
-                                          .span(context)
+                                          .span(context),
+                                      TextSpan(
+                                        text:
+                                            " \u06dd${toFarsi(verse["id"])}   ",
+                                        style: googleFontify(
+                                          readerStoreController
+                                              .ayaEndFont.value,
+                                          TextStyle(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .tertiary,
+                                            decoration: null,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ],
                                 ),
                               ),

@@ -1,6 +1,7 @@
-import 'package:din/screens/more/customisation/recitation.dart';
+import 'package:din/screens/more/customisation/recitation/recitation.dart';
 import 'package:din/screens/more/info/info.dart';
 import 'package:din/screens/more/inspiration/juz/juz.dart';
+import 'package:din/screens/more/notes/notes.dart';
 import 'package:din/screens/more/tools/prayer_times.dart';
 import 'package:din/screens/more/tools/qibla.dart';
 import 'package:flutter/cupertino.dart';
@@ -72,15 +73,10 @@ class _MoreScreenState extends State<MoreScreen> {
               children: [
                 ListTile(
                   leading: const Icon(Icons.stars_rounded),
-                  title: const Text("99 Names"),
+                  title: const Text("Asma Ul Husna"),
                   subtitle: const Text(
                       "99 Names of Allah and the prophet Muhammad (ﷺ.)"),
                   onTap: () => push(const Names()),
-                ),
-                ListTile(
-                  leading: const Icon(Icons.favorite_rounded),
-                  title: const Text("Favourites"),
-                  onTap: () => push(const Favourites()),
                 ),
                 ListTile(
                   enabled: true,
@@ -88,6 +84,18 @@ class _MoreScreenState extends State<MoreScreen> {
                   title: const Text("Juz"),
                   onTap: () => push(const Juz()),
                 ),
+                ListTile(
+                  leading: const Icon(Icons.favorite_rounded),
+                  title: const Text("Favourites"),
+                  onTap: () => push(const Favourites()),
+                ),
+                if (kDebugMode)
+                  ListTile(
+                    enabled: true,
+                    leading: const Icon(Icons.edit_note_rounded),
+                    title: const Text("Notes"),
+                    onTap: () => push(const Notes()),
+                  ),
               ],
             ),
           ),

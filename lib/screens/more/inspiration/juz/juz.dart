@@ -8,7 +8,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../widgets/verse.dart';
 import '/utils/json.dart';
 import '/utils/string_locale.dart';
 
@@ -46,12 +45,13 @@ class Juz extends StatelessWidget {
                         );
                       },
                       leading: Text(
-                        "\u06dd${toFarsi(section["id"])}",
+                        readerStoreController.showTranslation.value
+                            ? section["id"].toString()
+                            : toFarsi(section["id"]),
                         style: googleFontify(
-                          "Harmattan",
+                          readerStoreController.arabicFont.value,
                           TextStyle(
-                            fontSize:
-                                readerStoreController.fontSize.value * 1.5,
+                            fontSize: readerStoreController.fontSize.value,
                             color: Theme.of(context).colorScheme.tertiary,
                           ),
                         ),

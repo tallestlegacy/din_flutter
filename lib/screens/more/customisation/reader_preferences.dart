@@ -31,6 +31,7 @@ class ReaderPreferences extends StatelessWidget {
           ),
           const Divider(),
           const FontSetting(),
+          const FontSetting(isAyaEnd: true),
           const Divider(),
           const TextSettings(),
           const Divider(),

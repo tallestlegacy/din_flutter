@@ -204,23 +204,23 @@ const everyAya = {
     "bitrate": "128kbps"
   },
   "45": {
-    "subfolder": "English\/Sahih_Intnl_Ibrahim_Walk_192kbps",
+    "subfolder": "English/Sahih_Intnl_Ibrahim_Walk_192kbps",
     "name":
         "(English) Translated by Sahih International Recited by Ibrahim Walk",
     "bitrate": "192kbps"
   },
   "46": {
-    "subfolder": "MultiLanguage\/Basfar_Walk_192kbps",
-    "name": "MultiLanguage\/Basfar Walk",
+    "subfolder": "MultiLanguage/Basfar_Walk_192kbps",
+    "name": "MultiLanguage/Basfar Walk",
     "bitrate": "192kbps"
   },
   "47": {
-    "subfolder": "translations\/Makarem_Kabiri_16Kbps",
+    "subfolder": "translations/Makarem_Kabiri_16Kbps",
     "name": "(Persian) Translated by Makarem Recited by Kabiri",
     "bitrate": "64Kbps"
   },
   "48": {
-    "subfolder": "translations\/Fooladvand_Hedayatfar_40Kbps",
+    "subfolder": "translations/Fooladvand_Hedayatfar_40Kbps",
     "name": "(Persian) Translated by Fooladvand Recited by Hedayatfar",
     "bitrate": "64Kbps"
   },
@@ -230,7 +230,7 @@ const everyAya = {
     "bitrate": "64Kbps"
   },
   "50": {
-    "subfolder": "translations\/azerbaijani\/balayev",
+    "subfolder": "translations/azerbaijani/balayev",
     "name": "Balayev",
     "bitrate": "64Kbps"
   },
@@ -280,17 +280,17 @@ const everyAya = {
     "bitrate": "32kbps"
   },
   "60": {
-    "subfolder": "warsh\/warsh_ibrahim_aldosary_128kbps",
+    "subfolder": "warsh/warsh_ibrahim_aldosary_128kbps",
     "name": "(Warsh) Ibrahim Al-Dosary",
     "bitrate": "128kbps"
   },
   "61": {
-    "subfolder": "warsh\/warsh_yassin_al_jazaery_64kbps",
+    "subfolder": "warsh/warsh_yassin_al_jazaery_64kbps",
     "name": "(Warsh) Yassin Al-Jazaery",
     "bitrate": "64kbps"
   },
   "62": {
-    "subfolder": "warsh\/warsh_Abdul_Basit_128kbps",
+    "subfolder": "warsh/warsh_Abdul_Basit_128kbps",
     "name": "(Warsh) Abdul Basit",
     "bitrate": "128kbps"
   },

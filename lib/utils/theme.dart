@@ -104,6 +104,9 @@ class Styles {
         minVerticalPadding: 16,
         iconColor: accentColor,
       ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStatePropertyAll(accentColor),
+      ),
       scaffoldBackgroundColor: backgroundColor,
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(

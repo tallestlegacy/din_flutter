@@ -29,7 +29,7 @@ const List<Map<String, dynamic>> juz = [
   {
     "id": 1,
     "name": "آلم",
-    "translation": "Unknown",
+    "translation": "A.L.M",
     "transliteration": "Alīf-Lām-Mīm",
     "chapters": [1, 2],
     "verses": {
@@ -172,7 +172,7 @@ const List<Map<String, dynamic>> juz = [
   {
     "id": 14,
     "name": "رُبَمَا",
-    "translation": "Unknown",
+    "translation": "A.L.R",
     "transliteration": "Alīf-Lām-Rā’  Rubamā",
     "chapters": [15, 16],
     "verses": {

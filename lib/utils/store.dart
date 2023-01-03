@@ -23,8 +23,10 @@ class ReaderStoreController extends GetxController {
   var fontSize = 12.0.obs;
   var reverseScrolling = true.obs;
   var ayaSpans = false.obs;
-  var arabicFont = "Amiri".obs;
+  var arabicFont = arabicFonts[0].obs;
+  var ayaEndFont = ayaEndFonts[0].obs;
   var recitor = everyAya["1"]!["subfolder"].obs;
+  var selectedAya = "".obs;
 
   final box = GetStorage();
 
@@ -59,6 +61,11 @@ class ReaderStoreController extends GetxController {
     box.write("arabicFont", value);
   }
 
+  void setAyaEndFont(String value) {
+    ayaEndFont(value);
+    box.write("ayaEndFont", value);
+  }
+
   void setReverseScrolling(bool value) {
     reverseScrolling(value);
     box.write("reverseScrolling", value);
@@ -74,6 +81,14 @@ class ReaderStoreController extends GetxController {
     box.write("recitor", value);
   }
 
+  void setSelectedAya(String value) {
+    selectedAya(value);
+  }
+
+  void resetSelectedAya() {
+    selectedAya("");
+  }
+
   ReaderStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
@@ -82,6 +97,7 @@ class ReaderStoreController extends GetxController {
     fontSize(box.read("fontSize") ?? 12);
     reverseScrolling(box.read("reverseScrolling") ?? true);
     arabicFont(box.read("arabicFont") ?? arabicFonts[0]);
+    ayaEndFont(box.read("ayaEndFont") ?? ayaEndFonts[0]);
     recitor(box.read("recitor") ?? everyAya["1"]!["subfolder"]);
   }
 }

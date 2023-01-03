@@ -43,7 +43,7 @@ class TextSettings extends StatelessWidget {
             }),
           ),
           CheckboxListTile(
-            title: const Text("Aya Breaks"),
+            title: const Text("Aya Spans"),
             subtitle: const Text("Experimental"),
             value: readerStoreController.ayaSpans.value,
             onChanged: ((value) {
@@ -96,8 +96,8 @@ class TextSettingsAction extends StatelessWidget {
                   BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  topRight: Radius.circular(16),
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
                 color: Theme.of(context).canvasColor,
               ),

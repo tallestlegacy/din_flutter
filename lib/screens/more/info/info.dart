@@ -114,8 +114,8 @@ class _InfoState extends State<Info> {
                         ListTile(
                           leading: const Icon(Icons.assignment),
                           title: const Text("Attributions"),
-                          onTap: () => openLink(
-                              "https://github.com/tallestlegacy/din_dt"),
+                          enabled: false,
+                          onTap: () {},
                         ),
                       ListTile(
                         leading: const Icon(Icons.code_rounded),

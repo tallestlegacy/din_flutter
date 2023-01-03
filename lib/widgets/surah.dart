@@ -3,6 +3,7 @@ import 'package:din/widgets/bismi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../utils/string_locale.dart';
 import '/widgets/verse.dart';
 import '/utils/json.dart';
 
@@ -44,7 +45,7 @@ class _SurahState extends State<Surah> {
         : Center(
             child: CustomScrollView(shrinkWrap: true, slivers: [
               SliverToBoxAdapter(
-                child: (widget.chapter["id"] > 1)
+                child: (widget.chapter["id"] != 1 && widget.chapter["id"] != 9)
                     ? const Padding(
                         padding: EdgeInsets.only(
                             top: 16, bottom: 32, left: 8, right: 8),
@@ -58,8 +59,8 @@ class _SurahState extends State<Surah> {
                         child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text.rich(
-                            textAlign: TextAlign.center,
-                            TextSpan(
+                          textAlign: TextAlign.center,
+                          TextSpan(
                               style: googleFontify(
                                 readerStoreController.arabicFont.value,
                                 TextStyle(
@@ -70,13 +71,26 @@ class _SurahState extends State<Surah> {
                                 ),
                               ),
                               children: [
-                                for (var verse in _verses)
+                                for (var verse in _verses) ...[
                                   Verse(
                                           verse: verse,
                                           chapter: widget.chapter["id"])
                                       .span(context),
-                              ],
-                            )),
+                                  TextSpan(
+                                    text: " \u06dd${toFarsi(verse["id"])}   ",
+                                    style: googleFontify(
+                                      readerStoreController.ayaEndFont.value,
+                                      TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        decoration: null,
+                                      ),
+                                    ),
+                                  ),
+                                ]
+                              ]),
+                        ),
                       ))
                     : SliverList(
                         key: PageStorageKey<String>(

@@ -7,8 +7,6 @@ import '../utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/string_locale.dart';
-
 class Debug extends StatefulWidget {
   const Debug({super.key});
 
@@ -45,8 +43,6 @@ class _DebugState extends State<Debug> {
   Widget build(BuildContext context) {
     final readerStoreController = Get.put(ReaderStoreController());
     // Definitions
-
-    var prayerTimes = getAdhan(0.5, 35);
 
     return SafeArea(
       child: Scaffold(

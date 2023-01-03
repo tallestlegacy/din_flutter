@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
+import 'package:din/constants/strings.dart';
 import 'package:din/widgets/divider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -15,52 +16,59 @@ import '/utils/json.dart';
 import '/utils/store.dart';
 import '/utils/string_locale.dart';
 
-class Verse extends StatefulWidget {
+class Verse extends StatelessWidget {
   // ignore: prefer_typing_uninitialized_variables
   final verse;
   final int chapter;
+  final bool enabled;
 
-  const Verse({super.key, required this.verse, required this.chapter});
+  Verse({
+    super.key,
+    required this.verse,
+    required this.chapter,
+    this.enabled = true,
+  });
+
+  final ReaderStoreController readerStoreController =
+      Get.put(ReaderStoreController());
+  final GlobalStoreController globalStoreController =
+      Get.put(GlobalStoreController());
+
+  get isFavourite => globalStoreController.isFavouriteVerse({
+        "chapter": chapter,
+        "id": verse["id"],
+      });
+
+  get isSelected =>
+      readerStoreController.selectedAya.value == "$chapter:${verse["id"]}";
 
   span(BuildContext context) => TextSpan(
         text: "${verse["text"]}",
-        children: [
-          TextSpan(
-            text: " \u06dd${toFarsi(verse["id"])}     ",
-            style: googleFontify(
-              "Harmattan",
-              TextStyle(
-                color: Theme.of(context).colorScheme.tertiary,
-              ),
-            ),
-          )
-        ],
+        style: TextStyle(
+          backgroundColor:
+              isSelected ? Theme.of(context).primaryColor.withAlpha(56) : null,
+          color: isFavourite ? Theme.of(context).colorScheme.primary : null,
+        ),
         recognizer: LongPressGestureRecognizer()
           ..onLongPress = () => onLongPressVerse(context, verse, chapter),
       );
 
   @override
-  State<Verse> createState() => _VerseState();
-}
-
-class _VerseState extends State<Verse> {
-  final ReaderStoreController readerStoreController =
-      Get.put(ReaderStoreController());
-
-  @override
   Widget build(BuildContext context) {
     return Obx(
       () => ListTile(
+        selected: isSelected,
+        selectedTileColor: Theme.of(context).primaryColor.withAlpha(56),
+        enabled: enabled,
         enableFeedback: true,
-        onLongPress: () =>
-            onLongPressVerse(context, widget.verse, widget.chapter),
+        onLongPress: () => onLongPressVerse(context, verse, chapter),
         leading: Text(
           readerStoreController.showTranslation.value
-              ? widget.verse['id'].toString()
-              : "\u06dd${toFarsi(widget.verse['id'])}",
+              ? verse['id'].toString()
+              : "\u06dd${toFarsi(verse['id'])}",
           textAlign: TextAlign.center,
           style: googleFontify(
-            "Harmattan",
+            readerStoreController.ayaEndFont.value,
             TextStyle(
               color: Colors.grey,
               fontSize: readerStoreController.showTranslation.value
@@ -76,24 +84,30 @@ class _VerseState extends State<Verse> {
             children: <Widget>[
               if (readerStoreController.showArabicText.value)
                 PaddedText(
-                  text: widget.verse['text'],
+                  text: verse['text'],
                   textAlign: TextAlign.right,
                   fontSize: readerStoreController.fontSize.value * 1.5,
                   fontWeight: FontWeight.w400,
                   //fontFamily: readerStoreController.arabicFont.value,
                   googleFont: readerStoreController.arabicFont.value,
-                  color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                  color: isFavourite
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).primaryTextTheme.bodyText2?.color,
                 ),
               if (readerStoreController.showTransliteration.value)
                 PaddedText(
-                  text: widget.verse['transliteration'],
-                  color: Theme.of(context).primaryTextTheme.bodyText2?.color,
+                  text: verse['transliteration'],
+                  color: isFavourite
+                      ? Theme.of(context).colorScheme.tertiary
+                      : Theme.of(context).primaryTextTheme.bodyText2?.color,
                   fontSize: readerStoreController.fontSize.value,
                 ),
               if (readerStoreController.showTranslation.value)
                 PaddedText(
-                  text: widget.verse['translation'],
-                  color: Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  text: verse['translation'],
+                  color: isFavourite
+                      ? Theme.of(context).colorScheme.tertiary
+                      : Theme.of(context).primaryTextTheme.bodyText1?.color,
                   fontSize: readerStoreController.fontSize.value,
                 )
             ]),
@@ -110,13 +124,7 @@ class VersePreview extends StatefulWidget {
 }
 
 class _VersePreviewState extends State<VersePreview> {
-  var _verse = {
-    "id": 1,
-    "text": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
-    "translation":
-        "In the name of Allah, the Entirely Merciful, the Especially Merciful",
-    "transliteration": "Bismi Allahi alrrahmani alrraheemi"
-  };
+  var _verse = sura1aya1;
 
   void init() async {
     var chapter = await getVerses(Random().nextInt(114) + 1);
@@ -146,6 +154,7 @@ class _VersePreviewState extends State<VersePreview> {
           child: Verse(
             verse: _verse,
             chapter: 1,
+            enabled: false,
           )),
     );
   }
@@ -162,52 +171,57 @@ onLongPressVerse(BuildContext context, verse, int chapter) async {
       await LoadJson().load("assets/json/quran_editions/en.chapters.json");
   var currentChapter = chapters[chapter - 1];
 
-  String shareText = "Quran ${currentChapter['id']}:${verse['id']}\n\n"
-      "${verse['text']}"
-      "${toFarsi(verse['id'])}\n\n"
-      "${verse['translation']}\n\n"
-      "(${currentChapter['name']} - ${currentChapter['translation']} )";
+  bool isArabicText = readerStoreController.ayaSpans.value ||
+      !readerStoreController.showTranslation.value;
 
-  bool isArabicText = !readerStoreController.showTransliteration.value ||
-      readerStoreController.ayaSpans.value;
+  String shareText = isArabicText
+      ? "${currentChapter["name"]} ${toFarsi(verse["id"])}\n\n"
+          "${verse['text']}\n\n"
+      : "Quran $chapter:${verse['id']}\n\n"
+          "${verse['text']}\n\n"
+          "${verse['translation']}\n\n"
+          "(${currentChapter['name']} - ${currentChapter['translation']} )";
 
-  showModalBottomSheet(
+  readerStoreController.selectedAya("$chapter:${verse["id"]}");
+
+  await showModalBottomSheet(
     backgroundColor: Colors.transparent,
     context: context,
     builder: ((context) {
       return Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(16),
-              topRight: Radius.circular(16),
-            ),
-            color: Theme.of(context).canvasColor,
+        constraints:
+            BoxConstraints(maxHeight: MediaQuery.of(context).size.height),
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(20),
+            topRight: Radius.circular(20),
           ),
+          color: Theme.of(context).canvasColor,
+        ),
+        child: SafeArea(
+          bottom: true,
           child: ListView(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 48),
+            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 32),
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             children: [
               const HandleBar(),
               //* Share etc. menu
+              Text(
+                //isArabicText ? "${verse["text"]}" : "${verse["translation"]}",
+                shareText,
+                overflow: TextOverflow.fade,
+                maxLines: 4,
+                style: TextStyle(
+                  fontSize: readerStoreController.fontSize.value,
+                ),
+              ),
+              const Divider(),
               Wrap(
+                direction: Axis.horizontal,
                 alignment: WrapAlignment.spaceBetween,
-                crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    reverse: isArabicText,
-                    child: Text(
-                      isArabicText
-                          ? "${verse["text"]}"
-                          : "${verse["translation"]}",
-                      overflow: TextOverflow.fade,
-                      style: TextStyle(
-                          fontSize: readerStoreController.fontSize.value),
-                    ),
-                  ),
-                  const Divider(),
-                  Text("Quran $chapter:${verse["id"]}"),
+                  const SizedBox(width: 20),
                   Wrap(
                     direction: Axis.horizontal,
                     alignment: WrapAlignment.end,
@@ -233,19 +247,13 @@ onLongPressVerse(BuildContext context, verse, int chapter) async {
                         () => IconButton(
                           icon: Icon(globalStoreController
                                       .favouriteVerses.isNotEmpty &&
-                                  globalStoreController.isFavouriteVerse({
-                                    "chapter": currentChapter["id"],
-                                    "id": verse["id"]
-                                  })
+                                  globalStoreController.isFavouriteVerse(
+                                      {"chapter": chapter, "id": verse["id"]})
                               ? Icons.favorite_rounded
                               : Icons.favorite_outline_rounded),
                           onPressed: () {
-                            var v = verse;
-                            v['chapter'] = currentChapter['id'];
-                            globalStoreController.addFavouriteAya({
-                              "chapter": currentChapter["id"],
-                              "id": verse["id"]
-                            });
+                            globalStoreController.addFavouriteAya(
+                                {"chapter": chapter, "id": verse["id"]});
                             Navigator.pop(context);
                           },
                         ),
@@ -254,19 +262,33 @@ onLongPressVerse(BuildContext context, verse, int chapter) async {
                   ),
                 ],
               ),
-              if (kDebugMode) const Divider(),
+              const Divider(),
               //* Qira'at
-              if (kDebugMode) VerseAudio(verse: verse, chapter: chapter)
+              Obx(() => VerseAudio(
+                    verse: verse,
+                    chapter: chapter,
+                    subfolder: readerStoreController.recitor.value.toString(),
+                  )),
+              const Spacing(padding: 16)
             ],
-          ));
+          ),
+        ),
+      );
     }),
   );
+
+  readerStoreController.resetSelectedAya();
 }
 
 class VerseAudio extends StatefulWidget {
   final verse;
   final int chapter;
-  const VerseAudio({super.key, required this.verse, required this.chapter});
+  final String subfolder;
+  const VerseAudio(
+      {super.key,
+      required this.verse,
+      required this.chapter,
+      required this.subfolder});
 
   @override
   State<VerseAudio> createState() => _VerseAudioState();
@@ -312,7 +334,9 @@ class _VerseAudioState extends State<VerseAudio> {
   void dispose() {
     super.dispose();
 
-    streams.forEach((element) => element.cancel());
+    for (var element in streams) {
+      element.cancel();
+    }
 
     audioPlayer.pause();
     audioPlayer.dispose();
@@ -335,7 +359,7 @@ class _VerseAudioState extends State<VerseAudio> {
                 String verseId = widget.verse["id"].toString().padLeft(3, "0");
 
                 String url =
-                    "https://everyayah.com/data/${readerStoreController.recitor.value}/$chapterId$verseId.mp3";
+                    "$everyAyaUrl/${widget.subfolder}/$chapterId$verseId.mp3";
 
                 await audioPlayer.setSource(UrlSource(url));
 

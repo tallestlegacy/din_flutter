@@ -121,7 +121,10 @@ class _QuranPageState extends State<QuranPage> {
                 snap: true,
                 floating: true,
                 forceElevated: true,
-                actions: const [TextSettingsAction(), ThemeToggleButton()],
+                actions: const [
+                  TextSettingsAction(),
+                  ThemeToggleButton(),
+                ],
                 elevation: 1,
                 backgroundColor: Theme.of(context).backgroundColor,
               ),
@@ -158,10 +161,14 @@ class _QuranPageState extends State<QuranPage> {
                   index: index,
                   key: ValueKey(index),
                   child: ListTile(
+                    textColor: Theme.of(context)
+                        .primaryTextTheme
+                        .bodyText1
+                        ?.color
+                        ?.withAlpha(160),
                     selected:
                         pageController.page == (_chapters[index]["id"] - 1),
-                    selectedColor:
-                        Theme.of(context).primaryTextTheme.bodyText2?.color,
+                    selectedColor: Theme.of(context).primaryColor,
                     selectedTileColor:
                         Theme.of(context).primaryColor.withAlpha(50),
                     subtitle: Text("${_chapters[index]['translation']}"),
@@ -174,7 +181,6 @@ class _QuranPageState extends State<QuranPage> {
                     ),
                     title: Text(
                       "${_chapters[index]['name']} - ${_chapters[index]['transliteration']}",
-                      style: Theme.of(context).primaryTextTheme.bodyText2,
                     ),
                     trailing: Wrap(
                       spacing: 4,

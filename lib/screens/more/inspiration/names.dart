@@ -56,7 +56,7 @@ class _NamesState extends State<Names> {
                 pinned: true,
                 forceElevated: innerBoxIsScrolled,
                 backgroundColor: Theme.of(context).backgroundColor,
-                title: const Text("99 Names"),
+                title: const Text("Asma Ul Husna"),
                 leading: const CustomBackButton(),
                 bottom: TabBar(
                   labelPadding: const EdgeInsets.only(bottom: 8),
