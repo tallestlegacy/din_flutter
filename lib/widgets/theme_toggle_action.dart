@@ -3,8 +3,8 @@ import '../utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ThemeToggleButton extends StatelessWidget {
-  const ThemeToggleButton({Key? key}) : super(key: key);
+class ThemeToggleAction extends StatelessWidget {
+  const ThemeToggleAction({Key? key}) : super(key: key);
 
   @override
   build(BuildContext context) {

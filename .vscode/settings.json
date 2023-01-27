@@ -1,5 +1,6 @@
 {
     "cSpell.words": [
         "Color"
-    ]
+    ],
+    "C_Cpp.intelliSenseEngineFallback": "disabled"
 }

@@ -8,7 +8,6 @@ const arabicFonts = [
   "Almarai",
   "Cairo",
   "Changa",
-  //! "Gulzar",
   "Harmattan",
   "IBM Plex Sans Arabic",
   "Katibeh",
@@ -30,12 +29,10 @@ const arabicFonts = [
 ];
 
 const ayaEndFonts = [
+  "Noto Naskh Arabic",
   "Amiri",
-  "Harmattan",
   "Lateef",
   "Noto Nastaliq Urdu",
-  "Scheherazade New",
-  "Noto Naskh Arabic",
 ];
 
 const prayers = [

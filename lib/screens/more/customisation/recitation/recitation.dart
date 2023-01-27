@@ -1,10 +1,8 @@
 import 'package:din/constants/every_aya.dart';
 import 'package:din/constants/strings.dart';
-import 'package:din/utils/network.dart';
 import 'package:din/utils/store.dart';
 import 'package:din/widgets/back_button.dart';
-import 'package:din/widgets/icons.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:din/widgets/verse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +13,8 @@ class Recitation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    everyAya
+        .sort((a, b) => a['name'].toString().compareTo(b['name'].toString()));
     return Scaffold(
       appBar: AppBar(
         title: const Text("Reciters"),
@@ -23,29 +23,33 @@ class Recitation extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.search_rounded),
             onPressed: () {
-              showSearch(context: context, delegate: RecitorsSearch());
+              showSearch(context: context, delegate: RecitersSearch());
             },
           ),
-          const ThemeToggleButton(),
+          const ThemeToggleAction(),
         ],
       ),
-      body: ListView.separated(
-        itemCount: everyAya.length,
-        itemBuilder: (context, index) {
-          var track = everyAya[(index + 1).toString()];
-          return RecitorListTile(track: track);
-        },
-        separatorBuilder: (BuildContext context, int index) =>
-            const Divider(height: 0),
+      body: SafeArea(
+        bottom: true,
+        child: ListView.separated(
+          padding: const EdgeInsets.all(8),
+          itemCount: everyAya.length,
+          itemBuilder: (context, index) {
+            var track = everyAya[index];
+            return ReciterListTile(track: track);
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(height: 0),
+        ),
       ),
     );
   }
 }
 
-class RecitorListTile extends StatelessWidget {
+class ReciterListTile extends StatelessWidget {
   final track;
 
-  RecitorListTile({super.key, required this.track});
+  ReciterListTile({super.key, required this.track});
 
   final ReaderStoreController readerStoreController =
       Get.put(ReaderStoreController());
@@ -55,15 +59,15 @@ class RecitorListTile extends StatelessWidget {
     return Obx(
       () => ListTile(
         title: Text("${track["name"]}"),
-        subtitle: Text("${track["bitrate"]}"),
-        leading: Radio(
-          value: track["subfolder"].toString(),
-          groupValue: readerStoreController.recitor.value,
-          onChanged: (value) {
-            readerStoreController.setRecitor(value.toString());
-          },
-        ),
+        leading: readerStoreController.hasSubfolder(track["tracks"])
+            ? const Icon(Icons.check_circle_rounded)
+            : const Icon(Icons.person_rounded, color: Colors.grey),
         trailing: const Icon(Icons.chevron_right_rounded),
+        subtitle: Wrap(
+          spacing: 4,
+          runSpacing: 4,
+          children: [for (var t in track["tracks"]) Text(t["bitrate"])],
+        ),
         onTap: (() {
           Navigator.push(context,
               CupertinoPageRoute(builder: (context) => Reciter(track: track)));
@@ -73,7 +77,7 @@ class RecitorListTile extends StatelessWidget {
   }
 }
 
-class RecitorsSearch extends SearchDelegate {
+class RecitersSearch extends SearchDelegate {
   final ReaderStoreController readerStoreController =
       Get.put(ReaderStoreController());
 
@@ -104,8 +108,8 @@ class RecitorsSearch extends SearchDelegate {
   @override
   Widget buildResults(BuildContext context) {
     List matchQuery = [];
-    for (var ref in everyAya.values) {
-      if (ref["name"]!.toLowerCase().contains(query.toLowerCase())) {
+    for (var ref in everyAya) {
+      if (ref["name"].toString().toLowerCase().contains(query.toLowerCase())) {
         matchQuery.add(ref);
       }
     }
@@ -113,7 +117,7 @@ class RecitorsSearch extends SearchDelegate {
       itemCount: matchQuery.length,
       itemBuilder: (context, index) {
         var track = matchQuery[index];
-        return RecitorListTile(track: track);
+        return ReciterListTile(track: track);
       },
     );
   }
@@ -122,21 +126,39 @@ class RecitorsSearch extends SearchDelegate {
   Widget buildSuggestions(BuildContext context) => buildResults(context);
 }
 
-class Reciter extends StatelessWidget {
+class Reciter extends StatefulWidget {
   final track;
 
   Reciter({super.key, required this.track});
 
+  @override
+  State<Reciter> createState() => _ReciterState();
+}
+
+class _ReciterState extends State<Reciter> {
   final ReaderStoreController readerStoreController =
       Get.put(ReaderStoreController());
+
+  String subfolder = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    if (mounted) {
+      setState(() {
+        subfolder = widget.track["tracks"][0]["subfolder"];
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
-        actions: const [ThemeToggleButton()],
-        title: Text(track["name"]),
+        actions: const [ThemeToggleAction()],
+        title: Text(widget.track["name"]),
       ),
       body: SafeArea(
         bottom: true,
@@ -144,47 +166,44 @@ class Reciter extends StatelessWidget {
           () => ListView(
             padding: const EdgeInsets.all(8),
             children: [
-              ListTile(
-                title: const Text("Bit rate"),
-                subtitle: Text(track["bitrate"]),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text("Source"),
-                subtitle: Text("$everyAyaUrl/${track["subfolder"]}"),
-                trailing: linkIcon,
-                onTap: (() {
-                  openLink("$everyAyaUrl/${track["subfolder"]}");
-                }),
-              ),
-              const Divider(),
-              ListTile(
-                title: const Text("Preview"),
-                subtitle: Column(
-                  children: [
-                    //Verse(verse: sura1aya1, chapter: 1, enabled: false),
-                    VerseAudio(
-                      chapter: 1,
-                      verse: sura1aya1,
-                      subfolder: track["subfolder"].toString(),
-                    ),
-                  ],
+              for (var source in widget.track["tracks"])
+                RadioListTile(
+                  value: source["subfolder"].toString(),
+                  groupValue: subfolder,
+                  onChanged: (value) {
+                    setState(() {
+                      subfolder = source["subfolder"];
+                    });
+                  },
+                  title: Text(source["bitrate"]),
+                  subtitle:
+                      readerStoreController.reciter.value == source["subfolder"]
+                          ? const Text("Default")
+                          : null,
                 ),
-              ),
               const Divider(),
-              readerStoreController.recitor.value != track["subfolder"]
-                  ? TextButton(
-                      onPressed: () async {
-                        readerStoreController.setRecitor(track["subfolder"]);
+              VerseAudio(
+                chapter: 1,
+                verse: sura1aya1,
+                subfolder: subfolder,
+              ),
+              readerStoreController.reciter.value != subfolder
+                  ? ListTile(
+                      onTap: () async {
+                        readerStoreController.setReciter(subfolder);
                         var messenger = ScaffoldMessenger.of(context);
                         messenger.showSnackBar(
                           SnackBar(
-                            content: Text(
-                                "${track["subfolder"]} is the new default"),
+                            content: Text("$subfolder is the new default"),
                           ),
                         );
                       },
-                      child: const Text("Set as Default"))
+                      title: Text(
+                        "Set as Default",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
+                      ))
                   : const ListTile(
                       leading: Icon(Icons.check_circle_rounded),
                       title: Text("Default"),

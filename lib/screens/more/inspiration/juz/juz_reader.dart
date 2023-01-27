@@ -4,7 +4,7 @@ import 'package:din/utils/string_locale.dart';
 import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/bismi.dart';
 import 'package:din/widgets/text_settings.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:din/widgets/verse.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,7 +73,7 @@ class _JuzReaderState extends State<JuzReader> {
     return Scaffold(
       appBar: AppBar(
         leading: const CustomBackButton(),
-        actions: const [TextSettingsAction(), ThemeToggleButton()],
+        actions: const [TextSettingsAction(), ThemeToggleAction()],
         title: Obx(
           () => Text(readerStoreController.showTranslation.value
               ? "${widget.id} " "   ${thisJuz.translation}"

@@ -83,7 +83,7 @@ class _SurahState extends State<Surah> {
                                       TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme
-                                            .tertiary,
+                                            .primary,
                                         decoration: null,
                                       ),
                                     ),

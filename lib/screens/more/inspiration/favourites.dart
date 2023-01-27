@@ -7,7 +7,7 @@ import '/widgets/verse.dart';
 import '/utils/json.dart';
 import '/utils/store.dart';
 import '/utils/string_locale.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../widgets/theme_toggle_action.dart';
 
 class Favourites extends StatefulWidget {
   const Favourites({super.key});
@@ -77,7 +77,7 @@ class _FavouritesState extends State<Favourites> {
       appBar: AppBar(
         leading: const CustomBackButton(),
         title: const Text("Favourites"),
-        actions: const [TextSettingsAction(), ThemeToggleButton()],
+        actions: const [TextSettingsAction(), ThemeToggleAction()],
         //backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Obx(() {
@@ -126,7 +126,8 @@ class _FavouritesState extends State<Favourites> {
                                 style: googleFontify(
                                   readerStoreController.arabicFont.value,
                                   TextStyle(
-                                    color: Theme.of(context).primaryColor,
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
                                     fontSize:
                                         readerStoreController.fontSize.value *
                                             1.5,
@@ -138,7 +139,7 @@ class _FavouritesState extends State<Favourites> {
                                     ? "${chapter["translation"]} (${chapter["name"]})"
                                     : chapter['name'],
                                 style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
+                                  color: Theme.of(context).colorScheme.primary,
                                   fontSize:
                                       readerStoreController.fontSize.value *
                                           1.5,

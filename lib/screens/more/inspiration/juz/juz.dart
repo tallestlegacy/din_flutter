@@ -3,7 +3,7 @@ import 'package:din/screens/more/inspiration/juz/juz_reader.dart';
 import 'package:din/utils/store.dart';
 import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/text_settings.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,7 +24,7 @@ class Juz extends StatelessWidget {
         title: const Text("Juz"),
         actions: const [
           TextSettingsAction(),
-          ThemeToggleButton(),
+          ThemeToggleAction(),
         ],
       ),
       body: Obx(

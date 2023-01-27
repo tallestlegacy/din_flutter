@@ -14,7 +14,7 @@ import 'inspiration/favourites.dart';
 import 'inspiration/names.dart';
 import 'customisation/reader_preferences.dart';
 import 'customisation/translations/translations.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../widgets/theme_toggle_action.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -61,7 +61,7 @@ class _MoreScreenState extends State<MoreScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("More"),
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleAction()],
         // backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: ListView(
@@ -74,8 +74,6 @@ class _MoreScreenState extends State<MoreScreen> {
                 ListTile(
                   leading: const Icon(Icons.stars_rounded),
                   title: const Text("Asma Ul Husna"),
-                  subtitle: const Text(
-                      "99 Names of Allah and the prophet Muhammad (ﷺ.)"),
                   onTap: () => push(const Names()),
                 ),
                 ListTile(
@@ -91,7 +89,7 @@ class _MoreScreenState extends State<MoreScreen> {
                 ),
                 if (kDebugMode)
                   ListTile(
-                    enabled: true,
+                    enabled: false,
                     leading: const Icon(Icons.edit_note_rounded),
                     title: const Text("Notes"),
                     onTap: () => push(const Notes()),

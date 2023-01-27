@@ -43,7 +43,7 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     if (mounted) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Theme.of(context).colorScheme.tertiary,
+        systemNavigationBarColor: Theme.of(context).colorScheme.secondary,
       ));
     }
 
@@ -81,6 +81,9 @@ class _AppState extends State<App> {
 
     return WillPopScope(
       onWillPop: () async {
+        if (_selectedIndex == 0) {
+          return true;
+        }
         setState(() {
           _selectedIndex = 0;
         });
@@ -124,9 +127,11 @@ class _AppState extends State<App> {
                   child: SizedBox(
                     height: 72,
                     child: NavigationBar(
-                      backgroundColor: Theme.of(context).backgroundColor,
+                      // backgroundColor: Theme.of(context).colorScheme.tertiary,
                       selectedIndex: _selectedIndex,
                       onDestinationSelected: handleNavigationTap,
+                      labelBehavior:
+                          NavigationDestinationLabelBehavior.onlyShowSelected,
                       destinations: <NavigationDestination>[
                         for (var e in icons)
                           NavigationDestination(

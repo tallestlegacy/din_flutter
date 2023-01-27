@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '/widgets/theme_toggle_button.dart';
+import '../../../widgets/theme_toggle_action.dart';
 import '/utils/store.dart';
 
 class PrayerTimesScreen extends StatefulWidget {
@@ -82,7 +82,7 @@ class _PrayerTimesScreenState extends State<PrayerTimesScreen> {
                       : const Icon(Icons.add_location_alt_rounded),
             ),
           ),
-          const ThemeToggleButton(),
+          const ThemeToggleAction(),
         ],
       ),
       body: RefreshIndicator(

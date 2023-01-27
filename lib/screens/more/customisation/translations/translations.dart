@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'translation.dart';
 import '/utils/store.dart';
 import '/widgets/back_button.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../../widgets/theme_toggle_action.dart';
 
 class Translations extends StatelessWidget {
   const Translations({super.key});
@@ -30,7 +30,7 @@ class Translations extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.search_rounded)),
-          const ThemeToggleButton()
+          const ThemeToggleAction()
         ],
       ),
       body: RefreshIndicator(

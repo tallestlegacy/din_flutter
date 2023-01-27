@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '/widgets/back_button.dart';
 import '/widgets/verse.dart';
 import '/utils/store.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../widgets/theme_toggle_action.dart';
 
 class Appearance extends StatelessWidget {
   const Appearance({super.key});
@@ -33,7 +33,7 @@ class Appearance extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Appearance"),
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleAction()],
         elevation: 1,
         leading: const CustomBackButton(),
       ),
@@ -49,7 +49,7 @@ class Appearance extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.light_mode_outlined),
                 title: Text(
-                  "Light mode accent",
+                  "Light mode theme",
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),
@@ -62,7 +62,7 @@ class Appearance extends StatelessWidget {
               ListTile(
                 leading: const Icon(Icons.dark_mode_outlined),
                 title: Text(
-                  "Dark mode accent",
+                  "Dark mode theme",
                   style: TextStyle(color: Theme.of(context).primaryColor),
                 ),
               ),

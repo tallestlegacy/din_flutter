@@ -7,7 +7,7 @@ import '/widgets/text_settings.dart';
 import '/utils/json.dart';
 import '/utils/store.dart';
 import '/utils/string_locale.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../widgets/theme_toggle_action.dart';
 
 class Bukhari extends StatefulWidget {
   const Bukhari({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class _BukhariState extends State<Bukhari> {
                   delegate: BukhariSearch(refs: getAllBooks(_volumes)));
             },
           ),
-          const ThemeToggleButton(),
+          const ThemeToggleAction(),
         ],
       ),
       body: ListView.builder(
@@ -76,7 +76,7 @@ class _BukhariState extends State<Bukhari> {
                 "${_volumes[index]['name']}",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.primary,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -88,7 +88,7 @@ class _BukhariState extends State<Bukhari> {
                     title: Text(
                       "${book['name']}",
                     ),
-                    trailing: Text(
+                    leading: Text(
                       readerStoreController.showTranslation.value
                           ? "${book['length']}"
                           : toFarsi(book['length']),
@@ -213,39 +213,43 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
         appBar: AppBar(
           title: Text("${widget.book['name']}"),
           leading: const CustomBackButton(),
-          actions: const [TextSettingsAction(), ThemeToggleButton()],
+          actions: const [TextSettingsAction(), ThemeToggleAction()],
           titleTextStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.onSecondary),
+              color: Theme.of(context).colorScheme.secondary),
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: _hadiths.length,
           itemBuilder: (context, index) => Card(
             child: Obx(
-              () => ListTile(
-                leading: Text(
-                  readerStoreController.showTranslation.value
-                      ? _hadiths[index]['id'].toString()
-                      : toFarsi(_hadiths[index]['id']),
-                  style: googleFontify(
-                    readerStoreController.arabicFont.value,
-                    TextStyle(
-                      color: Colors.grey,
-                      fontSize: readerStoreController.fontSize.value,
+              () => SelectableRegion(
+                focusNode: FocusNode(),
+                selectionControls: materialTextSelectionControls,
+                child: ListTile(
+                  leading: Text(
+                    readerStoreController.showTranslation.value
+                        ? _hadiths[index]['id'].toString()
+                        : toFarsi(_hadiths[index]['id']),
+                    style: googleFontify(
+                      readerStoreController.arabicFont.value,
+                      TextStyle(
+                        color: Colors.grey,
+                        fontSize: readerStoreController.fontSize.value,
+                      ),
                     ),
                   ),
-                ),
-                title: Text(
-                  _hadiths[index]['by'],
-                  style:
-                      TextStyle(fontSize: readerStoreController.fontSize.value),
-                ),
-                subtitle: Text(
-                  _hadiths[index]['text'],
-                  style:
-                      TextStyle(fontSize: readerStoreController.fontSize.value),
+                  title: Text(
+                    _hadiths[index]['by'],
+                    style: TextStyle(
+                        fontSize: readerStoreController.fontSize.value),
+                  ),
+                  subtitle: Text(
+                    _hadiths[index]['text'],
+                    style: TextStyle(
+                        fontSize: readerStoreController.fontSize.value),
+                  ),
                 ),
               ),
             ),

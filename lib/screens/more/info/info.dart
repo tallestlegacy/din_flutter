@@ -1,3 +1,4 @@
+import 'package:din/screens/more/info/attributions.dart';
 import 'package:din/widgets/back_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -12,7 +13,7 @@ import '/screens/more/info/about_app.dart';
 import '/screens/more/info/about_developer.dart';
 import '/utils/network.dart';
 import '/widgets/icons.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../widgets/theme_toggle_action.dart';
 
 class Info extends StatefulWidget {
   const Info({Key? key}) : super(key: key);
@@ -73,7 +74,10 @@ class _InfoState extends State<Info> {
         slivers: [
           SliverAppBar(
             leading: const CustomBackButton(),
-            actions: const [ThemeToggleButton()],
+            actions: const [ThemeToggleAction()],
+            iconTheme: IconThemeData(
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
             pinned: true,
             snap: false,
             floating: false,
@@ -85,7 +89,7 @@ class _InfoState extends State<Info> {
                 : FlexibleSpaceBar(
                     background: Container(
                       padding: const EdgeInsets.all(8),
-                      color: Theme.of(context).primaryColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       child: const DinAppIcon(),
                     ),
                     stretchModes: const [
@@ -101,24 +105,22 @@ class _InfoState extends State<Info> {
                   subtitle: Column(
                     children: [
                       ListTile(
-                        leading: const Icon(Icons.info_outline_rounded),
+                        leading: const Icon(Icons.info_rounded),
                         title: const Text("About the app"),
                         onTap: () => push(const AboutApp()),
                       ),
                       ListTile(
-                        leading: const Icon(Icons.badge_outlined),
+                        leading: const Icon(FontAwesomeIcons.userNinja),
                         title: const Text("Meet the developer"),
                         onTap: () => push(const AboutDeveloper()),
                       ),
-                      if (kDebugMode) // TODO add page and relevant icon
-                        ListTile(
-                          leading: const Icon(Icons.assignment),
-                          title: const Text("Attributions"),
-                          enabled: false,
-                          onTap: () {},
-                        ),
                       ListTile(
-                        leading: const Icon(Icons.code_rounded),
+                        leading: const Icon(Icons.assignment),
+                        title: const Text("Attributions"),
+                        onTap: () => push(const Attributions()),
+                      ),
+                      ListTile(
+                        leading: const Icon(FontAwesomeIcons.githubAlt),
                         title: const Text("Source Code"),
                         onTap: () =>
                             openLink("https://github.com/tallestlegacy/din_dt"),
@@ -126,7 +128,8 @@ class _InfoState extends State<Info> {
                       ),
                       const Divider(),
                       ListTile(
-                        leading: const Icon(Icons.info_rounded),
+                        leading:
+                            const Icon(Icons.perm_device_information_rounded),
                         title: Text("Version ${_packageInfo.version}"),
                         subtitle: Text(
                             "(Build number : ${_packageInfo.buildNumber})"),

@@ -6,7 +6,7 @@ import 'dart:math';
 import 'package:din/screens/more/tools/prayer_times.dart';
 import 'package:din/utils/adhan.dart';
 import 'package:din/widgets/back_button.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -113,7 +113,7 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
                       : const Icon(Icons.add_location_alt_rounded),
             ),
           ),
-          const ThemeToggleButton(),
+          const ThemeToggleAction(),
         ],
       ),
       body: Obx(
@@ -159,6 +159,10 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
                         padding: const EdgeInsets.all(16),
                         child: Material(
                           shape: const CircleBorder(),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .tertiary
+                              .withAlpha(10),
                           shadowColor: Colors.grey.withAlpha(300),
                           elevation: 1,
                           child: Stack(
@@ -189,7 +193,7 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
                                           "assets/svg/needle.svg",
                                           color: Theme.of(context)
                                               .colorScheme
-                                              .tertiary,
+                                              .secondary,
                                         ),
                                       ),
                                     ],

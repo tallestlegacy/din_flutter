@@ -1,4 +1,4 @@
-import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
@@ -66,7 +66,7 @@ for inquiries and feature suggestions.
       appBar: AppBar(
         title: const Text("About the app"),
         leading: const CustomBackButton(),
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleAction()],
       ),
       body: SafeArea(
         bottom: true,

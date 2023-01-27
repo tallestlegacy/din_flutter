@@ -10,6 +10,10 @@ class Styles {
     this.swatch = Colors.blue,
   });
 
+  get bodyText1 => TextStyle(color: isDarkMode ? Colors.white : Colors.black87);
+  get bodyText2 =>
+      TextStyle(color: isDarkMode ? swatch[100] : Colors.black.withAlpha(100));
+
   ThemeData get themeData {
     MaterialColor primarySwatch = swatch;
 
@@ -19,30 +23,72 @@ class Styles {
     Color? backgroundColor = isDarkMode ? Colors.grey[900] : primarySwatch[50];
     Color? cardColor = isDarkMode ? Colors.grey[850] : Colors.white;
 
-    ColorScheme colorScheme = ColorScheme(
-      brightness: isDarkMode ? Brightness.dark : Brightness.light,
-      primary: primarySwatch,
-      onPrimary: primarySwatch.shade900,
-      secondary: isDarkMode ? Colors.grey.shade800 : primarySwatch.shade200,
-      onSecondary: isDarkMode ? Colors.grey.shade300 : primarySwatch.shade900,
-      tertiary: isDarkMode ? primarySwatch.shade200 : primarySwatch.shade600,
-      onTertiary: isDarkMode ? Colors.white : Colors.white,
-      error: Colors.amber,
-      onError: Colors.red,
-      background: isDarkMode ? Colors.grey.shade900 : primarySwatch.shade50,
-      onBackground: Colors.indigoAccent,
-      surface: isDarkMode ? Colors.grey.shade700 : primarySwatch.shade200,
-      onSurface: isDarkMode ? primarySwatch.shade50 : primarySwatch.shade900,
+    ColorScheme colorScheme = ColorScheme.fromSeed(
+      seedColor: swatch,
     );
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      systemNavigationBarColor: colorScheme.tertiary,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: colorScheme.secondary,
+      ),
+    );
 
     return ThemeData(
       useMaterial3: true,
+      colorSchemeSeed: swatch,
+      brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      primaryTextTheme: TextTheme(
+        bodySmall: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
+        bodyMedium: TextStyle(
+          color: isDarkMode ? accentColor : colorScheme.primary.withAlpha(100),
+        ),
+      ),
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
+        elevation: 2,
+        indicatorColor: colorScheme.onSecondary.withAlpha(50),
+        labelType: NavigationRailLabelType.selected,
+      ),
+      cardTheme: CardTheme(
+        // color: cardColor,
+        elevation: .5,
+        shadowColor: Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      dividerTheme: DividerThemeData(
+        color: Colors.grey.withAlpha(20),
+      ),
+      listTileTheme: ListTileThemeData(
+        dense: true,
+        minLeadingWidth: 4,
+        minVerticalPadding: 16,
+        iconColor: colorScheme.secondary,
+      ),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: colorScheme.secondary,
+        contentTextStyle: TextStyle(
+          color: colorScheme.onSecondary,
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: colorScheme.secondary,
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStatePropertyAll(colorScheme.secondary),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ButtonStyle(
+              side: MaterialStatePropertyAll(
+        BorderSide(color: primarySwatch),
+      ))),
+    );
+
+    // // ignore: dead_code
+    return ThemeData(
+      useMaterial3: true,
       colorScheme: colorScheme,
-      primaryColor: accentColor,
       primarySwatch: primarySwatch,
       primaryTextTheme: TextTheme(
         bodyText1: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),

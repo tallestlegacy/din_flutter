@@ -18,7 +18,7 @@ class Bismi extends StatelessWidget {
         style: googleFontify(
           readerStoreController.arabicFont.value,
           TextStyle(
-            color: Theme.of(context).primaryColor,
+            color: Theme.of(context).colorScheme.primary,
             fontSize: readerStoreController.fontSize * 3,
           ),
         ),

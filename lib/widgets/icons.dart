@@ -16,6 +16,11 @@ const Widget shareIcon = Icon(
   color: Colors.grey,
   size: 16,
 );
+const Widget favouriteIcon = Icon(
+  Icons.favorite_rounded,
+  color: Colors.grey,
+  size: 16,
+);
 
 class DinAppIcon extends StatelessWidget {
   final double size;
@@ -30,7 +35,7 @@ class DinAppIcon extends StatelessWidget {
         elevation: 2,
         child: SvgPicture.asset(
           "assets/svg/din.svg",
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.secondary,
           width: size,
         ),
       ),

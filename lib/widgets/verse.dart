@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:din/constants/strings.dart';
 import 'package:din/widgets/divider.dart';
+import 'package:din/widgets/icons.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -62,20 +63,30 @@ class Verse extends StatelessWidget {
         enabled: enabled,
         enableFeedback: true,
         onLongPress: () => onLongPressVerse(context, verse, chapter),
-        leading: Text(
-          readerStoreController.showTranslation.value
-              ? verse['id'].toString()
-              : "\u06dd${toFarsi(verse['id'])}",
-          textAlign: TextAlign.center,
-          style: googleFontify(
-            readerStoreController.ayaEndFont.value,
-            TextStyle(
-              color: Colors.grey,
-              fontSize: readerStoreController.showTranslation.value
-                  ? readerStoreController.fontSize.value
-                  : readerStoreController.fontSize.value * 1.5,
+        leading: Wrap(
+          direction: Axis.vertical,
+          crossAxisAlignment: WrapCrossAlignment.center,
+          alignment: WrapAlignment.center,
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            Text(
+              readerStoreController.showTranslation.value
+                  ? verse['id'].toString()
+                  : "\u06dd${toFarsi(verse['id'])}",
+              textAlign: TextAlign.center,
+              style: googleFontify(
+                readerStoreController.ayaEndFont.value,
+                TextStyle(
+                  color: Colors.grey,
+                  fontSize: readerStoreController.showTranslation.value
+                      ? readerStoreController.fontSize.value
+                      : readerStoreController.fontSize.value * 1.5,
+                ),
+              ),
             ),
-          ),
+            if (isFavourite) favouriteIcon
+          ],
         ),
         contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
         minVerticalPadding: 0,
@@ -92,22 +103,18 @@ class Verse extends StatelessWidget {
                   googleFont: readerStoreController.arabicFont.value,
                   color: isFavourite
                       ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).primaryTextTheme.bodyText2?.color,
+                      : Theme.of(context).primaryTextTheme.bodyMedium?.color,
                 ),
               if (readerStoreController.showTransliteration.value)
                 PaddedText(
                   text: verse['transliteration'],
-                  color: isFavourite
-                      ? Theme.of(context).colorScheme.tertiary
-                      : Theme.of(context).primaryTextTheme.bodyText2?.color,
+                  color: Theme.of(context).primaryTextTheme.bodyMedium?.color,
                   fontSize: readerStoreController.fontSize.value,
                 ),
               if (readerStoreController.showTranslation.value)
                 PaddedText(
                   text: verse['translation'],
-                  color: isFavourite
-                      ? Theme.of(context).colorScheme.tertiary
-                      : Theme.of(context).primaryTextTheme.bodyText1?.color,
+                  color: Theme.of(context).primaryTextTheme.bodySmall?.color,
                   fontSize: readerStoreController.fontSize.value,
                 )
             ]),
@@ -147,7 +154,10 @@ class _VersePreviewState extends State<VersePreview> {
     return DecoratedBox(
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(10)),
-        border: Border.all(width: 2, color: Theme.of(context).backgroundColor),
+        border: Border.all(
+          width: 2,
+          color: Theme.of(context).colorScheme.secondary.withAlpha(30),
+        ),
       ),
       child: Padding(
           padding: const EdgeInsets.all(0),
@@ -184,6 +194,7 @@ onLongPressVerse(BuildContext context, verse, int chapter) async {
 
   readerStoreController.selectedAya("$chapter:${verse["id"]}");
 
+  // ignore: use_build_context_synchronously
   await showModalBottomSheet(
     backgroundColor: Colors.transparent,
     context: context,
@@ -254,7 +265,6 @@ onLongPressVerse(BuildContext context, verse, int chapter) async {
                           onPressed: () {
                             globalStoreController.addFavouriteAya(
                                 {"chapter": chapter, "id": verse["id"]});
-                            Navigator.pop(context);
                           },
                         ),
                       )
@@ -267,7 +277,7 @@ onLongPressVerse(BuildContext context, verse, int chapter) async {
               Obx(() => VerseAudio(
                     verse: verse,
                     chapter: chapter,
-                    subfolder: readerStoreController.recitor.value.toString(),
+                    subfolder: readerStoreController.reciter.value.toString(),
                   )),
               const Spacing(padding: 16)
             ],
@@ -346,57 +356,60 @@ class _VerseAudioState extends State<VerseAudio> {
 
   @override
   Widget build(BuildContext context) {
-    return Flex(
-      direction: Axis.horizontal,
-      children: [
-        IconButton(
-          onPressed: () async {
-            if (_isPlaying) {
-              audioPlayer.pause();
-            } else {
-              if (isEmpty) {
-                String chapterId = widget.chapter.toString().padLeft(3, "0");
-                String verseId = widget.verse["id"].toString().padLeft(3, "0");
+    return ListTile(
+      contentPadding: const EdgeInsets.all(0),
+      leading: IconButton(
+        onPressed: () async {
+          if (_isPlaying) {
+            audioPlayer.pause();
+          } else {
+            if (isEmpty) {
+              String chapterId = widget.chapter.toString().padLeft(3, "0");
+              String verseId = widget.verse["id"].toString().padLeft(3, "0");
 
-                String url =
-                    "$everyAyaUrl/${widget.subfolder}/$chapterId$verseId.mp3";
+              String url =
+                  "$everyAyaUrl/${widget.subfolder}/$chapterId$verseId.mp3";
 
-                await audioPlayer.setSource(UrlSource(url));
+              await audioPlayer.setSource(UrlSource(url));
 
-                if (kDebugMode) {
-                  print(url);
-                }
+              if (kDebugMode) {
+                print(url);
               }
-              await audioPlayer.resume();
             }
-          },
-          icon:
-              Icon(_isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded),
-        ),
-        Expanded(
-          child: SliderTheme(
-            data: SliderThemeData(
-              thumbColor: !isEmpty
-                  ? Theme.of(context).colorScheme.primary
-                  : Colors.grey,
-              inactiveTrackColor: !isEmpty
-                  ? Theme.of(context).colorScheme.primary.withAlpha(100)
-                  : Colors.grey.withAlpha(100),
-              trackHeight: 2,
-              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
+            await audioPlayer.resume();
+          }
+        },
+        icon: Icon(_isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded),
+      ),
+      title: Flex(
+        direction: Axis.horizontal,
+        children: [
+          Expanded(
+            child: SliderTheme(
+              data: SliderThemeData(
+                thumbColor: !isEmpty
+                    ? Theme.of(context).colorScheme.primary
+                    : Colors.grey,
+                inactiveTrackColor: !isEmpty
+                    ? Theme.of(context).colorScheme.primary.withAlpha(100)
+                    : Colors.grey.withAlpha(100),
+                trackHeight: 2,
+                thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 7),
+              ),
+              child: Slider(
+                  min: 0,
+                  max: _duration.inSeconds.toDouble(),
+                  value: _position.inSeconds.toDouble(),
+                  onChanged: (value) async {
+                    final position = Duration(seconds: value.toInt());
+                    await audioPlayer.seek(position);
+                  }),
             ),
-            child: Slider(
-                min: 0,
-                max: _duration.inSeconds.toDouble(),
-                value: _position.inSeconds.toDouble(),
-                onChanged: (value) async {
-                  final position = Duration(seconds: value.toInt());
-                  await audioPlayer.seek(position);
-                }),
           ),
-        ),
-        if (!isEmpty) Text("${_duration.inSeconds - _position.inSeconds}s"),
-      ],
+          if (!isEmpty) Text("${_duration.inSeconds - _position.inSeconds}s"),
+        ],
+      ),
+      subtitle: Text(widget.subfolder, textAlign: TextAlign.right),
     );
   }
 }

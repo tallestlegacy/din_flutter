@@ -1,5 +1,5 @@
 import 'package:din/widgets/font_setting.dart';
-import 'package:din/widgets/theme_toggle_button.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,7 +21,7 @@ class ReaderPreferences extends StatelessWidget {
         leading: const CustomBackButton(),
         //backgroundColor: Theme.of(context).backgroundColor,
         elevation: 1,
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleAction()],
       ),
       body: ListView(
         children: [

@@ -58,7 +58,11 @@ class FontSetting extends StatelessWidget {
                               : readerStoreController.setArabicFont(fontFamily);
                         },
                         side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .secondary
+                              .withAlpha(20),
+                        ),
                       ),
                     ),
                   ),

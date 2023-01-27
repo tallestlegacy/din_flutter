@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:din/constants/every_aya.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -25,7 +24,7 @@ class ReaderStoreController extends GetxController {
   var ayaSpans = false.obs;
   var arabicFont = arabicFonts[0].obs;
   var ayaEndFont = ayaEndFonts[0].obs;
-  var recitor = everyAya["1"]!["subfolder"].obs;
+  var reciter = "Abdul_Basit_Murattal_64kbps".obs;
   var selectedAya = "".obs;
 
   final box = GetStorage();
@@ -76,9 +75,15 @@ class ReaderStoreController extends GetxController {
     box.write("ayaSpans", value);
   }
 
-  void setRecitor(String value) {
-    recitor(value);
-    box.write("recitor", value);
+  void setReciter(String value) {
+    reciter(value);
+    box.write("reciter", value);
+  }
+
+  bool hasSubfolder(List tracks) {
+    return tracks
+            .indexWhere((element) => element["subfolder"] == reciter.value) !=
+        -1;
   }
 
   void setSelectedAya(String value) {
@@ -98,7 +103,7 @@ class ReaderStoreController extends GetxController {
     reverseScrolling(box.read("reverseScrolling") ?? true);
     arabicFont(box.read("arabicFont") ?? arabicFonts[0]);
     ayaEndFont(box.read("ayaEndFont") ?? ayaEndFonts[0]);
-    recitor(box.read("recitor") ?? everyAya["1"]!["subfolder"]);
+    reciter(box.read("reciter") ?? "Abdul_Basit_Murattal_64kbps");
   }
 }
 
@@ -280,7 +285,7 @@ class TranslationsStoreController extends GetxController {
         null;
   }
 
-  bool editionIsDefaault(String language, String edition) {
+  bool editionIsDefault(String language, String edition) {
     return defaultTranslation["language"] == language &&
         defaultTranslation["edition"] == edition;
   }
