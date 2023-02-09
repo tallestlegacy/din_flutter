@@ -9,8 +9,8 @@ class AboutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String visionData = """ 
-### My Vision
+    const String visionData = """
+# My Vision
 I wanted to create an application than includes everyone, a platform that doesn't 
 discriminate user preferences, whether it's font size or text colour. To create
 an inclusive environment where everyone can be comfortable reading their Quran and 
@@ -21,11 +21,11 @@ literature and canon, for the average muslim and for any curious cats who need a
 reference or want to learn the Islamic way.
 
 Feel free to choose your preferred translation, or whether to show translations 
-altogether. *Change the default theme*, choose whether you want to swipe left to
+altogether. **_Change the default theme_**, choose whether you want to swipe left to
 right or right to left. There's even more Arabic fonts than you'd ever need.
 """;
     const String policyData = """
-### Privacy Policy
+# Privacy Policy
 Din does not need or collect any user data. All your preferences and network
 information is left on your device. We require a few permissions for some **opt-in 
 features** to work.
@@ -40,24 +40,28 @@ when you want to use this feature, and turn on location during calibration.
 """;
 
     const String featureImprovements = """
-### Improvements & Feature Suggestions
+# Improvements & Feature Suggestions
 
 The app is actively being built and the following improvements are underway
--  Compass rotations animation is a little laggy
--  Pinch to zoom on all text pages  
--  Juz page may undergo some UI and performance improvements.
+1.  Material 3 migration
+1.  Compass performance improvements
+1.  Qira'at player for Surah and Juz
+1.  Pinch to zoom on all text pages  
+1.  Surah page loading UI and performance improvements.
+1.  Juz page UI and performance improvements.
 
-And here are some of the incoming features
-1.  Adhan notifications
-1.  Global search (quran, hadith and dua) with match highlighting
-1.  Quran commentary (from online sources)
-1.  99 names commentary (from online sources)
-1.  Qira'at
-1.  Tajweed and its guidelines
-1.  Islamic literature library
+And here are some soon to come
+-  Internet references for each Aya    
+-  Notes on each Aya  
+- Adhan notifications
+- Global search (quran, hadith and dua) with match highlighting
+- Quran commentary (from online sources)
+- 99 names commentary (from online sources)
+- Tajweed and its guidelines
+- Islamic literature library
 
 Thank you to all the people I've been nagging about testing this app, you're the 
-reason that keeps me coding, and anyone can reach out to me [tallestlegacy@gmail.com](email)
+reason that keeps me coding, and anyone can reach out to me [tallestlegacy@gmail.com](mailto:tallestlegacy@gmail.com)
 for inquiries and feature suggestions.
 
 """;

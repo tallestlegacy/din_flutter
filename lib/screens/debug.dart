@@ -61,7 +61,7 @@ class _DebugState extends State<Debug> {
                   ),
                   children: [
                     for (var verse in _verses)
-                      Verse(verse: verse, chapter: 1).span(context)
+                      ...Verse(verse: verse, chapter: 1).span(context)
                   ],
                 ),
               ),

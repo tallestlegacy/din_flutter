@@ -88,7 +88,7 @@ class _QuranPageState extends State<QuranPage> {
 
     return AnnotatedRegion(
       value: SystemUiOverlayStyle(
-        statusBarColor: Theme.of(context).colorScheme.background,
+        statusBarColor: Theme.of(context).colorScheme.primary,
       ),
       child: SafeArea(
         top: false,
@@ -109,7 +109,10 @@ class _QuranPageState extends State<QuranPage> {
                                 !readerStoreController.ayaSpans.value,
                       ),
                       style: const TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w500),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      overflow: TextOverflow.fade,
                     ),
                   ),
                   leading: IconButton(
@@ -130,7 +133,6 @@ class _QuranPageState extends State<QuranPage> {
                     ThemeToggleAction(),
                   ],
                   elevation: 1,
-                  backgroundColor: Theme.of(context).backgroundColor,
                 ),
               ];
             },
@@ -170,12 +172,12 @@ class _QuranPageState extends State<QuranPage> {
                     child: ListTile(
                       textColor: Theme.of(context)
                           .primaryTextTheme
-                          .bodyMedium
+                          .bodySmall
                           ?.color
                           ?.withAlpha(160),
                       selected:
                           pageController.page == (_chapters[index]["id"] - 1),
-                      selectedColor: Theme.of(context).primaryColor,
+                      selectedColor: Theme.of(context).colorScheme.primary,
                       selectedTileColor:
                           Theme.of(context).colorScheme.primary.withAlpha(30),
                       subtitle: Text("${_chapters[index]['translation']}"),

@@ -76,7 +76,7 @@ class _InfoState extends State<Info> {
             leading: const CustomBackButton(),
             actions: const [ThemeToggleAction()],
             iconTheme: IconThemeData(
-              color: Theme.of(context).colorScheme.onPrimary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
             pinned: true,
             snap: false,

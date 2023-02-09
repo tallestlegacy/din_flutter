@@ -76,7 +76,7 @@ class _BukhariState extends State<Bukhari> {
                 "${_volumes[index]['name']}",
                 style: TextStyle(
                   fontSize: 16,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -88,7 +88,7 @@ class _BukhariState extends State<Bukhari> {
                     title: Text(
                       "${book['name']}",
                     ),
-                    leading: Text(
+                    trailing: Text(
                       readerStoreController.showTranslation.value
                           ? "${book['length']}"
                           : toFarsi(book['length']),
@@ -215,9 +215,10 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
           leading: const CustomBackButton(),
           actions: const [TextSettingsAction(), ThemeToggleAction()],
           titleTextStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.secondary),
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),

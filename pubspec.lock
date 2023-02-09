@@ -536,14 +536,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
-  scroll_to_hide_bottom_navigation_bar:
-    dependency: "direct main"
-    description:
-      name: scroll_to_hide_bottom_navigation_bar
-      sha256: e66dd27ce3eaddd0e4c25430d07803a4bf2bf883e667e41e7ed560429eed8a79
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.1"
   scroll_to_index:
     dependency: "direct main"
     description:

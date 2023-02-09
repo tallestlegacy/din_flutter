@@ -71,24 +71,11 @@ class _SurahState extends State<Surah> {
                                 ),
                               ),
                               children: [
-                                for (var verse in _verses) ...[
-                                  Verse(
+                                for (var verse in _verses)
+                                  ...Verse(
                                           verse: verse,
                                           chapter: widget.chapter["id"])
                                       .span(context),
-                                  TextSpan(
-                                    text: " \u06dd${toFarsi(verse["id"])}   ",
-                                    style: googleFontify(
-                                      readerStoreController.ayaEndFont.value,
-                                      TextStyle(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        decoration: null,
-                                      ),
-                                    ),
-                                  ),
-                                ]
                               ]),
                         ),
                       ))

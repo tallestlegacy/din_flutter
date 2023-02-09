@@ -31,7 +31,6 @@ dependencies:
   intl: ^0.18.0
   scroll_to_index: ^3.0.1
   audioplayers: ^1.1.1
-  scroll_to_hide_bottom_navigation_bar: ^0.0.1
   
 
 dev_dependencies:

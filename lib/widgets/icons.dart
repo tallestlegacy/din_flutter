@@ -16,9 +16,14 @@ const Widget shareIcon = Icon(
   color: Colors.grey,
   size: 16,
 );
+
+const Widget thumbIcon = Icon(
+  Icons.check,
+  color: Colors.grey,
+  size: 16,
+);
 const Widget favouriteIcon = Icon(
   Icons.favorite_rounded,
-  color: Colors.grey,
   size: 16,
 );
 

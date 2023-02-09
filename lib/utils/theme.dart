@@ -20,18 +20,20 @@ class Styles {
     Color? accentColor = primarySwatch[200];
     Color? text2 =
         isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100);
-    Color? backgroundColor = isDarkMode ? Colors.grey[900] : primarySwatch[50];
     Color? cardColor = isDarkMode ? Colors.grey[850] : Colors.white;
 
     ColorScheme colorScheme = ColorScheme.fromSeed(
       seedColor: swatch,
     );
 
-    SystemChrome.setSystemUIOverlayStyle(
+    Color? backgroundColor =
+        isDarkMode ? colorScheme.onSurface : colorScheme.secondaryContainer;
+
+/*     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        systemNavigationBarColor: colorScheme.secondary,
+        systemNavigationBarColor: backgroundColor,
       ),
-    );
+    ); */
 
     return ThemeData(
       useMaterial3: true,
@@ -40,17 +42,19 @@ class Styles {
       primaryTextTheme: TextTheme(
         bodySmall: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
         bodyMedium: TextStyle(
-          color: isDarkMode ? accentColor : colorScheme.primary.withAlpha(100),
+          color:
+              isDarkMode ? colorScheme.primaryContainer : colorScheme.secondary,
         ),
       ),
-      navigationRailTheme: NavigationRailThemeData(
-        backgroundColor: isDarkMode ? colorScheme.secondary : Colors.white,
+      navigationBarTheme: NavigationBarThemeData(
+        labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+        backgroundColor: backgroundColor,
         elevation: 2,
-        indicatorColor: colorScheme.onSecondary.withAlpha(50),
-        labelType: NavigationRailLabelType.selected,
       ),
       cardTheme: CardTheme(
-        // color: cardColor,
+        color: isDarkMode
+            ? colorScheme.primaryContainer.withAlpha(20)
+            : colorScheme.onPrimaryContainer.withAlpha(20),
         elevation: .5,
         shadowColor: Colors.transparent,
         shape: RoundedRectangleBorder(
@@ -67,10 +71,11 @@ class Styles {
         iconColor: colorScheme.secondary,
       ),
       snackBarTheme: SnackBarThemeData(
-        backgroundColor: colorScheme.secondary,
+        backgroundColor: colorScheme.primary,
         contentTextStyle: TextStyle(
-          color: colorScheme.onSecondary,
+          color: colorScheme.onPrimary,
         ),
+        actionTextColor: colorScheme.onPrimary,
       ),
       iconTheme: IconThemeData(
         color: colorScheme.secondary,
@@ -83,6 +88,23 @@ class Styles {
               side: MaterialStatePropertyAll(
         BorderSide(color: primarySwatch),
       ))),
+      appBarTheme: AppBarTheme(
+        scrolledUnderElevation: 1,
+        shadowColor: isDarkMode
+            ? primarySwatch.shade100.withAlpha(100)
+            : primarySwatch.shade100,
+        backgroundColor: backgroundColor,
+      ),
+      scaffoldBackgroundColor: backgroundColor,
+      switchTheme: SwitchThemeData(
+        thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.selected)) {
+              return const Icon(Icons.check);
+            }
+          },
+        ),
+      ),
     );
 
     // // ignore: dead_code

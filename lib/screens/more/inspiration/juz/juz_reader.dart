@@ -159,26 +159,11 @@ class _JuzReaderState extends State<JuzReader> {
                                     ),
                                   ),
                                   children: [
-                                    for (var verse in _chapters[index]) ...[
-                                      Verse(
+                                    for (var verse in _chapters[index])
+                                      ...Verse(
                                               verse: verse,
                                               chapter: thisJuz.chapters[index])
                                           .span(context),
-                                      TextSpan(
-                                        text:
-                                            " \u06dd${toFarsi(verse["id"])}   ",
-                                        style: googleFontify(
-                                          readerStoreController
-                                              .ayaEndFont.value,
-                                          TextStyle(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .tertiary,
-                                            decoration: null,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
                                   ],
                                 ),
                               ),

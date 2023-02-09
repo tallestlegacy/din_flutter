@@ -35,33 +35,23 @@ class FontSetting extends StatelessWidget {
                   (fontFamily) => Container(
                     margin: const EdgeInsets.all(4),
                     child: Obx(
-                      () => ActionChip(
-                        shape: isAyaEnd ? const CircleBorder() : null,
+                      () => ChoiceChip(
                         visualDensity: VisualDensity.compact,
-                        backgroundColor: (isAyaEnd
-                                    ? readerStoreController.ayaEndFont.value
-                                    : readerStoreController.arabicFont.value) ==
-                                fontFamily
-                            ? Theme.of(context)
-                                .colorScheme
-                                .primary
-                                .withAlpha(120)
-                            : null,
+                        selected: (isAyaEnd
+                                ? readerStoreController.ayaEndFont.value
+                                : readerStoreController.arabicFont.value) ==
+                            fontFamily,
                         label: isAyaEnd
                             ? Text("\u06dd${toFarsi(123)}")
                             : const Text(din),
                         labelStyle: googleFontify(fontFamily, null),
-                        surfaceTintColor: Theme.of(context).primaryColor,
-                        onPressed: () {
+                        onSelected: (value) {
                           isAyaEnd
                               ? readerStoreController.setAyaEndFont(fontFamily)
                               : readerStoreController.setArabicFont(fontFamily);
                         },
                         side: BorderSide(
-                          color: Theme.of(context)
-                              .colorScheme
-                              .secondary
-                              .withAlpha(20),
+                          color: Theme.of(context).colorScheme.surfaceVariant,
                         ),
                       ),
                     ),

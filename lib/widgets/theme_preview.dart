@@ -21,14 +21,19 @@ class ThemePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color? backgroundColor = isDarkMode ? Colors.grey.shade900 : color.shade50;
-    Color? cardColor = isDarkMode ? Colors.grey[850] : Colors.white;
-    Color? textColor = isDarkMode ? Colors.grey.shade600 : Colors.grey.shade400;
+    Color? cardColor =
+        isDarkMode ? color.shade900.withAlpha(40) : color.shade50;
+    Color? backgroundColor =
+        isDarkMode ? Colors.grey.shade900.withAlpha(240) : Colors.white;
+    Color? textColor =
+        isDarkMode ? Colors.white.withAlpha(100) : Colors.grey.shade400;
+    Color? selectedTextColor =
+        isDarkMode ? color.shade400 : Colors.grey.shade400;
 
     Container textDecoration(double scalar1, double scalar2) => Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(1)),
-            color: selected ? color : textColor,
+            color: selected ? selectedTextColor : textColor,
           ),
           height: 1,
           width: scalar1 * scalar2,
@@ -52,10 +57,11 @@ class ThemePreview extends StatelessWidget {
             Get.changeTheme(
                 Styles(swatch: color, isDarkMode: isDarkMode).themeData);
           },
-          child: DecoratedBox(
+          child: Container(
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: backgroundColor,
+              color: color,
               border: Border.all(
                 color: isDarkMode
                     ? selected
@@ -66,10 +72,11 @@ class ThemePreview extends StatelessWidget {
                         : color.shade100,
                 width: 2,
                 style: BorderStyle.solid,
+                strokeAlign: 1,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(2),
+            child: Container(
+              color: backgroundColor,
               child: Column(
                 children: [
                   Container(
@@ -77,8 +84,6 @@ class ThemePreview extends StatelessWidget {
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       color: color.withAlpha(30),
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(10)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -103,15 +108,10 @@ class ThemePreview extends StatelessWidget {
                                 vertical: 2, horizontal: 8),
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                                color: cardColor,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(4)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: .5,
-                                    color: Colors.grey.withAlpha(100),
-                                  )
-                                ]),
+                              color: cardColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(4)),
+                            ),
                             child: Wrap(
                               spacing: 2,
                               runSpacing: 2,
@@ -125,14 +125,7 @@ class ThemePreview extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 16,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: const BorderRadius.vertical(
-                          bottom: Radius.circular(10)),
-                    ),
-                  )
+                  Container(height: 16, color: color)
                 ],
               ),
             ),

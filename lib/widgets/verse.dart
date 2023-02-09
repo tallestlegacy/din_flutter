@@ -43,16 +43,29 @@ class Verse extends StatelessWidget {
   get isSelected =>
       readerStoreController.selectedAya.value == "$chapter:${verse["id"]}";
 
-  span(BuildContext context) => TextSpan(
-        text: "${verse["text"]}",
-        style: TextStyle(
-          backgroundColor:
-              isSelected ? Theme.of(context).primaryColor.withAlpha(56) : null,
-          color: isFavourite ? Theme.of(context).colorScheme.primary : null,
+  span(BuildContext context) => [
+        TextSpan(
+          text: "${verse["text"]}",
+          style: TextStyle(
+            backgroundColor: isSelected
+                ? Theme.of(context).colorScheme.primary.withAlpha(56)
+                : null,
+            color: isFavourite ? Theme.of(context).colorScheme.primary : null,
+          ),
+          recognizer: LongPressGestureRecognizer()
+            ..onLongPress = () => onLongPressVerse(context, verse, chapter),
         ),
-        recognizer: LongPressGestureRecognizer()
-          ..onLongPress = () => onLongPressVerse(context, verse, chapter),
-      );
+        TextSpan(
+          text: " \u06dd${toFarsi(verse["id"])}   ",
+          style: googleFontify(
+            readerStoreController.ayaEndFont.value,
+            TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              decoration: null,
+            ),
+          ),
+        ),
+      ];
 
   @override
   Widget build(BuildContext context) {

@@ -31,7 +31,7 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
   final _streamSubscriptions = <StreamSubscription<dynamic>>[];
 
   late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 10),
+    duration: const Duration(milliseconds: 10),
     vsync: this,
   )..repeat();
 
@@ -159,10 +159,7 @@ class _QiblaState extends State<Qibla> with TickerProviderStateMixin {
                         padding: const EdgeInsets.all(16),
                         child: Material(
                           shape: const CircleBorder(),
-                          color: Theme.of(context)
-                              .colorScheme
-                              .tertiary
-                              .withAlpha(10),
+                          color: Theme.of(context).colorScheme.onInverseSurface,
                           shadowColor: Colors.grey.withAlpha(300),
                           elevation: 1,
                           child: Stack(
