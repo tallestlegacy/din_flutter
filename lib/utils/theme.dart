@@ -29,16 +29,17 @@ class Styles {
     Color? backgroundColor =
         isDarkMode ? colorScheme.onSurface : colorScheme.secondaryContainer;
 
-/*     SystemChrome.setSystemUIOverlayStyle(
+    SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        systemNavigationBarColor: backgroundColor,
+        systemNavigationBarColor: colorScheme.primary,
       ),
-    ); */
+    );
 
     return ThemeData(
       useMaterial3: true,
       colorSchemeSeed: swatch,
       brightness: isDarkMode ? Brightness.dark : Brightness.light,
+      splashColor: colorScheme.primary.withAlpha(20),
       primaryTextTheme: TextTheme(
         bodySmall: TextStyle(color: isDarkMode ? Colors.white : Colors.black87),
         bodyMedium: TextStyle(

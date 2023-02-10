@@ -1,3 +1,4 @@
+import 'package:din/widgets/divider.dart';
 import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -43,12 +44,9 @@ when you want to use this feature, and turn on location during calibration.
 # Improvements & Feature Suggestions
 
 The app is actively being built and the following improvements are underway
-1.  Material 3 migration
-1.  Compass performance improvements
 1.  Qira'at player for Surah and Juz
 1.  Pinch to zoom on all text pages  
-1.  Surah page loading UI and performance improvements.
-1.  Juz page UI and performance improvements.
+1.  Surah and Juz page loading UI and performance improvements.
 
 And here are some soon to come
 -  Internet references for each Aya    
@@ -59,6 +57,9 @@ And here are some soon to come
 - 99 names commentary (from online sources)
 - Tajweed and its guidelines
 - Islamic literature library
+
+I thank all 12 of my users for giving me a reason to keep coding despite this project
+being financially unviable.
 
 Thank you to all the people I've been nagging about testing this app, you're the 
 reason that keeps me coding, and anyone can reach out to me [tallestlegacy@gmail.com](mailto:tallestlegacy@gmail.com)
@@ -79,9 +80,9 @@ for inquiries and feature suggestions.
                 const EdgeInsets.only(top: 32, bottom: 16, left: 16, right: 16),
             children: const [
               MarkdownBody(data: visionData),
-              Divider(),
+              Spacing(padding: 32),
               MarkdownBody(data: policyData),
-              Divider(),
+              Spacing(padding: 32),
               MarkdownBody(data: featureImprovements),
             ]),
       ),

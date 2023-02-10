@@ -3,23 +3,23 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 const Widget linkIcon = Icon(
   Icons.link_rounded,
-  color: Colors.grey,
+  // color: Colors.grey,
   size: 16,
 );
 const Widget copyIcon = Icon(
   Icons.copy_rounded,
-  color: Colors.grey,
+  // color: Colors.grey,
   size: 16,
 );
 const Widget shareIcon = Icon(
   Icons.share_rounded,
-  color: Colors.grey,
+  // color: Colors.grey,
   size: 16,
 );
 
 const Widget thumbIcon = Icon(
   Icons.check,
-  color: Colors.grey,
+  // color: Colors.grey,
   size: 16,
 );
 const Widget favouriteIcon = Icon(

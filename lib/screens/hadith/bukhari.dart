@@ -235,10 +235,7 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
                         : toFarsi(_hadiths[index]['id']),
                     style: googleFontify(
                       readerStoreController.arabicFont.value,
-                      TextStyle(
-                        color: Colors.grey,
-                        fontSize: readerStoreController.fontSize.value,
-                      ),
+                      TextStyle(fontSize: readerStoreController.fontSize.value),
                     ),
                   ),
                   title: Text(

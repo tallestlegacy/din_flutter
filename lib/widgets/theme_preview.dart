@@ -21,14 +21,14 @@ class ThemePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color? cardColor =
-        isDarkMode ? color.shade900.withAlpha(40) : color.shade50;
-    Color? backgroundColor =
-        isDarkMode ? Colors.grey.shade900.withAlpha(240) : Colors.white;
-    Color? textColor =
-        isDarkMode ? Colors.white.withAlpha(100) : Colors.grey.shade400;
-    Color? selectedTextColor =
-        isDarkMode ? color.shade400 : Colors.grey.shade400;
+    ThemeData themeData =
+        Styles(isDarkMode: isDarkMode, swatch: color).themeData;
+
+    Color? cardColor = themeData.cardTheme.color;
+    Color? backgroundColor = themeData.scaffoldBackgroundColor;
+    Color? textColor = themeData.textTheme.bodySmall!.color!.withAlpha(70);
+    Color? bottomBar = themeData.colorScheme.primary;
+    Color? selectedTextColor = color;
 
     Container textDecoration(double scalar1, double scalar2) => Container(
           decoration: BoxDecoration(
@@ -66,10 +66,10 @@ class ThemePreview extends StatelessWidget {
                 color: isDarkMode
                     ? selected
                         ? color.shade400
-                        : Colors.grey
+                        : color.shade100
                     : selected
                         ? color.shade600
-                        : color.shade100,
+                        : color.shade200,
                 width: 2,
                 style: BorderStyle.solid,
                 strokeAlign: 1,
@@ -125,7 +125,7 @@ class ThemePreview extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(height: 16, color: color)
+                  Container(height: 16, color: bottomBar)
                 ],
               ),
             ),

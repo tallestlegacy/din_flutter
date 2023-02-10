@@ -91,7 +91,6 @@ class Verse extends StatelessWidget {
               style: googleFontify(
                 readerStoreController.ayaEndFont.value,
                 TextStyle(
-                  color: Colors.grey,
                   fontSize: readerStoreController.showTranslation.value
                       ? readerStoreController.fontSize.value
                       : readerStoreController.fontSize.value * 1.5,

@@ -52,7 +52,7 @@ class Juz extends StatelessWidget {
                           readerStoreController.arabicFont.value,
                           TextStyle(
                             fontSize: readerStoreController.fontSize.value,
-                            color: Theme.of(context).colorScheme.tertiary,
+                            color: Theme.of(context).colorScheme.secondary,
                           ),
                         ),
                       ),
@@ -104,7 +104,7 @@ class Juz extends StatelessWidget {
                           Icon(
                             Icons.my_library_books_rounded,
                             size: readerStoreController.fontSize.value,
-                            color: Colors.grey,
+                            color: Theme.of(context).textTheme.bodySmall!.color,
                           )
                         ],
                       )),

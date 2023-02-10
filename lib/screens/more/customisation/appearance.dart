@@ -54,7 +54,7 @@ class Appearance extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.light_mode_outlined),
                   title: Text(
-                    "Light mode theme",
+                    "Light mode theme : ${appearanceStoreController.swatchName}",
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary),
                   ),
@@ -68,7 +68,7 @@ class Appearance extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.dark_mode_outlined),
                   title: Text(
-                    "Dark mode theme",
+                    "Dark mode theme: ${appearanceStoreController.darkSwatchName}",
                     style: TextStyle(
                         color: Theme.of(context).colorScheme.secondary),
                   ),

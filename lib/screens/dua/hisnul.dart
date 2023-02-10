@@ -254,7 +254,6 @@ class HisnulReference extends StatelessWidget {
                     style: googleFontify(
                       readerStoreController.arabicFont.value,
                       TextStyle(
-                        color: Colors.grey,
                         fontSize: readerStoreController.fontSize.value,
                       ),
                     ),

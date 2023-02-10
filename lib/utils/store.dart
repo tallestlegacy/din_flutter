@@ -114,6 +114,30 @@ class AppearanceStoreController extends GetxController {
   var darkSwatch = Colors.blue.obs;
   var forceDarkMode = false.obs;
 
+  get swatchName => colorNames[colors.indexOf(swatch.value)];
+  get darkSwatchName => colorNames[colors.indexOf(darkSwatch.value)];
+
+  List<String> get colorNames => [
+        "blue",
+        "cyan",
+        "indigo",
+        "deepPurple",
+        "purple",
+        "pink",
+        "red",
+        "deepOrange",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "lightGreen",
+        "green",
+        "teal",
+        "brown",
+        "grey",
+        "blueGrey",
+      ];
+
   List<MaterialColor> get colors => <MaterialColor>[
         Colors.blue,
         Colors.cyan,
