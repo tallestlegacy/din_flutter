@@ -1,10 +1,14 @@
+import 'package:din/utils/network.dart';
+import 'package:din/widgets/back_button.dart';
+import 'package:din/widgets/text_settings.dart';
+import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-import '/widgets/back_button.dart';
-import '/widgets/text_settings.dart';
+import '../../../widgets/padded_text.dart';
+import '/widgets/icons.dart';
 import '/utils/string_locale.dart';
-import '/widgets/theme_toggle_button.dart';
 import '/utils/json.dart';
 import '/utils/store.dart';
 
@@ -42,95 +46,92 @@ class _NamesState extends State<Names> {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        body: NestedScrollView(
-          floatHeaderSlivers: true,
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) => [
-            SliverOverlapAbsorber(
-              sliver: SliverAppBar(
-                floating: true,
-                snap: true,
-                pinned: true,
-                forceElevated: innerBoxIsScrolled,
-                backgroundColor: Theme.of(context).backgroundColor,
-                title: const Text("99 Names"),
-                leading: const CustomBackButton(),
-                bottom: TabBar(
-                  labelPadding: const EdgeInsets.only(bottom: 8),
-                  tabs: const [
-                    Text("Allah"),
-                    Text("Muhammad"),
-                  ],
-                  indicatorColor: Theme.of(context).primaryColor,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Asma Ul Husna"),
+        leading: const CustomBackButton(),
+        actions: const [TextSettingsAction(), ThemeToggleAction()],
+      ),
+      body: SafeArea(
+        bottom: true,
+        child: ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemBuilder: (BuildContext context, int index) =>
+              NameCard(name: _namesOfAllah[index], index: index),
+          itemCount: _namesOfAllah.length,
+        ),
+      ),
+    );
+  }
+}
+
+class NameCard extends StatelessWidget {
+  var name;
+  int index;
+
+  NameCard({super.key, required this.name, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    final ReaderStoreController readerStoreController =
+        Get.put(ReaderStoreController());
+
+    String link =
+        "https://myislam.org/99-names-of-allah/${name["transliteration"].toString().toLowerCase().replaceAll("'", "")}/";
+
+    return Obx(
+      () => Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            ListTile(
+              leading: Text(
+                readerStoreController.showTranslation.value
+                    ? (index + 1).toString()
+                    : toFarsi(index + 1),
+                style: googleFontify(
+                  readerStoreController.arabicFont.value,
+                  TextStyle(
+                    fontSize: readerStoreController.fontSize.value,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
                 ),
-                actions: const [TextSettingsAction(), ThemeToggleButton()],
-                scrolledUnderElevation: 1,
-                elevation: 1,
               ),
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              title: PaddedText(
+                text: "${name["name"]}",
+                googleFont: readerStoreController.arabicFont.value,
+                textAlign: TextAlign.right,
+                fontSize: readerStoreController.fontSize.value * 2,
+                color: Theme.of(context).colorScheme.onPrimaryContainer,
+              ),
+              subtitle: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  if (readerStoreController.showTransliteration.value)
+                    Text(name["transliteration"],
+                        style: TextStyle(
+                            fontSize: readerStoreController.fontSize.value)),
+                  if (readerStoreController.showTranslation.value)
+                    Text(name["translation"],
+                        style: TextStyle(
+                            fontSize: readerStoreController.fontSize.value)),
+                ],
+              ),
             ),
+            /* const Divider(),
+            TextButton(
+              onPressed: () => openLink(
+                link,
+                external: false,
+              ),
+              child: PaddedText(
+                text: "Learn More",
+                color: Theme.of(context).colorScheme.tertiary,
+              ),
+            ), */
           ],
-          body: TabBarView(
-            children: [_namesOfAllah, _namesOfMuhammad].map((var names) {
-              return SafeArea(
-                top: false,
-                bottom: true,
-                child: Builder(
-                  builder: (BuildContext context) {
-                    return CustomScrollView(
-                      slivers: <Widget>[
-                        SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context),
-                        ),
-                        SliverList(
-                          delegate: SliverChildBuilderDelegate(
-                            (context, index) => Column(
-                              children: [
-                                Obx(
-                                  (() {
-                                    double fontSize =
-                                        readerStoreController.fontSize.value;
-                                    return ListTile(
-                                      leading: Text(
-                                        readerStoreController
-                                                .showTranslation.value
-                                            ? (index + 1).toString()
-                                            : toFarsi(index + 1),
-                                        style: googleFontify(
-                                          readerStoreController
-                                              .arabicFont.value,
-                                          TextStyle(fontSize: fontSize),
-                                        ),
-                                      ),
-                                      title: Text(
-                                        "${names[index]["name"]} - ${names[index]["transliteration"]}",
-                                        style: TextStyle(fontSize: fontSize),
-                                      ),
-                                      subtitle: Text(
-                                        names[index]["translation"],
-                                        style: TextStyle(fontSize: fontSize),
-                                      ),
-                                    );
-                                  }),
-                                ),
-                                if (index != names.length - 1) const Divider()
-                              ],
-                            ),
-                            childCount: names.length,
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                ),
-              );
-            }).toList(),
-          ),
         ),
       ),
     );

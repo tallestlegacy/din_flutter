@@ -1,3 +1,4 @@
+import 'package:din/utils/string_locale.dart';
 import 'package:din/widgets/padded_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,7 +8,8 @@ import '/utils/store.dart';
 import '/constants/strings.dart';
 
 class FontSetting extends StatelessWidget {
-  const FontSetting({super.key});
+  final bool isAyaEnd;
+  const FontSetting({super.key, this.isAyaEnd = false});
 
   @override
   Widget build(BuildContext context) {
@@ -17,30 +19,40 @@ class FontSetting extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const PaddedText(text: "Arabic fonts", padding: 8),
+        Obx(() => PaddedText(
+            text: isAyaEnd
+                ? "End of Aya : ${readerStoreController.ayaEndFont.value}"
+                : "Arabic fonts : ${readerStoreController.arabicFont.value}",
+            padding: 8)),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          key: const PageStorageKey<String>("arabic fonts"),
           child: Wrap(
             direction: Axis.horizontal,
-            children: arabicFonts
+            children: (isAyaEnd ? ayaEndFonts : arabicFonts)
                 .map(
                   (fontFamily) => Container(
                     margin: const EdgeInsets.all(4),
                     child: Obx(
-                      () => ActionChip(
+                      () => ChoiceChip(
                         visualDensity: VisualDensity.compact,
-                        backgroundColor:
-                            readerStoreController.arabicFont.value == fontFamily
-                                ? Theme.of(context).backgroundColor
-                                : null,
-                        label: const Text(din),
+                        selected: (isAyaEnd
+                                ? readerStoreController.ayaEndFont.value
+                                : readerStoreController.arabicFont.value) ==
+                            fontFamily,
+                        label: isAyaEnd
+                            ? Text("\u06dd${toFarsi(123)}")
+                            : const Text(din),
                         labelStyle: googleFontify(fontFamily, null),
-                        surfaceTintColor: Theme.of(context).primaryColor,
-                        onPressed: () {
-                          readerStoreController.setArabicFont(fontFamily);
+                        onSelected: (value) {
+                          isAyaEnd
+                              ? readerStoreController.setAyaEndFont(fontFamily)
+                              : readerStoreController.setArabicFont(fontFamily);
                         },
                         side: BorderSide(
-                            color: Theme.of(context).colorScheme.secondary),
+                          color: Theme.of(context).colorScheme.surfaceVariant,
+                        ),
                       ),
                     ),
                   ),

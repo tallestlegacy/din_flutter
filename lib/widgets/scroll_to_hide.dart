@@ -51,13 +51,17 @@ class _ScrollToHideState extends State<ScrollToHide> {
       Get.put(GlobalStoreController());
 
   @override
-  Widget build(BuildContext context) => Obx(
-        () => AnimatedContainer(
-          duration: widget.duration,
-          height:
-              (isVisible && !globalStoreController.drawerIsOpen.value) ? 72 : 0,
-          child: Wrap(
-            children: [widget.child],
+  Widget build(BuildContext context) => SafeArea(
+        bottom: true,
+        child: Obx(
+          () => AnimatedContainer(
+            duration: widget.duration,
+            height: (isVisible && !globalStoreController.drawerIsOpen.value)
+                ? 72
+                : 0,
+            child: Wrap(
+              children: [widget.child],
+            ),
           ),
         ),
       );

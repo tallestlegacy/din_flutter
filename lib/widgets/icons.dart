@@ -3,7 +3,27 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 const Widget linkIcon = Icon(
   Icons.link_rounded,
-  color: Colors.grey,
+  // color: Colors.grey,
+  size: 16,
+);
+const Widget copyIcon = Icon(
+  Icons.copy_rounded,
+  // color: Colors.grey,
+  size: 16,
+);
+const Widget shareIcon = Icon(
+  Icons.share_rounded,
+  // color: Colors.grey,
+  size: 16,
+);
+
+const Widget thumbIcon = Icon(
+  Icons.check,
+  // color: Colors.grey,
+  size: 16,
+);
+const Widget favouriteIcon = Icon(
+  Icons.favorite_rounded,
   size: 16,
 );
 
@@ -20,7 +40,7 @@ class DinAppIcon extends StatelessWidget {
         elevation: 2,
         child: SvgPicture.asset(
           "assets/svg/din.svg",
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.secondary,
           width: size,
         ),
       ),

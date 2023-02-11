@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '/widgets/back_button.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../widgets/theme_toggle_action.dart';
 
 class LearningResources extends StatelessWidget {
   const LearningResources({super.key});
@@ -14,7 +14,7 @@ class LearningResources extends StatelessWidget {
         title: const Text("Learning Resources"),
         backgroundColor: Theme.of(context).backgroundColor,
         leading: const CustomBackButton(),
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleAction()],
       ),
       body: ListView(children: [
         ListTile(

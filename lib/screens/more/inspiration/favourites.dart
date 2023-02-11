@@ -7,7 +7,7 @@ import '/widgets/verse.dart';
 import '/utils/json.dart';
 import '/utils/store.dart';
 import '/utils/string_locale.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../widgets/theme_toggle_action.dart';
 
 class Favourites extends StatefulWidget {
   const Favourites({super.key});
@@ -77,7 +77,7 @@ class _FavouritesState extends State<Favourites> {
       appBar: AppBar(
         leading: const CustomBackButton(),
         title: const Text("Favourites"),
-        actions: const [TextSettingsAction(), ThemeToggleButton()],
+        actions: const [TextSettingsAction(), ThemeToggleAction()],
         //backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: Obx(() {
@@ -91,68 +91,74 @@ class _FavouritesState extends State<Favourites> {
             chapterMap(globalStoreController.favouriteVerses);
 
         var keys = favChapters.keys.toList();
-        return ListView(
-            padding: const EdgeInsets.all(8),
-            children: keys.map((key) {
-              var chapter = {};
-              if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
+        return SafeArea(
+          bottom: true,
+          child: ListView(
+              padding: const EdgeInsets.all(8),
+              children: keys.map((key) {
+                var chapter = {};
+                if (_chapters.isNotEmpty) chapter = _chapters[key - 1];
 
-              var verses = <Widget>[];
+                var verses = <Widget>[];
 
-              if (_quran.length >= favChapters.length) {
-                favChapters[key]?.forEach((verse) {
-                  verses.add(const Divider(height: 0));
-                  verses.add(Verse(
-                    verse: _quran[verse["chapter"]]?[verse["id"] - 1],
-                    chapter: verse["chapter"],
-                  ));
-                });
-              }
+                if (_quran.length >= favChapters.length) {
+                  favChapters[key]?.forEach((verse) {
+                    verses.add(const Divider(height: 0));
+                    verses.add(Verse(
+                      verse: _quran[verse["chapter"]]?[verse["id"] - 1],
+                      chapter: verse["chapter"],
+                    ));
+                  });
+                }
 
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Column(
-                    children: [
-                      if (_chapters.isNotEmpty)
-                        Obx(
-                          () => ListTile(
-                            leading: Text(
-                              readerStoreController.showTranslation.value
-                                  ? chapter["id"].toString()
-                                  : toFarsi(chapter["id"]),
-                              style: googleFontify(
-                                readerStoreController.arabicFont.value,
-                                TextStyle(
-                                  color: Theme.of(context).primaryColor,
+                return Card(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    child: Column(
+                      children: [
+                        if (_chapters.isNotEmpty)
+                          Obx(
+                            () => ListTile(
+                              leading: Text(
+                                readerStoreController.showTranslation.value
+                                    ? chapter["id"].toString()
+                                    : toFarsi(chapter["id"]),
+                                style: googleFontify(
+                                  readerStoreController.arabicFont.value,
+                                  TextStyle(
+                                    color:
+                                        Theme.of(context).colorScheme.primary,
+                                    fontSize:
+                                        readerStoreController.fontSize.value *
+                                            1.5,
+                                  ),
+                                ),
+                              ),
+                              title: Text(
+                                readerStoreController.showTranslation.value
+                                    ? "${chapter["translation"]} (${chapter["name"]})"
+                                    : chapter['name'],
+                                style: TextStyle(
+                                  color: Theme.of(context).colorScheme.primary,
                                   fontSize:
                                       readerStoreController.fontSize.value *
                                           1.5,
                                 ),
                               ),
-                            ),
-                            title: Text(
-                              readerStoreController.showTranslation.value
-                                  ? "${chapter["translation"]} (${chapter["name"]})"
-                                  : chapter['name'],
-                              style: TextStyle(
-                                color: Theme.of(context).primaryColor,
-                                fontSize:
+                              trailing: Icon(
+                                Icons.my_library_books_rounded,
+                                size:
                                     readerStoreController.fontSize.value * 1.5,
                               ),
                             ),
-                            trailing: Icon(
-                              Icons.my_library_books_rounded,
-                              size: readerStoreController.fontSize.value * 1.5,
-                            ),
                           ),
-                        ),
-                      Column(children: verses),
-                    ],
+                        Column(children: verses),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            }).toList());
+                );
+              }).toList()),
+        );
       }),
     );
   }

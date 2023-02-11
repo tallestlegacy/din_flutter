@@ -1,23 +1,20 @@
+import 'package:din/screens/more/customisation/recitation/recitation.dart';
 import 'package:din/screens/more/info/info.dart';
+import 'package:din/screens/more/inspiration/juz/juz.dart';
+import 'package:din/screens/more/notes/notes.dart';
 import 'package:din/screens/more/tools/prayer_times.dart';
 import 'package:din/screens/more/tools/qibla.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:share_plus/share_plus.dart';
 
-import 'info/about_app.dart';
-import 'info/about_developer.dart';
 import 'customisation/appearance.dart';
 import 'inspiration/favourites.dart';
 import 'inspiration/names.dart';
 import 'customisation/reader_preferences.dart';
 import 'customisation/translations/translations.dart';
-import '/utils/network.dart';
-import '/widgets/icons.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../widgets/theme_toggle_action.dart';
 
 class MoreScreen extends StatefulWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -64,7 +61,7 @@ class _MoreScreenState extends State<MoreScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("More"),
-        actions: const [ThemeToggleButton()],
+        actions: const [ThemeToggleAction()],
         // backgroundColor: Theme.of(context).backgroundColor,
       ),
       body: ListView(
@@ -76,22 +73,26 @@ class _MoreScreenState extends State<MoreScreen> {
               children: [
                 ListTile(
                   leading: const Icon(Icons.stars_rounded),
-                  title: const Text("99 Names"),
-                  subtitle: const Text(
-                      "99 Names of Allah and the prophet Muhammad (ﷺ.)"),
+                  title: const Text("Asma Ul Husna"),
                   onTap: () => push(const Names()),
+                ),
+                ListTile(
+                  enabled: true,
+                  leading: const Icon(Icons.menu_book_rounded),
+                  title: const Text("Juz"),
+                  onTap: () => push(const Juz()),
                 ),
                 ListTile(
                   leading: const Icon(Icons.favorite_rounded),
                   title: const Text("Favourites"),
                   onTap: () => push(const Favourites()),
                 ),
-                if (kDebugMode) // TODO add feature
+                if (kDebugMode)
                   ListTile(
                     enabled: false,
-                    leading: const Icon(Icons.menu_book_rounded),
-                    title: const Text("Juz"),
-                    onTap: () {},
+                    leading: const Icon(Icons.edit_note_rounded),
+                    title: const Text("Notes"),
+                    onTap: () => push(const Notes()),
                   ),
               ],
             ),
@@ -124,8 +125,8 @@ class _MoreScreenState extends State<MoreScreen> {
                 ),
                 ListTile(
                   leading: const Icon(Icons.av_timer_rounded),
-                  title: const Text("Prayer Times"),
-                  onTap: () => push(const PrayerTimes()),
+                  title: const Text("Adhan"),
+                  onTap: () => push(const PrayerTimesScreen()),
                 ),
               ],
             ),
@@ -138,19 +139,22 @@ class _MoreScreenState extends State<MoreScreen> {
                 ListTile(
                   leading: const Icon(Icons.palette_outlined),
                   title: const Text("Appearance"),
-                  subtitle: const Text("Theme modes, accent colors"),
                   onTap: () => push(const Appearance()),
                 ),
                 ListTile(
                   leading: const Icon(Icons.text_format_rounded),
                   title: const Text("Reader preferences"),
-                  subtitle: const Text("Size, text display format"),
+                  subtitle: const Text("Size, text display format, fontface"),
                   onTap: () => push(ReaderPreferences()),
+                ),
+                ListTile(
+                  leading: const Icon(Icons.spatial_audio_off_rounded),
+                  title: const Text("Recitation"),
+                  onTap: () => push(const Recitation()),
                 ),
                 ListTile(
                   leading: const Icon(Icons.translate_rounded),
                   title: const Text("Translation"),
-                  subtitle: const Text("en, fr, ru, bg ..."),
                   onTap: () => push(const Translations()),
                 ),
                 if (kDebugMode) // TODO add feature

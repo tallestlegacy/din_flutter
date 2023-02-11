@@ -1,4 +1,3 @@
-import 'package:din/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,21 +21,26 @@ class ThemePreview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color? backgroundColor = isDarkMode ? Colors.grey.shade900 : color.shade50;
-    Color? cardColor = isDarkMode ? Colors.grey[850] : Colors.white;
-    Color? textColor = isDarkMode ? Colors.grey.shade600 : Colors.grey.shade400;
+    ThemeData themeData =
+        Styles(isDarkMode: isDarkMode, swatch: color).themeData;
+
+    Color? cardColor = themeData.cardTheme.color;
+    Color? backgroundColor = themeData.scaffoldBackgroundColor;
+    Color? textColor = themeData.textTheme.bodySmall!.color!.withAlpha(70);
+    Color? bottomBar = themeData.colorScheme.primary;
+    Color? selectedTextColor = color;
 
     Container textDecoration(double scalar1, double scalar2) => Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(1)),
-            color: selected ? color : textColor,
+            color: selected ? selectedTextColor : textColor,
           ),
           height: 1,
           width: scalar1 * scalar2,
         );
 
     return SizedBox(
-      height: 160,
+      height: 150,
       width: 80,
       child: Obx(
         () => GestureDetector(
@@ -53,24 +57,26 @@ class ThemePreview extends StatelessWidget {
             Get.changeTheme(
                 Styles(swatch: color, isDarkMode: isDarkMode).themeData);
           },
-          child: DecoratedBox(
+          child: Container(
+            clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: backgroundColor,
+              color: color,
               border: Border.all(
                 color: isDarkMode
                     ? selected
                         ? color.shade400
-                        : Colors.grey
+                        : color.shade100
                     : selected
                         ? color.shade600
-                        : color.shade100,
+                        : color.shade200,
                 width: 2,
                 style: BorderStyle.solid,
+                strokeAlign: 1,
               ),
             ),
-            child: Padding(
-              padding: const EdgeInsets.all(1),
+            child: Container(
+              color: backgroundColor,
               child: Column(
                 children: [
                   Container(
@@ -78,18 +84,15 @@ class ThemePreview extends StatelessWidget {
                     padding: const EdgeInsets.all(2),
                     decoration: BoxDecoration(
                       color: color.withAlpha(30),
-                      borderRadius:
-                          const BorderRadius.vertical(top: Radius.circular(6)),
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        if (selected)
-                          Icon(
-                            Icons.check_circle_rounded,
-                            color: selected ? color : Colors.transparent,
-                          )
+                        Icon(
+                          Icons.check_circle_rounded,
+                          color: selected ? color : Colors.transparent,
+                        ),
                       ],
                     ),
                   ),
@@ -99,21 +102,16 @@ class ThemePreview extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        for (double i in [6, 3, 14, 5, 3])
+                        for (double i in [6, 4, 14, 5, 3])
                           Container(
                             margin: const EdgeInsets.symmetric(
                                 vertical: 2, horizontal: 8),
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                                color: cardColor,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(4)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: .5,
-                                    color: Colors.grey.withAlpha(100),
-                                  )
-                                ]),
+                              color: cardColor,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(4)),
+                            ),
                             child: Wrap(
                               spacing: 2,
                               runSpacing: 2,
@@ -127,14 +125,7 @@ class ThemePreview extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    height: 16,
-                    decoration: BoxDecoration(
-                      color: color,
-                      borderRadius: const BorderRadius.vertical(
-                          bottom: Radius.circular(10)),
-                    ),
-                  )
+                  Container(height: 16, color: bottomBar)
                 ],
               ),
             ),

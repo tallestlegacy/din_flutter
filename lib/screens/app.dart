@@ -41,12 +41,6 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    if (mounted) {
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Theme.of(context).colorScheme.tertiary,
-      ));
-    }
-
     List<Widget> screens = [
       QuranPage(scrollController: scrollController),
       const Dua(),
@@ -81,14 +75,18 @@ class _AppState extends State<App> {
 
     return WillPopScope(
       onWillPop: () async {
+        if (_selectedIndex == 0) {
+          return true;
+        }
         setState(() {
           _selectedIndex = 0;
         });
         return false;
       },
-      child: SafeArea(
-        bottom: true,
-        top: false,
+      child: AnnotatedRegion(
+        value: SystemUiOverlayStyle(
+          systemNavigationBarColor: Theme.of(context).colorScheme.primary,
+        ),
         child: Scaffold(
           body: MediaQuery.of(context).size.width < 600
               ? IndexedStack(
@@ -124,7 +122,6 @@ class _AppState extends State<App> {
                   child: SizedBox(
                     height: 72,
                     child: NavigationBar(
-                      backgroundColor: Theme.of(context).backgroundColor,
                       selectedIndex: _selectedIndex,
                       onDestinationSelected: handleNavigationTap,
                       destinations: <NavigationDestination>[

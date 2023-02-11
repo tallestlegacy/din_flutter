@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -9,6 +10,7 @@ import '/constants/strings.dart';
 import '/utils/json.dart';
 import '/utils/network.dart';
 import '/utils/theme.dart';
+import 'location.dart';
 
 /// Reader Store Controller
 /// manages the reading experience for users
@@ -19,7 +21,11 @@ class ReaderStoreController extends GetxController {
   var showArabicText = true.obs;
   var fontSize = 12.0.obs;
   var reverseScrolling = true.obs;
-  var arabicFont = "Noto Naskh Arabic".obs;
+  var ayaSpans = false.obs;
+  var arabicFont = arabicFonts[0].obs;
+  var ayaEndFont = ayaEndFonts[0].obs;
+  var reciter = "Abdul_Basit_Murattal_64kbps".obs;
+  var selectedAya = "".obs;
 
   final box = GetStorage();
 
@@ -54,18 +60,50 @@ class ReaderStoreController extends GetxController {
     box.write("arabicFont", value);
   }
 
+  void setAyaEndFont(String value) {
+    ayaEndFont(value);
+    box.write("ayaEndFont", value);
+  }
+
   void setReverseScrolling(bool value) {
     reverseScrolling(value);
     box.write("reverseScrolling", value);
+  }
+
+  void setAyaSpans(bool value) {
+    ayaSpans(value);
+    box.write("ayaSpans", value);
+  }
+
+  void setReciter(String value) {
+    reciter(value);
+    box.write("reciter", value);
+  }
+
+  bool hasSubfolder(List tracks) {
+    return tracks
+            .indexWhere((element) => element["subfolder"] == reciter.value) !=
+        -1;
+  }
+
+  void setSelectedAya(String value) {
+    selectedAya(value);
+  }
+
+  void resetSelectedAya() {
+    selectedAya("");
   }
 
   ReaderStoreController() {
     showTransliteration(box.read("showTransliteration") ?? true);
     showTranslation(box.read("showTranslation") ?? true);
     showArabicText(box.read("showArabicText") ?? true);
+    ayaSpans(box.read("ayaSpans") ?? false);
     fontSize(box.read("fontSize") ?? 12);
     reverseScrolling(box.read("reverseScrolling") ?? true);
     arabicFont(box.read("arabicFont") ?? arabicFonts[0]);
+    ayaEndFont(box.read("ayaEndFont") ?? ayaEndFonts[0]);
+    reciter(box.read("reciter") ?? "Abdul_Basit_Murattal_64kbps");
   }
 }
 
@@ -75,6 +113,30 @@ class AppearanceStoreController extends GetxController {
   var swatch = Colors.blue.obs;
   var darkSwatch = Colors.blue.obs;
   var forceDarkMode = false.obs;
+
+  get swatchName => colorNames[colors.indexOf(swatch.value)];
+  get darkSwatchName => colorNames[colors.indexOf(darkSwatch.value)];
+
+  List<String> get colorNames => [
+        "blue",
+        "cyan",
+        "indigo",
+        "deepPurple",
+        "purple",
+        "pink",
+        "red",
+        "deepOrange",
+        "orange",
+        "amber",
+        "yellow",
+        "lime",
+        "lightGreen",
+        "green",
+        "teal",
+        "brown",
+        "grey",
+        "blueGrey",
+      ];
 
   List<MaterialColor> get colors => <MaterialColor>[
         Colors.blue,
@@ -146,7 +208,7 @@ class GlobalStoreController extends GetxController {
 
   RxMap<dynamic, dynamic> prayerTimes = {}.obs;
 
-  void setcurrentSurah(int pageIndex) {
+  void setCurrentSurah(int pageIndex) {
     currentSurah(pageIndex);
     box.write("currentSurah", pageIndex);
   }
@@ -175,13 +237,20 @@ class GlobalStoreController extends GetxController {
     return fav;
   }
 
-  void setLocation(double latitude, double longitude) {
-    lat(latitude);
-    lon(longitude);
-    locationInitialised(true);
-    box.write("lat", lat.value);
-    box.write("lon", lon.value);
-    box.write("locationInitialised", locationInitialised.value);
+  Future<String> setLocation() async {
+    try {
+      Position position = await determinePosition();
+
+      lat(position.latitude);
+      lon(position.longitude);
+      locationInitialised(true);
+      box.write("lat", lat.value);
+      box.write("lon", lon.value);
+      box.write("locationInitialised", locationInitialised.value);
+      return "Location confirmed";
+    } catch (e) {
+      return "Please enable location services";
+    }
   }
 
   void setPrayerTimeForMonth(Map data) {
@@ -240,7 +309,7 @@ class TranslationsStoreController extends GetxController {
         null;
   }
 
-  bool editionIsDefaault(String language, String edition) {
+  bool editionIsDefault(String language, String edition) {
     return defaultTranslation["language"] == language &&
         defaultTranslation["edition"] == edition;
   }
@@ -262,6 +331,7 @@ class TranslationsStoreController extends GetxController {
     downloadedQuranEditions.removeWhere(
         (e) => e["language"] == language && e["edition"] == edition);
     await deleteEditionFromStorage(language, edition);
+    box.write("downloadedQuranEditions", jsonEncode(downloadedQuranEditions));
   }
 
   dynamic getEditionChapter(String language, String edition, int chapter) {

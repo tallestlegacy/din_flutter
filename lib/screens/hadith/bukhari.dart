@@ -7,7 +7,7 @@ import '/widgets/text_settings.dart';
 import '/utils/json.dart';
 import '/utils/store.dart';
 import '/utils/string_locale.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../widgets/theme_toggle_action.dart';
 
 class Bukhari extends StatefulWidget {
   const Bukhari({Key? key}) : super(key: key);
@@ -62,7 +62,7 @@ class _BukhariState extends State<Bukhari> {
                   delegate: BukhariSearch(refs: getAllBooks(_volumes)));
             },
           ),
-          const ThemeToggleButton(),
+          const ThemeToggleAction(),
         ],
       ),
       body: ListView.builder(
@@ -137,13 +137,12 @@ class BukhariSearch extends SearchDelegate {
   }
 
   @override
-  Widget? buildLeading(BuildContext context) {
-    return IconButton(
+  Widget buildLeading(BuildContext context) => IconButton(
         onPressed: () {
           close(context, null);
         },
-        icon: const Icon(Icons.arrow_back_rounded));
-  }
+        icon: const Icon(Icons.arrow_back_rounded),
+      );
 
   @override
   Widget buildResults(BuildContext context) {
@@ -173,31 +172,7 @@ class BukhariSearch extends SearchDelegate {
   }
 
   @override
-  Widget buildSuggestions(BuildContext context) {
-    List matchQuery = [];
-    for (var ref in refs) {
-      if (ref["name"].toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(ref);
-      }
-    }
-    return ListView.builder(
-      itemCount: matchQuery.length,
-      itemBuilder: (context, index) {
-        var result = matchQuery[index];
-        return ListTile(
-            title: Text(result["name"]),
-            onTap: () {
-              close(context, null);
-              Navigator.push(
-                context,
-                CupertinoPageRoute(
-                  builder: (context) => BukhariHadiths(book: result),
-                ),
-              );
-            });
-      },
-    );
-  }
+  Widget buildSuggestions(BuildContext context) => buildResults(context);
 }
 
 class BukhariHadiths extends StatefulWidget {
@@ -238,39 +213,41 @@ class _BukhariHadithsState extends State<BukhariHadiths> {
         appBar: AppBar(
           title: Text("${widget.book['name']}"),
           leading: const CustomBackButton(),
-          actions: const [TextSettingsAction(), ThemeToggleButton()],
+          actions: const [TextSettingsAction(), ThemeToggleAction()],
           titleTextStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.onSecondary),
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Theme.of(context).colorScheme.tertiary,
+          ),
         ),
         body: ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: _hadiths.length,
           itemBuilder: (context, index) => Card(
             child: Obx(
-              () => ListTile(
-                leading: Text(
-                  readerStoreController.showTranslation.value
-                      ? _hadiths[index]['id'].toString()
-                      : toFarsi(_hadiths[index]['id']),
-                  style: googleFontify(
-                    readerStoreController.arabicFont.value,
-                    TextStyle(
-                      color: Colors.grey,
-                      fontSize: readerStoreController.fontSize.value,
+              () => SelectableRegion(
+                focusNode: FocusNode(),
+                selectionControls: materialTextSelectionControls,
+                child: ListTile(
+                  leading: Text(
+                    readerStoreController.showTranslation.value
+                        ? _hadiths[index]['id'].toString()
+                        : toFarsi(_hadiths[index]['id']),
+                    style: googleFontify(
+                      readerStoreController.arabicFont.value,
+                      TextStyle(fontSize: readerStoreController.fontSize.value),
                     ),
                   ),
-                ),
-                title: Text(
-                  _hadiths[index]['by'],
-                  style:
-                      TextStyle(fontSize: readerStoreController.fontSize.value),
-                ),
-                subtitle: Text(
-                  _hadiths[index]['text'],
-                  style:
-                      TextStyle(fontSize: readerStoreController.fontSize.value),
+                  title: Text(
+                    _hadiths[index]['by'],
+                    style: TextStyle(
+                        fontSize: readerStoreController.fontSize.value),
+                  ),
+                  subtitle: Text(
+                    _hadiths[index]['text'],
+                    style: TextStyle(
+                        fontSize: readerStoreController.fontSize.value),
+                  ),
                 ),
               ),
             ),

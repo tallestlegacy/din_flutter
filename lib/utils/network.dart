@@ -4,12 +4,10 @@ import 'package:flutter/foundation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import "package:http/http.dart" as http;
 
-Future<void> openLink(String url) async {
+Future<void> openLink(String url, {external = true}) async {
   if (!await launchUrl(
     Uri.parse(url),
-    mode: url.contains("http")
-        ? LaunchMode.inAppWebView
-        : LaunchMode.externalApplication,
+    mode: external ? LaunchMode.externalApplication : LaunchMode.inAppWebView,
   )) {
     throw "Could not launch $url";
   }

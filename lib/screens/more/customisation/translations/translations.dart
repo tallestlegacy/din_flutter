@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'translation.dart';
 import '/utils/store.dart';
 import '/widgets/back_button.dart';
-import '/widgets/theme_toggle_button.dart';
+import '../../../../widgets/theme_toggle_action.dart';
 
 class Translations extends StatelessWidget {
   const Translations({super.key});
@@ -19,7 +19,19 @@ class Translations extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Translations"),
         leading: const CustomBackButton(),
-        actions: const [ThemeToggleButton()],
+        actions: [
+          IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: TranslationsSearch(
+                    translations: translationsStoreController.quranTranslations,
+                  ),
+                );
+              },
+              icon: const Icon(Icons.search_rounded)),
+          const ThemeToggleAction()
+        ],
       ),
       body: RefreshIndicator(
         onRefresh: translationsStoreController.updateQuranTranslations,
@@ -106,25 +118,87 @@ class Translations extends StatelessWidget {
   }
 }
 
+class TranslationsSearch extends SearchDelegate {
+  List translations = [];
+  TranslationsSearch({required this.translations});
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            if (query == "") {
+              close(context, null);
+            } else {
+              query = "";
+            }
+          },
+          icon: const Icon(Icons.close_rounded))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: const Icon(Icons.arrow_back_rounded));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List matchQuery = [];
+    for (var translation in translations) {
+      if (translation["language"].toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(translation);
+      }
+    }
+    return ListView.builder(
+      itemCount: matchQuery.length,
+      itemBuilder: (context, index) {
+        var result = Language.fromJson(matchQuery[index]);
+        return ListTile(
+            leading: Text(result.emoji),
+            title: Text(result.language),
+            onTap: () {
+              close(context, null);
+              Navigator.push(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => LanguageScreen(
+                    language: result,
+                  ),
+                ),
+              );
+            });
+      },
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) => buildResults(context);
+}
+
 class Language {
-  String emoji = "🤔";
-  String language = "NULL";
-  String abbrev = "NULL";
-  List editions = [];
+  String emoji;
+  String language;
+  String abbrev;
+  List editions;
 
   Language({
-    required this.emoji,
-    required this.language,
-    required this.abbrev,
-    required this.editions,
+    this.emoji = "🤔",
+    this.language = "NULL LANGUAGE",
+    this.abbrev = "NULL ABBREVIATION",
+    this.editions = const [],
   });
 
   factory Language.fromJson(dynamic json) {
     return Language(
-      emoji: json["emoji"],
-      language: json["language"],
-      abbrev: json["abbrev"],
-      editions: json["editions"],
+      emoji: json["emoji"].toString(),
+      language: json["language"].toString(),
+      abbrev: json["abbrev"].toString(),
+      editions: json["editions"] as List,
     );
   }
 }

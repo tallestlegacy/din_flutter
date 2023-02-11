@@ -23,6 +23,10 @@ Future<Position> determinePosition() async {
         'Location permissions are permanently denied, we cannot request permissions.');
   }
 
+  if (permission == LocationPermission.unableToDetermine) {
+    permission = await Geolocator.requestPermission();
+  }
+
   return await Geolocator.getCurrentPosition();
 }
 
@@ -40,34 +44,34 @@ double getQiblaAngle(double lat, double lon) {
 }
 
 double getOffsetFromNorth(double currentLatitude, double currentLongitude) {
-  double la_rad = radians(currentLatitude);
-  double lo_rad = radians(currentLongitude);
+  double laRad = radians(currentLatitude);
+  double loRad = radians(currentLongitude);
 
-  double de_la = radians(qLat);
-  double de_lo = radians(qLon);
+  double deLa = radians(qLat);
+  double deLo = radians(qLon);
 
-  var toDegrees = degrees(atan(sin(de_lo - lo_rad) /
-      ((cos(la_rad) * tan(de_la)) - (sin(la_rad) * cos(de_lo - lo_rad)))));
-  if (la_rad > de_la) {
-    if ((lo_rad > de_lo || lo_rad < radians(-180.0) + de_lo) &&
+  var toDegrees = degrees(atan(sin(deLo - loRad) /
+      ((cos(laRad) * tan(deLa)) - (sin(laRad) * cos(deLo - loRad)))));
+  if (laRad > deLa) {
+    if ((loRad > deLo || loRad < radians(-180.0) + deLo) &&
         toDegrees > 0.0 &&
         toDegrees <= 90.0) {
       toDegrees += 180.0;
-    } else if (lo_rad <= de_lo &&
-        lo_rad >= radians(-180.0) + de_lo &&
+    } else if (loRad <= deLo &&
+        loRad >= radians(-180.0) + deLo &&
         toDegrees > -90.0 &&
         toDegrees < 0.0) {
       toDegrees += 180.0;
     }
   }
-  if (la_rad < de_la) {
-    if ((lo_rad > de_lo || lo_rad < radians(-180.0) + de_lo) &&
+  if (laRad < deLa) {
+    if ((loRad > deLo || loRad < radians(-180.0) + deLo) &&
         toDegrees > 0.0 &&
         toDegrees < 90.0) {
       toDegrees += 180.0;
     }
-    if (lo_rad <= de_lo &&
-        lo_rad >= radians(-180.0) + de_lo &&
+    if (loRad <= deLo &&
+        loRad >= radians(-180.0) + deLo &&
         toDegrees > -90.0 &&
         toDegrees <= 0.0) {
       toDegrees += 180.0;

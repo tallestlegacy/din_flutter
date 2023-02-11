@@ -1,4 +1,5 @@
 const din = "دين";
+const bismi = "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ";
 
 const arabicFonts = [
   "Noto Naskh Arabic",
@@ -7,7 +8,6 @@ const arabicFonts = [
   "Almarai",
   "Cairo",
   "Changa",
-  //"Gulzar",
   "Harmattan",
   "IBM Plex Sans Arabic",
   "Katibeh",
@@ -28,6 +28,13 @@ const arabicFonts = [
   "Vibes",
 ];
 
+const ayaEndFonts = [
+  "Noto Naskh Arabic",
+  "Amiri",
+  "Lateef",
+  "Noto Nastaliq Urdu",
+];
+
 const prayers = [
   "Fajr",
   "Dhuhr",
@@ -42,3 +49,13 @@ const prayersArabic = [
   "المغرب",
   "العشاء",
 ];
+
+const sura1aya1 = {
+  "id": 1,
+  "text": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+  "translation":
+      "In the name of Allah, the Entirely Merciful, the Especially Merciful",
+  "transliteration": "Bismi Allahi alrrahmani alrraheemi"
+};
+
+const String everyAyaUrl = "https://everyayah.com/data";
