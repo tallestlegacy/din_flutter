@@ -20,7 +20,7 @@ flutter run
 ## Features
 
 - [x] Quran
-- [ ] Quran Recitations
+- [x] Quran Recitations
 - [ ] Dua Recitations
 - [x] Hadith and Sunnah
 - [ ] Madrasa
@@ -49,7 +49,7 @@ flutter run
 
 | light                    | dark                          |
 | ------------------------ | ----------------------------- |
-| ![](./_assets/surah.jpg) | ![](./_assets/surah-dark.jpg) |
+| ![image](https://github.com/tallestlegacy/din_flutter/assets/71118951/32186746-7022-470d-adcc-032b9c28a475) | ![image](https://github.com/tallestlegacy/din_flutter/assets/71118951/d2f95ee9-65ce-4578-adc3-5817a18693b2) |
 
 ## Building
 
