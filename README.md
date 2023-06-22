@@ -4,6 +4,8 @@ This is a simple material UI Quran and Sunnah reader.
 
 🤟 Works on Android, iOS, Linux, Windows and Mac. Thank you Flutter 💖!
 
+[https://play.google.com/store/apps/details?id=com.tallestlegacy.din_dt]
+
 ## Running the project
 
 After cloning the project, change to this working directory and run :
