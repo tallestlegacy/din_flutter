@@ -36,24 +36,29 @@ class FontSetting extends StatelessWidget {
                     margin: const EdgeInsets.all(4),
                     child: Obx(
                       () => ChoiceChip(
-                        visualDensity: VisualDensity.compact,
-                        selected: (isAyaEnd
-                                ? readerStoreController.ayaEndFont.value
-                                : readerStoreController.arabicFont.value) ==
-                            fontFamily,
-                        label: isAyaEnd
-                            ? Text("\u06dd${toFarsi(123)}")
-                            : const Text(din),
-                        labelStyle: googleFontify(fontFamily, null),
-                        onSelected: (value) {
-                          isAyaEnd
-                              ? readerStoreController.setAyaEndFont(fontFamily)
-                              : readerStoreController.setArabicFont(fontFamily);
-                        },
-                        side: BorderSide(
-                          color: Theme.of(context).colorScheme.surfaceVariant,
-                        ),
-                      ),
+                          visualDensity: VisualDensity.compact,
+                          selected: (isAyaEnd
+                                  ? readerStoreController.ayaEndFont.value
+                                  : readerStoreController.arabicFont.value) ==
+                              fontFamily,
+                          label: isAyaEnd
+                              ? Text("\u06dd${toFarsi(123)}")
+                              : const Text(din),
+                          labelStyle: googleFontify(fontFamily, null),
+                          onSelected: (value) {
+                            isAyaEnd
+                                ? readerStoreController
+                                    .setAyaEndFont(fontFamily)
+                                : readerStoreController
+                                    .setArabicFont(fontFamily);
+                          },
+                          side: BorderSide(
+                            color: Theme.of(context).colorScheme.surfaceVariant,
+                          ),
+                          selectedColor: Theme.of(context)
+                              .colorScheme
+                              .primary
+                              .withAlpha(160)),
                     ),
                   ),
                 )
