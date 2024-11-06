@@ -2,7 +2,6 @@ import 'package:din/utils/json.dart';
 import 'package:din/widgets/text_settings.dart';
 import 'package:din/widgets/verse.dart';
 
-import '../utils/adhan.dart';
 import '../utils/store.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

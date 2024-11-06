@@ -17,11 +17,6 @@ class Styles {
   ThemeData get themeData {
     MaterialColor primarySwatch = swatch;
 
-    Color? accentColor = primarySwatch[200];
-    Color? text2 =
-        isDarkMode ? primarySwatch[100] : Colors.black.withAlpha(100);
-    Color? cardColor = isDarkMode ? Colors.grey[850] : Colors.white;
-
     ColorScheme colorScheme = ColorScheme.fromSeed(
       seedColor: swatch,
     );
@@ -82,11 +77,11 @@ class Styles {
         color: colorScheme.secondary,
       ),
       radioTheme: RadioThemeData(
-        fillColor: MaterialStatePropertyAll(colorScheme.secondary),
+        fillColor: WidgetStatePropertyAll(colorScheme.secondary),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
           style: ButtonStyle(
-              side: MaterialStatePropertyAll(
+              side: WidgetStatePropertyAll(
         BorderSide(color: primarySwatch),
       ))),
       appBarTheme: AppBarTheme(
@@ -98,11 +93,12 @@ class Styles {
       ),
       scaffoldBackgroundColor: backgroundColor,
       switchTheme: SwitchThemeData(
-        thumbIcon: MaterialStateProperty.resolveWith<Icon?>(
-          (Set<MaterialState> states) {
-            if (states.contains(MaterialState.selected)) {
+        thumbIcon: WidgetStateProperty.resolveWith<Icon?>(
+          (Set<WidgetState> states) {
+            if (states.contains(WidgetState.selected)) {
               return const Icon(Icons.check);
             }
+            return null;
           },
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:din/widgets/bismi.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../utils/string_locale.dart';
 import '/widgets/verse.dart';
 import '/utils/json.dart';
 
@@ -11,7 +10,7 @@ class Surah extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final chapter;
 
-  const Surah({Key? key, this.chapter}) : super(key: key);
+  const Surah({super.key, this.chapter});
   @override
   State<Surah> createState() => _SurahState();
 }

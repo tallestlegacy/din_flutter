@@ -1,13 +1,10 @@
-import 'package:din/utils/network.dart';
 import 'package:din/widgets/back_button.dart';
 import 'package:din/widgets/text_settings.dart';
 import 'package:din/widgets/theme_toggle_action.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../../widgets/padded_text.dart';
-import '/widgets/icons.dart';
 import '/utils/string_locale.dart';
 import '/utils/json.dart';
 import '/utils/store.dart';
@@ -21,19 +18,19 @@ class Names extends StatefulWidget {
 
 class _NamesState extends State<Names> {
   List<dynamic> _namesOfAllah = [];
-  List<dynamic> _namesOfMuhammad = [];
+  // List<dynamic> _namesOfMuhammad = [];
 
   final ReaderStoreController readerStoreController =
       Get.put(ReaderStoreController());
 
   Future<void> getNames() async {
     final data1 = await LoadJson().load("assets/json/99 names of Allah.json");
-    final data2 =
-        await LoadJson().load("assets/json/99 names of Muhammad.json");
+    // final data2 =
+    //     await LoadJson().load("assets/json/99 names of Muhammad.json");
     if (mounted) {
       setState(() {
         _namesOfAllah = data1;
-        _namesOfMuhammad = data2;
+        // _namesOfMuhammad = data2;
       });
     }
   }
@@ -76,8 +73,8 @@ class NameCard extends StatelessWidget {
     final ReaderStoreController readerStoreController =
         Get.put(ReaderStoreController());
 
-    String link =
-        "https://myislam.org/99-names-of-allah/${name["transliteration"].toString().toLowerCase().replaceAll("'", "")}/";
+    // String link =
+    //     "https://myislam.org/99-names-of-allah/${name["transliteration"].toString().toLowerCase().replaceAll("'", "")}/";
 
     return Obx(
       () => Card(
