@@ -1,4 +1,4 @@
-package com.tallestlegacy.din_dt
+package com.tallestlegacy.din
 
 import android.os.Build
 import android.os.Bundle
