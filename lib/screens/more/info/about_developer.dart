@@ -24,7 +24,7 @@ class AboutDeveloper extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               child: Text(
                 "Marvin Mokua",
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             ListTile(

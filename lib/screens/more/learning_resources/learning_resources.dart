@@ -12,7 +12,7 @@ class LearningResources extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Learning Resources"),
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         leading: const CustomBackButton(),
         actions: const [ThemeToggleAction()],
       ),

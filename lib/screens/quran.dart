@@ -1,6 +1,5 @@
 import 'package:scroll_to_index/scroll_to_index.dart';
 
-import '../utils/theme.dart';
 import '/widgets/surah.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +15,7 @@ import '/utils/string_locale.dart';
 class QuranPage extends StatefulWidget {
   final ScrollController scrollController;
 
-  const QuranPage({Key? key, required this.scrollController}) : super(key: key);
+  const QuranPage({super.key, required this.scrollController});
 
   @override
   State<QuranPage> createState() => _QuranPageState();

@@ -4,14 +4,14 @@ PrayerTimes getAdhan(double lat, double lon) {
   Coordinates coordinates = Coordinates(lat, lon);
 
   // Parameters
-  CalculationParameters params = CalculationMethod.MuslimWorldLeague();
-  params.madhab = Madhab.Hanafi;
+  CalculationParameters params = CalculationMethod.muslimWorldLeague();
+  params.madhab = Madhab.hanafi;
 
-  PrayerTimes prayerTimes = PrayerTimes(
-    coordinates,
-    DateTime.now(),
-    params,
-    precision: true,
+  PrayerTimes prayerTimes = PrayerTimes( 
+    coordinates: coordinates,
+    date : DateTime.now(),
+    calculationParameters : params,
+    precision: true
   );
 
   return prayerTimes;

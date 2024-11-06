@@ -129,7 +129,7 @@ class RecitersSearch extends SearchDelegate {
 class Reciter extends StatefulWidget {
   final track;
 
-  Reciter({super.key, required this.track});
+  const Reciter({super.key, required this.track});
 
   @override
   State<Reciter> createState() => _ReciterState();

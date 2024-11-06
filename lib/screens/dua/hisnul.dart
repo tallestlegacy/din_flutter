@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../utils/theme.dart';
 import '/widgets/back_button.dart';
 import '/widgets/padded_text.dart';
 import '/widgets/text_settings.dart';
